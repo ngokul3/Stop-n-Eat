@@ -30,29 +30,23 @@ extension SavedRestaurantVC : UITableViewDataSource{
         switch indexPath.row{
             
         case 0:
-            cell.lblMiles.text = "2 mi"
-            cell.lblRestaurantName.text = "Dominos"
-            cell.imgRail.image = UIImage(named: "Rail.png")
+             cell.lblRestaurantName.text = "Dominos"
             cell.imgStar1.image = UIImage(named: "Rating.png")
             cell.imgStar2.image = UIImage(named: "Rating.png")
             cell.imgStar3.image = UIImage(named: "Rating.png")
-            cell.txtNotesRestaurant.text = "Yelp gave 3 R. Service is good"
-            cell.txtDateSaved.text = "07/01/2018"
+            cell.txtNotesRestaurant.text = "10 mins walk from SH. Yelp gave 3 stars. Service is good"
+            cell.txtDateSaved.text = "07.01.18"
         case 1:
-            cell.lblMiles.text = "3.1 mi"
             cell.lblRestaurantName.text = "Dosa Corner"
-            cell.imgRail.image = UIImage(named: "Rail.png")
             cell.imgStar1.image = UIImage(named: "Rating.png")
             cell.imgStar2.image = UIImage(named: "Rating.png")
              cell.txtNotesRestaurant.text = "Mint Sauce is not spicy enough"
-             cell.txtDateSaved.text = "05/03/2018"
+             cell.txtDateSaved.text = "05.03.18"
         case 2:
-            cell.lblMiles.text = "3 mi"
             cell.lblRestaurantName.text = "Chinese Bowl"
-            cell.imgRail.image = UIImage(named: "Rail")
             cell.imgStar1.image = UIImage(named: "Rating.png")
              cell.txtNotesRestaurant.text = "Noodles was not enough"
-             cell.txtDateSaved.text = "07/11/2018"
+             cell.txtDateSaved.text = "07.11.18"
         default : break
         }
         
