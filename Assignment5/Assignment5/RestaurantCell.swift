@@ -9,7 +9,8 @@
 import UIKit
 
 class RestaurantCell: UITableViewCell {
-
+    @IBOutlet weak var imgThumbnail: UIImageView!
+    
     @IBOutlet weak var imgRail: UIImageView!
     @IBOutlet weak var imgStar1: UIImageView!
     @IBOutlet weak var imgStar2: UIImageView!
