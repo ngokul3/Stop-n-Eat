@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    var sourceArr = ["Hoboken Train Station","Millburn","Newark","Short Hills"]
+    var sourceArr = ["East Orange","Millburn Train Station","Maplewood","Short Hills Train Station","Secaucus","Brampton","New Province"]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -26,29 +26,16 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //
-        //        if let menuItems = menuItemsInBill {
-        //            let arr = menuItems
-        //            let row = indexPath.row
-        //            let cell = tableView.dequeueReusableCell(withIdentifier: "foodCell", for: indexPath)
-        //            cell.textLabel?.text = arr[row].itemdescription
-        //            return cell
-        //        }
-        //        else{
-        //            preconditionFailure("Cell Identifier not set")
-        //        }
-        
+       
         let cell = tableView.dequeueReusableCell(withIdentifier: "trainCell", for: indexPath)
         cell.textLabel?.text = sourceArr[indexPath.row]
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // print("Table row: \(indexPath.row) was selected")
-      //  tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+     
+       
+        
     }
 
-    
-   
-    
 }

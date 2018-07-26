@@ -14,6 +14,8 @@
 		90A31A6B2107FE91000DB608 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A31A692107FE91000DB608 /* LaunchScreen.storyboard */; };
 		90A31A762107FE91000DB608 /* Assignment5Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A752107FE91000DB608 /* Assignment5Tests.swift */; };
 		90A31A812107FE91000DB608 /* Assignment5UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A802107FE91000DB608 /* Assignment5UITests.swift */; };
+		90A31A8F210953AD000DB608 /* RestaurantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A8E210953AD000DB608 /* RestaurantVC.swift */; };
+		90A31A9121095A86000DB608 /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A9021095A86000DB608 /* RestaurantCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		90A31A7C2107FE91000DB608 /* Assignment5UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment5UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A31A802107FE91000DB608 /* Assignment5UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment5UITests.swift; sourceTree = "<group>"; };
 		90A31A822107FE91000DB608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90A31A8E210953AD000DB608 /* RestaurantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantVC.swift; sourceTree = "<group>"; };
+		90A31A9021095A86000DB608 /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 				90A31A672107FE91000DB608 /* Assets.xcassets */,
 				90A31A692107FE91000DB608 /* LaunchScreen.storyboard */,
 				90A31A6C2107FE91000DB608 /* Info.plist */,
+				90A31A8E210953AD000DB608 /* RestaurantVC.swift */,
+				90A31A9021095A86000DB608 /* RestaurantCell.swift */,
 			);
 			path = Assignment5;
 			sourceTree = "<group>";
@@ -256,6 +262,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90A31A9121095A86000DB608 /* RestaurantCell.swift in Sources */,
+				90A31A8F210953AD000DB608 /* RestaurantVC.swift in Sources */,
 				90A31A632107FE8E000DB608 /* ViewController.swift in Sources */,
 				90A31A612107FE8E000DB608 /* AppDelegate.swift in Sources */,
 			);
