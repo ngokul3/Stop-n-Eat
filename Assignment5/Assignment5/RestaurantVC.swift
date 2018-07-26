@@ -33,8 +33,8 @@ extension RestaurantVC : UITableViewDataSource{
             cell.imgStar1.image = UIImage(named: "Rating.png")
             cell.imgStar2.image = UIImage(named: "Rating.png")
             cell.imgStar3.image = UIImage(named: "Rating.png")
-            cell.imgInfo.image = UIImage(named: "BlueInfo.png")
-            cell.imgThumbnail.image = UIImage(named: "pizza.jpg")
+             cell.imgThumbnail.image = UIImage(named: "pizza.jpg")
+      //      cell.imgInfo.image = UIImage(named: "savedHeart.png")
             
         case 1:
             cell.lblMiles.text = "3.1 mi"
@@ -42,16 +42,18 @@ extension RestaurantVC : UITableViewDataSource{
             cell.imgRail.image = UIImage(named: "Rail.png")
             cell.imgStar1.image = UIImage(named: "Rating.png")
             cell.imgStar2.image = UIImage(named: "Rating.png")
-            cell.imgInfo.image = UIImage(named: "BlueInfo.png")
             cell.imgThumbnail.image = UIImage(named: "dosa.ipg")
-            
+       //     cell.imgInfo.image = UIImage(named: "savedHeart.png")
+             cell.accessoryType = .checkmark
         case 2:
             cell.lblMiles.text = "3 mi"
             cell.lblRestaurantName.text = "Chipotle"
             cell.imgRail.image = UIImage(named: "Rail")
             cell.imgStar1.image = UIImage(named: "Rating.png")
-            cell.imgInfo.image = UIImage(named: "BlueInfo.png")
+         //    cell.imgInfo.image = UIImage(named: "heart.png")
+            
             cell.imgThumbnail.image = UIImage(named: "chipotle.png")
+           
         default : break
         }
        

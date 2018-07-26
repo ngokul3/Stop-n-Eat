@@ -1,6 +1,6 @@
 # Assignment 5
 
-Information mentioned here is also included in README.md file
+Information mentioned here is also included in Question1 - 4.txt file
 
 Point 1 -
 

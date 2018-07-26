@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90108A08210A7940008B9BC7 /* NotifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90108A07210A7940008B9BC7 /* NotifyVC.swift */; };
 		90A31A612107FE8E000DB608 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A602107FE8E000DB608 /* AppDelegate.swift */; };
 		90A31A632107FE8E000DB608 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A622107FE8E000DB608 /* ViewController.swift */; };
 		90A31A662107FE8E000DB608 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A31A642107FE8E000DB608 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		90108A07210A7940008B9BC7 /* NotifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyVC.swift; sourceTree = "<group>"; };
 		90A31A5D2107FE8E000DB608 /* Assignment5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A31A602107FE8E000DB608 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90A31A622107FE8E000DB608 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				90A31A9021095A86000DB608 /* RestaurantCell.swift */,
 				90A31A92210A0AD1000DB608 /* SavedRestaurantVC.swift */,
 				90A31A94210A0EDC000DB608 /* SavedRestaurantCell.swift */,
+				90108A07210A7940008B9BC7 /* NotifyVC.swift */,
 			);
 			path = Assignment5;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				90A31A93210A0AD1000DB608 /* SavedRestaurantVC.swift in Sources */,
 				90A31A8F210953AD000DB608 /* RestaurantVC.swift in Sources */,
 				90A31A632107FE8E000DB608 /* ViewController.swift in Sources */,
+				90108A08210A7940008B9BC7 /* NotifyVC.swift in Sources */,
 				90A31A95210A0EDC000DB608 /* SavedRestaurantCell.swift in Sources */,
 				90A31A612107FE8E000DB608 /* AppDelegate.swift in Sources */,
 			);
