@@ -16,6 +16,8 @@
 		90A31A812107FE91000DB608 /* Assignment5UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A802107FE91000DB608 /* Assignment5UITests.swift */; };
 		90A31A8F210953AD000DB608 /* RestaurantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A8E210953AD000DB608 /* RestaurantVC.swift */; };
 		90A31A9121095A86000DB608 /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A9021095A86000DB608 /* RestaurantCell.swift */; };
+		90A31A93210A0AD1000DB608 /* SavedRestaurantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A92210A0AD1000DB608 /* SavedRestaurantVC.swift */; };
+		90A31A95210A0EDC000DB608 /* SavedRestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A94210A0EDC000DB608 /* SavedRestaurantCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		90A31A822107FE91000DB608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90A31A8E210953AD000DB608 /* RestaurantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantVC.swift; sourceTree = "<group>"; };
 		90A31A9021095A86000DB608 /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
+		90A31A92210A0AD1000DB608 /* SavedRestaurantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantVC.swift; sourceTree = "<group>"; };
+		90A31A94210A0EDC000DB608 /* SavedRestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 				90A31A6C2107FE91000DB608 /* Info.plist */,
 				90A31A8E210953AD000DB608 /* RestaurantVC.swift */,
 				90A31A9021095A86000DB608 /* RestaurantCell.swift */,
+				90A31A92210A0AD1000DB608 /* SavedRestaurantVC.swift */,
+				90A31A94210A0EDC000DB608 /* SavedRestaurantCell.swift */,
 			);
 			path = Assignment5;
 			sourceTree = "<group>";
@@ -263,8 +269,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				90A31A9121095A86000DB608 /* RestaurantCell.swift in Sources */,
+				90A31A93210A0AD1000DB608 /* SavedRestaurantVC.swift in Sources */,
 				90A31A8F210953AD000DB608 /* RestaurantVC.swift in Sources */,
 				90A31A632107FE8E000DB608 /* ViewController.swift in Sources */,
+				90A31A95210A0EDC000DB608 /* SavedRestaurantCell.swift in Sources */,
 				90A31A612107FE8E000DB608 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
