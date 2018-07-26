@@ -1,0 +1,97 @@
+Point 1 -
+
+Topic area
+
+ 1) Identify restaurants around NJ Transit Train Stations
+ 
+
+Functional Scope 
+
+ 1) Show searchable option for user to pick any train station, and browse through nearby restaurants.
+ 2) Upon selection of any restaurant, show a map that has the selected restaurant in the view
+ 3) Have option to select one ore more restaurant and notify people
+ 
+ What makes it useful
+ 
+ 1) Targets NJTransit Train commuters that are looking to stop by at some take away place on the way to home. 
+ 2) Allows user to save restaurants that they have visited before, or mail / msg the current restaurant location to a friend so that the user gets picked up.
+ 3) Features in-built mail / messaging capability. For instance, one can select a restaurant and mail location coordinates to the spouse. This can be an information for a pick up or to join for the dinner.
+ 
+ What features must exist for the App to make any sense?
+ 
+ 1) App requires NJ Transit train station data that has location information.
+ 2) App will use Yelp API to find restaurants from a given train station.
+ 3) App will need mail / msg capability 
+ 4) App will save NJ Transit data if it's the first time user, and also allow saving restaurants.
+ 
+  What additional features are you thinking about and how realistic are they?
+  
+  1) I'm thinking to plug-in Uber API, so that user could use a cab to get to the restaurant.
+  2) When the user navigates from Train Station -> Restaurant Screen -> Map View, I would like to show 2 sets of data. The first annotation on map will be Red in color that shows the train station. The second annotation will be all restaurants that are corresponding to the train station.
+  
+ 
+ Point 2 -
+ 
+Additional iOS functionalities -
+
+1) MapKit to display Train Station and Restaurant
+2) CoreData to save Restaurant details
+
+ Point 3 -
+ 
+Screen Controllers -
+
+	App will feature a TabBar Controller. There will be a Search Controller on the first tab. Second tab will show already saved Restaurants from previous visits - RestaurantSavedVC. RestaurantSavedVC will segue to RestaurantDetailVC which have option to edit the saved data.
+
+	In the first tab, SearchController will display result of Train Stations around the location that's searched. 
+	 - On click of one of the table cell, the control will segue to a TableView Controller 
+	 - RestaurantsVC which will display results of Restaurants around the train station.
+	 - In RestaurantVC, there will be a button to navigate to the MapView. The map will show the Train Stations, and all Restaurants around.
+	 - In table view of RestaurantVC, each cell can segue to RestaurantMasterVC. 
+	 - RestaurantMasterVC will have controls to save Restaurant with customized information.
+	
+
+Persistence -
+
+		1) App will use NJTransitData.csv file included in the project directory. 
+		2) App will have feature to save a Restaurant, leave quick notes about it, and also personal rating for it. CoreData will be used to store these information.
+
+Background Task -
+		1) App will use Alamofire to request information using yelp API
+		2) App will use background thread to load NJTransit data.
+Images -
+		1) Star image for Rating
+		2) Rail image to display train
+	
+  Point 4 -
+  
+Data Model
+	Class - Stop  for TrainStops
+	Class - Restaurant for Restaurants
+	
+	class Stop {
+	 var stopName : String
+	 var latitude : Double
+	 var longitide : Double
+	}
+	
+	class Restaurant{
+	var storeName : String
+	var latitude : Double
+	var longitide : Double
+	var givenRating : Int // Comes from Yelp
+	var myRating : Int
+	}
+	
+	Map View dataSet -
+	Key - Stop
+	Value - Array of Restaurant
+	Dictionary object - [Stop : [Restaurant]]
+	
+	CoreData object Model to save Restaurant information-
+	
+		- StopName
+		- RestaurantName
+		- Notes
+		- MyRating
+		- Distance from train Stop
