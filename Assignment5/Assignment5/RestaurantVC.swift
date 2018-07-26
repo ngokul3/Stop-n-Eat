@@ -40,12 +40,13 @@ extension RestaurantVC : UITableViewDataSource{
             cell.imgRail.image = UIImage(named: "Rail.png")
             cell.imgStar1.image = UIImage(named: "Rating.png")
             cell.imgStar2.image = UIImage(named: "Rating.png")
-            
+            cell.imgInfo.image = UIImage(named: "BlueInfo.png")
         case 2:
             cell.lblMiles.text = "3 mi"
             cell.lblRestaurantName.text = "Chipotle"
             cell.imgRail.image = UIImage(named: "Rail")
             cell.imgStar1.image = UIImage(named: "Rating.png")
+            cell.imgInfo.image = UIImage(named: "BlueInfo.png")
         default : break
         }
        
