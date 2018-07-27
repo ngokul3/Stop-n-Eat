@@ -60,7 +60,7 @@ Tab 1 -
 - If the row display 'empty heart' image, then the corresponding Restaurant is not in the Favorite list.
 - On Click of 'empty Heart' image, the screen will segue to DetailRestaurantVC  to Add the Restaurant to the Favorite list.
 - On Click of 'fully painted Heart Image', App will show option to delete the Restaurant from the Favorite list.
-- Favorite restaurants are then persisted using NSUserDefault or CoreData.
+- Favorite restaurants are then persisted using NSCoder or CoreData.
 - RestaurantVC will have a button to navigate to Map View. On click of this button, Dictionary object [Stop :[Restaurant]] will be passed to the View Controller as datasource. From the below mentioned datamodel, Stop will correspond to the TrainStop that was selected from TrainStationVC, and value of the dictionary will be collection of Restaurants. Map will highlight Stop in Red color, and corresponding Restaurants in blue color.
 - Every Restaurant row item can also be navigated to Map View. In this case, only 1 Restaurant item will be passed to Map View Controller. 
 - Every Restaurant row item in Restaurant can be ticked or 'Checkmarked'. The CheckMark symbol will be generated using TableViewCell's accessory type in the cellForRowAt function. 
@@ -70,7 +70,7 @@ Tab 1 -
 
 Tab 2 -
 
-- Array of Favorite Restaurant is fetched on the App launch from NSUserDefault or CoreData. 
+- Array of Favorite Restaurant is fetched on the App launch from NSCoder or CoreData. 
 - User can see the Favorite list of Restaurants in SavedRestaurantVC. 
 - On click of Favorite row item in SavedRestaurantVC, the app will segue to DetailRestaurantVC.
 - There will be an 'Add' option on top of SavedRestaurantVC, app will navigate to DetailRestaurantVC. User can add new Restaurant details 
@@ -89,7 +89,7 @@ Tab 2 -
 Persistence -
 
 1) App will use NJTransitData.csv file included in the project directory. 
-2) App will have features to save Favorite list of Restaurants, leave quick notes about it, and also gvie personal rating for it.  CoreData / NSUserDefault may be used to store these information.
+2) App will have features to save Favorite list of Restaurants, leave quick notes about it, and also gvie personal rating for it.  CoreData / NSCoder may be used to store these information.
 
 Background Task -
 1) App will use Alamofire to request Restaurant information using yelp API

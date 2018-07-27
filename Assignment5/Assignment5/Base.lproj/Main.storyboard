@@ -132,7 +132,7 @@
             </objects>
             <point key="canvasLocation" x="1513" y="270"/>
         </scene>
-        <!--Saved Pt. of Iterest-->
+        <!--Saved Restaurants-->
         <scene sceneID="ym7-jq-h4Y">
             <objects>
                 <viewController id="KwJ-A0-DQ0" customClass="SavedRestaurantVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
@@ -258,7 +258,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="9lt-UT-Wh7"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Saved Pt. of Iterest" id="gZX-KT-0Uq">
+                    <navigationItem key="navigationItem" title="Saved Restaurants" id="gZX-KT-0Uq">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="ufJ-Zy-6E9">
                             <connections>
                                 <segue destination="aVw-KE-lTW" kind="show" id="fOB-Rc-vXx"/>
@@ -269,7 +269,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pm9-P6-HGk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="666" y="368"/>
+            <point key="canvasLocation" x="652" y="783"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="MOo-vZ-fjG">
@@ -405,11 +405,11 @@
                                                         <constraint firstAttribute="width" constant="25" id="mXl-a1-NZF"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUb-n8-PlC">
-                                                    <rect key="frame" x="261" y="1" width="78" height="39"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bUb-n8-PlC">
+                                                    <rect key="frame" x="283" y="1" width="56" height="39"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhJ-BS-DL1">
-                                                    <rect key="frame" x="212" y="1" width="33" height="28"/>
+                                                    <rect key="frame" x="230" y="1" width="33" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="33" id="Xc3-tj-y7m"/>
                                                         <constraint firstAttribute="height" constant="28" id="e4O-Gj-xcg"/>
@@ -423,10 +423,10 @@
                                             <constraints>
                                                 <constraint firstItem="HU4-Rk-DxP" firstAttribute="leading" secondItem="zGb-hs-S9N" secondAttribute="trailing" id="1gj-y8-Pot"/>
                                                 <constraint firstItem="a4a-1R-hVe" firstAttribute="leading" secondItem="f32-Ry-S36" secondAttribute="trailing" id="8CS-Gu-wuJ"/>
-                                                <constraint firstItem="qhJ-BS-DL1" firstAttribute="leading" secondItem="qxz-r0-FrD" secondAttribute="trailing" constant="2" id="8b0-yb-9MI"/>
+                                                <constraint firstItem="qhJ-BS-DL1" firstAttribute="leading" secondItem="qxz-r0-FrD" secondAttribute="trailing" constant="20" id="8b0-yb-9MI"/>
                                                 <constraint firstAttribute="trailing" secondItem="bUb-n8-PlC" secondAttribute="trailing" constant="3" id="8hZ-5E-xsO"/>
                                                 <constraint firstAttribute="bottom" secondItem="qxz-r0-FrD" secondAttribute="bottom" constant="13.5" id="BDJ-8L-mZd"/>
-                                                <constraint firstItem="bUb-n8-PlC" firstAttribute="leading" secondItem="qhJ-BS-DL1" secondAttribute="trailing" constant="2" id="DRY-mK-P53"/>
+                                                <constraint firstItem="bUb-n8-PlC" firstAttribute="leading" secondItem="qhJ-BS-DL1" secondAttribute="trailing" constant="20" id="DRY-mK-P53"/>
                                                 <constraint firstItem="a4a-1R-hVe" firstAttribute="top" secondItem="KXL-ES-22S" secondAttribute="top" constant="19" id="DUj-5P-q4R"/>
                                                 <constraint firstAttribute="bottom" secondItem="f32-Ry-S36" secondAttribute="bottom" constant="2.5" id="Dmq-1C-KEG"/>
                                                 <constraint firstItem="qxz-r0-FrD" firstAttribute="top" secondItem="KXL-ES-22S" secondAttribute="top" constant="1" id="FUd-Zg-I5D"/>
@@ -491,7 +491,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2xo-wE-Iw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1593" y="-556"/>
+            <point key="canvasLocation" x="1592.8" y="-556.37181409295351"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="LL3-4B-xis">
@@ -589,7 +589,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DOG-zh-2Kg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1814" y="517"/>
+            <point key="canvasLocation" x="-652" y="733"/>
         </scene>
     </scenes>
     <resources>
@@ -599,6 +599,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Knd-zM-H5K"/>
-        <segue reference="gbd-2F-tPy"/>
+        <segue reference="rik-Tt-5rB"/>
     </inferredMetricsTieBreakers>
 </document>
