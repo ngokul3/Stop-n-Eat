@@ -102,7 +102,7 @@ Images -
 4) Pizza image  - Downloaded from Google Image - Source mentioned - pixels
 5) Dosa image  - Downloaded from Google Image - Source mentioned - JustDial
 6) Chipotle  - Downloaded from Google Image - Source mentioned -  Chipotle
-
+7) Annotation - Downloaded from Google Image - nl.freepik.com
 
 Point 4 -
 

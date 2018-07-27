@@ -9,6 +9,7 @@
 import UIKit
 
 class RestaurantCell: UITableViewCell {
+    @IBOutlet weak var imgAnnotation: UIImageView!
     @IBOutlet weak var imgThumbnail: UIImageView!
     
     @IBOutlet weak var imgRail: UIImageView!
