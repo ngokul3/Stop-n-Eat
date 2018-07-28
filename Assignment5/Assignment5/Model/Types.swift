@@ -13,7 +13,8 @@ protocol TrainStopProtocol {
      func addTrainStop(stop: TrainStop) throws
     func getTrainStop(stopNo : Int) throws ->TrainStop?
     func getAllTrains()->[TrainStop]
-    func filterTrainStops(stopName : String)
+    var filteredStops : StopArray {get set}
+    //func filterTrainStops(stopName : String)
     var currentFilter : String {get set}
     func loadTransitData (JSONFileFromAssetFolder fileName: String, completed : ([TrainStop])->Void) throws
 }

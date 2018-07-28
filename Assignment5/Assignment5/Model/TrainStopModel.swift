@@ -15,14 +15,49 @@ class TrainStopModel {
     private static var instance: TrainStopProtocol?
     private var searchedStops = [String : StopArray]()
     private var trainStops : StopArray
-    private var filteredStops : StopArray
-    var currentFilter : String = ""
+    var filteredStops : StopArray
+    var currentFilter : String = ""{
+        didSet{
+            
+            if(!currentFilter.isEmpty){
+                filterTrainStops(stopName: currentFilter)
+                
+            }
+            else{
+                filteredStops = StopArray()
+            }
+           
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListFiltered), object: self))
+            
+        }
+    }
     var storedStopFilter : StopArray?{
 
         return searchedStops[currentFilter]
 
     }
     
+    
+//    lazy var filterTrainStops  = {[weak self] in
+//
+//        guard (self?.trainStops.count)! > 0 else
+//        {
+//            preconditionFailure("Not able to fetch Train Stops")
+//        }
+//
+//        if let storedStops = self?.storedStopFilter {
+//            self?.filteredStops = storedStops
+//        }
+//        else{
+//            self?.filteredStops =  (self?.trainStops.filter({(arg1) in
+//                return arg1.stopName.lowercased().contains(self?.currentFilter.lowercased())
+//            }))!
+//
+//            self?.searchedStops[(self?.currentFilter)!] = self?.filteredStops
+//        }
+//
+//        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListFiltered), object: self))
+//    }
     private init(){
         trainStops = StopArray()
         filteredStops = StopArray()
@@ -46,7 +81,25 @@ extension TrainStopModel : TrainStopProtocol{
 extension TrainStopModel{
     //Todo should be async call
     
-  
+    func filterTrainStops(stopName: String) {
+        
+        guard trainStops.count > 0 else
+        {
+            preconditionFailure("Not able to fetch Train Stops")
+        }
+        
+        if let storedStops = storedStopFilter {
+            filteredStops = storedStops
+        }
+        else{
+            filteredStops =  trainStops.filter({(arg1) in
+                return arg1.stopName.lowercased().contains(stopName.lowercased())
+            })
+            
+            searchedStops[stopName] = filteredStops
+        }
+        
+    }
     
     func loadTransitData(JSONFileFromAssetFolder fileName: String, completed : ([TrainStop])->Void) throws {
     //Todo
@@ -121,27 +174,7 @@ extension TrainStopModel{
         
          return trainStops
     }
-    
-    func filterTrainStops(stopName: String) {
-        
-        guard trainStops.count > 0 else
-        {
-            preconditionFailure("Not able to fetch Train Stops")
-        }
-        
-        if let storedStops = storedStopFilter {
-            filteredStops = storedStops
-        }
-        else{
-            filteredStops =  trainStops.filter({(arg1) in
-               return arg1.stopName.lowercased().contains(stopName.lowercased())
-              })
-            
-            searchedStops[stopName] = filteredStops
-        }
-        
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListFiltered), object: self))
-    }
+ 
 }
 class TrainStop{
     var stopNo  : Int = 0

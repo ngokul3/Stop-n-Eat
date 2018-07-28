@@ -10,13 +10,23 @@ import UIKit
 
 class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
 
+    @IBOutlet weak var searchBar: UISearchBar!
+   
     @IBOutlet weak var tableView: UITableView!
     private var model = TrainStopModel.getInstance()
-    
-    var sourceArr = ["East Orange","Millburn Train Station","Maplewood","Short Hills Train Station","Secaucus","Brampton","New Province"]
+    private static var modelObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
        
+        TrainStopVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.StopListFiltered), object: nil, queue: OperationQueue.main) {
+            
+            [weak self] (notification: Notification) in
+            if let s = self {
+                s.updateUI()
+            }
+        }
+        
+        
 //                DispatchQueue.global(qos: .background).async {
 //                    //background code
 //                    DispatchQueue.main.async {
@@ -32,17 +42,21 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
        
         super.viewDidLoad()
         
-        
     }
 }
 extension TrainStopVC{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        model.currentFilter = searchText
+        if(model.currentFilter != searchText){
+            print(searchBar.text)
+            
+            model.currentFilter = searchText
+        }
+      
     }
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder() // "give up focus" in HTML/JavaScript
+        searchBar.resignFirstResponder() 
     }
     
     
@@ -57,20 +71,28 @@ extension TrainStopVC{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return sourceArr.count
+       return model.filteredStops.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
         let cell = tableView.dequeueReusableCell(withIdentifier: "trainCell", for: indexPath)
-        cell.textLabel?.text = sourceArr[indexPath.row]
+        cell.textLabel?.text = model.filteredStops[indexPath.row].stopName
         return cell
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-     
-       
         
     }
 
+}
+
+extension TrainStopVC{
+    func updateUI(){
+        searchBar.text = model.currentFilter
+      //  print(searchBar.text)
+      //  tableView.reloadData()
+        searchBar.text = model.currentFilter
+        print(searchBar.text)
+    }
 }

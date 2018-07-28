@@ -280,7 +280,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" text="07081" translatesAutoresizingMaskIntoConstraints="NO" id="xOs-fK-sFz">
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xOs-fK-sFz">
                                 <rect key="frame" x="0.0" y="56" width="375" height="56"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -326,8 +326,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="0xA-at-CSg"/>
                     <connections>
+                        <outlet property="searchBar" destination="xOs-fK-sFz" id="TeP-AR-ojM"/>
                         <outlet property="tableView" destination="Qlq-N7-OU7" id="jmx-cI-mw2"/>
-                        <outlet property="view" destination="xOs-fK-sFz" id="ItP-Ur-o1g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fWA-gk-sSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
