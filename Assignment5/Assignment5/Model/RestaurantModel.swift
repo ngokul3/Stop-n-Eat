@@ -38,24 +38,54 @@ extension RestaurantModel{
     func loadRestaurantFromNetwork(njTransitStationCoordinates locationCoordinates : String){
         let network = RestaurantNetwork()
         
-        var jsonResult: Any?
         
-        network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {(data) in
-//            guard let rawData = data else {
-//                preconditionFailure("Fialure to parse json data")
-//                //jsonDataDidArrive(nil, errorMsg)
-//
-//            }
-           // jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-//
-//            guard let validaData = jsonResult as? NSDictionary else {
-//               preconditionFailure("Fialure to parse json data")
-//
-//            }
-
-          // print(validaData)
+        network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {(dictionary, error) in
+            print("In return from ajaxRequest: \(Thread.current)")
             
-            } )
+            guard let restaurantResultArray = dictionary?["businesses"] as? [ [String: AnyObject] ] else {
+                print("data format error: \(dictionary?.description ?? "[Missing dictionary]")")
+                return
+            }
+            
+            OperationQueue.main.addOperation {
+                print("Passing restaurant results to main operation queue: \(Thread.current)")
+                
+                self.restaurantsFromNetwork.removeAll()
+  
+                restaurantResultArray.forEach { [weak self](restaurant) in
+                    
+                    guard let name : String = restaurant["name"] as? String else{
+                        preconditionFailure("Name not found in JSON")
+                    }
+                    
+                    guard let id : String = restaurant["id"] as? String else{
+                        preconditionFailure("Id not found in JSON")
+                    }
+                    
+                    guard let coord : NSDictionary = restaurant["coordinates"] as? NSDictionary else{
+                        preconditionFailure("latitude not found in JSON")
+                    }
+                    
+                    guard let lat : Double = coord["latitude"] as? Double else{
+                        preconditionFailure("latitude not found in JSON")
+                    }
+
+                    guard let long : Double = coord["longitude"] as? Double else{
+                        preconditionFailure("longitude not found in JSON")
+                    }
+                    
+                    guard let rating : Double = restaurant["rating"] as? Double else{
+                        preconditionFailure("rating not found in JSON")
+                    }
+                    
+                    self?.restaurantsFromNetwork.append(Restaurant(_restaurantName: name, _restaurantId: id, _latitude: lat, _longitide: long, _givenRating: Int(rating)))
+                }
+                //Center.post(self.filterChangedNotification)
+            }
+            
+        } )
+        
+        print("Number of Records now in restaurant Array is \(restaurantsFromNetwork.count)")
     }
 }
 extension RestaurantModel{
@@ -82,4 +112,9 @@ class Restaurant{
     var givenRating : Int = 0
     var myRating : Int = 0
     var isSelected : Bool = false
+    
+    init(_restaurantName : String, _restaurantId : String, _latitude : Double, _longitide : Double, _givenRating : Int)
+    {
+        
+    }
 }

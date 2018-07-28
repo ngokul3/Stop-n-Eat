@@ -12,7 +12,7 @@ import Alamofire
 
 class RestaurantNetwork{
     
-    func loadFromNetwork(location: String, term: String, finished: @escaping (Data)  -> Void) {
+    func loadFromNetwork(location: String, term: String, finished: @escaping (_ dataDict: NSDictionary?, _ errorMsg: String?)  -> ()) {
         let MY_API_KEY = "Bearer qEjtERYCtGRtYmaELAxisLtdM2TWMsUbLG-wvs0b8KlxIfECiKGRrnY7AKOZwe6Zsz_DehvIAXJtt4jiIrKYjCgyf0Tx4CK_yX0u-6LpOc35By8TiyGlLdElXgqzWXYx"
         
         var locationURL : String
@@ -30,10 +30,28 @@ class RestaurantNetwork{
                 .responseJSON { response in
                     debugPrint(response)
                     
-                    guard let data = response.data else { return }
+                    if let status = response.response?.statusCode {
+                        switch(status){
+                        case 201:
+                            print("success")
+                        default:
+                            print("Response status: \(status)")
+                        }
+                    }
                     
-                    print(data)
-                    finished(data)
+                    if let result = response.result.value {
+                        let JSON = result as? NSDictionary
+                      //  print(JSON)
+                         finished(JSON, nil)
+                    }
+                    else{
+                        finished(nil, "Json crashed")
+                    }
+                    
+                    //guard let data = response.data else { return }
+                    
+                    //print(data)
+                   // finished(JSON)
                     
             }
         }
