@@ -11,8 +11,7 @@ import Foundation
 class RestaurantModel: RestaurantProtocol{
   
     private static var instance: RestaurantProtocol?
-    private var restaurantsFromNetwork : RestaurantArray
-  //  var networkDelegate : NetworkLayerListenerProtocol?
+    var restaurantsFromNetwork : RestaurantArray
     
     private init(){
         restaurantsFromNetwork = RestaurantArray()
@@ -52,7 +51,7 @@ extension RestaurantModel{
                 
                 self.restaurantsFromNetwork.removeAll()
   
-                restaurantResultArray.forEach { [weak self](restaurant) in
+                restaurantResultArray.forEach { (restaurant) in
                     
                     guard let name : String = restaurant["name"] as? String else{
                         preconditionFailure("Name not found in JSON")
@@ -78,9 +77,11 @@ extension RestaurantModel{
                         preconditionFailure("rating not found in JSON")
                     }
                     
-                    self?.restaurantsFromNetwork.append(Restaurant(_restaurantName: name, _restaurantId: id, _latitude: lat, _longitide: long, _givenRating: Int(rating)))
+                    let restaurant = Restaurant(_restaurantName: name, _restaurantId: id, _latitude: lat, _longitide: long, _givenRating: Int(rating))
+                    
+                    self.restaurantsFromNetwork.append(restaurant)
                 }
-                //Center.post(self.filterChangedNotification)
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantLoadedFromNetwork), object: self))
             }
             
         } )
@@ -115,6 +116,10 @@ class Restaurant{
     
     init(_restaurantName : String, _restaurantId : String, _latitude : Double, _longitide : Double, _givenRating : Int)
     {
-        
+        restaurantName = _restaurantName
+        restaurantId = _restaurantId
+        latitude = _latitude
+        longitide = _longitide
+        givenRating = _givenRating
     }
 }

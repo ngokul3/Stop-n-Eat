@@ -23,6 +23,7 @@ protocol RestaurantProtocol{
    // var networkDelegate : NetworkLayerListenerProtocol? {get set}
     func addRestaurantFromNetwork(restaurantOpt : Restaurant?)
     func loadRestaurantFromNetwork(njTransitStationCoordinates locationCoordinates : String)
+    var restaurantsFromNetwork : RestaurantArray {get set}
 }
 enum TrainStopError: Error{
     case invalidRowSelection()
