@@ -28,7 +28,6 @@ class TrainStopModel {
             }
            
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListFiltered), object: self))
-            
         }
     }
     var storedStopFilter : StopArray?{
