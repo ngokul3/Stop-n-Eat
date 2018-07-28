@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (4.7.1)
+  - DynamicBlurView (2.0.2)
+  - PopupDialog (0.8.0):
+    - DynamicBlurView (~> 2.0)
+  - UberCore (0.10.0)
+  - UberRides (0.10.0):
+    - UberCore
+
+DEPENDENCIES:
+  - Alamofire (= 4.7.1)
+  - PopupDialog (~> 0.6)
+  - UberRides (~> 0.9)
+
+SPEC CHECKSUMS:
+  Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
+  DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
+  PopupDialog: 11347197b6ac3e0548ac445d40ce68d1d407e9a0
+  UberCore: 512950407dadc8045a583e4a509da2750ae7dc21
+  UberRides: cc6d7c5232966e45229dda1534106b33e379dfbe
+
+PODFILE CHECKSUM: 72257f0ddd5dba920faff6f340398b5bb100ee03
+
+COCOAPODS: 1.4.0
