@@ -8,14 +8,29 @@
 
 import UIKit
 
-class RestaurantVC: UIViewController {
-    
+class RestaurantVC: UIViewController, UISearchBarDelegate {
+   
     var cellArrray = [RestaurantCell]()
             override func viewDidLoad() {
             super.viewDidLoad()
     }
 }
 
+extension RestaurantVC{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        //model.currentFilter = searchText
+    }
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder() // "give up focus" in HTML/JavaScript
+    }
+    
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}
 extension RestaurantVC : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
