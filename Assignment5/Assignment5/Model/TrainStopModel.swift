@@ -37,28 +37,7 @@ class TrainStopModel {
 
     }
     
-    
-//    lazy var filterTrainStops  = {[weak self] in
-//
-//        guard (self?.trainStops.count)! > 0 else
-//        {
-//            preconditionFailure("Not able to fetch Train Stops")
-//        }
-//
-//        if let storedStops = self?.storedStopFilter {
-//            self?.filteredStops = storedStops
-//        }
-//        else{
-//            self?.filteredStops =  (self?.trainStops.filter({(arg1) in
-//                return arg1.stopName.lowercased().contains(self?.currentFilter.lowercased())
-//            }))!
-//
-//            self?.searchedStops[(self?.currentFilter)!] = self?.filteredStops
-//        }
-//
-//        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListFiltered), object: self))
-//    }
-    private init(){
+private init(){
         trainStops = StopArray()
         filteredStops = StopArray()
         

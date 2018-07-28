@@ -14,6 +14,7 @@
 		90960B62210C8672005EC2AA /* TrainStopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90960B5F210C8672005EC2AA /* TrainStopModel.swift */; };
 		90960B63210C8672005EC2AA /* RestaurantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90960B60210C8672005EC2AA /* RestaurantModel.swift */; };
 		90960B64210C8672005EC2AA /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90960B61210C8672005EC2AA /* Types.swift */; };
+		90998ABD210CBD73001E5848 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90998ABC210CBD73001E5848 /* NetworkLayer.swift */; };
 		90A31A612107FE8E000DB608 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A602107FE8E000DB608 /* AppDelegate.swift */; };
 		90A31A632107FE8E000DB608 /* TrainStopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A622107FE8E000DB608 /* TrainStopVC.swift */; };
 		90A31A662107FE8E000DB608 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A31A642107FE8E000DB608 /* Main.storyboard */; };
@@ -58,6 +59,7 @@
 		90960B60210C8672005EC2AA /* RestaurantModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantModel.swift; sourceTree = "<group>"; };
 		90960B61210C8672005EC2AA /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		90960B69210C96FD005EC2AA /* RailStop.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = RailStop.json; path = Assignment5/Assets.xcassets/RailStop.dataset/RailStop.json; sourceTree = "<group>"; };
+		90998ABC210CBD73001E5848 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		90A31A5D2107FE8E000DB608 /* Assignment5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A31A602107FE8E000DB608 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90A31A622107FE8E000DB608 /* TrainStopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainStopVC.swift; sourceTree = "<group>"; };
@@ -162,6 +164,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		90998ABB210CBD2D001E5848 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				90998ABC210CBD73001E5848 /* NetworkLayer.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		90A31A542107FE8E000DB608 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +200,7 @@
 		90A31A5F2107FE8E000DB608 /* Assignment5 */ = {
 			isa = PBXGroup;
 			children = (
+				90998ABB210CBD2D001E5848 /* Network */,
 				90960B5E210C85B0005EC2AA /* Model */,
 				90960B5D210C85AA005EC2AA /* Controller */,
 				90960B5C210C85A3005EC2AA /* View */,
@@ -529,6 +540,7 @@
 				90108A08210A7940008B9BC7 /* NotifyVC.swift in Sources */,
 				90A31A95210A0EDC000DB608 /* SavedRestaurantCell.swift in Sources */,
 				90A31A612107FE8E000DB608 /* AppDelegate.swift in Sources */,
+				90998ABD210CBD73001E5848 /* NetworkLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
