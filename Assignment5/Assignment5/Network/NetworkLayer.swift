@@ -9,20 +9,10 @@
 import Foundation
 import Alamofire
 
-protocol NetworkLayerListenerProtocol: class{
-    func loadFromNetwork(location : String, term:String, finished: @escaping (Data) -> Void)
-}
 
-class TrainNetwork: NetworkLayerListenerProtocol{
-    func loadFromNetwork(location : String, term:String, finished: @escaping (Data) -> Void)
-    {
-            //Todo - Trains 
-    }
-}
-
-class RestaurantNetwork:NetworkLayerListenerProtocol{
+class RestaurantNetwork{
     
-    func loadFromNetwork(location: String, term: String, finished: @escaping (Data) -> Void) {
+    func loadFromNetwork(location: String, term: String, finished: @escaping (Data)  -> Void) {
         let MY_API_KEY = "Bearer qEjtERYCtGRtYmaELAxisLtdM2TWMsUbLG-wvs0b8KlxIfECiKGRrnY7AKOZwe6Zsz_DehvIAXJtt4jiIrKYjCgyf0Tx4CK_yX0u-6LpOc35By8TiyGlLdElXgqzWXYx"
         
         var locationURL : String
@@ -42,6 +32,7 @@ class RestaurantNetwork:NetworkLayerListenerProtocol{
                     
                     guard let data = response.data else { return }
                     
+                    print(data)
                     finished(data)
                     
             }

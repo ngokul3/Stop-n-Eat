@@ -137,21 +137,29 @@ extension TrainStopModel{
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListChanged), object: self))
     }
     
-    func getTrainStop(stopNo: Int) throws -> TrainStop? {
+    func getTrainStop(fromFilteredArray stopIndex : Int) throws ->TrainStop{
+    
+//        guard trainStops.count >= stopNo else //check for array bounds
+//        {
+//            preconditionFailure("Not able to fetch the requested Train Stop")
+//        }
+//
+//
+//        return trainStops.filter{$0.stopNo == stopNo}.first
         
-        guard trainStops.count >= stopNo else //check for array bounds
-        {
-            preconditionFailure("Not able to fetch the requested Train Stop")
+        guard filteredStops[stopIndex] else{
+            throw TrainStopError.invalidRowSelection()
         }
-        
-       
-        return trainStops.filter{$0.stopNo == stopNo}.first
+        let stop = filteredStops[stopIndex]
+        return stop
     }
     
     func getAllTrains() -> [TrainStop] {
         
          return trainStops
     }
+    
+   
  
 }
 class TrainStop{
@@ -178,3 +186,15 @@ class TrainStop{
         longitude = long
     }
 }
+
+extension Collection{
+    subscript(index: Int) -> Bool{
+        guard   index >= 0
+            ,self.count > index else{
+                return false
+        }
+        return true
+    }
+}
+
+

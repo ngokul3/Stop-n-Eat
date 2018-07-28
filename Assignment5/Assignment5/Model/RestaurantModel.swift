@@ -12,13 +12,15 @@ class RestaurantModel: RestaurantProtocol{
   
     private static var instance: RestaurantProtocol?
     private var restaurantsFromNetwork : RestaurantArray
-    var networkDelegate : NetworkLayerListenerProtocol?
+  //  var networkDelegate : NetworkLayerListenerProtocol?
+    
     private init(){
         restaurantsFromNetwork = RestaurantArray()
     }
 }
 
 extension RestaurantModel{
+    
     static func getInstance() -> RestaurantProtocol {
         if let inst = RestaurantModel.instance {
             return inst
@@ -29,19 +31,33 @@ extension RestaurantModel{
         return inst
     }
     
-    var restaurantNetworkDelegate: NetworkLayerListenerProtocol? {
-        set {
-            if networkDelegate != nil && newValue != nil {
-                print("warning: network delegate overwritten")
-            }
-            networkDelegate = newValue
-        }
-        get {
-            return networkDelegate
-        }
-    }
 }
 
+extension RestaurantModel{
+    
+    func loadRestaurantFromNetwork(njTransitStationCoordinates locationCoordinates : String){
+        let network = RestaurantNetwork()
+        
+        var jsonResult: Any?
+        
+        network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {(data) in
+//            guard let rawData = data else {
+//                preconditionFailure("Fialure to parse json data")
+//                //jsonDataDidArrive(nil, errorMsg)
+//
+//            }
+           // jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+//
+//            guard let validaData = jsonResult as? NSDictionary else {
+//               preconditionFailure("Fialure to parse json data")
+//
+//            }
+
+          // print(validaData)
+            
+            } )
+    }
+}
 extension RestaurantModel{
     
     func addRestaurantFromNetwork(restaurantOpt: Restaurant?) {

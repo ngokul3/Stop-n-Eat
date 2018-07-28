@@ -11,7 +11,7 @@ import Foundation
 protocol TrainStopProtocol {
     static func getInstance() -> TrainStopProtocol
     func addTrainStop(stop: TrainStop) throws
-    func getTrainStop(stopNo : Int) throws ->TrainStop?
+    func getTrainStop(fromFilteredArray stopIndex : Int) throws ->TrainStop
     func getAllTrains()->[TrainStop] //Todo reiew these get func. YOu dont need this
     var filteredStops : StopArray {get set}
     var currentFilter : String {get set}
@@ -20,11 +20,12 @@ protocol TrainStopProtocol {
 
 protocol RestaurantProtocol{
     static func getInstance()->RestaurantProtocol
-    var networkDelegate : NetworkLayerListenerProtocol? {get set}
+   // var networkDelegate : NetworkLayerListenerProtocol? {get set}
     func addRestaurantFromNetwork(restaurantOpt : Restaurant?)
-   
+    func loadRestaurantFromNetwork(njTransitStationCoordinates locationCoordinates : String)
 }
 enum TrainStopError: Error{
+    case invalidRowSelection()
     case invalidStopName()
     case invalidLocation()
     case notAbleToPrepopulate()

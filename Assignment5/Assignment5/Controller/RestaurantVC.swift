@@ -10,8 +10,25 @@ import UIKit
 
 class RestaurantVC: UIViewController, UISearchBarDelegate {
    
+    var trainlocation : String = ""
     var cellArrray = [RestaurantCell]()
-            override func viewDidLoad() {
+    private var model = RestaurantModel.getInstance()
+    private static var modelObserver: NSObjectProtocol?
+
+    override func viewDidLoad() {
+        
+        if(!trainlocation.isEmpty){
+            model.loadRestaurantFromNetwork(njTransitStationCoordinates: trainlocation)
+        }
+        
+        RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantLoadedFromNetwork), object: nil, queue: OperationQueue.main) {
+            
+            [weak self] (notification: Notification) in
+            if let s = self {
+                s.updateUI()
+            }
+        }
+        
             super.viewDidLoad()
     }
 }
@@ -78,4 +95,11 @@ extension RestaurantVC : UITableViewDataSource{
         return 3
     }
  }
+
+extension RestaurantVC{
+    
+    func updateUI(){
+        
+    }
+}
 
