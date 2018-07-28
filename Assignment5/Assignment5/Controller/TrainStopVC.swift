@@ -47,9 +47,7 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
 extension TrainStopVC{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if(model.currentFilter != searchText){
-            print(searchBar.text)
-            
-            model.currentFilter = searchText
+             model.currentFilter = searchText
         }
       
     }
@@ -89,10 +87,12 @@ extension TrainStopVC{
 
 extension TrainStopVC{
     func updateUI(){
-        searchBar.text = model.currentFilter
-      //  print(searchBar.text)
-      //  tableView.reloadData()
-        searchBar.text = model.currentFilter
-        print(searchBar.text)
+        self.tableView.reloadData()
+        
+//        if(searchBar.text != model.currentFilter)
+//        {
+//            searchBar.text = model.currentFilter
+//        }
+         // print(searchBar.text)
     }
 }
