@@ -142,8 +142,6 @@ extension RestaurantModel{
         
         restaurantsSaved.append(restaurant)
         
-//        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantRefreshed), object: self))
-        
         let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantRefreshed), object: nil)
         
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])

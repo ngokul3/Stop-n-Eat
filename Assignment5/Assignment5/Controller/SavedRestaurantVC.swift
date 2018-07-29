@@ -11,7 +11,6 @@ import UIKit
 class SavedRestaurantVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
     private var model = RestaurantModel.getInstance()
     private static var modelObserver: NSObjectProtocol?
     
@@ -48,8 +47,54 @@ extension SavedRestaurantVC : UITableViewDataSource{
 }
 
 extension SavedRestaurantVC{
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        guard let segueName = segue.identifier else{
+            preconditionFailure("No segue identifier")
+        }
+        
+        guard let detailVC = segue.destination as? DetailRestaurantVC else{
+            preconditionFailure("Wrong destination type: \(segue.destination)")
+        }
+        
+        switch String(describing: segueName){
+            
+        case "AddSegue" :
+            
+            detailVC.restaurantDetailVCType = DetailVCType.Add
+            
+            detailVC.saveDetailVC = {[weak self] (restaurant) in
+                do{
+                    try self?.model.addRestaurantToFavorite(restaurantOpt: restaurant)
+                }
+                catch RestaurantError.invalidRestaurant(){
+                    self?.alertUser = "Restaurant is nil"
+                }
+                catch{
+                    self?.alertUser = "Something went wrong while adding"
+                }
+            }
+        default : break
+        }
+    }
+}
+
+extension SavedRestaurantVC{
     func updateUI()
     {
         tableView.reloadData()
     }
+    
+    var alertUser :  String{
+        get{
+            preconditionFailure("You cannot read from this object")
+        }
+        
+        set{
+            let alert = UIAlertController(title: "Attention", message: newValue, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true)
+        }
+    }
 }
+

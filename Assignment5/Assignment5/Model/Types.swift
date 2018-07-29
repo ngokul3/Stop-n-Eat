@@ -47,6 +47,7 @@ enum RestaurantError: Error{
     case notAbleToAdd(name : String)
     case notAbleToEdit(name: String)
     case notAbleToDelete(name: String)
+    case notAbleToSave(name: String)
 }
 struct Messages {
     static let StopListChanged = "Train Stop List changed" //Todo this is not required

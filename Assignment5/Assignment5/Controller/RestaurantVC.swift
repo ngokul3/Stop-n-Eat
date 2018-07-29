@@ -235,7 +235,15 @@ extension RestaurantVC{
 //
 //         var restArray = RestaurantArray()
 //         restArray.append(restaurant)
-//         try Persistence.save(restArray)
+        do{
+         try Persistence.save(restaurant)
+        }
+        catch RestaurantError.notAbleToSave(let name){
+            alertUser = "Not able to save \(name) "
+        }
+        catch {
+            alertUser = "Something went wrong while saving"
+        }
     }
     var alertUser :  String{
         get{

@@ -32,15 +32,19 @@ class Persistence {
     
     static func save(_ restaurant: Restaurant) throws {
        
+        var savedRestaurants = [Restaurant]()
         guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
             return
         }
         
-        guard var alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] else{
-            return
+        if let alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] {
+            savedRestaurants.append(restaurant)
         }
+//        guard var alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] else{
+//            return
+//        }
         
-        alreadySavedRestaurants.append(restaurant)
+        
         
 //        restaurants.forEach({
 //            print("Original count of restaurants in database is \(alreadySavedRestaurants.count)")
@@ -49,7 +53,7 @@ class Persistence {
 //            print("Saved count of restaurants that will be saved is \(alreadySavedRestaurants.count)")
 //        })
         
-        let savedData = NSKeyedArchiver.archivedData(withRootObject: alreadySavedRestaurants)
+        let savedData = NSKeyedArchiver.archivedData(withRootObject: savedRestaurants)
         UserDefaults.standard.set(savedData, forKey: "restaurants")
         
         if let data = UserDefaults.standard.data(forKey: "restaurants"),

@@ -276,7 +276,7 @@
                         <viewLayoutGuide key="safeArea" id="9lt-UT-Wh7"/>
                     </view>
                     <navigationItem key="navigationItem" title="Saved Restaurants" id="gZX-KT-0Uq">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="ufJ-Zy-6E9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ufJ-Zy-6E9">
                             <connections>
                                 <segue destination="aVw-KE-lTW" kind="show" id="fOB-Rc-vXx"/>
                             </connections>
