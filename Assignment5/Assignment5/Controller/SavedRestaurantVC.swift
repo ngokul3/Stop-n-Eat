@@ -27,6 +27,24 @@ class SavedRestaurantVC: UIViewController {
         catch{
             alertUser = "Unknown Error"
         }
+        
+        SavedRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantDeleted), object: nil, queue: OperationQueue.main) {
+           
+            [weak self] (notification: Notification) in
+            if let s = self {
+                let info0 = notification.userInfo?[Consts.KEY0]
+                
+                let restaurantOpt = info0 as? Restaurant
+                
+                guard let restaurant = restaurantOpt else{
+                    preconditionFailure("Could not save this favorite restaurant")
+                }
+                
+                s.deleteRestaurant(restaurant: restaurant)
+                s.updateUI()
+            }
+        }
+        
         SavedRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantRefreshed), object: nil, queue: OperationQueue.main) {
             
             [weak self] (notification: Notification) in
@@ -53,6 +71,32 @@ extension SavedRestaurantVC : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.restaurantsSaved.count
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCellEditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+           
+            guard  model.restaurantsSaved[indexPath.row] else{
+                preconditionFailure("Error while getting value from the Menu Model")
+            }
+            
+            let restaurantInContext = model.restaurantsSaved[indexPath.row]
+            
+            do{
+                try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext)
+            }
+                
+            catch RestaurantError.notAbleToDelete(let name){
+                alertUser = "\(name) cannot be deleted"
+            }
+                
+            catch{
+                alertUser = "Unexpected Error"
+            }
+        }
     }
 }
 
@@ -127,6 +171,18 @@ extension SavedRestaurantVC{
     func updateUI()
     {
         tableView.reloadData()
+    }
+    
+    func deleteRestaurant(restaurant: Restaurant){
+        do{
+            try Persistence.delete(restaurant)
+        }
+        catch RestaurantError.notAbleToDelete(let name){
+            alertUser = "Not able to delete \(name) from database"
+        }
+        catch {
+            alertUser = "Unexpected Error while deletig from database"
+        }
     }
     
     var alertUser :  String{

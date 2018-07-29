@@ -59,6 +59,7 @@ struct Messages {
     static let RestaurantLoadedFromNetwork = "Restaurants From Network Loaded"
     static let RestaurantRefreshed = "Restaurant refreshed to Favorite"
     static let FavoriteListChanged = "Add Delete or Edit on the Model"
+    static let RestaurantDeleted = "Restaurant Deleted"
 }
 
 enum DetailVCType : String

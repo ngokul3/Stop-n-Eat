@@ -31,7 +31,24 @@ class Persistence {
     }
     
     static func delete(_ restaurant: Restaurant) throws{
+        guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
+            return
+        }
         
+        if let alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] {
+            
+            if(alreadySavedRestaurants.contains{$0.restaurantId == restaurant.restaurantId}){
+                let restaurantsSaved = alreadySavedRestaurants.filter({($0.restaurantId != restaurant.restaurantId)})
+                
+                let savedData = NSKeyedArchiver.archivedData(withRootObject: restaurantsSaved)
+                UserDefaults.standard.set(savedData, forKey: "restaurants")
+
+            }
+            else{
+                throw RestaurantError.notAbleToDelete(name: restaurant.restaurantName)
+            }
+            
+        }
     }
     
     static func save(_ restaurant: Restaurant) throws {
@@ -48,21 +65,25 @@ class Persistence {
                 savedRestaurants.append($0)
             }
         }
-        savedRestaurants.forEach({
-                        if($0.restaurantId == restaurant.restaurantId){
-                            $0.restaurantName = restaurant.restaurantName
-                            $0.dateVisited = restaurant.dateVisited
-                            $0.comments = restaurant.comments
-                            $0.givenRating = restaurant.givenRating
-                        }
-                        else{
-                            savedRestaurants.append(restaurant)
-                        }
-                    })
+        
+        if(savedRestaurants.contains(restaurant)){
+            savedRestaurants.forEach({(rest) in
+                if(rest.restaurantId == restaurant.restaurantId){
+                    rest.restaurantName = restaurant.restaurantName
+                    rest.dateVisited = restaurant.dateVisited
+                    rest.comments = restaurant.comments
+                    rest.givenRating = restaurant.givenRating
+                }
+            })
+        }
+        else{
+            savedRestaurants.append(restaurant)
+        }
         
         let savedData = NSKeyedArchiver.archivedData(withRootObject: savedRestaurants)
         UserDefaults.standard.set(savedData, forKey: "restaurants")
         
+        //Todo - remove below
         if let data = UserDefaults.standard.data(forKey: "restaurants"),
             let myRestList = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Restaurant] {
             myRestList.forEach({print( $0.restaurantName)})

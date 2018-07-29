@@ -178,7 +178,9 @@ extension RestaurantModel{
             throw RestaurantError.notAbleToDelete(name: restaurant.restaurantName)
         }
         
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantRefreshed), object: self))
+        let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantDeleted), object: nil)
+        
+        NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
     }
 }
 

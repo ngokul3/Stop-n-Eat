@@ -90,7 +90,7 @@ extension DetailRestaurantVC{
         }
         
         restaurant?.restaurantName = name
-       // saveDetailVC?(restaurant)
+        saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
     }
 }
