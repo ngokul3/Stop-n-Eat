@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RestaurantVC: UIViewController, UISearchBarDelegate {
+class RestaurantVC: UIViewController {
    
     
     @IBOutlet weak var tableView: UITableView!
@@ -38,21 +38,6 @@ class RestaurantVC: UIViewController, UISearchBarDelegate {
     }
 }
 
-extension RestaurantVC{
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //model.currentFilter = searchText
-    }
-    
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder() // "give up focus" in HTML/JavaScript
-    }
-    
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-}
 extension RestaurantVC : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -110,6 +95,7 @@ extension RestaurantVC : UITableViewDataSource{
  }
 extension RestaurantVC{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        
         guard let identifier = segue.identifier else{
             preconditionFailure("No segue identifier")
         }
@@ -117,6 +103,8 @@ extension RestaurantVC{
         guard let mapVC = segue.destination as? MapViewVC else{
             preconditionFailure("Wrong destination type: \(segue.destination)")
         }
+        
+        var retaurants = RestaurantArray()
         
         switch identifier{
             
@@ -129,13 +117,13 @@ extension RestaurantVC{
             
             do{
                 let restaurant = try model.getRestaurantFromNetwork(fromRestaurantArray: indexPath.row)
-                
                 let place = Place()
-                //place.trainStop =
-                //place.restaurantName = restaurant.restaurantName
-                
-               // place.latitude = restaurant.latitude
+                place.trainStop = restaurant.trainStop
+                retaurants.append(restaurant)
+                place.restaurants = retaurants
+                mapVC.place = place
             }
+                
             catch(RestaurantError.invalidRowSelection()){
                 alertUser = "Restaurant selected could not be navigated to the map"
             }

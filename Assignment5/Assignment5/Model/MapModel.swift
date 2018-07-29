@@ -7,7 +7,6 @@
 //
 
 import Foundation
-typealias PlaceArray = [Place]
 
 //class MapModel{
 //    var placeArray = PlaceArray()

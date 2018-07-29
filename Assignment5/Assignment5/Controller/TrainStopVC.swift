@@ -103,12 +103,6 @@ extension TrainStopVC{
 extension TrainStopVC{
     func updateUI(){
         self.tableView.reloadData()
-        
-//        if(searchBar.text != model.currentFilter)
-//        {
-//            searchBar.text = model.currentFilter
-//        }
-         // print(searchBar.text)
     }
     
     var alertUser :  String{

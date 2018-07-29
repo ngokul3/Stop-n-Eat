@@ -431,7 +431,7 @@
                                                     <rect key="frame" x="331" y="1" width="39" height="28"/>
                                                     <state key="normal" backgroundImage="annotation"/>
                                                     <connections>
-                                                        <segue destination="7qZ-wz-HbW" kind="show" identifier="singleMap" id="TX1-a0-gH6"/>
+                                                        <segue destination="7qZ-wz-HbW" kind="show" identifier="singleMapSegue" id="TX1-a0-gH6"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -638,7 +638,7 @@
         <image name="heart" width="257" height="196"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TX1-a0-gH6"/>
+        <segue reference="dlF-Qv-XRz"/>
         <segue reference="rik-Tt-5rB"/>
     </inferredMetricsTieBreakers>
 </document>

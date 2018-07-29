@@ -14,18 +14,25 @@ class MapViewVC: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     let locationManager = CLLocationManager()
     
-    var stopLocation : CLLocation?
-    var places : PlaceArray?
+    var place : Place?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        stopLocation = CLLocation(latitude: 40.723937714264, longitude: -74.306469376626)
-        guard let location = stopLocation else{
-            alertUser = "Map cannot be launched"
+        guard let placeOfInterest = place else
+        {
+            alertUser = "Error while loading map"
             return
         }
-        centerMapOnLocation(location: location)
+        
+        guard let trainStop = placeOfInterest.trainStop else{
+            alertUser = "Map cannot be launch Train Stop Coordinates"
+            return
+        }
+        
+        let stopLocation = CLLocation(latitude: trainStop.latitude, longitude: trainStop.longitude)
+        
+        centerMapOnLocation(location: stopLocation)
         
     }
     
