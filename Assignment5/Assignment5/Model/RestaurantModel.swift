@@ -35,8 +35,6 @@ extension RestaurantModel{
 extension RestaurantModel{
     func loadRestaurantFromNetwork(trainStop : TrainStop){
         
-       
-        
         let trainLocation = (trainStop.latitude, trainStop.longitude)
     
         guard trainLocation.0 != 0.0
@@ -47,6 +45,7 @@ extension RestaurantModel{
         let locationCoordinates = String(describing: trainLocation.0) + "," +  String(describing: trainLocation.1)
      
         let network = RestaurantNetwork()
+        
         network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {(dictionary, error) in
             print("In return from ajaxRequest: \(Thread.current)")
             
@@ -86,7 +85,7 @@ extension RestaurantModel{
                         preconditionFailure("rating not found in JSON")
                     }
                     
-                    let restaurant = Restaurant(_restaurantName: name, _restaurantId: id, _latitude: lat, _longitide: long, _givenRating: Int(rating))
+                    let restaurant = Restaurant(_trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating))
                     
                     self.restaurantsFromNetwork.append(restaurant)
                 }
@@ -106,14 +105,14 @@ extension RestaurantModel{
         }
         
         restaurantsFromNetwork.append(restaurant)
-        //NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListFiltered), object: self))
-    }
+     }
     
     func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant{
         
         guard restaurantsFromNetwork[stopIndex] else{
             throw RestaurantError.invalidRowSelection()
         }
+        
         let restaurant = restaurantsFromNetwork[stopIndex]
         return restaurant
     }
@@ -122,22 +121,23 @@ extension RestaurantModel{
 
 class Restaurant{
 
-    var trainStop : TrainStop?
+    var trainStop : TrainStop
     var restaurantName : String = ""
     var restaurantId : String = ""
     var latitude : Double = 0.0
-    var longitide : Double = 0.0
+    var longitude : Double = 0.0
     var distanceFromTrainStop : Double = 0.0
     var givenRating : Int = 0
     var myRating : Int = 0
     var isSelected : Bool = false
     
-    init(_restaurantName : String, _restaurantId : String, _latitude : Double, _longitide : Double, _givenRating : Int)
+    init(_trainStop : TrainStop, _restaurantName : String, _restaurantId : String, _latitude : Double, _longitude : Double, _givenRating : Int)
     {
+        trainStop = _trainStop
         restaurantName = _restaurantName
         restaurantId = _restaurantId
         latitude = _latitude
-        longitide = _longitide
+        longitude = _longitude
         givenRating = _givenRating
     }
 }

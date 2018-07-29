@@ -41,58 +41,21 @@ class RestaurantVC: UIViewController {
 extension RestaurantVC : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as? RestaurantCell else{
+            preconditionFailure("Incorrect Cell provided")
+        }
         
         print("Returned name is \(model.restaurantsFromNetwork[indexPath.row].restaurantName)")
-        cell.textLabel?.text = model.restaurantsFromNetwork[indexPath.row].restaurantName
+        cell.lblRestaurantName.text = model.restaurantsFromNetwork[indexPath.row].restaurantName
+        cell.btnSingleMap.tag = indexPath.row
         return cell
-        
-        
-//
-//        let CellID = "restaurantCell"
-//
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath) as? RestaurantCell else{
-//            preconditionFailure("Incorrect cell provided -- see storyboard")
-//        }
-//        switch indexPath.row{
-//
-//        case 0:
-//            cell.lblMiles.text = "2 mi"
-//            cell.lblRestaurantName.text = "Dominos"
-//            cell.imgRail.image = UIImage(named: "Rail.png")
-//            cell.imgStar1.image = UIImage(named: "Rating.png")
-//            cell.imgStar2.image = UIImage(named: "Rating.png")
-//            cell.imgStar3.image = UIImage(named: "Rating.png")
-//             cell.imgThumbnail.image = UIImage(named: "pizza.jpg")
-//
-//        case 1:
-//            cell.lblMiles.text = "1 mi"
-//            cell.lblRestaurantName.text = "Dosa Corner"
-//            cell.imgRail.image = UIImage(named: "Rail.png")
-//            cell.imgStar1.image = UIImage(named: "Rating.png")
-//            cell.imgStar2.image = UIImage(named: "Rating.png")
-//
-//           //  cell.accessoryType = .checkmark
-//        case 2:
-//            cell.lblMiles.text = "3 mi"
-//            cell.lblRestaurantName.text = "Chipotle"
-//            cell.imgRail.image = UIImage(named: "Rail")
-//            cell.imgStar1.image = UIImage(named: "Rating.png")
-//
-//            cell.imgThumbnail.image = UIImage(named: "chipotle.png")
-//
-//        default : break
-//        }
-//
-//
-//
-//        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.restaurantsFromNetwork.count
     }
  }
+
 extension RestaurantVC{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         
@@ -110,13 +73,18 @@ extension RestaurantVC{
             
         case "singleMapSegue" :
             
-            guard let cell = sender as? UITableViewCell
-                ,let indexPath = self.tableView.indexPath(for: cell) else{
-                    preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
+            var rowNo : Int?
+            
+            if let button = sender as? UIButton {
+                rowNo = button.tag
+            }
+            
+            guard let indexRow = rowNo else{
+                 preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
             }
             
             do{
-                let restaurant = try model.getRestaurantFromNetwork(fromRestaurantArray: indexPath.row)
+                let restaurant = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
                 let place = Place()
                 place.trainStop = restaurant.trainStop
                 retaurants.append(restaurant)
@@ -131,6 +99,7 @@ extension RestaurantVC{
             catch{
                 alertUser = "Unexpected Error"
             }
+            
         case "multipleMapSegue" : break
             
         default : break

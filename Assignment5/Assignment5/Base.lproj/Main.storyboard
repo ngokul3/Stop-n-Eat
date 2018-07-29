@@ -475,6 +475,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="btnHeart" destination="qhJ-BS-DL1" id="9aK-Sn-fFy"/>
+                                            <outlet property="btnSingleMap" destination="RK6-0c-5Kr" id="l1i-Qm-JPG"/>
                                             <outlet property="imgRail" destination="qxz-r0-FrD" id="w7p-pL-0oU"/>
                                             <outlet property="imgStar1" destination="zGb-hs-S9N" id="8Vy-kS-HJf"/>
                                             <outlet property="imgStar2" destination="HU4-Rk-DxP" id="18W-A0-uTm"/>

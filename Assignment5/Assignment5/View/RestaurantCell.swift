@@ -12,6 +12,8 @@ class RestaurantCell: UITableViewCell {
     @IBOutlet weak var imgAnnotation: UIImageView!
     @IBOutlet weak var imgThumbnail: UIImageView!
     
+    @IBOutlet weak var btnHeart: UIButton!
+    @IBOutlet weak var btnSingleMap: UIButton!
     @IBOutlet weak var imgRail: UIImageView!
     @IBOutlet weak var imgStar1: UIImageView!
     @IBOutlet weak var imgStar2: UIImageView!
