@@ -10,7 +10,6 @@ import UIKit
 
 class RestaurantVC: UIViewController {
    
-    
     @IBOutlet weak var tableView: UITableView!
     var trainStop : TrainStop?
     var cellArrray = [RestaurantCell]()
@@ -23,9 +22,8 @@ class RestaurantVC: UIViewController {
             preconditionFailure("Could not find Stop")
         }
         
-         model.loadRestaurantFromNetwork(trainStop: stop)
+        model.loadRestaurantFromNetwork(trainStop: stop)
      
-        
         RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantLoadedFromNetwork), object: nil, queue: OperationQueue.main) {
             
             [weak self] (notification: Notification) in
@@ -33,11 +31,34 @@ class RestaurantVC: UIViewController {
                 s.updateUI()
             }
         }
-        
             super.viewDidLoad()
     }
 }
 
+extension RestaurantVC{
+    @IBAction func btnSave(_ sender: Any) {
+        var rowNo : Int?
+        
+        if let button = sender as? UIButton {
+            rowNo = button.tag
+        }
+        
+        guard let indexRow = rowNo else{
+            preconditionFailure("Could not find corresponding row: \(sender )")
+        }
+        
+        do{
+            let restaurant = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+            try Persistence.save(restaurant)
+        }
+        catch(RestaurantError.invalidRowSelection()){
+            alertUser = "Restaurant selected could not be navigated to the map"
+        }
+        catch{
+            alertUser = "Unexpected Error"
+        }
+    }
+}
 extension RestaurantVC : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -48,6 +69,7 @@ extension RestaurantVC : UITableViewDataSource{
         print("Returned name is \(model.restaurantsFromNetwork[indexPath.row].restaurantName)")
         cell.lblRestaurantName.text = model.restaurantsFromNetwork[indexPath.row].restaurantName
         cell.btnSingleMap.tag = indexPath.row
+        cell.btnHeart.tag = indexPath.row
         return cell
     }
     

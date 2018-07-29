@@ -11,6 +11,8 @@
 		8F3149FF4647B78F8FF3CAD5 /* Pods_Assignment5.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F790217F0D29031A1A06CDEB /* Pods_Assignment5.framework */; };
 		90108A08210A7940008B9BC7 /* NotifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90108A07210A7940008B9BC7 /* NotifyVC.swift */; };
 		9048B4EE210C9A2F00D1A26A /* RailStop.json in Resources */ = {isa = PBXBuildFile; fileRef = 9048B4ED210C9A2F00D1A26A /* RailStop.json */; };
+		9064B68B210DDEEA00E35072 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9064B68A210DDEEA00E35072 /* Persistence.swift */; };
+		9064B68D210DDEF700E35072 /* PersistedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9064B68C210DDEF700E35072 /* PersistedData.swift */; };
 		90960B62210C8672005EC2AA /* TrainStopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90960B5F210C8672005EC2AA /* TrainStopModel.swift */; };
 		90960B63210C8672005EC2AA /* RestaurantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90960B60210C8672005EC2AA /* RestaurantModel.swift */; };
 		90960B64210C8672005EC2AA /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90960B61210C8672005EC2AA /* Types.swift */; };
@@ -57,6 +59,8 @@
 		90108A07210A7940008B9BC7 /* NotifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyVC.swift; sourceTree = "<group>"; };
 		9048B4EB210C98CD00D1A26A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Assignment5/Assets.xcassets; sourceTree = "<group>"; };
 		9048B4ED210C9A2F00D1A26A /* RailStop.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = RailStop.json; path = Assignment5/Assets.xcassets/RailStop.dataset/RailStop.json; sourceTree = "<group>"; };
+		9064B68A210DDEEA00E35072 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		9064B68C210DDEF700E35072 /* PersistedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistedData.swift; sourceTree = "<group>"; };
 		90960B5F210C8672005EC2AA /* TrainStopModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainStopModel.swift; sourceTree = "<group>"; };
 		90960B60210C8672005EC2AA /* RestaurantModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantModel.swift; sourceTree = "<group>"; };
 		90960B61210C8672005EC2AA /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
@@ -138,6 +142,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9064B689210DDECB00E35072 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				9064B68A210DDEEA00E35072 /* Persistence.swift */,
+				9064B68C210DDEF700E35072 /* PersistedData.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		90960B5C210C85A3005EC2AA /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +219,7 @@
 		90A31A5F2107FE8E000DB608 /* Assignment5 */ = {
 			isa = PBXGroup;
 			children = (
+				9064B689210DDECB00E35072 /* Storage */,
 				90998ABB210CBD2D001E5848 /* Network */,
 				90960B5E210C85B0005EC2AA /* Model */,
 				90960B5D210C85AA005EC2AA /* Controller */,
@@ -539,10 +553,12 @@
 				90A31A9121095A86000DB608 /* RestaurantCell.swift in Sources */,
 				90998AC1210D3031001E5848 /* MapModel.swift in Sources */,
 				90960B63210C8672005EC2AA /* RestaurantModel.swift in Sources */,
+				9064B68B210DDEEA00E35072 /* Persistence.swift in Sources */,
 				90A31A93210A0AD1000DB608 /* SavedRestaurantVC.swift in Sources */,
 				90960B64210C8672005EC2AA /* Types.swift in Sources */,
 				90998ABF210D2A7B001E5848 /* MapViewVC.swift in Sources */,
 				90A31A8F210953AD000DB608 /* RestaurantVC.swift in Sources */,
+				9064B68D210DDEF700E35072 /* PersistedData.swift in Sources */,
 				90A31A632107FE8E000DB608 /* TrainStopVC.swift in Sources */,
 				90960B62210C8672005EC2AA /* TrainStopModel.swift in Sources */,
 				90108A08210A7940008B9BC7 /* NotifyVC.swift in Sources */,

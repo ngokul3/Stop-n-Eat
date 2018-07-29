@@ -424,6 +424,7 @@
                                                     </constraints>
                                                     <state key="normal" backgroundImage="heart"/>
                                                     <connections>
+                                                        <action selector="btnSave:" destination="1KB-Rn-UMM" eventType="touchUpInside" id="649-Ne-8uQ"/>
                                                         <segue destination="aVw-KE-lTW" kind="show" identifier="detailSegue" id="rik-Tt-5rB"/>
                                                     </connections>
                                                 </button>
