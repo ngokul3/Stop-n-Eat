@@ -33,11 +33,20 @@ extension RestaurantModel{
 }
 
 extension RestaurantModel{
+    func loadRestaurantFromNetwork(trainStop : TrainStop){
+        
+       
+        
+        let trainLocation = (trainStop.latitude, trainStop.longitude)
     
-    func loadRestaurantFromNetwork(njTransitStationCoordinates locationCoordinates : String){
+        guard trainLocation.0 != 0.0
+            , trainLocation.1 != 0.0 else{
+            preconditionFailure("Could not find Stop location")
+        }
+
+        let locationCoordinates = String(describing: trainLocation.0) + "," +  String(describing: trainLocation.1)
+     
         let network = RestaurantNetwork()
-        
-        
         network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {(dictionary, error) in
             print("In return from ajaxRequest: \(Thread.current)")
             
@@ -99,12 +108,21 @@ extension RestaurantModel{
         restaurantsFromNetwork.append(restaurant)
         //NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListFiltered), object: self))
     }
+    
+    func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant{
+        
+        guard restaurantsFromNetwork[stopIndex] else{
+            throw RestaurantError.invalidRowSelection()
+        }
+        let restaurant = restaurantsFromNetwork[stopIndex]
+        return restaurant
+    }
 }
 
 
 class Restaurant{
 
-    var trainStopName : String = ""
+    var trainStop : TrainStop?
     var restaurantName : String = ""
     var restaurantId : String = ""
     var latitude : Double = 0.0

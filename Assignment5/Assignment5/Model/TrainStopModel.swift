@@ -138,15 +138,7 @@ extension TrainStopModel{
     }
     
     func getTrainStop(fromFilteredArray stopIndex : Int) throws ->TrainStop{
-    
-//        guard trainStops.count >= stopNo else //check for array bounds
-//        {
-//            preconditionFailure("Not able to fetch the requested Train Stop")
-//        }
-//
-//
-//        return trainStops.filter{$0.stopNo == stopNo}.first
-        
+
         guard filteredStops[stopIndex] else{
             throw TrainStopError.invalidRowSelection()
         }

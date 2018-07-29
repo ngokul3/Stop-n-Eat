@@ -13,7 +13,6 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
     @IBOutlet weak var searchBar: UISearchBar!
    
     @IBOutlet weak var tableView: UITableView!
-    private var stopLocation : String = "" // Todo - can be put into View state
     private var model = TrainStopModel.getInstance()
     private static var modelObserver: NSObjectProtocol?
     
@@ -28,7 +27,7 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
         }
         
         do{
-            try model.loadTransitData(JSONFileFromAssetFolder: "RailStop", completed: {_ in })
+            try model.loadTransitData(JSONFileFromAssetFolder: "RailStop", completed: {_ in }) //Todo completed required?
         }
         
         catch{}//Todo do something
@@ -77,10 +76,7 @@ extension TrainStopVC{
 
 extension TrainStopVC{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-//        guard let _ = segue.identifier else{
-//            preconditionFailure("No segue identifier")
-//        }
-        
+
         guard let segueVC = segue.destination as? RestaurantVC else{
             preconditionFailure("Wrong destination type: \(segue.destination)")
         }
@@ -92,17 +88,7 @@ extension TrainStopVC{
         
         do{
             let trainStop = try model.getTrainStop(fromFilteredArray: indexPath.row)
-            let trainLocation = (trainStop.latitude, trainStop.longitude)
-            let trainStopName = trainStop.stopName
-            
-            guard trainLocation.0 != 0.0
-                , trainLocation.1 != 0.0 else{
-                preconditionFailure("Could not find Stop location")
-            }
-            
-            stopLocation = String(describing: trainLocation.0) + "," +  String(describing: trainLocation.1)
-            
-            print("Stop \(trainStopName) location returned is " + String(describing: stopLocation))
+            segueVC.trainStop = trainStop
         }
         catch(TrainStopError.invalidRowSelection()){
             alertUser = "Not able to navigate to Restaurant screen"
@@ -110,12 +96,6 @@ extension TrainStopVC{
         catch{
             alertUser = "Unexpected Error"
         }
-    
-        guard !stopLocation.isEmpty else{
-            preconditionFailure("Could not find Stop location")
-        }
-        segueVC.trainlocation = stopLocation
-        
     }
 
 }

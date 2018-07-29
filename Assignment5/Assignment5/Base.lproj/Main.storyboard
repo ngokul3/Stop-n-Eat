@@ -424,14 +424,14 @@
                                                     </constraints>
                                                     <state key="normal" backgroundImage="heart"/>
                                                     <connections>
-                                                        <segue destination="aVw-KE-lTW" kind="show" id="rik-Tt-5rB"/>
+                                                        <segue destination="aVw-KE-lTW" kind="show" identifier="detailSegue" id="rik-Tt-5rB"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RK6-0c-5Kr">
                                                     <rect key="frame" x="331" y="1" width="39" height="28"/>
                                                     <state key="normal" backgroundImage="annotation"/>
                                                     <connections>
-                                                        <segue destination="7qZ-wz-HbW" kind="show" id="TX1-a0-gH6"/>
+                                                        <segue destination="7qZ-wz-HbW" kind="show" identifier="singleMap" id="TX1-a0-gH6"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -499,7 +499,7 @@
                     <navigationItem key="navigationItem" title="Restaurants" id="4Mb-Tr-9VG">
                         <barButtonItem key="rightBarButtonItem" title="Map" id="jnz-Js-IFI">
                             <connections>
-                                <segue destination="7qZ-wz-HbW" kind="show" id="dlF-Qv-XRz"/>
+                                <segue destination="7qZ-wz-HbW" kind="show" identifier="multipleMapSegue" id="dlF-Qv-XRz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -511,10 +511,10 @@
             </objects>
             <point key="canvasLocation" x="1775" y="-530"/>
         </scene>
-        <!--View Controller-->
+        <!--Map ViewVC-->
         <scene sceneID="LL3-4B-xis">
             <objects>
-                <viewController id="7qZ-wz-HbW" sceneMemberID="viewController">
+                <viewController id="7qZ-wz-HbW" customClass="MapViewVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sYh-df-C3p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -522,11 +522,17 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sMl-iM-tVx">
                                 <rect key="frame" x="0.0" y="65" width="375" height="602"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="7qZ-wz-HbW" id="ht3-Cx-hkn"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="rYH-rT-ofi"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="sMl-iM-tVx" id="AUy-oD-pI4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hIB-kJ-uGn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

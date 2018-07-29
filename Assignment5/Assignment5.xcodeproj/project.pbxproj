@@ -15,6 +15,8 @@
 		90960B63210C8672005EC2AA /* RestaurantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90960B60210C8672005EC2AA /* RestaurantModel.swift */; };
 		90960B64210C8672005EC2AA /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90960B61210C8672005EC2AA /* Types.swift */; };
 		90998ABD210CBD73001E5848 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90998ABC210CBD73001E5848 /* NetworkLayer.swift */; };
+		90998ABF210D2A7B001E5848 /* MapViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90998ABE210D2A7B001E5848 /* MapViewVC.swift */; };
+		90998AC1210D3031001E5848 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90998AC0210D3030001E5848 /* MapModel.swift */; };
 		90A31A612107FE8E000DB608 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A602107FE8E000DB608 /* AppDelegate.swift */; };
 		90A31A632107FE8E000DB608 /* TrainStopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A622107FE8E000DB608 /* TrainStopVC.swift */; };
 		90A31A662107FE8E000DB608 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A31A642107FE8E000DB608 /* Main.storyboard */; };
@@ -60,6 +62,8 @@
 		90960B61210C8672005EC2AA /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		90960B69210C96FD005EC2AA /* RailStop.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = RailStop.json; path = Assignment5/Assets.xcassets/RailStop.dataset/RailStop.json; sourceTree = "<group>"; };
 		90998ABC210CBD73001E5848 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
+		90998ABE210D2A7B001E5848 /* MapViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVC.swift; sourceTree = "<group>"; };
+		90998AC0210D3030001E5848 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		90A31A5D2107FE8E000DB608 /* Assignment5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A31A602107FE8E000DB608 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90A31A622107FE8E000DB608 /* TrainStopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainStopVC.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				90108A07210A7940008B9BC7 /* NotifyVC.swift */,
 				90A31A92210A0AD1000DB608 /* SavedRestaurantVC.swift */,
 				90A31A8E210953AD000DB608 /* RestaurantVC.swift */,
+				90998ABE210D2A7B001E5848 /* MapViewVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 				90960B60210C8672005EC2AA /* RestaurantModel.swift */,
 				90960B5F210C8672005EC2AA /* TrainStopModel.swift */,
 				90960B61210C8672005EC2AA /* Types.swift */,
+				90998AC0210D3030001E5848 /* MapModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -531,9 +537,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				90A31A9121095A86000DB608 /* RestaurantCell.swift in Sources */,
+				90998AC1210D3031001E5848 /* MapModel.swift in Sources */,
 				90960B63210C8672005EC2AA /* RestaurantModel.swift in Sources */,
 				90A31A93210A0AD1000DB608 /* SavedRestaurantVC.swift in Sources */,
 				90960B64210C8672005EC2AA /* Types.swift in Sources */,
+				90998ABF210D2A7B001E5848 /* MapViewVC.swift in Sources */,
 				90A31A8F210953AD000DB608 /* RestaurantVC.swift in Sources */,
 				90A31A632107FE8E000DB608 /* TrainStopVC.swift in Sources */,
 				90960B62210C8672005EC2AA /* TrainStopModel.swift in Sources */,

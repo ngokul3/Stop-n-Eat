@@ -12,16 +12,19 @@ class RestaurantVC: UIViewController, UISearchBarDelegate {
    
     
     @IBOutlet weak var tableView: UITableView!
-    var trainlocation : String = ""
+    var trainStop : TrainStop?
     var cellArrray = [RestaurantCell]()
     private var model = RestaurantModel.getInstance()
     private static var modelObserver: NSObjectProtocol?
 
     override func viewDidLoad() {
         
-        if(!trainlocation.isEmpty){
-            model.loadRestaurantFromNetwork(njTransitStationCoordinates: trainlocation)
+        guard let stop = trainStop else{
+            preconditionFailure("Could not find Stop")
         }
+        
+         model.loadRestaurantFromNetwork(trainStop: stop)
+     
         
         RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantLoadedFromNetwork), object: nil, queue: OperationQueue.main) {
             
@@ -105,11 +108,65 @@ extension RestaurantVC : UITableViewDataSource{
         return model.restaurantsFromNetwork.count
     }
  }
-
+extension RestaurantVC{
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        guard let identifier = segue.identifier else{
+            preconditionFailure("No segue identifier")
+        }
+        
+        guard let mapVC = segue.destination as? MapViewVC else{
+            preconditionFailure("Wrong destination type: \(segue.destination)")
+        }
+        
+        switch identifier{
+            
+        case "singleMapSegue" :
+            
+            guard let cell = sender as? UITableViewCell
+                ,let indexPath = self.tableView.indexPath(for: cell) else{
+                    preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
+            }
+            
+            do{
+                let restaurant = try model.getRestaurantFromNetwork(fromRestaurantArray: indexPath.row)
+                
+                let place = Place()
+                //place.trainStop =
+                //place.restaurantName = restaurant.restaurantName
+                
+               // place.latitude = restaurant.latitude
+            }
+            catch(RestaurantError.invalidRowSelection()){
+                alertUser = "Restaurant selected could not be navigated to the map"
+            }
+            
+            catch{
+                alertUser = "Unexpected Error"
+            }
+        case "multipleMapSegue" : break
+            
+        default : break
+        }
+    }
+}
 extension RestaurantVC{
     
     func updateUI(){
         self.tableView.reloadData()
     }
+    
+    var alertUser :  String{
+        get{
+            preconditionFailure("You cannot read from this object")
+        }
+        
+        set{
+            let alert = UIAlertController(title: "Attention", message: newValue, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true)
+        }
+    }
+
 }
 

@@ -20,11 +20,13 @@ protocol TrainStopProtocol {
 
 protocol RestaurantProtocol{
     static func getInstance()->RestaurantProtocol
-   // var networkDelegate : NetworkLayerListenerProtocol? {get set}
     func addRestaurantFromNetwork(restaurantOpt : Restaurant?)
-    func loadRestaurantFromNetwork(njTransitStationCoordinates locationCoordinates : String)
+    func loadRestaurantFromNetwork(trainStop : TrainStop)
     var restaurantsFromNetwork : RestaurantArray {get set}
+    func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant
 }
+
+
 enum TrainStopError: Error{
     case invalidRowSelection()
     case invalidStopName()
@@ -34,7 +36,7 @@ enum TrainStopError: Error{
 }
 
 enum RestaurantError: Error{
-    
+    case invalidRowSelection()
 }
 struct Messages {
     static let StopListChanged = "Train Stop List changed" //Todo this is not required
