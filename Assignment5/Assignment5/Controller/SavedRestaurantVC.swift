@@ -45,7 +45,7 @@ class SavedRestaurantVC: UIViewController {
             }
         }
         
-        SavedRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantRefreshed), object: nil, queue: OperationQueue.main) {
+        SavedRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.FavoriteListChanged), object: nil, queue: OperationQueue.main) {
             
             [weak self] (notification: Notification) in
             if let s = self {
@@ -150,17 +150,17 @@ extension SavedRestaurantVC{
             let restaurantInContext = model.restaurantsSaved[indexPath.row]
             detailVC.restaurantDetailVCType = DetailVCType.Edit
             detailVC.restaurant = restaurantInContext
-//            detailVC.saveDetailVC = {[weak self] (restaurant) in
-//                do{
-//                    try self?.model.editRestaurantInFavorite(restaurant: restaurantInContext)
-//                }
-//                catch RestaurantError.notAbleToEdit(let name){
-//                    self?.alertUser = "Restaurant \(name) cannot be edited"
-//                }
-//                catch{
-//                    self?.alertUser = "Something went wrong while adding"
-//                }
-//            }
+            detailVC.saveDetailVC = {[weak self] (restaurant) in
+                do{
+                    try self?.model.editRestaurantInFavorite(restaurant: restaurantInContext)
+                }
+                catch RestaurantError.notAbleToEdit(let name){
+                    self?.alertUser = "Restaurant \(name) cannot be edited"
+                }
+                catch{
+                    self?.alertUser = "Something went wrong while adding"
+                }
+            }
             
         default : break
         }

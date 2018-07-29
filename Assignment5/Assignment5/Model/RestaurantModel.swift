@@ -140,11 +140,15 @@ extension RestaurantModel{
             throw RestaurantError.invalidRestaurant()
         }
         
+//        if(restaurant.restaurantId.isEmpty){
+//            restaurant.restaurantId = restaurant.restaurantName
+//        }
         restaurantsSaved.append(restaurant)
         
-        let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantRefreshed), object: nil)
-        
+        let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantReadyToBeSaved), object: nil)
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
+        
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteListChanged), object: self))
     }
    
     func restoreRestaurantsFromFavorite(restaurants : [Restaurant]){
@@ -156,17 +160,11 @@ extension RestaurantModel{
         guard restaurantsSaved.contains(restaurant) else{
             throw RestaurantError.notAbleToEdit(name: restaurant.restaurantName)
         }
-//        restaurantsSaved.forEach({
-//            if($0.restaurantId == restaurant.restaurantId){
-//                $0.restaurantName = restaurant.restaurantName
-//                $0.dateVisited = restaurant.dateVisited
-//                $0.comments = restaurant.comments
-//                $0.givenRating = restaurant.givenRating
-//            }
-//        })
-        
+        let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantReadyToBeSaved), object: nil)
+        NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
+
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteListChanged), object: self))
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantRefreshed), object: self))
+        
    }
     
     func deleteRestaurantFromFavorite(restaurant: Restaurant) throws{
@@ -224,7 +222,14 @@ class Restaurant:  NSObject, NSCoding{
     
     var trainStop : TrainStop?
     var restaurantName : String = ""
-    var restaurantId : String = ""
+    {
+        didSet{
+            if(restaurantId.isEmpty){
+                restaurantId = restaurantName
+            }
+        }
+    }
+    var restaurantId : String = "" //Todo check edit on a new rest from SavedRest. Id does not change. This will duplicate if another rst is created
     var latitude : Double = 0.0
     var longitude : Double = 0.0
     var distanceFromTrainStop : Double = 0.0

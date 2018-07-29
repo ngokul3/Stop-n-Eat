@@ -57,7 +57,7 @@ struct Messages {
     static let StopListChanged = "Train Stop List changed" //Todo this is not required
     static let StopListFiltered = "Train Stops Filtered"
     static let RestaurantLoadedFromNetwork = "Restaurants From Network Loaded"
-    static let RestaurantRefreshed = "Restaurant refreshed to Favorite"
+    static let RestaurantReadyToBeSaved = "Restaurant refreshed to Favorite"
     static let FavoriteListChanged = "Add Delete or Edit on the Model"
     static let RestaurantDeleted = "Restaurant Deleted"
 }

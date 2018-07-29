@@ -66,7 +66,8 @@ class Persistence {
             }
         }
         
-        if(savedRestaurants.contains(restaurant)){
+        if(savedRestaurants.filter({$0.restaurantId == restaurant.restaurantId}).count != 0)
+        {
             savedRestaurants.forEach({(rest) in
                 if(rest.restaurantId == restaurant.restaurantId){
                     rest.restaurantName = restaurant.restaurantName
@@ -90,7 +91,6 @@ class Persistence {
         } else {
             print("There is an issue")
         }
-       
     }
     
     

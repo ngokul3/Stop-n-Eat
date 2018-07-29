@@ -32,7 +32,7 @@ class DetailRestaurantVC: UIViewController {
         txtNotes.layer.borderWidth = 0.4
         txtNotes.layer.cornerRadius = 0.8
         
-        DetailRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantRefreshed), object: nil, queue: OperationQueue.main) {
+        DetailRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantReadyToBeSaved), object: nil, queue: OperationQueue.main) {
             
             [weak self] (notification: Notification) in
             if let s = self {
@@ -66,17 +66,6 @@ class DetailRestaurantVC: UIViewController {
             txtNotes.text = "Prepopulate with distance from station" //todo
         default : break
         }
-//        if(detailType == .Preload)
-//        {
-//            guard let restaurantInContext = restaurant else
-//            {
-//                preconditionFailure("Parent VC did not initialize MenuItem")
-//            }
-//
-//            txtRestaurantName.text = restaurantInContext.restaurantName
-//            dateVisited.date = restaurantInContext.dateVisited
-//            txtNotes.text = "Prepopulate with distance from station" //todo
-//        }
     }
 }
 
