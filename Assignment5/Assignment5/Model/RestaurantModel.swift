@@ -35,6 +35,10 @@ extension RestaurantModel{
         RestaurantModel.instance = inst
         return inst
     }
+    
+    static func getTotalFavoriteCount()->Int{
+        return getInstance().restaurantsSaved.count
+    }
 }
 
 extension RestaurantModel{
@@ -221,15 +225,14 @@ class Restaurant:  NSObject, NSCoding{
     }
     
     var trainStop : TrainStop?
-    var restaurantName : String = ""
-    {
+    var restaurantName : String = ""{
         didSet{
             if(restaurantId.isEmpty){
-                restaurantId = restaurantName
+                restaurantId = String(describing: RestaurantModel.getTotalFavoriteCount())
             }
         }
     }
-    var restaurantId : String = "" //Todo check edit on a new rest from SavedRest. Id does not change. This will duplicate if another rst is created
+    var restaurantId : String = ""
     var latitude : Double = 0.0
     var longitude : Double = 0.0
     var distanceFromTrainStop : Double = 0.0
