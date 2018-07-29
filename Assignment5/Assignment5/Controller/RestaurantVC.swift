@@ -65,11 +65,7 @@ extension RestaurantVC{
         }
         
         do{
-            let restaurant = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
-            
-           // var restArray = RestaurantArray()
-           // restArray.append(restaurant)
-           // try Persistence.save(restArray)
+            let _ = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
         }
         catch(RestaurantError.invalidRowSelection()){
             alertUser = "Restaurant selected could not be navigated to the map"
@@ -231,12 +227,8 @@ extension RestaurantVC{
     }
     
     func saveRestaurant(_ restaurant: Restaurant){
-//        let restaurant = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
-//
-//         var restArray = RestaurantArray()
-//         restArray.append(restaurant)
         do{
-         try Persistence.save(restaurant)
+            try Persistence.save(restaurant)
         }
         catch RestaurantError.notAbleToSave(let name){
             alertUser = "Not able to save \(name) "

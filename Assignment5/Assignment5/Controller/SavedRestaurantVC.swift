@@ -17,6 +17,16 @@ class SavedRestaurantVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        do {
+            let restoredObject = try Persistence.restore()
+            model.restoreRestaurantsFromFavorite(restaurants: restoredObject)
+        }
+        catch RestaurantError.notAbleToRestore(){
+            alertUser = "Not able to restore from the favorite list"
+        }
+        catch{
+            alertUser = "Unknown Error"
+        }
         SavedRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantRefreshed), object: nil, queue: OperationQueue.main) {
             
             [weak self] (notification: Notification) in
@@ -37,7 +47,7 @@ extension SavedRestaurantVC : UITableViewDataSource{
         let restaurant = model.restaurantsSaved[indexPath.row]
         print("Returned name is \(restaurant.restaurantName)")
         cell.lblRestaurantName.text = restaurant.restaurantName
-        cell.txtNotesRestaurant.text = restaurant.comments
+        //cell.txtNotesRestaurant.text = restaurant.comments
         return cell
     }
     
@@ -58,21 +68,56 @@ extension SavedRestaurantVC{
         
         switch String(describing: segueName){
             
-        case "AddSegue" :
-            
-            detailVC.restaurantDetailVCType = DetailVCType.Add
-            
-            detailVC.saveDetailVC = {[weak self] (restaurant) in
-                do{
-                    try self?.model.addRestaurantToFavorite(restaurantOpt: restaurant)
-                }
-                catch RestaurantError.invalidRestaurant(){
-                    self?.alertUser = "Restaurant is nil"
-                }
-                catch{
-                    self?.alertUser = "Something went wrong while adding"
+        case "addSegue" :
+            do{
+                detailVC.restaurantDetailVCType = DetailVCType.Add
+                detailVC.restaurant = try model.generateEmptyRestaurant()
+                detailVC.saveDetailVC = {[weak self] (restaurant) in
+                    do{
+                        try self?.model.addRestaurantToFavorite(restaurantOpt: restaurant)
+                    }
+                    catch RestaurantError.invalidRestaurant(){
+                        self?.alertUser = "Restaurant is nil"
+                    }
+                    catch{
+                        self?.alertUser = "Something went wrong while adding"
+                    }
                 }
             }
+            
+            catch RestaurantError.notAbleToCreateEmptyRestaurant(){
+                self.alertUser = "Could not add restaurant"
+            }
+            catch{
+                self.alertUser = "Something went wrong before launching detailed favorite restaurant"
+            }
+            
+        case "editSegue" :
+            
+            guard let cell = sender as? UITableViewCell
+                ,let indexPath = self.tableView.indexPath(for: cell) else{
+                    preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
+            }
+            
+            guard  model.restaurantsSaved[indexPath.row] else{
+                preconditionFailure("Error while getting value from the Menu Model")
+            }
+            
+            let restaurantInContext = model.restaurantsSaved[indexPath.row]
+            detailVC.restaurantDetailVCType = DetailVCType.Edit
+            detailVC.restaurant = restaurantInContext
+//            detailVC.saveDetailVC = {[weak self] (restaurant) in
+//                do{
+//                    try self?.model.editRestaurantInFavorite(restaurant: restaurantInContext)
+//                }
+//                catch RestaurantError.notAbleToEdit(let name){
+//                    self?.alertUser = "Restaurant \(name) cannot be edited"
+//                }
+//                catch{
+//                    self?.alertUser = "Something went wrong while adding"
+//                }
+//            }
+            
         default : break
         }
     }

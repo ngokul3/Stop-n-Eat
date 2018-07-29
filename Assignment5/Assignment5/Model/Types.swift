@@ -27,8 +27,10 @@ protocol RestaurantProtocol{
     func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant
     func getAllRestaurantsFromNetwork() throws ->RestaurantArray
     func addRestaurantToFavorite(restaurantOpt: Restaurant?) throws
-    func editRestaurantInFavorite(restaurant: Restaurant)
+    func editRestaurantInFavorite(restaurant: Restaurant) throws
     func deleteRestaurantFromFavorite(restaurant: Restaurant) throws
+    func restoreRestaurantsFromFavorite(restaurants : [Restaurant])
+    func generateEmptyRestaurant() throws-> Restaurant
 }
 
 
@@ -48,6 +50,8 @@ enum RestaurantError: Error{
     case notAbleToEdit(name: String)
     case notAbleToDelete(name: String)
     case notAbleToSave(name: String)
+    case notAbleToRestore()
+    case notAbleToCreateEmptyRestaurant()
 }
 struct Messages {
     static let StopListChanged = "Train Stop List changed" //Todo this is not required

@@ -37,8 +37,8 @@ class DetailRestaurantVC: UIViewController {
             
         }
         
-        if(detailType == .Preload)
-        {
+        switch detailType {
+        case .Edit, .Preload :
             guard let restaurantInContext = restaurant else
             {
                 preconditionFailure("Parent VC did not initialize MenuItem")
@@ -47,7 +47,19 @@ class DetailRestaurantVC: UIViewController {
             txtRestaurantName.text = restaurantInContext.restaurantName
             dateVisited.date = restaurantInContext.dateVisited
             txtNotes.text = "Prepopulate with distance from station" //todo
+        default : break
         }
+//        if(detailType == .Preload)
+//        {
+//            guard let restaurantInContext = restaurant else
+//            {
+//                preconditionFailure("Parent VC did not initialize MenuItem")
+//            }
+//
+//            txtRestaurantName.text = restaurantInContext.restaurantName
+//            dateVisited.date = restaurantInContext.dateVisited
+//            txtNotes.text = "Prepopulate with distance from station" //todo
+//        }
     }
 }
 
@@ -61,7 +73,7 @@ extension DetailRestaurantVC{
         }
         
         restaurant?.restaurantName = name
-        saveDetailVC?(restaurant)
+       // saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
     }
 }

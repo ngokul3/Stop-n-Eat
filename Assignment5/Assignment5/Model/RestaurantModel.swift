@@ -147,8 +147,15 @@ extension RestaurantModel{
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
     }
    
-    func editRestaurantInFavorite(restaurant: Restaurant) {
+    func restoreRestaurantsFromFavorite(restaurants : [Restaurant]){
+        restaurantsSaved = restaurants
+    }
+    
+    func editRestaurantInFavorite(restaurant: Restaurant) throws{
         
+        guard restaurantsSaved.contains(restaurant) else{
+            throw RestaurantError.notAbleToEdit(name: restaurant.restaurantName)
+        }
         restaurantsSaved.forEach({
             if($0.restaurantId == restaurant.restaurantId){
                 $0.restaurantName = restaurant.restaurantName
@@ -174,9 +181,18 @@ extension RestaurantModel{
     }
 }
 
+extension RestaurantModel{
+    func generateEmptyRestaurant() throws-> Restaurant{
+        let trainStop = try TrainStop(_stopName: "", _latitude: 0.0, _longitude: 0.0)
+        let restaurant = Restaurant(_trainStop: trainStop, _restaurantName: "", _restaurantId: "", _latitude: 0.0, _longitude: 0.0, _givenRating: 0)
+       
+        return restaurant
+    }
+}
+
 class Restaurant:  NSObject, NSCoding{
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(restaurantName, forKey: "restaurantId")
+        aCoder.encode(restaurantId, forKey: "restaurantId")
         aCoder.encode(restaurantName, forKey: "restaurantName")
         aCoder.encode(givenRating, forKey: "givenRating")
         aCoder.encode(myRating, forKey: "myRating")
@@ -188,8 +204,6 @@ class Restaurant:  NSObject, NSCoding{
         guard
             let restId = aDecoder.decodeObject(forKey: "restaurantId") as? String,
             let restName = aDecoder.decodeObject(forKey: "restaurantName") as? String,
-            //let restGivenRating = aDecoder.decodeInteger(forKey: "givenRating") as? Int,
-           //  let restMyRating = aDecoder.decodeInteger(forKey: "myRating") as? Int,
             let restComment = aDecoder.decodeObject(forKey:"comments") as? String,
             let restDate = aDecoder.decodeObject(forKey:"dateVisited") as? Date else {
                 return nil

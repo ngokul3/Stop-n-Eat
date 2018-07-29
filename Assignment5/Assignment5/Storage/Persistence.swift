@@ -33,12 +33,16 @@ class Persistence {
     static func save(_ restaurant: Restaurant) throws {
        
         var savedRestaurants = [Restaurant]()
+        savedRestaurants.append(restaurant)
+        
         guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
             return
         }
         
         if let alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] {
-            savedRestaurants.append(restaurant)
+            alreadySavedRestaurants.forEach {
+                savedRestaurants.append($0)
+            }
         }
 //        guard var alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] else{
 //            return
@@ -72,19 +76,30 @@ class Persistence {
     }
     
     
-    static func restore() throws -> NSObject {
-        let saveURL = try Persistence.getStorageURL()
-        guard let rawData = try? Data(contentsOf: URL(fileURLWithPath: saveURL.path)) else {
-            throw NSError(domain: "File I/O", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to retrieve unarchival data"])
+    static func restore() throws -> [Restaurant] {
+        var savedRestaurants = [Restaurant]()
+     
+        guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
+            return savedRestaurants
         }
-   
-        let unarchiver = NSKeyedUnarchiver(forReadingWith: rawData)
         
-        guard let model = unarchiver.decodeObject(forKey: "root") as? NSObject else {
-            throw NSError(domain: "File I/O", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to find root object"])
+        if let alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] {
+            savedRestaurants = alreadySavedRestaurants
         }
-        print("restored model successfully at \(Date()): \(type(of: model))")
-        return model
+        
+        return savedRestaurants
+//        let saveURL = try Persistence.getStorageURL()
+//        guard let rawData = try? Data(contentsOf: URL(fileURLWithPath: saveURL.path)) else {
+//            throw NSError(domain: "File I/O", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to retrieve unarchival data"])
+//        }
+//
+//        let unarchiver = NSKeyedUnarchiver(forReadingWith: rawData)
+//
+//        guard let model = unarchiver.decodeObject(forKey: "root") as? NSObject else {
+//            throw NSError(domain: "File I/O", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to find root object"])
+//        }
+//        print("restored model successfully at \(Date()): \(type(of: model))")
+//        return model
     }
 }
 
