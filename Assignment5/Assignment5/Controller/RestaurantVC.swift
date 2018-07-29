@@ -70,7 +70,7 @@ extension RestaurantVC{
         var retaurants = RestaurantArray()
         
         switch identifier{
-            
+       
         case "singleMapSegue" :
             
             var rowNo : Int?
@@ -100,7 +100,23 @@ extension RestaurantVC{
                 alertUser = "Unexpected Error"
             }
             
-        case "multipleMapSegue" : break
+        case "multipleMapSegue" :
+            
+        do{
+            let place = Place()
+            let restaurantsFetched = try model.getAllRestaurants()
+            place.trainStop = restaurantsFetched.first?.trainStop
+            retaurants = restaurantsFetched
+            place.restaurants = retaurants
+            mapVC.place = place
+        }
+            
+        catch(RestaurantError.zeroCount()){
+            alertUser = "There are no restaurants to show"
+            }
+        catch{
+            alertUser = "Unexpected Error"
+            }
             
         default : break
         }

@@ -55,8 +55,9 @@ class MapViewVC: UIViewController {
         
         centerMapOnLocation(location: stopLocation)
         
-        //let span = MKCoordinateSpanMake(0.05, 0.05)
-        let span = MKCoordinateSpanMake(0.08, 0.08)
+        //ToDo Set the span based on the farthest distance from the restaurant.
+        //Todo color train in red and restaurant in blue
+        let span = MKCoordinateSpanMake(0.07, 0.07)
         let locationCoordinate2D = CLLocationCoordinate2D(latitude:  trainStop.latitude,longitude: trainStop.longitude)
 
         let region = MKCoordinateRegion(center: locationCoordinate2D, span: span)

@@ -116,6 +116,13 @@ extension RestaurantModel{
         let restaurant = restaurantsFromNetwork[stopIndex]
         return restaurant
     }
+    
+    func getAllRestaurants() throws ->RestaurantArray{
+        guard restaurantsFromNetwork.count > 0 else{
+            throw RestaurantError.zeroCount()
+        }
+       return restaurantsFromNetwork
+    }
 }
 
 
