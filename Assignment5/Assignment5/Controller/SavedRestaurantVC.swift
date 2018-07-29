@@ -13,27 +13,7 @@ class SavedRestaurantVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        do {
-            
-            let defaults = UserDefaults.standard
-            
-            guard let restObject = defaults.object(forKey: "restaurants") as? Data else{
-               // print("Got the wrong type: \(type(of: rest)), giving up on restoring")
-                return
-            }
-            let restaurants = NSKeyedUnarchiver.unarchiveObject(with: restObject) as? [Restaurant]
-           // let restoredObject = try Persistence.restore()
-//            guard let rest = restoredObject as? Restaurant else {
-//                print("Got the wrong type: \(type(of: restoredObject)), giving up on restoring")
-//                return
-//            }
-            print("success!: restaurant name :  \(restaurants?.first?.restaurantName)")
-        }
-        catch let nse as NSError {
-            // First time run: nothing was saved from before
-            print("Probably first run. No archived model. Error: \(nse.localizedDescription) No obj found, saving")
-           // saveObject()
-        }
+       
     }
 
 

@@ -12,9 +12,15 @@ class RestaurantModel: RestaurantProtocol{
   
     private static var instance: RestaurantProtocol?
     var restaurantsFromNetwork : RestaurantArray
-    
+    var restaurantsSaved : RestaurantArray
+//    var lastRestaurantNumber : Int
+//    {
+//        return restaurantsSaved.reduce(Int.min, {max($0, $1.itemNumber)})
+//    }
+//
     private init(){
         restaurantsFromNetwork = RestaurantArray()
+        restaurantsSaved = RestaurantArray()
     }
 }
 
@@ -117,17 +123,59 @@ extension RestaurantModel{
         return restaurant
     }
     
-    func getAllRestaurants() throws ->RestaurantArray{
+    func getAllRestaurantsFromNetwork() throws ->RestaurantArray{
+        
         guard restaurantsFromNetwork.count > 0 else{
             throw RestaurantError.zeroCount()
         }
+        
        return restaurantsFromNetwork
     }
 }
 
+extension RestaurantModel{
+    
+    func addRestaurant(restaurant: Restaurant) throws{
+      
+        guard !restaurant.restaurantName.isEmpty  else{
+            throw RestaurantError.invalidRestaurant()
+        }
+        
+        restaurantsSaved.append(restaurant)
+        
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantRefreshed), object: self))
+    }
+   
+    func editRestaurant(restaurant: Restaurant) {
+        
+        restaurantsSaved.forEach({
+            if($0.restaurantId == restaurant.restaurantId){
+                $0.restaurantName = restaurant.restaurantName
+                $0.dateVisited = restaurant.dateVisited
+                $0.comments = restaurant.comments
+                $0.givenRating = restaurant.givenRating
+            }
+        })
+        
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantRefreshed), object: self))
+   }
+    
+    func deleteRestaurant(restaurant: Restaurant) throws{
+        
+        if(restaurantsSaved.contains{$0.restaurantId == restaurant.restaurantId}){
+            restaurantsSaved = restaurantsSaved.filter({($0.restaurantId != restaurant.restaurantId)})
+        }
+        else{
+            throw RestaurantError.notAbleToDelete(name: restaurant.restaurantName)
+        }
+        
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantRefreshed), object: self))
+    }
+}
 
 class Restaurant:  NSObject, NSCoding{
     func encode(with aCoder: NSCoder) {
+        aCoder.encode(restaurantName, forKey: "restaurantId")
         aCoder.encode(restaurantName, forKey: "restaurantName")
         aCoder.encode(givenRating, forKey: "givenRating")
         aCoder.encode(myRating, forKey: "myRating")
@@ -137,17 +185,20 @@ class Restaurant:  NSObject, NSCoding{
     
     required init?(coder aDecoder: NSCoder) {
         guard
+            let restId = aDecoder.decodeObject(forKey: "restaurantId") as? String,
             let restName = aDecoder.decodeObject(forKey: "restaurantName") as? String,
-            let restGivenRating = aDecoder.decodeInteger(forKey: "givenRating") as? Int,
-             let restMyRating = aDecoder.decodeInteger(forKey: "myRating") as? Int,
+            //let restGivenRating = aDecoder.decodeInteger(forKey: "givenRating") as? Int,
+           //  let restMyRating = aDecoder.decodeInteger(forKey: "myRating") as? Int,
             let restComment = aDecoder.decodeObject(forKey:"comments") as? String,
             let restDate = aDecoder.decodeObject(forKey:"dateVisited") as? Date else {
                 return nil
                 
         }
+        
+        restaurantId = restId
         restaurantName = restName
-        givenRating = restGivenRating
-        myRating = restMyRating
+        givenRating = aDecoder.decodeInteger(forKey: "givenRating")
+        myRating = aDecoder.decodeInteger(forKey: "myRating")
         comments = restComment
         dateVisited = restDate
         super.init()
@@ -164,6 +215,7 @@ class Restaurant:  NSObject, NSCoding{
     var isSelected : Bool = false
     var comments : String = ""
     var dateVisited : Date = Date()
+    
     init(_trainStop : TrainStop, _restaurantName : String, _restaurantId : String, _latitude : Double, _longitude : Double, _givenRating : Int)
     {
         trainStop = _trainStop

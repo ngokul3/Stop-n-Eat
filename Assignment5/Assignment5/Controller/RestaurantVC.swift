@@ -50,9 +50,9 @@ extension RestaurantVC{
         do{
             let restaurant = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
             
-            var restArray = RestaurantArray()
-            restArray.append(restaurant)
-            try Persistence.save(restArray)
+           // var restArray = RestaurantArray()
+           // restArray.append(restaurant)
+           // try Persistence.save(restArray)
         }
         catch(RestaurantError.invalidRowSelection()){
             alertUser = "Restaurant selected could not be navigated to the map"
@@ -142,7 +142,7 @@ extension RestaurantVC{
             
             do{
                 let place = Place()
-                let restaurantsFetched = try model.getAllRestaurants()
+                let restaurantsFetched = try model.getAllRestaurantsFromNetwork()
                 place.trainStop = restaurantsFetched.first?.trainStop
                 retaurants = restaurantsFetched
                 place.restaurants = retaurants

@@ -24,7 +24,10 @@ protocol RestaurantProtocol{
     func loadRestaurantFromNetwork(trainStop : TrainStop)
     var restaurantsFromNetwork : RestaurantArray {get set}
     func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant
-    func getAllRestaurants() throws ->RestaurantArray
+    func getAllRestaurantsFromNetwork() throws ->RestaurantArray
+    func addRestaurant(restaurant: Restaurant) throws
+    func editRestaurant(restaurant: Restaurant)
+    func deleteRestaurant(restaurant: Restaurant) throws
 }
 
 
@@ -37,12 +40,23 @@ enum TrainStopError: Error{
 }
 
 enum RestaurantError: Error{
+    case invalidRestaurant()
     case invalidRowSelection()
     case zeroCount()
+    case notAbleToAdd(name : String)
+    case notAbleToEdit(name: String)
+    case notAbleToDelete(name: String)
 }
 struct Messages {
     static let StopListChanged = "Train Stop List changed" //Todo this is not required
     static let StopListFiltered = "Train Stops Filtered"
     static let RestaurantLoadedFromNetwork = "Restaurants From Network Loaded"
+    static let RestaurantRefreshed = "Restaurant refreshed to Favorite"
+   
 }
 
+enum DetailVCType : String
+{
+    case Add
+    case Edit
+}

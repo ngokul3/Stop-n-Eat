@@ -127,7 +127,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="daL-cH-eFj"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Detail" id="qFv-i1-htj"/>
+                    <navigationItem key="navigationItem" title="Detail" id="qFv-i1-htj">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="MzK-II-wYw"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="btnSave" destination="MzK-II-wYw" id="2Cd-Eb-brp"/>
+                        <outlet property="dateVisited" destination="kdq-3B-IeE" id="3bl-ej-Z1Y"/>
+                        <outlet property="imgRating1" destination="ad5-3i-YIl" id="2Bd-GD-lGq"/>
+                        <outlet property="imgRating2" destination="Qh9-JM-TWB" id="nER-yc-bCf"/>
+                        <outlet property="imgRating3" destination="6FC-ug-l6a" id="NvB-vn-qSx"/>
+                        <outlet property="imgRating4" destination="2ot-iZ-qqM" id="oJR-Ai-QWB"/>
+                        <outlet property="imgRating5" destination="FJc-Yf-GXB" id="Mse-CQ-tfB"/>
+                        <outlet property="lblRestaurantName" destination="v2j-aE-eNV" id="sEr-7F-QHt"/>
+                        <outlet property="txtNotes" destination="XHl-lf-3iQ" id="yNR-nI-zgz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3m-Rd-Ai7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
