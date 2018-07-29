@@ -156,15 +156,16 @@ extension RestaurantModel{
         guard restaurantsSaved.contains(restaurant) else{
             throw RestaurantError.notAbleToEdit(name: restaurant.restaurantName)
         }
-        restaurantsSaved.forEach({
-            if($0.restaurantId == restaurant.restaurantId){
-                $0.restaurantName = restaurant.restaurantName
-                $0.dateVisited = restaurant.dateVisited
-                $0.comments = restaurant.comments
-                $0.givenRating = restaurant.givenRating
-            }
-        })
+//        restaurantsSaved.forEach({
+//            if($0.restaurantId == restaurant.restaurantId){
+//                $0.restaurantName = restaurant.restaurantName
+//                $0.dateVisited = restaurant.dateVisited
+//                $0.comments = restaurant.comments
+//                $0.givenRating = restaurant.givenRating
+//            }
+//        })
         
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteListChanged), object: self))
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantRefreshed), object: self))
    }
     

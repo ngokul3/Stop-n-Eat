@@ -19,6 +19,7 @@ class DetailRestaurantVC: UIViewController {
     @IBOutlet weak var imgRating5: UIImageView!
     @IBOutlet weak var txtRestaurantName: UITextField!
     
+    private static var modelObserver: NSObjectProtocol?
     var restaurant : Restaurant?
     var goBackAction : ((UIAlertAction) -> Void)?
     var restaurantDetailVCType : DetailVCType?
@@ -30,6 +31,22 @@ class DetailRestaurantVC: UIViewController {
         txtNotes.layer.borderColor = UIColor.gray.cgColor
         txtNotes.layer.borderWidth = 0.4
         txtNotes.layer.cornerRadius = 0.8
+        
+        DetailRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantRefreshed), object: nil, queue: OperationQueue.main) {
+            
+            [weak self] (notification: Notification) in
+            if let s = self {
+                let info0 = notification.userInfo?[Consts.KEY0]
+                
+                let restaurantOpt = info0 as? Restaurant
+                
+                guard let restaurant = restaurantOpt else{
+                    preconditionFailure("Could not save this favorite restaurant")
+                }
+                
+                s.saveRestaurant(restaurant)
+            }
+        }
         
         guard let detailType = restaurantDetailVCType else
         {
@@ -79,6 +96,18 @@ extension DetailRestaurantVC{
 }
 
 extension DetailRestaurantVC{
+    func saveRestaurant(_ restaurant: Restaurant){
+        do{
+            try Persistence.save(restaurant)
+        }
+        catch RestaurantError.notAbleToSave(let name){
+            alertUser = "Not able to save \(name) "
+        }
+        catch {
+            alertUser = "Something went wrong while saving"
+        }
+    }
+    
     var alertUser :  String{
         get{
             preconditionFailure("You cannot read from this object")

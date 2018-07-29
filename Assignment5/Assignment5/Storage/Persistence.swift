@@ -30,10 +30,14 @@ class Persistence {
         try FileManager.default.createDirectory(at: newDirURL, withIntermediateDirectories: false, attributes: nil)
     }
     
+    static func delete(_ restaurant: Restaurant) throws{
+        
+    }
+    
     static func save(_ restaurant: Restaurant) throws {
        
         var savedRestaurants = [Restaurant]()
-        savedRestaurants.append(restaurant)
+        //savedRestaurants.append(restaurant)
         
         guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
             return
@@ -44,35 +48,28 @@ class Persistence {
                 savedRestaurants.append($0)
             }
         }
-//        guard var alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] else{
-//            return
-//        }
-        
-        
-        
-//        restaurants.forEach({
-//            print("Original count of restaurants in database is \(alreadySavedRestaurants.count)")
-//            print("This restaurant \($0.restaurantName) will be saved")
-//            alreadySavedRestaurants.append($0)
-//            print("Saved count of restaurants that will be saved is \(alreadySavedRestaurants.count)")
-//        })
+        savedRestaurants.forEach({
+                        if($0.restaurantId == restaurant.restaurantId){
+                            $0.restaurantName = restaurant.restaurantName
+                            $0.dateVisited = restaurant.dateVisited
+                            $0.comments = restaurant.comments
+                            $0.givenRating = restaurant.givenRating
+                        }
+                        else{
+                            savedRestaurants.append(restaurant)
+                        }
+                    })
         
         let savedData = NSKeyedArchiver.archivedData(withRootObject: savedRestaurants)
         UserDefaults.standard.set(savedData, forKey: "restaurants")
         
         if let data = UserDefaults.standard.data(forKey: "restaurants"),
-            let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Restaurant] {
-            myPeopleList.forEach({print( $0.restaurantName)})  
+            let myRestList = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Restaurant] {
+            myRestList.forEach({print( $0.restaurantName)})
         } else {
             print("There is an issue")
         }
-        
-        
-//        guard let restObject = defaults.object(forKey: "restaurants") as? Data else{
-//             return
-//        }
-//        let restaurants = NSKeyedUnarchiver.unarchiveObject(with: restObject) as? [Restaurant]
-//         print("success!: restaurant name :  \(restaurants?.first?.restaurantName)")
+       
     }
     
     
