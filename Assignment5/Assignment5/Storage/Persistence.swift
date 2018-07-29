@@ -30,15 +30,39 @@ class Persistence {
         try FileManager.default.createDirectory(at: newDirURL, withIntermediateDirectories: false, attributes: nil)
     }
     
-    static func save(_ model: NSObject) throws {
-        let saveURL = try Persistence.getStorageURL()
-        print("saveURL: \(saveURL)")
-      
-        let success = NSKeyedArchiver.archiveRootObject(model, toFile: saveURL.path)
-        if !success {
-            throw NSError(domain: "File I/O", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to archive"])
+    static func save(_ restaurants: [Restaurant]) throws {
+       
+        guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
+            return
         }
-        print("saved model success: \(success) at \(Date()) to path: \(saveURL)")
+        
+        guard var alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] else{
+            return
+        }
+        
+        restaurants.forEach({
+            print("Original count of restaurants in database is \(alreadySavedRestaurants.count)")
+            print("This restaurant \($0.restaurantName) will be saved")
+            alreadySavedRestaurants.append($0)
+            print("Saved count of restaurants that will be saved is \(alreadySavedRestaurants.count)")
+        })
+        
+        let savedData = NSKeyedArchiver.archivedData(withRootObject: alreadySavedRestaurants)
+        UserDefaults.standard.set(savedData, forKey: "restaurants")
+        
+        if let data = UserDefaults.standard.data(forKey: "restaurants"),
+            let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Restaurant] {
+            myPeopleList.forEach({print( $0.restaurantName)})  
+        } else {
+            print("There is an issue")
+        }
+        
+        
+//        guard let restObject = defaults.object(forKey: "restaurants") as? Data else{
+//             return
+//        }
+//        let restaurants = NSKeyedUnarchiver.unarchiveObject(with: restObject) as? [Restaurant]
+//         print("success!: restaurant name :  \(restaurants?.first?.restaurantName)")
     }
     
     
@@ -57,3 +81,4 @@ class Persistence {
         return model
     }
 }
+

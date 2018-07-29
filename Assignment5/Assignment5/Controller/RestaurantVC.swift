@@ -49,7 +49,10 @@ extension RestaurantVC{
         
         do{
             let restaurant = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
-            try Persistence.save(restaurant)
+            
+            var restArray = RestaurantArray()
+            restArray.append(restaurant)
+            try Persistence.save(restArray)
         }
         catch(RestaurantError.invalidRowSelection()){
             alertUser = "Restaurant selected could not be navigated to the map"
@@ -85,8 +88,17 @@ extension RestaurantVC{
             preconditionFailure("No segue identifier")
         }
         
-        guard let mapVC = segue.destination as? MapViewVC else{
-            preconditionFailure("Wrong destination type: \(segue.destination)")
+        let segueToVC : UIViewController?
+        
+        switch segue.destination{
+      
+        case is MapViewVC :
+                segueToVC = segue.destination as? MapViewVC
+        case is DetailRestaurantVC:
+                segueToVC = segue.destination as? DetailRestaurantVC
+        default :
+                print(segue.destination)
+                preconditionFailure("Wrong destination type: \(segue.destination)")
         }
         
         var retaurants = RestaurantArray()
@@ -111,7 +123,11 @@ extension RestaurantVC{
                 place.trainStop = restaurant.trainStop
                 retaurants.append(restaurant)
                 place.restaurants = retaurants
-                mapVC.place = place
+                
+                guard let vc = segueToVC as? MapViewVC else{
+                    preconditionFailure("Could not find segue")
+                }
+                vc.place = place
             }
                 
             catch(RestaurantError.invalidRowSelection()){
@@ -124,21 +140,27 @@ extension RestaurantVC{
             
         case "multipleMapSegue" :
             
-        do{
-            let place = Place()
-            let restaurantsFetched = try model.getAllRestaurants()
-            place.trainStop = restaurantsFetched.first?.trainStop
-            retaurants = restaurantsFetched
-            place.restaurants = retaurants
-            mapVC.place = place
-        }
+            do{
+                let place = Place()
+                let restaurantsFetched = try model.getAllRestaurants()
+                place.trainStop = restaurantsFetched.first?.trainStop
+                retaurants = restaurantsFetched
+                place.restaurants = retaurants
+                
+                guard let vc = segueToVC as? MapViewVC else{
+                    preconditionFailure("Could not find segue")
+                }
+                vc.place = place
+            }
+                
+            catch(RestaurantError.zeroCount()){
+                alertUser = "There are no restaurants to show"
+                }
+            catch{
+                alertUser = "Unexpected Error"
+                }
             
-        catch(RestaurantError.zeroCount()){
-            alertUser = "There are no restaurants to show"
-            }
-        catch{
-            alertUser = "Unexpected Error"
-            }
+        case "detailSegue" : break
             
         default : break
         }

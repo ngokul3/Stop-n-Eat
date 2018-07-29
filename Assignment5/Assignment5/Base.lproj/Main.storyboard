@@ -14,7 +14,7 @@
         <!--DetailVC-->
         <scene sceneID="OhN-ID-Fe9">
             <objects>
-                <viewController id="aVw-KE-lTW" userLabel="DetailVC" sceneMemberID="viewController">
+                <viewController id="aVw-KE-lTW" userLabel="DetailVC" customClass="DetailRestaurantVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="evk-pH-rlY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
