@@ -21,7 +21,7 @@ class MapViewVC: UIViewController {
                 self.title = title
                 self.locationName = locationName
                 self.coordinate = coordinate
-            //    let ss = CLLocationCoordinate2D(latitude: <#T##CLLocationDegrees#>, longitude: <#T##CLLocationDegrees#>)
+           
                 super.init()
             }
         }
@@ -56,23 +56,16 @@ class MapViewVC: UIViewController {
         centerMapOnLocation(location: stopLocation)
         
         //let span = MKCoordinateSpanMake(0.05, 0.05)
-        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let span = MKCoordinateSpanMake(0.08, 0.08)
         let locationCoordinate2D = CLLocationCoordinate2D(latitude:  trainStop.latitude,longitude: trainStop.longitude)
 
         let region = MKCoordinateRegion(center: locationCoordinate2D, span: span)
         mapView.setRegion(region, animated: true)
         
         points.append(PointOfInterest(title: trainStop.stopName, locationName: trainStop.stopName, coordinate: CLLocationCoordinate2D(latitude: trainStop.latitude, longitude: trainStop.longitude)))
-        
-       // let pt2 = PointOfInterest(title: trainStop.stopName, locationName: trainStop.stopName, coordinate: CLLocationCoordinate2D(latitude: trainStop.latitude, longitude: trainStop.longitude))
-      //  mapView.addAnnotation(pt2)
-        
+
         restaurants.forEach({(restaurant) in
             points.append(PointOfInterest(title: restaurant.restaurantName, locationName: restaurant.restaurantName, coordinate: CLLocationCoordinate2D(latitude: restaurant.latitude, longitude: restaurant.longitude)))
-            
-           // let pt1 = PointOfInterest(title: restaurant.restaurantName, locationName: restaurant.restaurantName, coordinate: CLLocationCoordinate2D(latitude: restaurant.latitude, longitude: restaurant.longitude))
-            // mapView.addAnnotation(pt1)
-            
         })
         
         print(points.count)
@@ -83,7 +76,6 @@ class MapViewVC: UIViewController {
         super.viewDidAppear(animated)
         checkLocationAuthorizationStatus()
     }
-
 }
 
 extension MapViewVC{
@@ -121,11 +113,11 @@ extension MapViewVC{
 
 extension MapViewVC: MKMapViewDelegate {
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
-                 calloutAccessoryControlTapped control: UIControl) {
-    //    let location = view.annotation as! Artwork
-        let launchOptions = [MKLaunchOptionsDirectionsModeKey:
-            MKLaunchOptionsDirectionsModeDriving]
-        //location.mapItem().openInMaps(launchOptions: launchOptions)
-}
+//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
+//                 calloutAccessoryControlTapped control: UIControl) {
+//        let location = view.annotation as? PointOfInterest
+//        let launchOptions = [MKLaunchOptionsDirectionsModeKey:
+//            MKLaunchOptionsDirectionsModeDriving]
+//        location.mapItem().openInMaps(launchOptions: launchOptions)
+//}
 }
