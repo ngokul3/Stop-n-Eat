@@ -22,7 +22,8 @@ protocol RestaurantProtocol{
     static func getInstance()->RestaurantProtocol
     func addRestaurantFromNetwork(restaurantOpt : Restaurant?)
     func loadRestaurantFromNetwork(trainStop : TrainStop)
-    var restaurantsFromNetwork : RestaurantArray {get set}
+    var restaurantsFromNetwork: RestaurantArray {get set}
+    var restaurantsSaved: RestaurantArray {get set}
     func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant
     func getAllRestaurantsFromNetwork() throws ->RestaurantArray
     func addRestaurantToFavorite(restaurantOpt: Restaurant?) throws
@@ -60,4 +61,8 @@ enum DetailVCType : String
     case Add
     case Edit
     case Preload
+}
+
+struct Consts{
+    static let KEY0 = "Key0"
 }

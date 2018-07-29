@@ -31,6 +31,23 @@ class RestaurantVC: UIViewController {
                 s.updateUI()
             }
         }
+        
+        RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantRefreshed), object: nil, queue: OperationQueue.main) {
+            
+            [weak self] (notification: Notification) in
+            if let s = self {
+                let info0 = notification.userInfo?[Consts.KEY0]
+                
+                let restaurantOpt = info0 as? Restaurant
+                
+                guard let restaurant = restaurantOpt else{
+                    preconditionFailure("Could not save this favorite restaurant")
+                }
+                
+                s.saveRestaurant(restaurant)
+            }
+        }
+        
             super.viewDidLoad()
     }
 }
@@ -213,6 +230,13 @@ extension RestaurantVC{
         self.tableView.reloadData()
     }
     
+    func saveRestaurant(_ restaurant: Restaurant){
+//        let restaurant = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+//
+//         var restArray = RestaurantArray()
+//         restArray.append(restaurant)
+//         try Persistence.save(restArray)
+    }
     var alertUser :  String{
         get{
             preconditionFailure("You cannot read from this object")

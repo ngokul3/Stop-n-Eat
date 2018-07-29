@@ -30,7 +30,7 @@ class Persistence {
         try FileManager.default.createDirectory(at: newDirURL, withIntermediateDirectories: false, attributes: nil)
     }
     
-    static func save(_ restaurants: [Restaurant]) throws {
+    static func save(_ restaurant: Restaurant) throws {
        
         guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
             return
@@ -40,12 +40,14 @@ class Persistence {
             return
         }
         
-        restaurants.forEach({
-            print("Original count of restaurants in database is \(alreadySavedRestaurants.count)")
-            print("This restaurant \($0.restaurantName) will be saved")
-            alreadySavedRestaurants.append($0)
-            print("Saved count of restaurants that will be saved is \(alreadySavedRestaurants.count)")
-        })
+        alreadySavedRestaurants.append(restaurant)
+        
+//        restaurants.forEach({
+//            print("Original count of restaurants in database is \(alreadySavedRestaurants.count)")
+//            print("This restaurant \($0.restaurantName) will be saved")
+//            alreadySavedRestaurants.append($0)
+//            print("Saved count of restaurants that will be saved is \(alreadySavedRestaurants.count)")
+//        })
         
         let savedData = NSKeyedArchiver.archivedData(withRootObject: alreadySavedRestaurants)
         UserDefaults.standard.set(savedData, forKey: "restaurants")

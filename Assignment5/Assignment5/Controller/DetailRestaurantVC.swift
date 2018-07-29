@@ -11,13 +11,13 @@ import UIKit
 class DetailRestaurantVC: UIViewController {
 
     @IBOutlet weak var dateVisited : UIDatePicker!
-    @IBOutlet weak var lblRestaurantName: UILabel!
     @IBOutlet weak var txtNotes: UITextView!
     @IBOutlet weak var imgRating1: UIImageView!
     @IBOutlet weak var imgRating2: UIImageView!
     @IBOutlet weak var imgRating3: UIImageView!
     @IBOutlet weak var imgRating4: UIImageView!
     @IBOutlet weak var imgRating5: UIImageView!
+    @IBOutlet weak var txtRestaurantName: UITextField!
     
     var restaurant : Restaurant?
     var goBackAction : ((UIAlertAction) -> Void)?
@@ -44,7 +44,7 @@ class DetailRestaurantVC: UIViewController {
                 preconditionFailure("Parent VC did not initialize MenuItem")
             }
             
-            lblRestaurantName.text = restaurantInContext.restaurantName
+            txtRestaurantName.text = restaurantInContext.restaurantName
             dateVisited.date = restaurantInContext.dateVisited
             txtNotes.text = "Prepopulate with distance from station" //todo
         }
@@ -53,7 +53,32 @@ class DetailRestaurantVC: UIViewController {
 
 extension DetailRestaurantVC{
     @IBAction func btnSavedClicked(_ sender: UIBarButtonItem) {
+        
+        guard let name = txtRestaurantName.text
+            , !name.isEmpty else{
+            alertUser = "Restaurant Name cannot be empty"
+            return
+        }
+        
+        restaurant?.restaurantName = name
         saveDetailVC?(restaurant)
+        navigationController?.popViewController(animated: true)
     }
-    
 }
+
+extension DetailRestaurantVC{
+    var alertUser :  String{
+        get{
+            preconditionFailure("You cannot read from this object")
+        }
+        
+        set{
+            let alert = UIAlertController(title: "Changes not saved", message: newValue, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Stay", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Disregard", style: .default, handler: goBackAction))
+            
+            self.present(alert, animated: true)
+        }
+    }
+}
+

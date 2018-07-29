@@ -10,52 +10,46 @@ import UIKit
 
 class SavedRestaurantVC: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    private var model = RestaurantModel.getInstance()
+    private static var modelObserver: NSObjectProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
+        
+        SavedRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantRefreshed), object: nil, queue: OperationQueue.main) {
+            
+            [weak self] (notification: Notification) in
+            if let s = self {
+                s.updateUI()
+            }
+        }
     }
-
-
 }
 
 extension SavedRestaurantVC : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let CellID = "savedRestaurantCell"
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath) as? SavedRestaurantCell else{
-            preconditionFailure("Incorrect cell provided -- see storyboard")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "savedRestaurantCell", for: indexPath) as? SavedRestaurantCell else{
+            preconditionFailure("Incorrect Cell provided")
         }
-//        switch indexPath.row{
-//
-//        case 0:
-//             cell.lblRestaurantName.text = "Dominos"
-//            cell.imgStar1.image = UIImage(named: "Rating.png")
-//            cell.imgStar2.image = UIImage(named: "Rating.png")
-//            cell.imgStar3.image = UIImage(named: "Rating.png")
-//            cell.txtNotesRestaurant.text = "10 mins walk from SH. Yelp gave 3 stars. Service is good"
-//            cell.txtDateSaved.text = "07.01.18"
-//        case 1:
-//            cell.lblRestaurantName.text = "Dosa Corner"
-//            cell.imgStar1.image = UIImage(named: "Rating.png")
-//            cell.imgStar2.image = UIImage(named: "Rating.png")
-//             cell.txtNotesRestaurant.text = "Mint Sauce is not spicy enough"
-//             cell.txtDateSaved.text = "05.03.18"
-//        case 2:
-//            cell.lblRestaurantName.text = "Chinese Bowl"
-//            cell.imgStar1.image = UIImage(named: "Rating.png")
-//             cell.txtNotesRestaurant.text = "Noodles was not enough"
-//             cell.txtDateSaved.text = "07.11.18"
-//        default : break
-//        }
         
-        
-        
+        let restaurant = model.restaurantsSaved[indexPath.row]
+        print("Returned name is \(restaurant.restaurantName)")
+        cell.lblRestaurantName.text = restaurant.restaurantName
+        cell.txtNotesRestaurant.text = restaurant.comments
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return model.restaurantsSaved.count
+    }
+}
+
+extension SavedRestaurantVC{
+    func updateUI()
+    {
+        tableView.reloadData()
     }
 }

@@ -35,7 +35,6 @@ extension RestaurantModel{
         RestaurantModel.instance = inst
         return inst
     }
-    
 }
 
 extension RestaurantModel{
@@ -137,14 +136,17 @@ extension RestaurantModel{
     
     func addRestaurantToFavorite(restaurantOpt: Restaurant?) throws{
       
-        
         guard let restaurant =  restaurantOpt else{
             throw RestaurantError.invalidRestaurant()
         }
         
         restaurantsSaved.append(restaurant)
         
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantRefreshed), object: self))
+//        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantRefreshed), object: self))
+        
+        let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantRefreshed), object: nil)
+        
+        NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
     }
    
     func editRestaurantInFavorite(restaurant: Restaurant) {
