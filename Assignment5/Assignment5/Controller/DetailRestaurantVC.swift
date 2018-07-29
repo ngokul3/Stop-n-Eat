@@ -18,17 +18,42 @@ class DetailRestaurantVC: UIViewController {
     @IBOutlet weak var imgRating3: UIImageView!
     @IBOutlet weak var imgRating4: UIImageView!
     @IBOutlet weak var imgRating5: UIImageView!
-    @IBOutlet weak var btnSave: UIBarButtonItem!
     
     var restaurant : Restaurant?
     var goBackAction : ((UIAlertAction) -> Void)?
-    var menuDetailVCType : DetailVCType?
+    var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        txtNotes.layer.borderColor = UIColor.gray.cgColor
+        txtNotes.layer.borderWidth = 0.4
+        txtNotes.layer.cornerRadius = 0.8
+        
+        guard let detailType = restaurantDetailVCType else
+        {
+            preconditionFailure("Parent VC did not initialize Detail VC Type")
+            
+        }
+        
+        if(detailType == .Preload)
+        {
+            guard let restaurantInContext = restaurant else
+            {
+                preconditionFailure("Parent VC did not initialize MenuItem")
+            }
+            
+            lblRestaurantName.text = restaurantInContext.restaurantName
+            dateVisited.date = restaurantInContext.dateVisited
+            txtNotes.text = "Prepopulate with distance from station" //todo
+        }
     }
+}
 
-
+extension DetailRestaurantVC{
+    @IBAction func btnSavedClicked(_ sender: UIBarButtonItem) {
+        saveDetailVC?(restaurant)
+    }
+    
 }

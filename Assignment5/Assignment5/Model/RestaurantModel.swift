@@ -135,9 +135,10 @@ extension RestaurantModel{
 
 extension RestaurantModel{
     
-    func addRestaurant(restaurant: Restaurant) throws{
+    func addRestaurantToFavorite(restaurantOpt: Restaurant?) throws{
       
-        guard !restaurant.restaurantName.isEmpty  else{
+        
+        guard let restaurant =  restaurantOpt else{
             throw RestaurantError.invalidRestaurant()
         }
         
@@ -146,7 +147,7 @@ extension RestaurantModel{
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantRefreshed), object: self))
     }
    
-    func editRestaurant(restaurant: Restaurant) {
+    func editRestaurantInFavorite(restaurant: Restaurant) {
         
         restaurantsSaved.forEach({
             if($0.restaurantId == restaurant.restaurantId){
@@ -160,7 +161,7 @@ extension RestaurantModel{
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantRefreshed), object: self))
    }
     
-    func deleteRestaurant(restaurant: Restaurant) throws{
+    func deleteRestaurantFromFavorite(restaurant: Restaurant) throws{
         
         if(restaurantsSaved.contains{$0.restaurantId == restaurant.restaurantId}){
             restaurantsSaved = restaurantsSaved.filter({($0.restaurantId != restaurant.restaurantId)})

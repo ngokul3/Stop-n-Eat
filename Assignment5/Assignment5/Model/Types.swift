@@ -25,9 +25,9 @@ protocol RestaurantProtocol{
     var restaurantsFromNetwork : RestaurantArray {get set}
     func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant
     func getAllRestaurantsFromNetwork() throws ->RestaurantArray
-    func addRestaurant(restaurant: Restaurant) throws
-    func editRestaurant(restaurant: Restaurant)
-    func deleteRestaurant(restaurant: Restaurant) throws
+    func addRestaurantToFavorite(restaurantOpt: Restaurant?) throws
+    func editRestaurantInFavorite(restaurant: Restaurant)
+    func deleteRestaurantFromFavorite(restaurant: Restaurant) throws
 }
 
 
@@ -59,4 +59,5 @@ enum DetailVCType : String
 {
     case Add
     case Edit
+    case Preload
 }

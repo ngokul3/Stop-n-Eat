@@ -128,10 +128,13 @@
                         <viewLayoutGuide key="safeArea" id="daL-cH-eFj"/>
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="qFv-i1-htj">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="MzK-II-wYw"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="MzK-II-wYw">
+                            <connections>
+                                <action selector="btnSavedClicked:" destination="aVw-KE-lTW" id="Gf9-D5-xTP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnSave" destination="MzK-II-wYw" id="2Cd-Eb-brp"/>
                         <outlet property="dateVisited" destination="kdq-3B-IeE" id="3bl-ej-Z1Y"/>
                         <outlet property="imgRating1" destination="ad5-3i-YIl" id="2Bd-GD-lGq"/>
                         <outlet property="imgRating2" destination="Qh9-JM-TWB" id="nER-yc-bCf"/>
@@ -655,6 +658,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dlF-Qv-XRz"/>
-        <segue reference="rik-Tt-5rB"/>
+        <segue reference="gbd-2F-tPy"/>
     </inferredMetricsTieBreakers>
 </document>

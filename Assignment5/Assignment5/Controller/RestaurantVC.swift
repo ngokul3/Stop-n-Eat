@@ -160,7 +160,48 @@ extension RestaurantVC{
                 alertUser = "Unexpected Error"
                 }
             
-        case "detailSegue" : break
+        case "detailSegue" :
+            
+                var rowNo : Int?
+                
+                if let button = sender as? UIButton {
+                    rowNo = button.tag
+                }
+                
+                guard let indexRow = rowNo else{
+                    preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
+                }
+                guard let vc = segueToVC as? DetailRestaurantVC else{
+                    preconditionFailure("Could not find segue")
+                }
+                
+                do{
+                    let restaurantFromNetwork = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+                    vc.restaurant = restaurantFromNetwork
+                }
+                    
+                catch(RestaurantError.invalidRowSelection()){
+                    alertUser = "Restaurant selected could not be navigated to the map"
+                }
+                    
+                catch{
+                    alertUser = "Unexpected Error"
+                }
+                
+                
+                vc.restaurantDetailVCType = DetailVCType.Preload
+                vc.saveDetailVC = {[weak self] (restaurant) in
+                    do{
+                        
+                        try self?.model.addRestaurantToFavorite(restaurantOpt: restaurant)
+                    }
+                    catch RestaurantError.invalidRestaurant(){
+                        self?.alertUser = "Restaurant is nil"
+                    }
+                    catch{
+                        self?.alertUser = "Something went wrong while adding"
+                    }
+                }
             
         default : break
         }
