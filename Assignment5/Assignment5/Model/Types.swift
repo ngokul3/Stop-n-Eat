@@ -10,8 +10,7 @@ import Foundation
 
 protocol TrainStopProtocol {
     static func getInstance() -> TrainStopProtocol
-    func addTrainStop(stop: TrainStop) throws
-    func getTrainStop(fromFilteredArray stopIndex : Int) throws ->TrainStop
+     func getTrainStop(fromFilteredArray stopIndex : Int) throws ->TrainStop
     func getAllTrains()->[TrainStop] //Todo reiew these get func. YOu dont need this
     var filteredStops : StopArray {get set}
     var currentFilter : String {get set}
@@ -53,7 +52,6 @@ enum RestaurantError: Error{
     case notAbleToCreateEmptyRestaurant()
 }
 struct Messages {
-    static let StopListChanged = "Train Stop List changed" //Todo this is not required
     static let StopListFiltered = "Train Stops Filtered"
     static let RestaurantLoadedFromNetwork = "Restaurants From Network Loaded"
     static let RestaurantReadyToBeSaved = "Restaurant refreshed to Favorite"

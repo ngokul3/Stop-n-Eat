@@ -14,6 +14,7 @@ class SavedRestaurantVC: UIViewController {
     private var model = RestaurantModel.getInstance()
     private static var modelObserver: NSObjectProtocol?
     
+    //Todo - default populate into notest section - miles from railway station
     override func viewDidLoad() {
         super.viewDidLoad()
         

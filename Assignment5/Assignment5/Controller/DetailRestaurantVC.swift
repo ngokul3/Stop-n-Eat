@@ -18,6 +18,7 @@ class DetailRestaurantVC: UIViewController {
     @IBOutlet weak var imgRating4: UIImageView!
     @IBOutlet weak var imgRating5: UIImageView!
     @IBOutlet weak var txtRestaurantName: UITextField!
+    @IBOutlet weak var lblDistance: UILabel!
     
     private static var modelObserver: NSObjectProtocol?
     var restaurant : Restaurant?
@@ -48,14 +49,14 @@ class DetailRestaurantVC: UIViewController {
             }
         }
         
-        guard let detailType = restaurantDetailVCType else
-        {
+        guard let detailType = restaurantDetailVCType else{
             preconditionFailure("Parent VC did not initialize Detail VC Type")
-            
         }
         
         switch detailType {
+            
         case .Edit, .Preload :
+            
             guard let restaurantInContext = restaurant else
             {
                 preconditionFailure("Parent VC did not initialize MenuItem")
@@ -63,7 +64,8 @@ class DetailRestaurantVC: UIViewController {
             
             txtRestaurantName.text = restaurantInContext.restaurantName
             dateVisited.date = restaurantInContext.dateVisited
-            txtNotes.text = "Prepopulate with distance from station" //todo
+            lblDistance.text = restaurantInContext.distanceFromStopDesc
+            
         default : break
         }
     }

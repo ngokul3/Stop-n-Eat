@@ -207,6 +207,7 @@ class Restaurant:  NSObject, NSCoding{
         aCoder.encode(givenRating, forKey: "givenRating")
         aCoder.encode(myRating, forKey: "myRating")
         aCoder.encode(comments, forKey: "comments")
+        aCoder.encode(distanceFromStopDesc, forKey: "distanceFromStopDesc")
         aCoder.encode(dateVisited, forKey : "dateVisited")
         aCoder.encode(isFavorite, forKey : "isFavorite")
     }
@@ -216,9 +217,9 @@ class Restaurant:  NSObject, NSCoding{
             let restId = aDecoder.decodeObject(forKey: "restaurantId") as? String,
             let restName = aDecoder.decodeObject(forKey: "restaurantName") as? String,
             let restComment = aDecoder.decodeObject(forKey:"comments") as? String,
+            let restDistanceDesc = aDecoder.decodeObject(forKey:"distanceFromStopDesc") as? String,
             let restDate = aDecoder.decodeObject(forKey:"dateVisited") as? Date else {
                 return nil
-                
         }
         
         restaurantId = restId
@@ -228,6 +229,7 @@ class Restaurant:  NSObject, NSCoding{
         comments = restComment
         dateVisited = restDate
         isFavorite = aDecoder.decodeBool(forKey: "isFavorite")
+        distanceFromStopDesc = restDistanceDesc
         super.init()
     }
     
@@ -242,10 +244,14 @@ class Restaurant:  NSObject, NSCoding{
     var restaurantId : String = ""
     var latitude : Double = 0.0
     var longitude : Double = 0.0
-    
+    var distanceFromStopDesc : String = ""
     var distanceFromTrainStop : Double{
+        
         let distance = self.distanceBetweenTwoCoordinates(lat1: latitude, lon1: longitude, latOpt: trainStop?.latitude, lonOpt: trainStop?.longitude).rounded(toPlaces: 1)
         
+        if let stop = self.trainStop{
+            distanceFromStopDesc = String(describing:distance) + " mi from " + String(describing: stop.stopName)
+        }
         return distance
     }
     

@@ -121,17 +121,9 @@ extension TrainStopModel{
             print(type(of: stopArray[0]))
         }
     }
-    
-    
 }
+
 extension TrainStopModel{
-    
-    func addTrainStop(stop: TrainStop) throws {
-     
-        trainStops.append(stop)
-        
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListChanged), object: self))
-    }
     
     func getTrainStop(fromFilteredArray stopIndex : Int) throws ->TrainStop{
 
@@ -143,13 +135,10 @@ extension TrainStopModel{
     }
     
     func getAllTrains() -> [TrainStop] {
-        
          return trainStops
     }
-    
-   
- 
 }
+
 class TrainStop{
     var stopNo  : Int = 0
     var stopName : String
@@ -158,7 +147,6 @@ class TrainStop{
     
     init(_stopName : String?, _latitude : Double?, _longitude : Double?) throws
     {
-        
         guard let name = _stopName else{
             throw TrainStopError.invalidStopName()
         }
@@ -168,7 +156,6 @@ class TrainStop{
             throw TrainStopError.invalidLocation()
         }
         
-       
         stopName = name
         latitude = lat
         longitude = long
