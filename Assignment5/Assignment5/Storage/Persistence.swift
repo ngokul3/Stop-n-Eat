@@ -43,13 +43,11 @@ class Persistence {
        
         var savedRestaurants = [Restaurant]()
         
-        guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
-            return
-        }
-        
-        if let alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] {
-            alreadySavedRestaurants.forEach {
-                savedRestaurants.append($0)
+        if let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") {
+            if let alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] {
+                alreadySavedRestaurants.forEach {
+                    savedRestaurants.append($0)
+                }
             }
         }
         
