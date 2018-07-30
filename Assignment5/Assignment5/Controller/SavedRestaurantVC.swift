@@ -17,16 +17,16 @@ class SavedRestaurantVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        do {
-            let restoredObject = try Persistence.restore()
-            model.restoreRestaurantsFromFavorite(restaurants: restoredObject)
-        }
-        catch RestaurantError.notAbleToRestore(){
-            alertUser = "Not able to restore from the favorite list"
-        }
-        catch{
-            alertUser = "Unknown Error"
-        }
+//        do {
+//            let restoredObject = try Persistence.restore()
+//            model.restoreRestaurantsFromFavorite(restaurants: restoredObject)
+//        }
+//        catch RestaurantError.notAbleToRestore(){
+//            alertUser = "Not able to restore from the favorite list"
+//        }
+//        catch{
+//            alertUser = "Unknown Error"
+//        }
         
         SavedRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantDeleted), object: nil, queue: OperationQueue.main) {
            

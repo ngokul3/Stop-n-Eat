@@ -51,6 +51,7 @@ extension RestaurantModel{
      
         let network = RestaurantNetwork()
         
+        //Todo - Implement caching 
         network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {(dictionary, error) in
             print("In return from ajaxRequest: \(Thread.current)")
             
@@ -92,6 +93,15 @@ extension RestaurantModel{
                     
                     let restaurant = Restaurant(_trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating))
                     
+                    if(self.restaurantsSaved.filter({$0.restaurantId == restaurant.restaurantId}).count > 0)
+                    {
+                        restaurant.isFavorite = true
+                    }
+//                    self.restaurantsSaved.forEach({(arg) in
+//                        if(arg.restaurantId == restaurant.restaurantId){
+//                            restaurant.isFavorite = true
+//                        }
+//                    })
                     if(restaurant.distanceFromTrainStop <= 2){ // Loading only those data that are less than 2 miles. Idea is to see restaurants in walking distance
                         self.restaurantsFromNetwork.append(restaurant)
                     }
@@ -134,6 +144,7 @@ extension RestaurantModel{
             throw RestaurantError.invalidRestaurant()
         }
         
+        restaurant.isFavorite = true
         restaurantsSaved.append(restaurant)
         
         let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantReadyToBeSaved), object: nil)
@@ -190,6 +201,7 @@ class Restaurant:  NSObject, NSCoding{
         aCoder.encode(myRating, forKey: "myRating")
         aCoder.encode(comments, forKey: "comments")
         aCoder.encode(dateVisited, forKey : "dateVisited")
+        aCoder.encode(isFavorite, forKey : "isFavorite")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -208,6 +220,7 @@ class Restaurant:  NSObject, NSCoding{
         myRating = aDecoder.decodeInteger(forKey: "myRating")
         comments = restComment
         dateVisited = restDate
+        isFavorite = aDecoder.decodeBool(forKey: "isFavorite")
         super.init()
     }
     
@@ -234,7 +247,8 @@ class Restaurant:  NSObject, NSCoding{
     var isSelected : Bool = false
     var comments : String = ""
     var dateVisited : Date = Date()
-    
+    var isFavorite : Bool = false
+   
     init(_trainStop : TrainStop, _restaurantName : String, _restaurantId : String, _latitude : Double, _longitude : Double, _givenRating : Int)
     {
         trainStop = _trainStop

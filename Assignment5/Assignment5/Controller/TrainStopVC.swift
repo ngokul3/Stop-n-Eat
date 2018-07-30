@@ -14,6 +14,7 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
    
     @IBOutlet weak var tableView: UITableView!
     private var model = TrainStopModel.getInstance()
+    private var restModel = RestaurantModel.getInstance()
     private static var modelObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
@@ -32,6 +33,17 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
         
         catch{}//Todo do something
        
+        do {
+            let restoredObject = try Persistence.restore()
+            restModel.restoreRestaurantsFromFavorite(restaurants: restoredObject)
+        }
+        catch RestaurantError.notAbleToRestore(){
+            alertUser = "Not able to restore from the favorite list"
+        }
+        catch{
+            alertUser = "Unknown Error"
+        }
+        
         super.viewDidLoad()
         
     }

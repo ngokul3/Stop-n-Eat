@@ -31,6 +31,14 @@ class RestaurantVC: UIViewController {
                 s.updateUI()
             }
         }
+        
+        RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.FavoriteListChanged), object: nil, queue: OperationQueue.main) {
+            
+            [weak self] (notification: Notification) in
+            if let s = self {
+                s.updateUI()
+            }
+        }
         super.viewDidLoad()
     }
 }
@@ -72,6 +80,12 @@ extension RestaurantVC : UITableViewDataSource{
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop)
         cell.btnSingleMap.tag = indexPath.row
         cell.btnHeart.tag = indexPath.row
+        
+        if(restaurant.isFavorite){
+            cell.btnHeart.setBackgroundImage(UIImage(named: "savedHeart"), for: .normal)
+        }else{
+            cell.btnHeart.setBackgroundImage(UIImage(named: "heart"), for: .normal)
+        }
         
         let rating = restaurant.givenRating
         
@@ -247,6 +261,7 @@ extension RestaurantVC{
     func updateUI(){
         self.tableView.reloadData()
     }
+    
     
     var alertUser :  String{
         get{
