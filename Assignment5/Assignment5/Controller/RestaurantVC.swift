@@ -66,8 +66,11 @@ extension RestaurantVC : UITableViewDataSource{
         }
         
         print("Returned name is \(model.restaurantsFromNetwork[indexPath.row].restaurantName)")
-        cell.lblRestaurantName.text = model.restaurantsFromNetwork[indexPath.row].restaurantName
+        let restaurant = model.restaurantsFromNetwork[indexPath.row]
+        cell.lblRestaurantName.text = restaurant.restaurantName
+    
         cell.imgRail.image = UIImage(named: "Rail")
+        cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop)
         cell.btnSingleMap.tag = indexPath.row
         cell.btnHeart.tag = indexPath.row
         return cell
@@ -210,7 +213,6 @@ extension RestaurantVC{
         self.tableView.reloadData()
     }
     
-  
     var alertUser :  String{
         get{
             preconditionFailure("You cannot read from this object")
@@ -225,4 +227,6 @@ extension RestaurantVC{
     }
 
 }
+
+
 

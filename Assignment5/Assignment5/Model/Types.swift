@@ -20,7 +20,6 @@ protocol TrainStopProtocol {
 
 protocol RestaurantProtocol{
     static func getInstance()->RestaurantProtocol
-    func addRestaurantFromNetwork(restaurantOpt : Restaurant?)
     func loadRestaurantFromNetwork(trainStop : TrainStop)
     var restaurantsFromNetwork: RestaurantArray {get set}
     var restaurantsSaved: RestaurantArray {get set}

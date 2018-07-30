@@ -13,11 +13,7 @@ class RestaurantModel: RestaurantProtocol{
     private static var instance: RestaurantProtocol?
     var restaurantsFromNetwork : RestaurantArray
     var restaurantsSaved : RestaurantArray
-//    var lastRestaurantNumber : Int
-//    {
-//        return restaurantsSaved.reduce(Int.min, {max($0, $1.itemNumber)})
-//    }
-//
+
     private init(){
         restaurantsFromNetwork = RestaurantArray()
         restaurantsSaved = RestaurantArray()
@@ -96,7 +92,9 @@ extension RestaurantModel{
                     
                     let restaurant = Restaurant(_trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating))
                     
-                    self.restaurantsFromNetwork.append(restaurant)
+                    if(restaurant.distanceFromTrainStop <= 2){ // Loading only those data that are less than 2 miles. Idea is to see restaurants in walking distance
+                        self.restaurantsFromNetwork.append(restaurant)
+                    }
                 }
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantLoadedFromNetwork), object: self))
             }
@@ -107,14 +105,6 @@ extension RestaurantModel{
     }
 }
 extension RestaurantModel{
-    
-    func addRestaurantFromNetwork(restaurantOpt: Restaurant?) {
-        guard let restaurant = restaurantOpt else{
-            preconditionFailure("Restaurant cannot be added")
-        }
-        
-        restaurantsFromNetwork.append(restaurant)
-     }
     
     func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant{
         
@@ -144,9 +134,6 @@ extension RestaurantModel{
             throw RestaurantError.invalidRestaurant()
         }
         
-//        if(restaurant.restaurantId.isEmpty){
-//            restaurant.restaurantId = restaurant.restaurantName
-//        }
         restaurantsSaved.append(restaurant)
         
         let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantReadyToBeSaved), object: nil)
@@ -235,7 +222,13 @@ class Restaurant:  NSObject, NSCoding{
     var restaurantId : String = ""
     var latitude : Double = 0.0
     var longitude : Double = 0.0
-    var distanceFromTrainStop : Double = 0.0
+    
+    var distanceFromTrainStop : Double{
+        let distance = self.distanceBetweenTwoCoordinates(lat1: latitude, lon1: longitude, latOpt: trainStop?.latitude, lonOpt: trainStop?.longitude).rounded(toPlaces: 1)
+        
+        return distance
+    }
+    
     var givenRating : Int = 0
     var myRating : Int = 0
     var isSelected : Bool = false
@@ -251,6 +244,36 @@ class Restaurant:  NSObject, NSCoding{
         longitude = _longitude
         givenRating = _givenRating
     }
+}
+
+//Distance between 2 points - Code snippet from https://www.geodatasource.com/developers/swift
+extension Restaurant{
     
-  
+    func distanceBetweenTwoCoordinates(lat1:Double, lon1:Double, latOpt:Double?, lonOpt:Double?) -> Double {
+        
+        guard let lat2 = latOpt, let lon2 = lonOpt else{
+            preconditionFailure("Could not calculate distance")
+        }
+        let theta = lon1 - lon2
+        var dist = sin(deg2rad(deg: lat1)) * sin(deg2rad(deg: lat2)) + cos(deg2rad(deg: lat1)) * cos(deg2rad(deg: lat2)) * cos(deg2rad(deg: theta))
+        dist = acos(dist)
+        dist = rad2deg(rad: dist)
+        dist = dist * 60 * 1.1515
+        return dist
+    }
+    
+    func rad2deg(rad:Double) -> Double {
+        return rad * 180.0 / Double.pi
+    }
+    
+    func deg2rad(deg:Double) -> Double {
+        return deg * Double.pi / 180
+    }
+}
+//Code snippet from StackOverflow
+extension Double {
+func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
 }
