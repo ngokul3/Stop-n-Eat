@@ -13,6 +13,7 @@
 		9048B4EE210C9A2F00D1A26A /* RailStop.json in Resources */ = {isa = PBXBuildFile; fileRef = 9048B4ED210C9A2F00D1A26A /* RailStop.json */; };
 		9064B68B210DDEEA00E35072 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9064B68A210DDEEA00E35072 /* Persistence.swift */; };
 		9064B68F210E065200E35072 /* DetailRestaurantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9064B68E210E065200E35072 /* DetailRestaurantVC.swift */; };
+		9064B691210F8B7A00E35072 /* RestaurantViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9064B690210F8B7A00E35072 /* RestaurantViewState.swift */; };
 		90960B62210C8672005EC2AA /* TrainStopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90960B5F210C8672005EC2AA /* TrainStopModel.swift */; };
 		90960B63210C8672005EC2AA /* RestaurantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90960B60210C8672005EC2AA /* RestaurantModel.swift */; };
 		90960B64210C8672005EC2AA /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90960B61210C8672005EC2AA /* Types.swift */; };
@@ -61,6 +62,7 @@
 		9048B4ED210C9A2F00D1A26A /* RailStop.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = RailStop.json; path = Assignment5/Assets.xcassets/RailStop.dataset/RailStop.json; sourceTree = "<group>"; };
 		9064B68A210DDEEA00E35072 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		9064B68E210E065200E35072 /* DetailRestaurantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRestaurantVC.swift; sourceTree = "<group>"; };
+		9064B690210F8B7A00E35072 /* RestaurantViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewState.swift; sourceTree = "<group>"; };
 		90960B5F210C8672005EC2AA /* TrainStopModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainStopModel.swift; sourceTree = "<group>"; };
 		90960B60210C8672005EC2AA /* RestaurantModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantModel.swift; sourceTree = "<group>"; };
 		90960B61210C8672005EC2AA /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				90A31A8E210953AD000DB608 /* RestaurantVC.swift */,
 				90998ABE210D2A7B001E5848 /* MapViewVC.swift */,
 				9064B68E210E065200E35072 /* DetailRestaurantVC.swift */,
+				9064B690210F8B7A00E35072 /* RestaurantViewState.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				90998ABF210D2A7B001E5848 /* MapViewVC.swift in Sources */,
 				90A31A8F210953AD000DB608 /* RestaurantVC.swift in Sources */,
 				9064B68F210E065200E35072 /* DetailRestaurantVC.swift in Sources */,
+				9064B691210F8B7A00E35072 /* RestaurantViewState.swift in Sources */,
 				90A31A632107FE8E000DB608 /* TrainStopVC.swift in Sources */,
 				90960B62210C8672005EC2AA /* TrainStopModel.swift in Sources */,
 				90108A08210A7940008B9BC7 /* NotifyVC.swift in Sources */,

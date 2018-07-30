@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 
+//Todo key should come from info.plist
 
 class RestaurantNetwork{
     

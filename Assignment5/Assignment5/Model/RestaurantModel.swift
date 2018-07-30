@@ -51,7 +51,7 @@ extension RestaurantModel{
      
         let network = RestaurantNetwork()
         
-        //Todo - Implement caching 
+        //Todo - Implement caching
         network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {(dictionary, error) in
             print("In return from ajaxRequest: \(Thread.current)")
             
@@ -166,12 +166,12 @@ extension RestaurantModel{
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
 
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteListChanged), object: self))
-        
    }
     
     func deleteRestaurantFromFavorite(restaurant: Restaurant) throws{
         
         if(restaurantsSaved.contains{$0.restaurantId == restaurant.restaurantId}){
+            restaurant.isFavorite = false
             restaurantsSaved = restaurantsSaved.filter({($0.restaurantId != restaurant.restaurantId)})
         }
         else{
@@ -179,8 +179,9 @@ extension RestaurantModel{
         }
         
         let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantDeleted), object: nil)
-        
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
+   
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteListChanged), object: self))
     }
 }
 
@@ -247,7 +248,16 @@ class Restaurant:  NSObject, NSCoding{
     var isSelected : Bool = false
     var comments : String = ""
     var dateVisited : Date = Date()
-    var isFavorite : Bool = false
+    var favoriteImageName : String = "heart"
+    var isFavorite : Bool = false{
+        didSet{
+            if(isFavorite){
+                favoriteImageName = "savedHeart"
+            }else{
+                favoriteImageName = "heart"
+            }
+        }
+    }
    
     init(_trainStop : TrainStop, _restaurantName : String, _restaurantId : String, _latitude : Double, _longitude : Double, _givenRating : Int)
     {

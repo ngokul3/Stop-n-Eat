@@ -15,7 +15,7 @@ class RestaurantVC: UIViewController {
     var cellArrray = [RestaurantCell]()
     private var model = RestaurantModel.getInstance()
     private static var modelObserver: NSObjectProtocol?
-
+    
     override func viewDidLoad() {
         
         guard let stop = trainStop else{
@@ -80,12 +80,12 @@ extension RestaurantVC : UITableViewDataSource{
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop)
         cell.btnSingleMap.tag = indexPath.row
         cell.btnHeart.tag = indexPath.row
-        
-        if(restaurant.isFavorite){
-            cell.btnHeart.setBackgroundImage(UIImage(named: "savedHeart"), for: .normal)
-        }else{
-            cell.btnHeart.setBackgroundImage(UIImage(named: "heart"), for: .normal)
-        }
+        cell.btnHeart.setBackgroundImage(UIImage(named: restaurant.favoriteImageName), for: .normal)
+//        if(restaurant.isFavorite){
+//            cell.btnHeart.setBackgroundImage(UIImage(named: "savedHeart"), for: .normal)
+//        }else{
+//            cell.btnHeart.setBackgroundImage(UIImage(named: "heart"), for: .normal)
+//        }
         
         let rating = restaurant.givenRating
         
@@ -131,6 +131,43 @@ extension RestaurantVC : UITableViewDataSource{
  }
 
 extension RestaurantVC{
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        switch identifier{
+        
+        case "detailSegue":
+            var rowNo : Int?
+            
+            if let button = sender as? UIButton {
+                rowNo = button.tag
+            }
+            
+            guard let indexRow = rowNo else{
+                preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
+            }
+            do{
+                let restaurantFromNetwork = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+                if(restaurantFromNetwork.isFavorite == true){
+                    try model.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork)
+                    return false
+                }else
+                {
+                    return true
+                }
+            }
+            catch RestaurantError.notAbleToDelete(let name){
+                alertUser = "Not able to delete \(name)"
+                return false
+            }
+            catch{
+                alertUser = "Unexpected Error while preparing to navigate"
+                return false
+            }
+        
+        default:    return true
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         
         guard let identifier = segue.identifier else{
@@ -226,13 +263,6 @@ extension RestaurantVC{
                 
                 do{
                     let restaurantFromNetwork = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
-                    
-                    //Todo - implement removing favorite from restaurantVC
-//                    if(restaurantFromNetwork.isFavorite == true)
-//                    {
-//                        try model.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork)
-//                        return
-//                    }
                     vc.restaurant = restaurantFromNetwork
                 }
                     

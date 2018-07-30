@@ -41,7 +41,6 @@ class SavedRestaurantVC: UIViewController {
                 }
                 
                 s.deleteRestaurant(restaurant: restaurant)
-                s.updateUI()
             }
         }
         
