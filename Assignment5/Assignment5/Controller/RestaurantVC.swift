@@ -76,17 +76,11 @@ extension RestaurantVC : UITableViewDataSource{
         print("Returned name is \(model.restaurantsFromNetwork[indexPath.row].restaurantName)")
         let restaurant = model.restaurantsFromNetwork[indexPath.row]
         cell.lblRestaurantName.text = restaurant.restaurantName
-        cell.imgRail.image = UIImage(named: "Rail")
+        cell.imgRail.image = UIImage(named: restaurant.railImageName) 
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop)
         cell.btnSingleMap.tag = indexPath.row
         cell.btnHeart.tag = indexPath.row
         cell.btnHeart.setBackgroundImage(UIImage(named: restaurant.favoriteImageName), for: .normal)
-//        if(restaurant.isFavorite){
-//            cell.btnHeart.setBackgroundImage(UIImage(named: "savedHeart"), for: .normal)
-//        }else{
-//            cell.btnHeart.setBackgroundImage(UIImage(named: "heart"), for: .normal)
-//        }
-        
         let rating = restaurant.givenRating
         
         switch rating{

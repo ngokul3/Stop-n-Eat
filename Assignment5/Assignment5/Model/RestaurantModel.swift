@@ -59,8 +59,7 @@ extension RestaurantModel{
      
         let network = RestaurantNetwork()
         
-        //Todo - Implement caching
-        //Todo - self should be captured weak in Oepration.main.addoperation
+         //Todo - self should be captured weak in Oepration.main.addoperation
         network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {(dictionary, error) in
             print("In return from ajaxRequest: \(Thread.current)")
             
@@ -255,6 +254,7 @@ class Restaurant:  NSObject, NSCoding{
     var isSelected : Bool = false
     var comments : String = ""
     var dateVisited : Date = Date()
+    var railImageName : String = "Rail"
     var favoriteImageName : String = "heart"
     var isFavorite : Bool = false{
         didSet{
