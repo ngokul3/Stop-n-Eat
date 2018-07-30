@@ -226,13 +226,22 @@ extension RestaurantVC{
                 
                 do{
                     let restaurantFromNetwork = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+                    
+                    //Todo - implement removing favorite from restaurantVC
+//                    if(restaurantFromNetwork.isFavorite == true)
+//                    {
+//                        try model.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork)
+//                        return
+//                    }
                     vc.restaurant = restaurantFromNetwork
                 }
                     
                 catch(RestaurantError.invalidRowSelection()){
                     alertUser = "Restaurant selected could not be navigated to the map"
                 }
-                    
+                catch(RestaurantError.notAbleToDelete(let name)){
+                    alertUser = "Restaurant \(name) could not be removed from favorite"
+                }
                 catch{
                     alertUser = "Unexpected Error"
                 }
