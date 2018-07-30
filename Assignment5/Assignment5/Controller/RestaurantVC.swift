@@ -68,11 +68,46 @@ extension RestaurantVC : UITableViewDataSource{
         print("Returned name is \(model.restaurantsFromNetwork[indexPath.row].restaurantName)")
         let restaurant = model.restaurantsFromNetwork[indexPath.row]
         cell.lblRestaurantName.text = restaurant.restaurantName
-    
         cell.imgRail.image = UIImage(named: "Rail")
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop)
         cell.btnSingleMap.tag = indexPath.row
         cell.btnHeart.tag = indexPath.row
+        
+        let rating = restaurant.givenRating
+        
+        switch rating{
+        case 1 :
+            cell.imgStar1.image = UIImage(named: "rating")
+            cell.imgStar2.image = UIImage(named: "plainStar")
+            cell.imgStar3.image = UIImage(named: "plainStar")
+            cell.imgStar4.image = UIImage(named: "plainStar")
+            cell.imgStar5.image = UIImage(named: "plainStar")
+        case 2 :
+            cell.imgStar1.image = UIImage(named: "rating")
+            cell.imgStar2.image = UIImage(named: "rating")
+            cell.imgStar3.image = UIImage(named: "plainStar")
+            cell.imgStar4.image = UIImage(named: "plainStar")
+            cell.imgStar5.image = UIImage(named: "plainStar")
+        case 3 :
+            cell.imgStar1.image = UIImage(named: "rating")
+            cell.imgStar2.image = UIImage(named: "rating")
+            cell.imgStar3.image = UIImage(named: "rating")
+            cell.imgStar4.image = UIImage(named: "plainStar")
+            cell.imgStar5.image = UIImage(named: "plainStar")
+        case 4 :
+            cell.imgStar1.image = UIImage(named: "rating")
+            cell.imgStar2.image = UIImage(named: "rating")
+            cell.imgStar3.image = UIImage(named: "rating")
+            cell.imgStar4.image = UIImage(named: "rating")
+            cell.imgStar5.image = UIImage(named: "plainStar")
+        case 5 :
+            cell.imgStar1.image = UIImage(named: "rating")
+            cell.imgStar2.image = UIImage(named: "rating")
+            cell.imgStar3.image = UIImage(named: "rating")
+            cell.imgStar4.image = UIImage(named: "rating")
+            cell.imgStar5.image = UIImage(named: "rating")
+        default : break
+        }
         return cell
     }
     
