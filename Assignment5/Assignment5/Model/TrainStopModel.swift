@@ -21,7 +21,6 @@ class TrainStopModel {
             
             if(!currentFilter.isEmpty){
                 filterTrainStops(stopName: currentFilter)
-                
             }
             else{
                 filteredStops = StopArray()
@@ -31,15 +30,12 @@ class TrainStopModel {
         }
     }
     var storedStopFilter : StopArray?{
-
         return searchedStops[currentFilter]
-
     }
     
 private init(){
         trainStops = StopArray()
         filteredStops = StopArray()
-        
     }
 }
 

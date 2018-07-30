@@ -11,9 +11,12 @@ import Foundation
 class RestaurantModel: RestaurantProtocol{
   
     private static var instance: RestaurantProtocol?
+    private var searchedRestaurants = [String : RestaurantArray]()
+   
     var restaurantsFromNetwork : RestaurantArray
     var restaurantsSaved : RestaurantArray
-
+ 
+    
     private init(){
         restaurantsFromNetwork = RestaurantArray()
         restaurantsSaved = RestaurantArray()
@@ -40,6 +43,11 @@ extension RestaurantModel{
 extension RestaurantModel{
     func loadRestaurantFromNetwork(trainStop : TrainStop){
         
+        if let restaurantArray = searchedRestaurants[trainStop.stopName] {
+            restaurantsFromNetwork = restaurantArray
+            return
+        }
+        
         let trainLocation = (trainStop.latitude, trainStop.longitude)
     
         guard trainLocation.0 != 0.0
@@ -52,6 +60,7 @@ extension RestaurantModel{
         let network = RestaurantNetwork()
         
         //Todo - Implement caching
+        //Todo - self should be captured weak in Oepration.main.addoperation
         network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {(dictionary, error) in
             print("In return from ajaxRequest: \(Thread.current)")
             
@@ -97,15 +106,13 @@ extension RestaurantModel{
                     {
                         restaurant.isFavorite = true
                     }
-//                    self.restaurantsSaved.forEach({(arg) in
-//                        if(arg.restaurantId == restaurant.restaurantId){
-//                            restaurant.isFavorite = true
-//                        }
-//                    })
+
                     if(restaurant.distanceFromTrainStop <= 2){ // Loading only those data that are less than 2 miles. Idea is to see restaurants in walking distance
                         self.restaurantsFromNetwork.append(restaurant)
                     }
                 }
+                
+                self.searchedRestaurants[trainStop.stopName] = self.restaurantsFromNetwork
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantLoadedFromNetwork), object: self))
             }
             
