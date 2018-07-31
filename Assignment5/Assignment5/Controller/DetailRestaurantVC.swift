@@ -169,7 +169,7 @@ extension DetailRestaurantVC{
         
         restaurant?.restaurantName = name
         let fullStarCount = viewState.ratingButtonArr.filter{$0.rawValue == RatingViewState.RatingType.full.rawValue}.count
-        restaurant?.givenRating = fullStarCount
+        restaurant?.myRating = fullStarCount
         saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
     }

@@ -34,7 +34,7 @@ class RatingViewState{
             return
         }
         
-        for index in 0...MaxRating{
+        for index in 0...MaxRating-1{
             if(index<givenRating){
                 ratingButtonArr.append(.full)
             }else{
@@ -45,17 +45,17 @@ class RatingViewState{
     }
     
     func loadRatingType(ratingButtonNo: Int, ratingType : RatingType){
-        guard ratingButtonArr[ratingButtonNo] else{
+        guard ratingButtonArr[ratingButtonNo-1] else{
             preconditionFailure("View state does not contai this button index")
         }
-       ratingButtonArr[ratingButtonNo] = ratingType
+       ratingButtonArr[ratingButtonNo-1] = ratingType
     }
     
     func getRatingType(ratingButtonNo: Int) -> RatingType?{
-        guard ratingButtonArr[ratingButtonNo] else{
+        guard ratingButtonArr[ratingButtonNo-1] else{
             preconditionFailure("View state does not contain this button index")
         }
         
-        return ratingButtonArr[ratingButtonNo]
+        return ratingButtonArr[ratingButtonNo-1]
     }
 }
