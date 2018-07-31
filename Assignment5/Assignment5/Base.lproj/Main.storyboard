@@ -406,13 +406,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ov2-ua-eTG">
-                                                    <rect key="frame" x="15" y="0.0" width="164" height="20.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="194" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="miles" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZ8-4d-auD">
-                                                    <rect key="frame" x="219" y="0.0" width="40" height="20.5"/>
+                                                    <rect key="frame" x="219" y="-1" width="40" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -480,12 +480,6 @@
                                                         <segue destination="7qZ-wz-HbW" kind="show" identifier="singleMapSegue" id="TX1-a0-gH6"/>
                                                     </connections>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bUb-n8-PlC">
-                                                    <rect key="frame" x="180" y="1" width="37" height="40"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="37" id="lrl-9B-OeP"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="RK6-0c-5Kr" secondAttribute="trailing" constant="5" id="03b-Kj-RG9"/>
@@ -508,16 +502,13 @@
                                                 <constraint firstItem="qhJ-BS-DL1" firstAttribute="top" secondItem="KXL-ES-22S" secondAttribute="top" constant="1" id="deU-jS-Yoe"/>
                                                 <constraint firstItem="RK6-0c-5Kr" firstAttribute="top" secondItem="KXL-ES-22S" secondAttribute="top" constant="1" id="g1U-7L-bvb"/>
                                                 <constraint firstAttribute="bottom" secondItem="qhJ-BS-DL1" secondAttribute="bottom" constant="13.5" id="hcz-Cl-gya"/>
+                                                <constraint firstItem="jZ8-4d-auD" firstAttribute="leading" secondItem="Ov2-ua-eTG" secondAttribute="trailing" constant="10" id="iFf-LN-ROF"/>
                                                 <constraint firstItem="HU4-Rk-DxP" firstAttribute="leading" secondItem="KXL-ES-22S" secondAttribute="leading" constant="33" id="ih8-Xf-evD"/>
-                                                <constraint firstItem="bUb-n8-PlC" firstAttribute="top" secondItem="KXL-ES-22S" secondAttribute="top" constant="1" id="l7d-cI-gLK"/>
                                                 <constraint firstAttribute="bottom" secondItem="zGb-hs-S9N" secondAttribute="bottom" constant="2.5" id="mbi-dT-27i"/>
                                                 <constraint firstItem="Ov2-ua-eTG" firstAttribute="leading" secondItem="KXL-ES-22S" secondAttribute="leading" constant="15" id="ocj-K0-37h"/>
                                                 <constraint firstItem="f32-Ry-S36" firstAttribute="leading" secondItem="HU4-Rk-DxP" secondAttribute="trailing" id="riJ-w7-NyE"/>
-                                                <constraint firstItem="jZ8-4d-auD" firstAttribute="leading" secondItem="bUb-n8-PlC" secondAttribute="trailing" constant="2" id="umb-7a-RQZ"/>
-                                                <constraint firstAttribute="bottom" secondItem="bUb-n8-PlC" secondAttribute="bottom" constant="2" id="vMl-Np-qbL"/>
                                                 <constraint firstItem="Ov2-ua-eTG" firstAttribute="top" secondItem="KXL-ES-22S" secondAttribute="top" id="vPm-b6-iZe"/>
                                                 <constraint firstItem="Lcl-hH-gbG" firstAttribute="leading" secondItem="a4a-1R-hVe" secondAttribute="trailing" id="wh8-wF-YgA"/>
-                                                <constraint firstItem="bUb-n8-PlC" firstAttribute="leading" secondItem="Ov2-ua-eTG" secondAttribute="trailing" constant="1" id="wjw-Y8-xxW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -529,7 +520,6 @@
                                             <outlet property="imgStar3" destination="f32-Ry-S36" id="lCo-ll-X5q"/>
                                             <outlet property="imgStar4" destination="a4a-1R-hVe" id="kQa-1H-XPV"/>
                                             <outlet property="imgStar5" destination="Lcl-hH-gbG" id="L7K-dh-OaD"/>
-                                            <outlet property="imgThumbnail" destination="bUb-n8-PlC" id="UNL-H0-GSQ"/>
                                             <outlet property="lblMiles" destination="jZ8-4d-auD" id="KjO-uj-a8h"/>
                                             <outlet property="lblRestaurantName" destination="Ov2-ua-eTG" id="Ebq-ZA-ITz"/>
                                         </connections>
