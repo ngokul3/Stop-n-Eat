@@ -28,7 +28,7 @@ class DetailRestaurantVC: UIViewController {
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
     
-    lazy var viewState = RatingViewState(myRatingOpt: self.restaurant?.myRating, MaxRating: 5, emptyRatingImageName: self.restaurant?.nonRatedImageName, fullRatingImageName: self.restaurant?.ratedImageName)
+    lazy var viewState = RatingViewState(myRatingOpt: self.restaurant?.myRating, MaxRating: 5)
 
     lazy var ratingImageClosure :(Restaurant,Int)->RatingViewState.RatingType = {[weak self](restaurant: Restaurant, rating: Int)->RatingViewState.RatingType in
         if(restaurant.givenRating >= rating){
@@ -57,6 +57,27 @@ class DetailRestaurantVC: UIViewController {
         })
     }
     
+    lazy var setUpButtonImages:(Int)->Void = {[weak self](rating: Int) in
+        self?.btnRatings.forEach{(btn) in
+            let btnIndex = self?.btnRatings.index(of: btn)
+           
+            guard let index = btnIndex,
+                  let fullImageName = self?.viewState.fullRatingImageName,
+                  let emptyImageName = self?.viewState.emptyRatingImageName else{
+                return
+            }
+            guard let imageName = self?.viewState.fullRatingImageName else{
+                return
+            }
+            if(rating > index){
+                
+                btn.setBackgroundImage(UIImage(named: fullImageName), for: .normal)
+            }
+            else{
+                btn.setBackgroundImage(UIImage(named: emptyImageName), for: .normal)
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -84,7 +105,22 @@ class DetailRestaurantVC: UIViewController {
             preconditionFailure("Parent VC did not initialize Detail VC Type")
         }
         
+        
+//        btnRatings.forEach{(btn) in
+//            let btnIndex = btnRatings.index(of: btn)
+//            guard let index = btnIndex else{
+//                return
+//            }
+//            if(rating > index){
+//                btn.setBackgroundImage(UIImage(named: viewState.fullRatingImageName), for: .normal)
+//            }
+//            else{
+//                btn.setBackgroundImage(UIImage(named: viewState.emptyRatingImageName), for: .normal)
+//            }
+//        }
         switch detailType {
+        
+        case .Add : setUpButtonImages(0)
             
         case .Edit, .Preload :
             
@@ -97,61 +133,8 @@ class DetailRestaurantVC: UIViewController {
             dateVisited.date = restaurantInContext.dateVisited
             lblDistance.text = restaurantInContext.distanceFromStopDesc
             let rating = restaurantInContext.myRating
-            
-            btnRatings.forEach{(btn) in
-                let btnIndex = btnRatings.index(of: btn)
-                guard let index = btnIndex else{
-                    return
-                }
-                if(rating > index){
-                    btn.setBackgroundImage(UIImage(named: restaurantInContext.ratedImageName), for: .normal)
-                }
-                else{
-                    btn.setBackgroundImage(UIImage(named: restaurantInContext.nonRatedImageName), for: .normal)
-                }
-            }
-//            switch rating{
-//            case 1 :
-////                ratingState.ratingButtonNo = rating
-////                ratingState.ratingType = ratingImageClosure(restaurantInContext, rating)
-//                viewState.loadRatingType(ratingButtonNo: rating, ratingType: ratingImageClosure(restaurantInContext, rating))
-//
-//                //Todo rating imag should come from mode. It's already there
-//                btnRating1.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating2.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
-//                btnRating3.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
-//                btnRating4.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
-//                btnRating5.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
-//            case 2 :
-//                viewState.loadRatingType(ratingButtonNo: rating, ratingType: ratingImageClosure(restaurantInContext, rating))
-//                btnRating1.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating2.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating3.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
-//                btnRating4.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
-//                btnRating5.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
-//            case 3 :
-//                viewState.loadRatingType(ratingButtonNo: rating, ratingType: ratingImageClosure(restaurantInContext, rating))
-//                btnRating1.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating2.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating3.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating4.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
-//                btnRating5.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
-//            case 4 :
-//                viewState.loadRatingType(ratingButtonNo: rating, ratingType: ratingImageClosure(restaurantInContext, rating))
-//                btnRating1.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating2.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating3.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating4.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating5.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
-//            case 5 :
-//                viewState.loadRatingType(ratingButtonNo: rating, ratingType: ratingImageClosure(restaurantInContext, rating))
-//                btnRating1.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating2.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating3.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating4.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//                btnRating5.setBackgroundImage(UIImage(named: "rating"), for: .normal)
-//            default : break
-//            }
+            setUpButtonImages(rating)
+       
         default : break
         }
     }

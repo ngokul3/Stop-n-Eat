@@ -266,8 +266,6 @@ class Restaurant:  NSObject, NSCoding{
     var dateVisited : Date = Date()
     var railImageName : String = "rail"
     var favoriteImageName : String = "heart"
-    var ratedImageName : String = "rating"
-    var nonRatedImageName : String = "plainStar"
     var isFavorite : Bool = false{
         didSet{
             if(isFavorite){

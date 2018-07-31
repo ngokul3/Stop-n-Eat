@@ -16,15 +16,15 @@ class RatingViewState{
     }
     
     var ratingButtonArr : [RatingType] = [RatingType]()
-    var emptyRatingImageName: String = ""
-    var fullRatingImageName: String = ""
+    var emptyRatingImageName: String = "plainStar"
+    var fullRatingImageName: String = "rating"
     
-    init(myRatingOpt : Int?, MaxRating: Int, emptyRatingImageName: String?, fullRatingImageName: String?){
+    init(myRatingOpt : Int?, MaxRating: Int){
+        
         guard let myRating = myRatingOpt else{
+            ratingButtonArr = Array(repeating: RatingType.empty, count: 5)
             return
         }
-        self.emptyRatingImageName = emptyRatingImageName ?? ""
-        self.fullRatingImageName = fullRatingImageName ?? ""
         
         for index in 0...MaxRating-1{
             if(index<myRating){
@@ -40,11 +40,7 @@ class RatingViewState{
         guard ratingButtonArr[ratingButtonIndex] else{
             preconditionFailure("View state does not contai this button index")
         }
-        
-        
        ratingButtonArr[ratingButtonIndex] = ratingType
-        
-        
     }
     
     func changeRatingType(ratingButtonIndex: Int,  returnRatingImageName: (String)->()){
