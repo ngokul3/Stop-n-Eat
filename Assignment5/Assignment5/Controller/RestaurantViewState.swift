@@ -9,7 +9,6 @@
 import Foundation
 
 class RatingViewState{
-    typealias RatingNotifier = (RatingViewState.RatingType)->()
     
     enum RatingType : String{
         case empty = "empty"
@@ -17,30 +16,18 @@ class RatingViewState{
     }
     
     var ratingButtonArr : [RatingType] = [RatingType]()
-    var ratingButtonNo: Int = 0
     var emptyRatingImageName: String = ""
     var fullRatingImageName: String = ""
     
-//    var notify = RatingNotifier.self
-//
-//    var ratingType : RatingType = .empty{
-//        didSet{
-//            guard oldValue != ratingType else{
-//                return
-//            }
-//           notify(oldValue)
-//        }
-//    }
-    
-    init(givenRatingOpt : Int?, MaxRating: Int, emptyRatingImageName: String?, fullRatingImageName: String?){
-        guard let givenRating = givenRatingOpt else{
+    init(myRatingOpt : Int?, MaxRating: Int, emptyRatingImageName: String?, fullRatingImageName: String?){
+        guard let myRating = myRatingOpt else{
             return
         }
         self.emptyRatingImageName = emptyRatingImageName ?? ""
         self.fullRatingImageName = fullRatingImageName ?? ""
         
         for index in 0...MaxRating-1{
-            if(index<givenRating){
+            if(index<myRating){
                 ratingButtonArr.append(.full)
             }else{
                 ratingButtonArr.append(.empty)
@@ -49,36 +36,36 @@ class RatingViewState{
         
     }
     
-    func loadRatingType(ratingButtonNo: Int, ratingType : RatingType){
-        guard ratingButtonArr[ratingButtonNo-1] else{
+    func loadRatingType(ratingButtonIndex: Int, ratingType : RatingType){
+        guard ratingButtonArr[ratingButtonIndex] else{
             preconditionFailure("View state does not contai this button index")
         }
         
         
-       ratingButtonArr[ratingButtonNo-1] = ratingType
+       ratingButtonArr[ratingButtonIndex] = ratingType
         
         
     }
     
-    func changeRatingType(ratingButtonNo: Int,  returnRatingImageName: (String)->()){
-        guard ratingButtonArr[ratingButtonNo-1] else{
+    func changeRatingType(ratingButtonIndex: Int,  returnRatingImageName: (String)->()){
+        guard ratingButtonArr[ratingButtonIndex] else{
             preconditionFailure("View state does not contai this button index")
         }
         
-        if ratingButtonArr[ratingButtonNo-1].rawValue == "empty"{
-            ratingButtonArr[ratingButtonNo-1] = .full
+        if ratingButtonArr[ratingButtonIndex].rawValue == "empty"{
+            ratingButtonArr[ratingButtonIndex] = .full
             returnRatingImageName(self.fullRatingImageName)
         }else{
-            ratingButtonArr[ratingButtonNo-1] = .empty
+            ratingButtonArr[ratingButtonIndex] = .empty
             returnRatingImageName(self.emptyRatingImageName)
         }
         
     }
-    func getRatingType(ratingButtonNo: Int) -> RatingType?{
-        guard ratingButtonArr[ratingButtonNo-1] else{
+    func getRatingType(ratingButtonIndex: Int) -> RatingType?{
+        guard ratingButtonArr[ratingButtonIndex] else{
             preconditionFailure("View state does not contain this button index")
         }
         
-        return ratingButtonArr[ratingButtonNo-1]
+        return ratingButtonArr[ratingButtonIndex]
     }
 }

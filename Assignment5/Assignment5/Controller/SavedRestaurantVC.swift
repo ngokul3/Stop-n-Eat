@@ -155,7 +155,7 @@ extension SavedRestaurantVC{
                     try self?.model.editRestaurantInFavorite(restaurant: restaurantInContext)
                 }
                 catch RestaurantError.notAbleToEdit(let name){
-                    self?.alertUser = "Restaurant \(name) cannot be edited"
+                    self?.alertUser = "Restaurant \(name) cannot be edited. May be it's not in Favorite list anymore."
                 }
                 catch{
                     self?.alertUser = "Something went wrong while adding"

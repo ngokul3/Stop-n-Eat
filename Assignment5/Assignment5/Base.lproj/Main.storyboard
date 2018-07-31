@@ -38,7 +38,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Already saved Notes in the previous contorller will appear here" translatesAutoresizingMaskIntoConstraints="NO" id="XHl-lf-3iQ">
-                                <rect key="frame" x="110" y="186" width="249" height="101"/>
+                                <rect key="frame" x="110" y="165" width="249" height="122"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -50,13 +50,13 @@
                                 </date>
                             </datePicker>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fEB-je-GNb">
-                                <rect key="frame" x="110" y="125" width="249" height="30"/>
+                                <rect key="frame" x="110" y="104" width="249" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NiC-af-srt">
-                                <rect key="frame" x="110" y="75" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NiC-af-srt">
+                                <rect key="frame" x="110" y="75" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -67,32 +67,31 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pew-h5-JG4">
                                 <rect key="frame" x="166" y="555" width="44" height="50"/>
                                 <connections>
-                                    <action selector="btnRating1Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="hID-hu-o5K"/>
-                                    <action selector="btnRating3Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="Ma8-Z4-lyT"/>
+                                    <action selector="btnRating3Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="DtA-8v-MIQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rF-7O-OhX">
                                 <rect key="frame" x="121.5" y="555" width="43.5" height="50"/>
                                 <connections>
-                                    <action selector="btnRating2Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="PmH-L6-G5e"/>
+                                    <action selector="btnRating2Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="CIl-3a-WFf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZx-it-EQ2">
                                 <rect key="frame" x="71" y="555" width="43.5" height="50"/>
                                 <connections>
-                                    <action selector="btnRating1Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="kbo-FP-sQm"/>
+                                    <action selector="btnRating1Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="b5S-hi-bfD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqg-ik-f1p">
                                 <rect key="frame" x="210" y="555" width="43.5" height="50"/>
                                 <connections>
-                                    <action selector="btnRating4Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="cGQ-As-Uv2"/>
+                                    <action selector="btnRating4Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="bpW-Nd-i71"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyN-e7-JxK">
                                 <rect key="frame" x="261.5" y="555" width="43.5" height="50"/>
                                 <connections>
-                                    <action selector="btnRating5Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="lP7-HX-Pip"/>
+                                    <action selector="btnRating5Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="yux-hh-MXB"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -162,11 +161,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnRating1" destination="zZx-it-EQ2" id="gsV-DB-Ik6"/>
-                        <outlet property="btnRating2" destination="2rF-7O-OhX" id="4iG-cG-iYV"/>
-                        <outlet property="btnRating3" destination="pew-h5-JG4" id="RXw-2y-FPn"/>
-                        <outlet property="btnRating4" destination="Dqg-ik-f1p" id="Ymm-SH-ciE"/>
-                        <outlet property="btnRating5" destination="vyN-e7-JxK" id="Vez-Uq-bft"/>
+                        <outlet property="btnRating1" destination="zZx-it-EQ2" id="uuY-sF-8Qp"/>
+                        <outlet property="btnRating2" destination="2rF-7O-OhX" id="7ak-mc-toy"/>
+                        <outlet property="btnRating3" destination="pew-h5-JG4" id="L6G-Ep-Mnf"/>
+                        <outlet property="btnRating4" destination="Dqg-ik-f1p" id="dq8-Hk-4uP"/>
+                        <outlet property="btnRating5" destination="vyN-e7-JxK" id="1en-i1-wAm"/>
                         <outlet property="dateVisited" destination="kdq-3B-IeE" id="3bl-ej-Z1Y"/>
                         <outlet property="lblDistance" destination="NiC-af-srt" id="4CP-BO-hzH"/>
                         <outlet property="txtNotes" destination="XHl-lf-3iQ" id="yNR-nI-zgz"/>
