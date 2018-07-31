@@ -77,7 +77,7 @@ extension RestaurantVC : UITableViewDataSource{
         let restaurant = model.restaurantsFromNetwork[indexPath.row]
         cell.lblRestaurantName.text = restaurant.restaurantName
         cell.imgRail.image = UIImage(named: restaurant.railImageName)
-        cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop)
+        cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop) + " mi"
         cell.btnSingleMap.tag = indexPath.row
         cell.btnHeart.tag = indexPath.row
         cell.btnHeart.setBackgroundImage(UIImage(named: restaurant.favoriteImageName), for: .normal)

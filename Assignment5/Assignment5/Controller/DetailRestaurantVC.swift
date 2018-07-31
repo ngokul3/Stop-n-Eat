@@ -105,19 +105,6 @@ class DetailRestaurantVC: UIViewController {
             preconditionFailure("Parent VC did not initialize Detail VC Type")
         }
         
-        
-//        btnRatings.forEach{(btn) in
-//            let btnIndex = btnRatings.index(of: btn)
-//            guard let index = btnIndex else{
-//                return
-//            }
-//            if(rating > index){
-//                btn.setBackgroundImage(UIImage(named: viewState.fullRatingImageName), for: .normal)
-//            }
-//            else{
-//                btn.setBackgroundImage(UIImage(named: viewState.emptyRatingImageName), for: .normal)
-//            }
-//        }
         switch detailType {
         
         case .Add : setUpButtonImages(0)
@@ -132,10 +119,9 @@ class DetailRestaurantVC: UIViewController {
             txtRestaurantName.text = restaurantInContext.restaurantName
             dateVisited.date = restaurantInContext.dateVisited
             lblDistance.text = restaurantInContext.distanceFromStopDesc
+            txtNotes.text = restaurantInContext.comments
             let rating = restaurantInContext.myRating
             setUpButtonImages(rating)
-       
-        default : break
         }
     }
 }
@@ -150,6 +136,8 @@ extension DetailRestaurantVC{
         }
         
         restaurant?.restaurantName = name
+        restaurant?.dateVisited = dateVisited.date
+        restaurant?.comments = txtNotes.text
         let fullStarCount = viewState.ratingButtonArr.filter{$0.rawValue == RatingViewState.RatingType.full.rawValue}.count
         restaurant?.myRating = fullStarCount
         saveDetailVC?(restaurant)
