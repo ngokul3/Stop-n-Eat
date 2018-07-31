@@ -76,7 +76,7 @@ extension RestaurantVC : UITableViewDataSource{
         print("Returned name is \(model.restaurantsFromNetwork[indexPath.row].restaurantName)")
         let restaurant = model.restaurantsFromNetwork[indexPath.row]
         cell.lblRestaurantName.text = restaurant.restaurantName
-        cell.imgRail.image = UIImage(named: restaurant.railImageName) 
+        cell.imgRail.image = UIImage(named: restaurant.railImageName)
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop)
         cell.btnSingleMap.tag = indexPath.row
         cell.btnHeart.tag = indexPath.row

@@ -255,13 +255,19 @@ class Restaurant:  NSObject, NSCoding{
         return distance
     }
     
-    var givenRating : Int = 0
+    var givenRating : Int = 0{
+        didSet{
+            myRating = givenRating
+        }
+    }
     var myRating : Int = 0
     var isSelected : Bool = false
     var comments : String = ""
     var dateVisited : Date = Date()
-    var railImageName : String = "Rail"
+    var railImageName : String = "rail"
     var favoriteImageName : String = "heart"
+    var ratedImageName : String = "rating"
+    var nonRatedImageName : String = "plainStar"
     var isFavorite : Bool = false{
         didSet{
             if(isFavorite){

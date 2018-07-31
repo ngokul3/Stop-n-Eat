@@ -13,18 +13,41 @@ enum HeartType{
     case full
 }
 
-class RestaurantViewState{
-    private var handleChange: () -> Void
-    var heartType : HeartType = .empty{
-        didSet{
-            handleChange()
-        }
+class RatingViewState{
+    typealias RatingNotifier = (RatingViewState.RatingType)->()
+    
+    enum RatingType{
+        case empty
+        case full
     }
     
-    init(heartType : HeartType, handleChange: @escaping ()->Void){
-        self.handleChange = handleChange
-        self.heartType = heartType
+    var ratingButtonDict = [Int : RatingType]()
+    var ratingButtonNo: Int = 0
+//    var notify = RatingNotifier.self
+//
+//    var ratingType : RatingType = .empty{
+//        didSet{
+//            guard oldValue != ratingType else{
+//                return
+//            }
+//           notify(oldValue)
+//        }
+//    }
+    
+    init(){
+        
+    }
+//    init(ratingButtonNo: Int, ratingType : RatingType, notify: @escaping RatingNotifier){
+//        self.notify = notify
+//        self.ratingType = ratingType
+//        self.ratingButtonNo = ratingButtonNo
+//    }
+    
+    func loadRatingType(ratingButtonNo: Int, ratingType : RatingType){
+        ratingButtonDict[ratingButtonNo] = ratingType
     }
     
-    
+    func getRatingType(ratingButtonNo: Int) -> RatingType?{
+        return ratingButtonDict[ratingButtonNo]
+    }
 }
