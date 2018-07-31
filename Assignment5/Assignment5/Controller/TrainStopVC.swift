@@ -10,6 +10,7 @@ import UIKit
 
 class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
 
+    //Todo alignment of search bar looks weird in iphone x
     @IBOutlet weak var searchBar: UISearchBar!
    
     @IBOutlet weak var tableView: UITableView!
