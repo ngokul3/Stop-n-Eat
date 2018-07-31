@@ -30,7 +30,7 @@ class DetailRestaurantVC: UIViewController {
     var goBackAction : ((UIAlertAction) -> Void)?
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
-    lazy var viewState = RatingViewState(givenRatingOpt: self.restaurant?.givenRating, MaxRating: 5)
+    lazy var viewState = RatingViewState(givenRatingOpt: self.restaurant?.givenRating, MaxRating: 5, emptyRatingImageName: self.restaurant?.nonRatedImageName, fullRatingImageName: self.restaurant?.ratedImageName)
 
     lazy var ratingImageClosure :(Restaurant,Int)->RatingViewState.RatingType = {[weak self](restaurant: Restaurant, rating: Int)->RatingViewState.RatingType in
         if(restaurant.givenRating >= rating){
@@ -40,41 +40,21 @@ class DetailRestaurantVC: UIViewController {
         }
     }
     
-    lazy var updateRating:(Int, (String)->())->Void = {[weak self] (buttonNo: Int, sendNewRatingImage : (String)->()) in
+    lazy var updateRating:(Int, UIButton)->Void = {[weak self] (buttonNo: Int, button: UIButton) in
         
         let ratingTypeOpt = self?.viewState.getRatingType(ratingButtonNo: buttonNo)
         var imageNameOpt : String?
         guard var ratingType = ratingTypeOpt else{
             return
         }
-        
-        if ratingType == .empty{
-            ratingType = .full
-            imageNameOpt = self?.restaurant?.ratedImageName
-        }else{
-            ratingType = .empty
-            imageNameOpt = self?.restaurant?.nonRatedImageName
-        }
-        
-        self?.viewState.loadRatingType(ratingButtonNo: buttonNo, ratingType: ratingType)
-        
-        guard let imageName = imageNameOpt else{
-            return
-        }
-        sendNewRatingImage(imageName)
+        self?.viewState.changeRatingType(ratingButtonNo: buttonNo, returnRatingImageName: {(imageName) in
+            button.setBackgroundImage(UIImage(named: imageName), for: .normal)
+        })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        if(restaurantInContext.givenRating >= rating){
-//            ratingState.ratingType = .full
-//        }else{
-//            ratingState.ratingType = .empty
-//        }
-//        imgRating1.isUserInteractionEnabled = true
-//        imgRating1.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DetailRestaurantVC.ratingClicked(_:no:) )))
-        
+    
         txtNotes.layer.borderColor = UIColor.gray.cgColor
         txtNotes.layer.borderWidth = 0.4
         txtNotes.layer.cornerRadius = 0.8
@@ -118,6 +98,8 @@ class DetailRestaurantVC: UIViewController {
 //                ratingState.ratingButtonNo = rating
 //                ratingState.ratingType = ratingImageClosure(restaurantInContext, rating)
                 viewState.loadRatingType(ratingButtonNo: rating, ratingType: ratingImageClosure(restaurantInContext, rating))
+                
+                //Todo rating imag should come from mode. It's already there
                 btnRating1.setBackgroundImage(UIImage(named: "rating"), for: .normal)
                 btnRating2.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
                 btnRating3.setBackgroundImage(UIImage(named: "plainStar"), for: .normal)
@@ -206,35 +188,20 @@ extension DetailRestaurantVC{
 
 extension DetailRestaurantVC{
     @IBAction func btnRating2Click(_ sender: UIButton) {
-        self.updateRating(2, {(imageName) in
-            btnRating2.setBackgroundImage(UIImage(named: imageName), for: .normal)
-            }
-        )
+        self.updateRating(1, sender)
     }
     @IBAction func btnRating1Click(_ sender: UIButton) {
-        self.updateRating(1, {(imageName) in
-            btnRating1.setBackgroundImage(UIImage(named: imageName), for: .normal)
-            }
-        )
+        self.updateRating(2, sender)
     }
     
     @IBAction func btnRating3Click(_ sender: UIButton) {
-        self.updateRating(3, {(imageName) in
-            btnRating3.setBackgroundImage(UIImage(named: imageName), for: .normal)
-            }
-        )
+       self.updateRating(3, sender)
     }
     @IBAction func btnRating4Click(_ sender: UIButton) {
-        self.updateRating(4, {(imageName) in
-            btnRating4.setBackgroundImage(UIImage(named: imageName), for: .normal)
-            }
-        )
+        self.updateRating(4, sender)
     }
     @IBAction func btnRating5Click(_ sender: UIButton) {
-        self.updateRating(5, {(imageName) in
-            btnRating5.setBackgroundImage(UIImage(named: imageName), for: .normal)
-            }
-        )
+        self.updateRating(5, sender)
     }
 }
 
