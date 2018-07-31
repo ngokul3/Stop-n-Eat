@@ -73,6 +73,21 @@ extension SavedRestaurantVC : UITableViewDataSource{
         cell.lblRestaurantName.text = restaurant.restaurantName
         cell.txtNotesRestaurant.text = restaurant.comments
         cell.txtDateSaved.text = restaurant.dateVisited.returnFormattedDate()
+        let rating = restaurant.myRating
+        let imgStarArr = [cell.imgStar1, cell.imgStar2, cell.imgStar3, cell.imgStar4, cell.imgStar5]
+        
+        imgStarArr.forEach({(img) in
+            
+            guard let imgIndex = imgStarArr.index(of: img) else{
+                preconditionFailure("Can't load images")
+            }
+            
+            if (rating > imgIndex){
+                img?.image = UIImage(named: "rating")
+            }else{
+                img?.image = UIImage(named: "plainStar")
+            }
+        })
         return cell
     }
     

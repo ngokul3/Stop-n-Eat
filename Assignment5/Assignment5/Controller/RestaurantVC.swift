@@ -92,41 +92,20 @@ extension RestaurantVC : UITableViewDataSource{
         cell.btnHeart.tag = indexPath.row
         cell.btnHeart.setBackgroundImage(UIImage(named: restaurant.favoriteImageName), for: .normal)
         let rating = restaurant.givenRating
-        
-        //todo for rating image
-        switch rating{
-        case 1 :
-            cell.imgStar1.image = UIImage(named: "rating")
-            cell.imgStar2.image = UIImage(named: "plainStar")
-            cell.imgStar3.image = UIImage(named: "plainStar")
-            cell.imgStar4.image = UIImage(named: "plainStar")
-            cell.imgStar5.image = UIImage(named: "plainStar")
-        case 2 :
-            cell.imgStar1.image = UIImage(named: "rating")
-            cell.imgStar2.image = UIImage(named: "rating")
-            cell.imgStar3.image = UIImage(named: "plainStar")
-            cell.imgStar4.image = UIImage(named: "plainStar")
-            cell.imgStar5.image = UIImage(named: "plainStar")
-        case 3 :
-            cell.imgStar1.image = UIImage(named: "rating")
-            cell.imgStar2.image = UIImage(named: "rating")
-            cell.imgStar3.image = UIImage(named: "rating")
-            cell.imgStar4.image = UIImage(named: "plainStar")
-            cell.imgStar5.image = UIImage(named: "plainStar")
-        case 4 :
-            cell.imgStar1.image = UIImage(named: "rating")
-            cell.imgStar2.image = UIImage(named: "rating")
-            cell.imgStar3.image = UIImage(named: "rating")
-            cell.imgStar4.image = UIImage(named: "rating")
-            cell.imgStar5.image = UIImage(named: "plainStar")
-        case 5 :
-            cell.imgStar1.image = UIImage(named: "rating")
-            cell.imgStar2.image = UIImage(named: "rating")
-            cell.imgStar3.image = UIImage(named: "rating")
-            cell.imgStar4.image = UIImage(named: "rating")
-            cell.imgStar5.image = UIImage(named: "rating")
-        default : break
-        }
+        let imgStarArr = [cell.imgStar1, cell.imgStar2, cell.imgStar3, cell.imgStar4, cell.imgStar5]
+      
+        imgStarArr.forEach({(img) in
+            
+            guard let imgIndex = imgStarArr.index(of: img) else{
+                preconditionFailure("Can't load images")
+            }
+            
+            if (rating > imgIndex){
+                img?.image = UIImage(named: "rating")
+            }else{
+                img?.image = UIImage(named: "plainStar")
+            }
+        })
         return cell
     }
     
