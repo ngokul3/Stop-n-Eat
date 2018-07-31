@@ -22,7 +22,7 @@ class RestaurantVC: UIViewController {
         
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 70
+        tableView.estimatedRowHeight = 80
         
         guard let stop = trainStop else{
             preconditionFailure("Could not find Stop")
