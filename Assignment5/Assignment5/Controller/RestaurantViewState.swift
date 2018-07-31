@@ -64,4 +64,24 @@ class RatingViewState{
         
         return ratingButtonArr[ratingButtonIndex]
     }
+    
+    func changeRatingType_test(ratingButtonIndex: Int,  returnRatingImageName: (String)->()){
+        guard ratingButtonArr[ratingButtonIndex] else{
+            preconditionFailure("View state does not contai this button index")
+        }
+        
+         ratingButtonArr.forEach({(arg) in
+            guard let index = ratingButtonArr.index(of: arg) else{
+                return
+            }
+            if(index < ratingButtonIndex){
+                ratingButtonArr[ratingButtonIndex] = .full
+               
+            }else{
+                ratingButtonArr[ratingButtonIndex] = .empty
+            }
+            
+        })
+        
+    }
 }

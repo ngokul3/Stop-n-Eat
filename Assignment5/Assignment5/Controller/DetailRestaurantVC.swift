@@ -30,15 +30,15 @@ class DetailRestaurantVC: UIViewController {
     
     lazy var viewState = RatingViewState(myRatingOpt: self.restaurant?.myRating, MaxRating: 5)
 
-    lazy var ratingImageClosure :(Restaurant,Int)->RatingViewState.RatingType = {[weak self](restaurant: Restaurant, rating: Int)->RatingViewState.RatingType in
-        if(restaurant.givenRating >= rating){
-            return.full
-        }else{
-            return .empty
-        }
-    }
+//    lazy var ratingImageClosure  = {[weak self](restaurant: Restaurant, rating: Int)->RatingViewState.RatingType in
+//        if(restaurant.givenRating >= rating){
+//            return.full
+//        }else{
+//            return .empty
+//        }
+//    }
     
-    lazy var updateRating:(UIButton)->Void = {[weak self] (button: UIButton) in
+    lazy var updateRating_OLD:(UIButton)->Void = {[weak self] (button: UIButton) in //Todo remove this
         var imageNameOpt : String?
         let btnIndexOpt = self?.btnRatings.index(of: button)
         
@@ -54,6 +54,36 @@ class DetailRestaurantVC: UIViewController {
         
         self?.viewState.changeRatingType(ratingButtonIndex: btnIndex, returnRatingImageName: {(imageName) in
             button.setBackgroundImage(UIImage(named: imageName), for: .normal)
+        })
+    }
+    
+    lazy var updateRating = {[weak self](button: UIButton) in
+        var imageNameOpt : String?
+        let btnClickedIndexOpt = self?.btnRatings.index(of: button)
+        
+        guard let btnClickedIndex = btnClickedIndexOpt else{
+            return
+        }
+        
+        self?.restaurant?.myRating = 0
+        
+        //for each and update button image
+        self?.btnRatings.forEach({(btn) in
+            let btnIndexOpt = self?.btnRatings.index(of: btn)
+            
+            guard let btnIndex = btnIndexOpt,
+                let fullImageName = self?.viewState.fullRatingImageName,
+                let emptyImageName = self?.viewState.emptyRatingImageName else{
+                return
+            }
+            
+            if(btnIndex <= btnClickedIndex){
+                self?.restaurant?.myRating += 1
+                btn.setBackgroundImage(UIImage(named: fullImageName), for: .normal)
+             }
+            else{
+                btn.setBackgroundImage(UIImage(named: emptyImageName), for: .normal)
+            }
         })
     }
     
@@ -143,8 +173,8 @@ extension DetailRestaurantVC{
         restaurant?.restaurantName = name
         restaurant?.dateVisited = dateVisited.date
         restaurant?.comments = txtNotes.text
-        let fullStarCount = viewState.ratingButtonArr.filter{$0.rawValue == RatingViewState.RatingType.full.rawValue}.count
-        restaurant?.myRating = fullStarCount
+        //let fullStarCount = viewState.ratingButtonArr.filter{$0.rawValue == RatingViewState.RatingType.full.rawValue}.count
+        //restaurant?.myRating = fullStarCount
         saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
     }
@@ -181,20 +211,25 @@ extension DetailRestaurantVC{
 
 extension DetailRestaurantVC{
     @IBAction func btnRating1Click(_ sender: UIButton) {
+        //self.updateRating(sender)
         self.updateRating(sender)
     }
     
     @IBAction func btnRating2Click(_ sender: UIButton) {
+        //self.updateRating(sender)
         self.updateRating(sender)
     }
  
     @IBAction func btnRating3Click(_ sender: UIButton) {
+       // self.updateRating(sender)
         self.updateRating(sender)
     }
     @IBAction func btnRating4Click(_ sender: UIButton) {
+        //self.updateRating(sender)
         self.updateRating(sender)
     }
     @IBAction func btnRating5Click(_ sender: UIButton) {
+        //self.updateRating(sender)
         self.updateRating(sender)
     }
     

@@ -257,7 +257,7 @@ class Restaurant:  NSObject, NSCoding{
     
     var givenRating : Int = 0{
         didSet{
-            myRating = givenRating
+           // myRating = givenRating
         }
     }
     var myRating : Int = 0

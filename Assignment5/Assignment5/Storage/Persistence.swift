@@ -59,6 +59,7 @@ class Persistence {
                     rest.dateVisited = restaurant.dateVisited
                     rest.comments = restaurant.comments
                     rest.givenRating = restaurant.givenRating
+                    rest.myRating = restaurant.myRating
                 }
             })
         }
