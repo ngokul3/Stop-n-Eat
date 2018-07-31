@@ -10,11 +10,13 @@ import UIKit
 
 class RestaurantVC: UIViewController {
    
+    @IBOutlet weak var btnFavoriteClick: UIButton!
     @IBOutlet weak var tableView: UITableView!
     var trainStop : TrainStop?
     var cellArrray = [RestaurantCell]()
     private var model = RestaurantModel.getInstance()
     private static var modelObserver: NSObjectProtocol?
+    var removeFavoriteNo : ((UIAlertAction)->Void)?
     
     override func viewDidLoad() {
         
@@ -39,6 +41,10 @@ class RestaurantVC: UIViewController {
                 s.updateUI()
             }
         }
+        
+//        removeFavoriteNo = ({[weak self](arg) -> Void in
+//            //self?.shouldRemoveFavorite = false
+//        })
         super.viewDidLoad()
     }
 }
@@ -83,6 +89,7 @@ extension RestaurantVC : UITableViewDataSource{
         cell.btnHeart.setBackgroundImage(UIImage(named: restaurant.favoriteImageName), for: .normal)
         let rating = restaurant.givenRating
         
+        //todo for rating image
         switch rating{
         case 1 :
             cell.imgStar1.image = UIImage(named: "rating")
@@ -141,7 +148,16 @@ extension RestaurantVC{
             }
             do{
                 let restaurantFromNetwork = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+                
                 if(restaurantFromNetwork.isFavorite == true){
+                    
+                   // alertRemoveFavorite = "Do you want to remove \(restaurantFromNetwork.restaurantName) from Favorite"
+//                    if(shouldRemoveFavorite != nil){
+//                        return false
+//                    }else{
+//                        shouldRemoveFavorite = nil
+//                    }
+   
                     try model.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork)
                     return false
                 }else
@@ -295,7 +311,6 @@ extension RestaurantVC{
         self.tableView.reloadData()
     }
     
-    
     var alertUser :  String{
         get{
             preconditionFailure("You cannot read from this object")
@@ -308,6 +323,21 @@ extension RestaurantVC{
             self.present(alert, animated: true)
         }
     }
+    
+    var alertRemoveFavorite :  String{
+        get{
+            preconditionFailure("You cannot read from this object")
+        }
+        
+        set{
+            let alert = UIAlertController(title: "Remove Favorite?", message: newValue, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "No ", style: .default, handler: removeFavoriteNo))
+            
+            self.present(alert, animated: true)
+        }
+    }
+
 
 }
 

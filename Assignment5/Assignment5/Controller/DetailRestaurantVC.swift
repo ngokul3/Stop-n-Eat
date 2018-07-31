@@ -123,6 +123,11 @@ class DetailRestaurantVC: UIViewController {
             let rating = restaurantInContext.myRating
             setUpButtonImages(rating)
         }
+        
+        //Todo - this has not been implemented yet.
+        goBackAction  = ({[weak self](arg) -> Void in
+            self?.navigationController?.popViewController(animated: true) // self is captured WEAK
+        })
     }
 }
 
