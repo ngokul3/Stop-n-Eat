@@ -30,7 +30,7 @@ class DetailRestaurantVC: UIViewController {
     var goBackAction : ((UIAlertAction) -> Void)?
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
-    var viewState = RatingViewState()
+    lazy var viewState = RatingViewState(givenRatingOpt: self.restaurant?.givenRating, MaxRating: 5)
 
     lazy var ratingImageClosure :(Restaurant,Int)->RatingViewState.RatingType = {[weak self](restaurant: Restaurant, rating: Int)->RatingViewState.RatingType in
         if(restaurant.givenRating >= rating){
@@ -56,7 +56,7 @@ class DetailRestaurantVC: UIViewController {
             imageNameOpt = self?.restaurant?.nonRatedImageName
         }
         
-        self?.viewState.loadRatingType(ratingButtonNo: 1, ratingType: ratingType)
+        self?.viewState.loadRatingType(ratingButtonNo: buttonNo, ratingType: ratingType)
         
         guard let imageName = imageNameOpt else{
             return
@@ -168,9 +168,8 @@ extension DetailRestaurantVC{
         }
         
         restaurant?.restaurantName = name
-        let returnType = viewState.ratingButtonDict.values
-        
-        //restaurant?.givenRatingrestaurant?.givenRating = viewState.ratingButtonDict.contains(where: { $0.value == Rating }))
+        let fullStarCount = viewState.ratingButtonArr.filter{$0.rawValue == RatingViewState.RatingType.full.rawValue}.count
+        restaurant?.givenRating = fullStarCount
         saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
     }

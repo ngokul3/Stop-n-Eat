@@ -162,14 +162,5 @@ class TrainStop{
     }
 }
 
-extension Collection{
-    subscript(index: Int) -> Bool{
-        guard   index >= 0
-            ,self.count > index else{
-                return false
-        }
-        return true
-    }
-}
 
 

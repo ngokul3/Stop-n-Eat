@@ -7,21 +7,16 @@
 //
 
 import Foundation
-//Todo - REmove this 
-enum HeartType{
-    case empty
-    case full
-}
 
 class RatingViewState{
     typealias RatingNotifier = (RatingViewState.RatingType)->()
     
-    enum RatingType{
-        case empty
-        case full
+    enum RatingType : String{
+        case empty = "empty"
+        case full = "full"
     }
     
-    var ratingButtonDict = [Int : RatingType]()
+    var ratingButtonArr : [RatingType] = [RatingType]()
     var ratingButtonNo: Int = 0
 //    var notify = RatingNotifier.self
 //
@@ -34,20 +29,33 @@ class RatingViewState{
 //        }
 //    }
     
-    init(){
+    init(givenRatingOpt : Int?, MaxRating: Int){
+        guard let givenRating = givenRatingOpt else{
+            return
+        }
+        
+        for index in 0...MaxRating{
+            if(index<givenRating){
+                ratingButtonArr.append(.full)
+            }else{
+                ratingButtonArr.append(.empty)
+            }
+        }
         
     }
-//    init(ratingButtonNo: Int, ratingType : RatingType, notify: @escaping RatingNotifier){
-//        self.notify = notify
-//        self.ratingType = ratingType
-//        self.ratingButtonNo = ratingButtonNo
-//    }
     
     func loadRatingType(ratingButtonNo: Int, ratingType : RatingType){
-        ratingButtonDict[ratingButtonNo] = ratingType
+        guard ratingButtonArr[ratingButtonNo] else{
+            preconditionFailure("View state does not contai this button index")
+        }
+       ratingButtonArr[ratingButtonNo] = ratingType
     }
     
     func getRatingType(ratingButtonNo: Int) -> RatingType?{
-        return ratingButtonDict[ratingButtonNo]
+        guard ratingButtonArr[ratingButtonNo] else{
+            preconditionFailure("View state does not contain this button index")
+        }
+        
+        return ratingButtonArr[ratingButtonNo]
     }
 }

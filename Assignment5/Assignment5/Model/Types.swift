@@ -69,3 +69,13 @@ enum DetailVCType : String
 struct Consts{
     static let KEY0 = "Key0"
 }
+
+extension Collection{
+    subscript(index: Int) -> Bool{
+        guard   index >= 0
+            ,self.count > index else{
+                return false
+        }
+        return true
+    }
+}
