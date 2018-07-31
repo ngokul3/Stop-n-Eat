@@ -22,6 +22,10 @@ class SavedRestaurantCell: UITableViewCell {
     @IBOutlet weak var lblRestaurantName: UILabel!
     
     override func awakeFromNib() {
+        txtNotesRestaurant.layer.borderColor = UIColor.gray.cgColor
+        txtNotesRestaurant.layer.borderWidth = 0.4
+        txtNotesRestaurant.layer.cornerRadius = 0.8
+        
         super.awakeFromNib()
         
     }

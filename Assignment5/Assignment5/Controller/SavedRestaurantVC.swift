@@ -14,9 +14,13 @@ class SavedRestaurantVC: UIViewController {
     private var model = RestaurantModel.getInstance()
     private static var modelObserver: NSObjectProtocol?
     
-    //Todo - default populate into notest section - miles from railway station
+     //Todo - default populate into notest section - miles from railway station
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+      //  tableView.estimatedRowHeight = 120
         
 //        do {
 //            let restoredObject = try Persistence.restore()
@@ -56,6 +60,8 @@ class SavedRestaurantVC: UIViewController {
 }
 
 extension SavedRestaurantVC : UITableViewDataSource{
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> UITableViewCell {
+//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "savedRestaurantCell", for: indexPath) as? SavedRestaurantCell else{
@@ -65,7 +71,8 @@ extension SavedRestaurantVC : UITableViewDataSource{
         let restaurant = model.restaurantsSaved[indexPath.row]
         print("Returned name is \(restaurant.restaurantName)")
         cell.lblRestaurantName.text = restaurant.restaurantName
-        //cell.txtNotesRestaurant.text = restaurant.comments
+        cell.txtNotesRestaurant.text = restaurant.comments
+        cell.txtDateSaved.text = restaurant.dateVisited.returnFormattedDate()
         return cell
     }
     
@@ -196,6 +203,18 @@ extension SavedRestaurantVC{
             
             self.present(alert, animated: true)
         }
+    }
+}
+
+//Code referred from http://ios-tutorial.com/working-dates-swift/
+extension Date{
+    func returnFormattedDate() -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        
+        let dateString = dateFormatter.string(from: self)
+        return dateString
     }
 }
 

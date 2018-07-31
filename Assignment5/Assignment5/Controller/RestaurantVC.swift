@@ -20,6 +20,10 @@ class RestaurantVC: UIViewController {
     
     override func viewDidLoad() {
         
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 70
+        
         guard let stop = trainStop else{
             preconditionFailure("Could not find Stop")
         }
