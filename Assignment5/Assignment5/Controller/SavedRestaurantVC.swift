@@ -106,36 +106,7 @@ extension SavedRestaurantVC : UITableViewDataSource{
     }
 }
 
-extension SavedRestaurantVC{
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark)
-        {
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
-            
-            model.restaurantsSaved[indexPath.row].isSelected = false
-         }
-        else
-        {
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-            model.restaurantsSaved[indexPath.row].isSelected = true
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark)
-        {
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
-            model.restaurantsSaved[indexPath.row].isSelected = false
-        }
-        else
-        {
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-            model.restaurantsSaved[indexPath.row].isSelected = true
-        }
-    }
-}
+
 
 extension SavedRestaurantVC{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
