@@ -45,5 +45,7 @@
 	<string>To show restaurants nearby</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Look for restaurants nearby</string>
+	<key>YelpAPIKEY</key>
+	<string>Bearer qEjtERYCtGRtYmaELAxisLtdM2TWMsUbLG-wvs0b8KlxIfECiKGRrnY7AKOZwe6Zsz_DehvIAXJtt4jiIrKYjCgyf0Tx4CK_yX0u-6LpOc35By8TiyGlLdElXgqzWXYx</string>
 </dict>
 </plist>

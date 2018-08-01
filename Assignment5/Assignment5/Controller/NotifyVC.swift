@@ -20,7 +20,10 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
         super.viewDidLoad()
         
         
-        
+        /*
+        get a model to send notifications. Populate the model from items selected from REstaurantVC
+         & SavedrestVC. When even item gets checked, call an e
+        */
         showImageDialog()
     }
 
@@ -88,7 +91,7 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
     {
         if !MFMailComposeViewController.canSendMail() {
             #if targetEnvironment(simulator)
-                alertUser = "Application should be running in device to send mail"
+                alertUser = "Application should be running in an actual device to send mails"
             #else
                 print("Real device")
             #endif
@@ -117,7 +120,7 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
     {
         if !MFMessageComposeViewController.canSendText(){
             #if targetEnvironment(simulator)
-                alertUser = "Application should be running in device to send message"
+                alertUser = "Application should be running in an actual device to send messages"
             #else
                 print("Real device")
             #endif
@@ -152,13 +155,11 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
                 } else {
                     
                     #if targetEnvironment(simulator)
-                    alertUser = "WhatsApp is not available on this device"
+                    alertUser = "WhatsApp is not available on this device."
                     #else
                     print("Real device")
                     #endif
                     return
-                        
-                    print("please install watsapp")
                 }
             }
         }

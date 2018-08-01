@@ -13,9 +13,28 @@ import Alamofire
 
 class RestaurantNetwork{
     
+    private var keyOpt : String?
+    
+    init()
+    {
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+           
+            let dictRootOpt = NSDictionary(contentsOfFile: path)
+           
+            guard let dict = dictRootOpt else{
+                preconditionFailure("Yelp API is not available")
+            }
+                keyOpt = dict["YelpAPIKEY"] as? String
+        }
+    }
+
     func loadFromNetwork(location: String, term: String, finished: @escaping (_ dataDict: NSDictionary?, _ errorMsg: String?)  -> ()) {
-        let MY_API_KEY = "Bearer qEjtERYCtGRtYmaELAxisLtdM2TWMsUbLG-wvs0b8KlxIfECiKGRrnY7AKOZwe6Zsz_DehvIAXJtt4jiIrKYjCgyf0Tx4CK_yX0u-6LpOc35By8TiyGlLdElXgqzWXYx"
+       // let MY_API_KEY = "Bearer qEjtERYCtGRtYmaELAxisLtdM2TWMsUbLG-wvs0b8KlxIfECiKGRrnY7AKOZwe6Zsz_DehvIAXJtt4jiIrKYjCgyf0Tx4CK_yX0u-6LpOc35By8TiyGlLdElXgqzWXYx"
         
+        guard let myKey = keyOpt else{
+            return
+        }
+       
         var locationURL : String
         locationURL = "https://api.yelp.com/v3/businesses/search?term=" + term+"&location=" + location
         
@@ -24,7 +43,7 @@ class RestaurantNetwork{
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = HTTPMethod.get.rawValue
             
-            urlRequest.addValue(MY_API_KEY, forHTTPHeaderField: "Authorization")
+            urlRequest.addValue(myKey, forHTTPHeaderField: "Authorization")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             
             Alamofire.request(urlRequest)
@@ -42,18 +61,11 @@ class RestaurantNetwork{
                     
                     if let result = response.result.value {
                         let JSON = result as? NSDictionary
-                      //  print(JSON)
                          finished(JSON, nil)
                     }
                     else{
                         finished(nil, "Json crashed")
                     }
-                    
-                    //guard let data = response.data else { return }
-                    
-                    //print(data)
-                   // finished(JSON)
-                    
             }
         }
         
