@@ -181,9 +181,17 @@ extension NotifyVC{
         
         set{
             let alert = UIAlertController(title: "Attention", message: newValue, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             
-            self.present(alert, animated: true)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel,
+                                          handler: ({[weak self]_ in
+                                            self?.tabBarController!.selectedIndex = 0
+                                            })
+                                        )
+                        )
+            DispatchQueue.main.async(execute: {
+                self.present(alert, animated: true)
+            })
+            
         }
     }
 }
