@@ -178,7 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3m-Rd-Ai7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1512.8" y="269.41529235382313"/>
+            <point key="canvasLocation" x="2452" y="269.41529235382313"/>
         </scene>
         <!--Saved Restaurants-->
         <scene sceneID="ym7-jq-h4Y">
@@ -383,7 +383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fWA-gk-sSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="806" y="-530"/>
+            <point key="canvasLocation" x="1744.8" y="-530.28485757121439"/>
         </scene>
         <!--Restaurants-->
         <scene sceneID="qEh-MF-z3u">
@@ -547,7 +547,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2xo-wE-Iw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1773.5999999999999" y="-530.28485757121439"/>
+            <point key="canvasLocation" x="2712.8000000000002" y="-530.28485757121439"/>
         </scene>
         <!--Map ViewVC-->
         <scene sceneID="LL3-4B-xis">
@@ -588,7 +588,7 @@
                     <connections>
                         <segue destination="dlu-Ef-rSM" kind="relationship" relationship="viewControllers" id="tbG-Qi-ikb"/>
                         <segue destination="kWu-jJ-8Td" kind="relationship" relationship="viewControllers" id="1cb-xh-oC5"/>
-                        <segue destination="0oi-Wj-mKF" kind="relationship" relationship="viewControllers" id="O57-Pt-RBl"/>
+                        <segue destination="NUk-7q-woH" kind="relationship" relationship="viewControllers" id="O57-Pt-RBl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZI-Kp-vX8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -612,42 +612,27 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zwd-eM-jgc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="93.599999999999994" y="-530.28485757121439"/>
+            <point key="canvasLocation" x="1032.8" y="-530.28485757121439"/>
         </scene>
-        <!--Notify-->
+        <!--NotifyVC-->
         <scene sceneID="9kk-xv-g7r">
             <objects>
                 <viewController id="0oi-Wj-mKF" customClass="NotifyVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MvZ-5w-Yv6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bzz-lP-Xia">
-                                <rect key="frame" x="0.0" y="44" width="375" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Click of Notify will dynamically show PopUpDialog as mentioned in the README.md file. This feature cannot be mocked in the prototype</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="tdE-gD-TXe" firstAttribute="bottom" secondItem="Bzz-lP-Xia" secondAttribute="bottom" constant="402" id="oCL-02-q0S"/>
-                            <constraint firstItem="Bzz-lP-Xia" firstAttribute="trailing" secondItem="tdE-gD-TXe" secondAttribute="trailing" id="soc-6Y-FhT"/>
-                            <constraint firstItem="Bzz-lP-Xia" firstAttribute="top" secondItem="tdE-gD-TXe" secondAttribute="top" constant="24" id="v4Z-D3-TFo"/>
-                            <constraint firstItem="Bzz-lP-Xia" firstAttribute="leading" secondItem="tdE-gD-TXe" secondAttribute="leading" id="xdu-2u-Sgm"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="tdE-gD-TXe"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Notify" id="Oh6-JG-vAX"/>
                     <toolbarItems>
                         <barButtonItem title="Item" id="L88-A0-PcC"/>
                     </toolbarItems>
+                    <navigationItem key="navigationItem" id="LRS-bA-9mK"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YC8-cV-pCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-28" y="73.313343328335833"/>
+            <point key="canvasLocation" x="911.20000000000005" y="73.313343328335833"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="uKj-9T-38z">
@@ -667,6 +652,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DOG-zh-2Kg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-652" y="733"/>
+        </scene>
+        <!--Notify-->
+        <scene sceneID="aPA-ya-gpd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NUk-7q-woH" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Notify" id="Oh6-JG-vAX"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bt8-lh-Ni3">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0oi-Wj-mKF" kind="relationship" relationship="rootViewController" id="1u4-Hw-7Wk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dTW-t5-0m6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6" y="128"/>
         </scene>
     </scenes>
     <resources>

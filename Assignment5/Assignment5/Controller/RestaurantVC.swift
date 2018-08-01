@@ -133,7 +133,7 @@ extension RestaurantVC{
                 let restaurantFromNetwork = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
                 
                 if(restaurantFromNetwork.isFavorite == true){
-                    
+                    //Todo
                    // alertRemoveFavorite = "Do you want to remove \(restaurantFromNetwork.restaurantName) from Favorite"
 //                    if(shouldRemoveFavorite != nil){
 //                        return false
@@ -311,11 +311,13 @@ extension RestaurantVC{
         }
         
         set{
-            let alert = UIAlertController(title: "Remove Favorite?", message: newValue, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "No ", style: .default, handler: removeFavoriteNo))
-            
-            self.present(alert, animated: true)
+            OperationQueue.main.addOperation{
+                let alert = UIAlertController(title: "Remove Favorite?", message: newValue, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+                alert.addAction(UIAlertAction(title: "No ", style: .default, handler: self.removeFavoriteNo))
+                
+                self.present(alert, animated: true)
+            }
         }
     }
 
