@@ -29,7 +29,7 @@ class MapViewVC: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     var points : [PointOfInterest] = []
     let locationManager = CLLocationManager()
-    
+    var leg: Int = 0
     var place : Place?
     
     override func viewDidLoad() {
@@ -122,7 +122,7 @@ extension MapViewVC: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
             let lineRenderer = MKPolylineRenderer(overlay: overlay)
-          //  lineRenderer.strokeColor = UIColor(hue: CGFloat(leg) * 0.05, saturation: 0.85, brightness: 0.85, alpha: 0.75)
+            lineRenderer.strokeColor = UIColor(hue: CGFloat(leg) * 0.05, saturation: 0.85, brightness: 0.85, alpha: 0.75)
             lineRenderer.lineWidth = 5.0
             
             return lineRenderer
@@ -154,7 +154,6 @@ extension MapViewVC: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         print("RegionWillChange: \(mapView.region)")
-       // self.searchBar.resignFirstResponder() // Dismiss the keyboard when dragging
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {

@@ -30,35 +30,6 @@ class DetailRestaurantVC: UIViewController {
     var emptyRatingImageName: String = "plainStar"
     var fullRatingImageName: String = "rating"
 
-   // lazy var viewState = RatingViewState(myRatingOpt: self.restaurant?.myRating, MaxRating: 5)
-
-//    lazy var ratingImageClosure  = {[weak self](restaurant: Restaurant, rating: Int)->RatingViewState.RatingType in
-//        if(restaurant.givenRating >= rating){
-//            return.full
-//        }else{
-//            return .empty
-//        }
-//    }
-    
-//    lazy var updateRating_OLD:(UIButton)->Void = {[weak self] (button: UIButton) in //Todo remove this
-//        var imageNameOpt : String?
-//        let btnIndexOpt = self?.btnRatings.index(of: button)
-//
-//        guard let btnIndex = btnIndexOpt else{
-//            return
-//        }
-//
-//        let ratingTypeOpt = self?.viewState.getRatingType(ratingButtonIndex: btnIndex)
-//
-//        guard var ratingType = ratingTypeOpt else{
-//            return
-//        }
-//
-//        self?.viewState.changeRatingType(ratingButtonIndex: btnIndex, returnRatingImageName: {(imageName) in
-//            button.setBackgroundImage(UIImage(named: imageName), for: .normal)
-//        })
-//    }
-    
     lazy var updateRating = {[weak self](button: UIButton) in
         var imageNameOpt : String?
         let btnClickedIndexOpt = self?.btnRatings.index(of: button)
@@ -69,7 +40,6 @@ class DetailRestaurantVC: UIViewController {
         
         self?.restaurant?.myRating = 0
         
-        //for each and update button image
         self?.btnRatings.forEach({(btn) in
             let btnIndexOpt = self?.btnRatings.index(of: btn)
             
@@ -175,8 +145,6 @@ extension DetailRestaurantVC{
         restaurant?.restaurantName = name
         restaurant?.dateVisited = dateVisited.date
         restaurant?.comments = txtNotes.text
-        //let fullStarCount = viewState.ratingButtonArr.filter{$0.rawValue == RatingViewState.RatingType.full.rawValue}.count
-        //restaurant?.myRating = fullStarCount
         saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
     }
