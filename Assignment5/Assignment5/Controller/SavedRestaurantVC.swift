@@ -20,19 +20,7 @@ class SavedRestaurantVC: UIViewController {
         super.viewDidLoad()
         
         tableView.rowHeight = UITableViewAutomaticDimension
-      //  tableView.estimatedRowHeight = 120
-        
-//        do {
-//            let restoredObject = try Persistence.restore()
-//            model.restoreRestaurantsFromFavorite(restaurants: restoredObject)
-//        }
-//        catch RestaurantError.notAbleToRestore(){
-//            alertUser = "Not able to restore from the favorite list"
-//        }
-//        catch{
-//            alertUser = "Unknown Error"
-//        }
-        
+
         SavedRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantDeleted), object: nil, queue: OperationQueue.main) {
            
             [weak self] (notification: Notification) in

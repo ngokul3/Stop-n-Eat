@@ -14,8 +14,8 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
     @IBOutlet weak var searchBar: UISearchBar!
    
     @IBOutlet weak var tableView: UITableView!
-    private var model = TrainStopModel.getInstance() //Todo should get restored in AppDelegate
-    private var restModel = RestaurantModel.getInstance()
+    private var model = TrainStopModel.getInstance()
+    private var restModel = AppDel.restModel
     private static var modelObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
