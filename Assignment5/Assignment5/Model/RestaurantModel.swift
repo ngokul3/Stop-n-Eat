@@ -257,7 +257,7 @@ class Restaurant:  NSObject, NSCoding{
     
     var givenRating : Int = 0{
         didSet{
-           // myRating = givenRating
+            myRating = givenRating
         }
     }
     var myRating : Int = 0
@@ -284,6 +284,7 @@ class Restaurant:  NSObject, NSCoding{
         latitude = _latitude
         longitude = _longitude
         givenRating = _givenRating
+        myRating = _givenRating
     }
 }
 

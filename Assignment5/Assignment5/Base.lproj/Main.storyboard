@@ -241,7 +241,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="aHT-yT-CtX"/>
                                                     </constraints>
                                                 </imageView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O84-84-ewJ">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O84-84-ewJ">
                                                     <rect key="frame" x="117" y="4" width="157" height="79"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -676,6 +676,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dlF-Qv-XRz"/>
-        <segue reference="rik-Tt-5rB"/>
+        <segue reference="fOB-Rc-vXx"/>
     </inferredMetricsTieBreakers>
 </document>

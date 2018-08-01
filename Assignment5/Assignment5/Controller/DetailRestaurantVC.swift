@@ -109,7 +109,13 @@ class DetailRestaurantVC: UIViewController {
         
         switch detailType {
         
-        case .Add : setUpButtonImages(0)
+        case .Add :
+            
+            if let restaurantInContext = restaurant {
+                setUpButtonImages(restaurantInContext.myRating)
+            }else{
+                setUpButtonImages(0)
+            }
             
         case .Edit, .Preload :
             
