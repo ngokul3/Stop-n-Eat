@@ -14,16 +14,12 @@ import PopupDialog
 
 class NotifyVC: UIViewController, UITabBarControllerDelegate {
 
+    private var model = RestaurantModel.getInstance()
     
     override func viewDidLoad() {
         tabBarController?.delegate = self
         super.viewDidLoad()
         
-        
-        /*
-        get a model to send notifications. Populate the model from items selected from REstaurantVC
-         & SavedrestVC. When even item gets checked, call an e
-        */
         showImageDialog()
     }
 
@@ -47,48 +43,39 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
         let popup = PopupDialog(title: title, message: message, image: image)
         
         let buttonOne = CancelButton(title: "CANCEL") {
-            //self.label.text = "You canceled the Invite."
         }
         
         buttonOne.addTarget(self, action:#selector(self.cancelClicked), for: .touchUpInside)
         
         let buttonTwo = DefaultButton(title: "Send a Mail") {
-            //   self.label.text = "Email"
         }
         
         buttonTwo.addTarget(self, action:#selector(self.mailClicked), for: .touchUpInside)
         
         let buttonThree = DefaultButton(title: "Send a Message") {
-            //    self.label.text = "Message)"
         }
         
         buttonThree.addTarget(self, action:#selector(self.messageClicked), for: .touchUpInside)
         
-        
-        
         let buttonFour = DefaultButton(title: "WhatsApp") {
-            //    self.label.text = "Message)"
         }
         
         buttonFour.addTarget(self, action:#selector(self.whatsAppClicked), for: .touchUpInside)
-        
-        
         popup.addButtons([buttonOne, buttonTwo, buttonThree, buttonFour])
         
         self.present(popup, animated: animated, completion: nil)
-        
     }
     
     
-    @objc func cancelClicked()
-    {
+    @objc func cancelClicked(){
+        
         self.dismiss(animated: true, completion: nil)
         tabBarController!.selectedIndex = 0
-        self.navigationController?.popViewController(animated: true)
+        //self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func mailClicked()
-    {
+    @objc func mailClicked(){
+        
         if !MFMailComposeViewController.canSendMail() {
             #if targetEnvironment(simulator)
                 alertUser = "Application should be running in an actual device to send mails"
@@ -99,25 +86,20 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
             return
         }
         let mailComposer = MFMailComposeViewController()
+        var restaurantInfo = String()
         
-        var businessInfo = String()
+        restaurantInfo = convertToHTMLTable(restaurants: model.restaurantsSaved.filter({$0.isSelected == true}))
         
-       // businessInfo = ConvertToHTMLTable(businessSelected: businesses.filter({$0.selected == true}))
-        
-        mailComposer.setMessageBody(businessInfo, isHTML: true)
+        mailComposer.setMessageBody(restaurantInfo, isHTML: true)
         mailComposer.setSubject("Check out these locations that we can go")
         mailComposer.mailComposeDelegate = self
-        
         
         DispatchQueue.main.async(execute: {
             self.present(mailComposer, animated: true, completion: nil)
         })
-        
-        
     }
     
-    @objc func messageClicked()
-    {
+    @objc func messageClicked(){
         if !MFMessageComposeViewController.canSendText(){
             #if targetEnvironment(simulator)
                 alertUser = "Application should be running in an actual device to send messages"
@@ -128,11 +110,10 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
        }
         
         let msgComposer = MFMessageComposeViewController()
-        var businessInfo  = String()
+        var restaurantInfo = String()
+        restaurantInfo = convertToMSGBody(restaurants: model.restaurantsSaved.filter({$0.isSelected == true}))
         
-        //businessInfo = ConvertToMSGBody(businessSelected: businesses.filter({$0.selected == true}))
-        
-        msgComposer.body = businessInfo
+        msgComposer.body = restaurantInfo
         msgComposer.messageComposeDelegate = self
         
         DispatchQueue.main.async(execute: {
@@ -143,10 +124,10 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
     
     @objc func whatsAppClicked()
     {
-        var businessInfo  = String()
-       // businessInfo = ConvertToMSGBody(businessSelected: businesses.filter({$0.selected == true}))
+        var restaurantInfo = String()
+        restaurantInfo = convertToMSGBody(restaurants: model.restaurantsSaved.filter({$0.isSelected == true}))
         
-        let urlWhats = "whatsapp://send?text=\(businessInfo)"
+        let urlWhats = "whatsapp://send?text=\(restaurantInfo)"
         
         if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) {
             if let whatsappURL = NSURL(string: urlString) {
@@ -195,4 +176,62 @@ extension NotifyVC{
             
         }
     }
+}
+
+extension NotifyVC{
+    func convertToHTMLTable(restaurants : [Restaurant]) -> String
+    {
+        var itemCount = 1
+        var innerHTML = String()
+        let htmlHeader = """
+                <!DOCTYPE>
+                <HTML>
+                    <head>
+                    </head>
+                    <body>
+                        <table>
+                        
+
+            """
+        let htmlFooter = """
+                       
+                        </table>
+                    </body>
+                </HTML>
+            """
+        
+        for restaurant in restaurants {
+            innerHTML += "<tr>"
+            innerHTML += "<td> " + String(itemCount) + ") " + "</td>"
+            innerHTML +=  "<td><a href=" + restaurant.restaurantName + ">" + restaurant.displayedAddress.getTruncatedAddress(firstAddress: "", seperator: " @ ") + "</a>  </td>"
+            
+            innerHTML += "</tr>"
+            itemCount = itemCount + 1
+        }
+        
+        let html  = htmlHeader + innerHTML + htmlFooter
+        return html
+        
+    }
+    
+    func convertToMSGBody(restaurants : [Restaurant])-> String{
+        
+        var itemCount = 1
+        var innerMSGBody = String()
+        for restaurant in restaurants {
+            innerMSGBody += String(itemCount) + ") "
+            
+            innerMSGBody +=  restaurant.restaurantName
+            if(restaurant.displayedAddress.count > 1){
+                let truncatedAddress = restaurant.displayedAddress.getTruncatedAddress(firstAddress: "", seperator: " @ ")
+                innerMSGBody +=  truncatedAddress
+            }
+            innerMSGBody += "\n"
+            itemCount = itemCount + 1
+            
+        }
+        
+        return innerMSGBody
+    }
+    
 }

@@ -79,3 +79,18 @@ extension Collection{
         return true
     }
 }
+
+extension String{
+    
+    func getTruncatedAddress(firstAddress : String, seperator : String) -> String
+    {
+        var shortAddress = firstAddress
+        let addressLine = self.components(separatedBy: ",")
+        if(addressLine.count > 0){
+            shortAddress =  shortAddress + seperator + addressLine[0]
+        }
+        
+        return shortAddress
+    }
+    
+}

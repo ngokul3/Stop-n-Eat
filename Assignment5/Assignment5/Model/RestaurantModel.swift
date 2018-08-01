@@ -99,7 +99,19 @@ extension RestaurantModel{
                         preconditionFailure("rating not found in JSON")
                     }
                     
-                    let restaurant = Restaurant(_trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating))
+                    guard let location : NSDictionary = restaurant["location"] as? NSDictionary else{
+                        preconditionFailure("latitude not found in JSON")
+                    }
+                    
+                    guard let addressArr : NSArray = location["display_address"] as? NSArray else{
+                        preconditionFailure("display_address not found in JSON")
+                    }
+                    
+                    let address : String = String(describing: addressArr[0] as? String ?? "" ) + String(describing: addressArr[1] as? String ?? "") 
+//                        preconditionFailure("display_address not found in JSON")
+//                    }
+                    
+                    let restaurant = Restaurant(_trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating), _displayAddress :  address)
                     
                     if(self.restaurantsSaved.filter({$0.restaurantId == restaurant.restaurantId}).count > 0)
                     {
@@ -194,7 +206,7 @@ extension RestaurantModel{
 extension RestaurantModel{
     func generateEmptyRestaurant() throws-> Restaurant{
         let trainStop = try TrainStop(_stopName: "", _latitude: 0.0, _longitude: 0.0)
-        let restaurant = Restaurant(_trainStop: trainStop, _restaurantName: "", _restaurantId: "", _latitude: 0.0, _longitude: 0.0, _givenRating: 0)
+        let restaurant = Restaurant(_trainStop: trainStop, _restaurantName: "", _restaurantId: "", _latitude: 0.0, _longitude: 0.0, _givenRating: 0, _displayAddress: "")
        
         return restaurant
     }
@@ -207,6 +219,7 @@ class Restaurant:  NSObject, NSCoding{
         aCoder.encode(givenRating, forKey: "givenRating")
         aCoder.encode(myRating, forKey: "myRating")
         aCoder.encode(comments, forKey: "comments")
+        aCoder.encode(comments, forKey: "displayedAddress")
         aCoder.encode(distanceFromStopDesc, forKey: "distanceFromStopDesc")
         aCoder.encode(dateVisited, forKey : "dateVisited")
         aCoder.encode(isFavorite, forKey : "isFavorite")
@@ -217,6 +230,7 @@ class Restaurant:  NSObject, NSCoding{
             let restId = aDecoder.decodeObject(forKey: "restaurantId") as? String,
             let restName = aDecoder.decodeObject(forKey: "restaurantName") as? String,
             let restComment = aDecoder.decodeObject(forKey:"comments") as? String,
+            let restAddress = aDecoder.decodeObject(forKey:"displayedAddress") as? String,
             let restDistanceDesc = aDecoder.decodeObject(forKey:"distanceFromStopDesc") as? String,
             let restDate = aDecoder.decodeObject(forKey:"dateVisited") as? Date else {
                 return nil
@@ -227,6 +241,7 @@ class Restaurant:  NSObject, NSCoding{
         givenRating = aDecoder.decodeInteger(forKey: "givenRating")
         myRating = aDecoder.decodeInteger(forKey: "myRating")
         comments = restComment
+        displayedAddress = restAddress
         dateVisited = restDate
         isFavorite = aDecoder.decodeBool(forKey: "isFavorite")
         distanceFromStopDesc = restDistanceDesc
@@ -275,8 +290,9 @@ class Restaurant:  NSObject, NSCoding{
             }
         }
     }
+    var displayedAddress: String = ""
    
-    init(_trainStop : TrainStop, _restaurantName : String, _restaurantId : String, _latitude : Double, _longitude : Double, _givenRating : Int)
+    init(_trainStop : TrainStop, _restaurantName : String, _restaurantId : String, _latitude : Double, _longitude : Double, _givenRating : Int, _displayAddress : String)
     {
         trainStop = _trainStop
         restaurantName = _restaurantName
@@ -285,6 +301,7 @@ class Restaurant:  NSObject, NSCoding{
         longitude = _longitude
         givenRating = _givenRating
         myRating = _givenRating
+        displayedAddress = _displayAddress
     }
 }
 
