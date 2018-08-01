@@ -208,11 +208,9 @@ extension RestaurantVC{
                 }
                 vc.place = place
             }
-                
             catch(RestaurantError.invalidRowSelection()){
                 alertUser = "Restaurant selected could not be navigated to the map"
             }
-            
             catch{
                 alertUser = "Unexpected Error"
             }

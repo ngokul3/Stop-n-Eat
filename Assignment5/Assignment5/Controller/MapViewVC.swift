@@ -11,20 +11,20 @@ import MapKit
 
 class MapViewVC: UIViewController {
 
-        class PointOfInterest : NSObject, MKAnnotation
-        {
-            let title: String?
-            let locationName: String
-             let coordinate: CLLocationCoordinate2D
-            
-            init(title: String, locationName: String,  coordinate: CLLocationCoordinate2D) {
-                self.title = title
-                self.locationName = locationName
-                self.coordinate = coordinate
-           
-                super.init()
-            }
+    class PointOfInterest : NSObject, MKAnnotation
+    {
+        let title: String?
+        let locationName: String
+        let coordinate: CLLocationCoordinate2D
+        let placeType : PlaceType
+        init(title: String, locationName: String,  coordinate: CLLocationCoordinate2D, placeType: PlaceType) {
+            self.title = title
+            self.locationName = locationName
+            self.coordinate = coordinate
+            self.placeType = placeType
+            super.init()
         }
+    }
     
     @IBOutlet weak var mapView: MKMapView!
     var points : [PointOfInterest] = []
@@ -35,8 +35,7 @@ class MapViewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let placeOfInterest = place else
-        {
+        guard let placeOfInterest = place else{
             alertUser = "Error while loading map"
             return
         }
@@ -63,10 +62,10 @@ class MapViewVC: UIViewController {
         let region = MKCoordinateRegion(center: locationCoordinate2D, span: span)
         mapView.setRegion(region, animated: true)
         
-        points.append(PointOfInterest(title: trainStop.stopName, locationName: trainStop.stopName, coordinate: CLLocationCoordinate2D(latitude: trainStop.latitude, longitude: trainStop.longitude)))
+        points.append(PointOfInterest(title: trainStop.stopName, locationName: trainStop.stopName, coordinate: CLLocationCoordinate2D(latitude: trainStop.latitude, longitude: trainStop.longitude), placeType: .train))
 
         restaurants.forEach({(restaurant) in
-            points.append(PointOfInterest(title: restaurant.restaurantName, locationName: restaurant.restaurantName, coordinate: CLLocationCoordinate2D(latitude: restaurant.latitude, longitude: restaurant.longitude)))
+            points.append(PointOfInterest(title: restaurant.restaurantName, locationName: restaurant.restaurantName, coordinate: CLLocationCoordinate2D(latitude: restaurant.latitude, longitude: restaurant.longitude), placeType: .restaurant))
         })
         
         print(points.count)
@@ -112,13 +111,53 @@ extension MapViewVC{
     }
 }
 
+
 extension MapViewVC: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("Selected view \(view.annotation?.description ?? "None")")
+    }
     
-//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
-//                 calloutAccessoryControlTapped control: UIControl) {
-//        let location = view.annotation as? PointOfInterest
-//        let launchOptions = [MKLaunchOptionsDirectionsModeKey:
-//            MKLaunchOptionsDirectionsModeDriving]
-//        location.mapItem().openInMaps(launchOptions: launchOptions)
-//}
+    
+    // https://www.raywenderlich.com/166182/mapkit-tutorial-overlay-views
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline {
+            let lineRenderer = MKPolylineRenderer(overlay: overlay)
+          //  lineRenderer.strokeColor = UIColor(hue: CGFloat(leg) * 0.05, saturation: 0.85, brightness: 0.85, alpha: 0.75)
+            lineRenderer.lineWidth = 5.0
+            
+            return lineRenderer
+        }
+        return MKOverlayRenderer()
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let pinView: MKPinAnnotationView = {
+            if let reusedPin = mapView.dequeueReusableAnnotationView(withIdentifier: "annotation") as? MKPinAnnotationView {
+                print("Reusing Pin")
+                return reusedPin
+            }
+            else {
+                print("Creating new Pin")
+                return MKPinAnnotationView(annotation: annotation, reuseIdentifier: "annotation")
+            }
+        }()
+        
+        let placePointOpt = annotation as? PointOfInterest
+        
+        guard let placePoint = placePointOpt else{
+            return nil
+        }
+        pinView.canShowCallout = true
+        pinView.pinTintColor = placePoint.placeType == .train ? UIColor.red : UIColor.blue
+        return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        print("RegionWillChange: \(mapView.region)")
+       // self.searchBar.resignFirstResponder() // Dismiss the keyboard when dragging
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("RegionDidChange: \(mapView.region)")
+    }
 }

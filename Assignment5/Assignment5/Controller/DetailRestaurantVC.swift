@@ -27,8 +27,10 @@ class DetailRestaurantVC: UIViewController {
     var goBackAction : ((UIAlertAction) -> Void)?
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
-    
-    lazy var viewState = RatingViewState(myRatingOpt: self.restaurant?.myRating, MaxRating: 5)
+    var emptyRatingImageName: String = "plainStar"
+    var fullRatingImageName: String = "rating"
+
+   // lazy var viewState = RatingViewState(myRatingOpt: self.restaurant?.myRating, MaxRating: 5)
 
 //    lazy var ratingImageClosure  = {[weak self](restaurant: Restaurant, rating: Int)->RatingViewState.RatingType in
 //        if(restaurant.givenRating >= rating){
@@ -38,24 +40,24 @@ class DetailRestaurantVC: UIViewController {
 //        }
 //    }
     
-    lazy var updateRating_OLD:(UIButton)->Void = {[weak self] (button: UIButton) in //Todo remove this
-        var imageNameOpt : String?
-        let btnIndexOpt = self?.btnRatings.index(of: button)
-        
-        guard let btnIndex = btnIndexOpt else{
-            return
-        }
-        
-        let ratingTypeOpt = self?.viewState.getRatingType(ratingButtonIndex: btnIndex)
-        
-        guard var ratingType = ratingTypeOpt else{
-            return
-        }
-        
-        self?.viewState.changeRatingType(ratingButtonIndex: btnIndex, returnRatingImageName: {(imageName) in
-            button.setBackgroundImage(UIImage(named: imageName), for: .normal)
-        })
-    }
+//    lazy var updateRating_OLD:(UIButton)->Void = {[weak self] (button: UIButton) in //Todo remove this
+//        var imageNameOpt : String?
+//        let btnIndexOpt = self?.btnRatings.index(of: button)
+//
+//        guard let btnIndex = btnIndexOpt else{
+//            return
+//        }
+//
+//        let ratingTypeOpt = self?.viewState.getRatingType(ratingButtonIndex: btnIndex)
+//
+//        guard var ratingType = ratingTypeOpt else{
+//            return
+//        }
+//
+//        self?.viewState.changeRatingType(ratingButtonIndex: btnIndex, returnRatingImageName: {(imageName) in
+//            button.setBackgroundImage(UIImage(named: imageName), for: .normal)
+//        })
+//    }
     
     lazy var updateRating = {[weak self](button: UIButton) in
         var imageNameOpt : String?
@@ -72,8 +74,8 @@ class DetailRestaurantVC: UIViewController {
             let btnIndexOpt = self?.btnRatings.index(of: btn)
             
             guard let btnIndex = btnIndexOpt,
-                let fullImageName = self?.viewState.fullRatingImageName,
-                let emptyImageName = self?.viewState.emptyRatingImageName else{
+                let fullImageName = self?.fullRatingImageName,
+                let emptyImageName = self?.emptyRatingImageName else{
                 return
             }
             
@@ -92,15 +94,14 @@ class DetailRestaurantVC: UIViewController {
             let btnIndex = self?.btnRatings.index(of: btn)
            
             guard let index = btnIndex,
-                  let fullImageName = self?.viewState.fullRatingImageName,
-                  let emptyImageName = self?.viewState.emptyRatingImageName else{
+                  let fullImageName = self?.fullRatingImageName,
+                  let emptyImageName = self?.emptyRatingImageName else{
                 return
             }
-            guard let imageName = self?.viewState.fullRatingImageName else{
+            guard let imageName = self?.fullRatingImageName else{
                 return
             }
             if(rating > index){
-                
                 btn.setBackgroundImage(UIImage(named: fullImageName), for: .normal)
             }
             else{
@@ -108,6 +109,7 @@ class DetailRestaurantVC: UIViewController {
             }
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -183,7 +185,6 @@ extension DetailRestaurantVC{
 extension DetailRestaurantVC{
     func saveRestaurant(_ restaurant: Restaurant){
         do{
-            
             try Persistence.save(restaurant)
         }
         catch RestaurantError.notAbleToSave(let name){
@@ -211,28 +212,20 @@ extension DetailRestaurantVC{
 
 extension DetailRestaurantVC{
     @IBAction func btnRating1Click(_ sender: UIButton) {
-        //self.updateRating(sender)
         self.updateRating(sender)
     }
-    
     @IBAction func btnRating2Click(_ sender: UIButton) {
-        //self.updateRating(sender)
         self.updateRating(sender)
     }
- 
-    @IBAction func btnRating3Click(_ sender: UIButton) {
-       // self.updateRating(sender)
+   @IBAction func btnRating3Click(_ sender: UIButton) {
         self.updateRating(sender)
     }
     @IBAction func btnRating4Click(_ sender: UIButton) {
-        //self.updateRating(sender)
         self.updateRating(sender)
     }
     @IBAction func btnRating5Click(_ sender: UIButton) {
-        //self.updateRating(sender)
         self.updateRating(sender)
     }
-    
 }
 
 

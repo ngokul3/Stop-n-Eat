@@ -44,7 +44,6 @@ class SavedRestaurantVC: UIViewController {
                 guard let restaurant = restaurantOpt else{
                     preconditionFailure("Could not save this favorite restaurant")
                 }
-                
                 s.deleteRestaurant(restaurant: restaurant)
             }
         }
@@ -60,8 +59,7 @@ class SavedRestaurantVC: UIViewController {
 }
 
 extension SavedRestaurantVC : UITableViewDataSource{
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> UITableViewCell {
-//    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "savedRestaurantCell", for: indexPath) as? SavedRestaurantCell else{
@@ -227,7 +225,6 @@ extension Date{
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .none
-        
         let dateString = dateFormatter.string(from: self)
         return dateString
     }
