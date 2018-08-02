@@ -100,6 +100,7 @@ extension RestaurantVC : UITableViewDataSource{
         cell.btnSingleMap.tag = indexPath.row
         cell.btnHeart.tag = indexPath.row
         cell.btnHeart.setBackgroundImage(UIImage(named: restaurant.favoriteImageName), for: .normal)
+        cell.btnHeart.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         let rating = restaurant.givenRating
         let imageName = "\(rating)Stars"
         cell.imgRatings.image = UIImage(named: imageName)
