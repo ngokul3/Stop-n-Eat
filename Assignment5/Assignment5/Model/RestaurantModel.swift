@@ -57,7 +57,7 @@ extension RestaurantModel{
 
         let locationCoordinates = String(describing: trainLocation.0) + "," +  String(describing: trainLocation.1)
      
-        let network = RestaurantNetwork()
+        let network = NetworkModel()
         
          //Todo - self should be captured weak in Oepration.main.addoperation
         network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {[weak self](dictionary, error) in
@@ -264,7 +264,7 @@ class Restaurant:  NSObject, NSCoding{
             }
         }
     }
-    var imageURL: String = "" 
+    var imageURL: String = ""
     var restaurantId : String = ""
     var latitude : Double = 0.0
     var longitude : Double = 0.0
@@ -289,6 +289,7 @@ class Restaurant:  NSObject, NSCoding{
     var comments : String = ""
     var dateVisited : Date = Date()
     var favoriteImageName : String = "heart"
+   // var restaurantImage
     var isFavorite : Bool = false{
         didSet{
             if(isFavorite){

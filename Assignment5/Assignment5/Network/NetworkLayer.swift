@@ -9,11 +9,27 @@
 import Foundation
 import Alamofire
 
-//Todo key should come from info.plist
-
-class RestaurantNetwork{
+//Todo train and rest protocol here
+protocol NetworkProtocol {
+    static func getInstance() -> NetworkProtocol
+    func loadFromNetwork(location: String, term: String, finished: @escaping (_ dataDict: NSDictionary?, _ errorMsg: String?)  -> ())
+    func setRestaurantImage(forRestaurantImage restaurantImageURL : String, imageLoaded : @escaping (Data?, HTTPURLResponse?, Error?)->Void)
+}
+    
+//protocol NetworkImageListener{
+//   func setRestaurantImage(forRestaurantImage restaurantImageURL : String, imageLoaded : @escaping (Data?, HTTPURLResponse?, Error?)->Void)
+//}
+class NetworkModel: NetworkProtocol{
     
     private var keyOpt : String?
+    private static var instance: NetworkProtocol?
+    
+    var session: URLSession = {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 10.0
+        let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: nil)
+        return session
+    }()
     
     init()
     {
@@ -27,7 +43,21 @@ class RestaurantNetwork{
                 keyOpt = dict["YelpAPIKEY"] as? String
         }
     }
+}
 
+extension NetworkModel{
+    static func getInstance() -> NetworkProtocol {
+        if let inst = NetworkModel.instance {
+            return inst
+        }
+        
+        let inst = NetworkModel()
+        NetworkModel.instance = inst
+        return inst
+    }
+}
+//todo remove term from below func
+extension NetworkModel{
     func loadFromNetwork(location: String, term: String, finished: @escaping (_ dataDict: NSDictionary?, _ errorMsg: String?)  -> ()) {
         guard let myKey = keyOpt else{
             return
@@ -70,6 +100,38 @@ class RestaurantNetwork{
         
         print("loading data from server")
         
+    }
+    
+    func setRestaurantImage(forRestaurantImage restaurantImageURL : String, imageLoaded : @escaping (Data?, HTTPURLResponse?, Error?)->Void) {
+        
+        if let _ = URL(string: restaurantImageURL)
+        {
+            let restaurantImageURL = URL(string: restaurantImageURL)!
+            let downloadPicTask = session.dataTask(with: restaurantImageURL) { (data, responseOpt, error) in
+                if let e = error {
+                    print("Error downloading cat picture: \(e)")
+                } else {
+                    if let response = responseOpt as? HTTPURLResponse {
+                        
+                        if let imageData = data {
+                            imageLoaded(imageData, response, error)
+                            // Finally convert that Data into an image and do what you wish with it.
+//                            DispatchQueue.main.async(execute: {
+//
+//                                self.imgBusiness.image = UIImage(data: imageData)
+//                            })
+                            
+                        } else {
+                            imageLoaded(nil, response, error)
+                        }
+                    }else {
+                        imageLoaded(nil, nil, error)
+                    }
+                }
+            }
+            downloadPicTask.resume()
+            
+        }
     }
     
 }

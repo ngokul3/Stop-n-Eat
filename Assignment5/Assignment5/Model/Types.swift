@@ -58,6 +58,7 @@ struct Messages {
     static let RestaurantReadyToBeSaved = "Restaurant refreshed to Favorite"
     static let FavoriteListChanged = "Add Delete or Edit on the Model"
     static let RestaurantDeleted = "Restaurant Deleted"
+    static let ImageArrived = "Image arrived"
 }
 
 enum DetailVCType : String

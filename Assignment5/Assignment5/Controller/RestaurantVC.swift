@@ -14,7 +14,8 @@ class RestaurantVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var trainStop : TrainStop?
     var cellArrray = [RestaurantCell]()
-    private var model = RestaurantModel.getInstance()
+    private var model = AppDel.restModel// RestaurantModel.getInstance() //Todo - should come from Appmodel?
+    private var networkModel = AppDel.networkModel
     private static var modelObserver: NSObjectProtocol?
     var removeFavoriteNo : ((UIAlertAction)->Void)?
     
@@ -95,7 +96,6 @@ extension RestaurantVC : UITableViewDataSource{
     
         let restaurant = model.restaurantsFromNetwork[indexPath.row]
         cell.lblRestaurantName.text = restaurant.restaurantName
-        //cell.imgRail.image = UIImage(named: restaurant.railImageName)
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop) + " mi"
         cell.btnSingleMap.tag = indexPath.row
         cell.btnHeart.tag = indexPath.row
@@ -104,6 +104,39 @@ extension RestaurantVC : UITableViewDataSource{
         let rating = restaurant.givenRating
         let imageName = "\(rating)Stars"
         cell.imgRatings.image = UIImage(named: imageName)
+        
+        //Todo put the below in a closure separately
+        networkModel.setRestaurantImage(forRestaurantImage: restaurant.imageURL, imageLoaded: ({(data,response,error) in
+            
+            if let e = error {
+                print("HTTP request failed: \(e.localizedDescription)")
+            }
+            
+            if let httpResponse = response {
+                print("http response code: \(httpResponse.statusCode)")
+                let HTTP_OK = 200
+                if(httpResponse.statusCode == HTTP_OK ){}else{
+                    print("HTTP Error \(httpResponse.statusCode)")
+                }
+            }else{
+                print("Can't parse imageresponse")
+            }
+            
+            if let imageData = data{
+                OperationQueue.main.addOperation {
+                    print("urlArrivedCallback operation: Now on thread: \(Thread.current)")
+                    
+                    cell.imgThumbnail.image = UIImage(data: imageData)
+                    
+                }
+            }else{
+                print("Image data not available")
+            }
+           
+            
+            
+            })
+        )
         
         //let imgStarArr = [cell.imgStar1, cell.imgStar2, cell.imgStar3, cell.imgStar4, cell.imgStar5]
       
