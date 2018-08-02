@@ -41,7 +41,7 @@ extension RestaurantModel{
 }
 
 extension RestaurantModel{
-    func loadRestaurantFromNetwork(trainStop : TrainStop){
+    func loadRestaurantFromNetwork(trainStop : TrainStop) throws{
         
         if let restaurantArray = searchedRestaurants[trainStop.stopName] {
             restaurantsFromNetwork = restaurantArray
@@ -60,7 +60,7 @@ extension RestaurantModel{
         let network = RestaurantNetwork()
         
          //Todo - self should be captured weak in Oepration.main.addoperation
-        network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {(dictionary, error) in
+        network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {[weak self](dictionary, error) in
             print("In return from ajaxRequest: \(Thread.current)")
             
             guard let restaurantResultArray = dictionary?["businesses"] as? [ [String: AnyObject] ] else {
@@ -71,7 +71,7 @@ extension RestaurantModel{
             OperationQueue.main.addOperation {
                 print("Passing restaurant results to main operation queue: \(Thread.current)")
                 
-                self.restaurantsFromNetwork.removeAll()
+                self?.restaurantsFromNetwork.removeAll()
   
                 restaurantResultArray.forEach { (restaurant) in
                     
@@ -107,23 +107,28 @@ extension RestaurantModel{
                         preconditionFailure("display_address not found in JSON")
                     }
                     
-                    let address : String = String(describing: addressArr[0] as? String ?? "" ) + String(describing: addressArr[1] as? String ?? "") 
-//                        preconditionFailure("display_address not found in JSON")
-//                    }
+                    let addressFirstComponent = addressArr.count > 0 ? String(describing: addressArr[0] as? String ?? "" ) : ""
+                    let addressSecondComponent = addressArr.count > 1 ? String(describing: addressArr[1] as? String ?? "" ) : ""
                     
-                    let restaurant = Restaurant(_trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating), _displayAddress :  address)
+                    let completeAddress = addressFirstComponent + addressSecondComponent
                     
-                    if(self.restaurantsSaved.filter({$0.restaurantId == restaurant.restaurantId}).count > 0)
+                    let restaurant = Restaurant(_trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating), _displayAddress :  completeAddress)
+                    
+                    if(self?.restaurantsSaved.filter({$0.restaurantId == restaurant.restaurantId}).count ?? 0 > 0)
                     {
                         restaurant.isFavorite = true
                     }
 
                     if(restaurant.distanceFromTrainStop <= 2){ // Loading only those data that are less than 2 miles. Idea is to see restaurants in walking distance
-                        self.restaurantsFromNetwork.append(restaurant)
+                        
+                        print("Adding restaurant \(restaurant.restaurantName)")
+                        self?.restaurantsFromNetwork.append(restaurant)
                     }
                 }
                 
-                self.searchedRestaurants[trainStop.stopName] = self.restaurantsFromNetwork
+                 print("Before Caching layer")
+                 self?.searchedRestaurants[trainStop.stopName] = self?.restaurantsFromNetwork
+                print("Caching layer")
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantLoadedFromNetwork), object: self))
             }
             

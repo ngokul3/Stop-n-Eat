@@ -29,12 +29,11 @@ class RestaurantNetwork{
     }
 
     func loadFromNetwork(location: String, term: String, finished: @escaping (_ dataDict: NSDictionary?, _ errorMsg: String?)  -> ()) {
-       // let MY_API_KEY = "Bearer qEjtERYCtGRtYmaELAxisLtdM2TWMsUbLG-wvs0b8KlxIfECiKGRrnY7AKOZwe6Zsz_DehvIAXJtt4jiIrKYjCgyf0Tx4CK_yX0u-6LpOc35By8TiyGlLdElXgqzWXYx"
-        
         guard let myKey = keyOpt else{
             return
         }
-       
+        print("Searching for location \(location)")
+        
         var locationURL : String
         locationURL = "https://api.yelp.com/v3/businesses/search?term=" + term+"&location=" + location
         

@@ -19,7 +19,7 @@ protocol TrainStopProtocol {
 
 protocol RestaurantProtocol{
     static func getInstance()->RestaurantProtocol
-    func loadRestaurantFromNetwork(trainStop : TrainStop)
+    func loadRestaurantFromNetwork(trainStop : TrainStop) throws
     var restaurantsFromNetwork: RestaurantArray {get set}
     var restaurantsSaved: RestaurantArray {get set}
     func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant
@@ -44,6 +44,7 @@ enum RestaurantError: Error{
     case invalidRestaurant()
     case invalidRowSelection()
     case zeroCount()
+    case notAbleToPopulateRestaurants()
     case notAbleToAdd(name : String)
     case notAbleToEdit(name: String)
     case notAbleToDelete(name: String)

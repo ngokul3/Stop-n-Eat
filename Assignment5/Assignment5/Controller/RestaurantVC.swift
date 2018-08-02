@@ -20,15 +20,21 @@ class RestaurantVC: UIViewController {
     
     override func viewDidLoad() {
         
-        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 80
         
         guard let stop = trainStop else{
             preconditionFailure("Could not find Stop")
         }
-        
-        model.loadRestaurantFromNetwork(trainStop: stop)
+        do{
+           try model.loadRestaurantFromNetwork(trainStop: stop)
+        }
+        catch RestaurantError.notAbleToPopulateRestaurants(){
+            alertUser = "Not able to populate restaurants at this time. Could be network related issue"
+        }
+        catch{
+            alertUser = "Unexpected Error while populating Resaurants. Try again"
+        }
      
         RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantLoadedFromNetwork), object: nil, queue: OperationQueue.main) {
             
@@ -83,7 +89,10 @@ extension RestaurantVC : UITableViewDataSource{
             preconditionFailure("Incorrect Cell provided")
         }
         
-        print("Returned name is \(model.restaurantsFromNetwork[indexPath.row].restaurantName)")
+        guard model.restaurantsFromNetwork[indexPath.row] else{
+            preconditionFailure("Restaurant list did not get loaded")
+        }
+    
         let restaurant = model.restaurantsFromNetwork[indexPath.row]
         cell.lblRestaurantName.text = restaurant.restaurantName
         cell.imgRail.image = UIImage(named: restaurant.railImageName)
@@ -134,7 +143,7 @@ extension RestaurantVC{
                 
                 if(restaurantFromNetwork.isFavorite == true){
                     //Todo
-                   // alertRemoveFavorite = "Do you want to remove \(restaurantFromNetwork.restaurantName) from Favorite"
+                    //alertRemoveFavorite = "Do you want to remove \(restaurantFromNetwork.restaurantName) from Favorite"
 //                    if(shouldRemoveFavorite != nil){
 //                        return false
 //                    }else{
@@ -311,44 +320,40 @@ extension RestaurantVC{
         }
         
         set{
-            OperationQueue.main.addOperation{
-                let alert = UIAlertController(title: "Remove Favorite?", message: newValue, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
-                alert.addAction(UIAlertAction(title: "No ", style: .default, handler: self.removeFavoriteNo))
-                
+            let alert = UIAlertController(title: "Remove Favorite?", message: newValue, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "No ", style: .default, handler: self.removeFavoriteNo))
+            
+            DispatchQueue.main.async(execute: {
                 self.present(alert, animated: true)
-            }
+            })
         }
     }
 }
 
-extension RestaurantVC{
+extension RestaurantVC: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark)
-        {
+        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
             
-            model.restaurantsSaved[indexPath.row].isSelected = false
+            model.restaurantsFromNetwork[indexPath.row].isSelected = false
         }
-        else
-        {
+        else{
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-            model.restaurantsSaved[indexPath.row].isSelected = true
+            model.restaurantsFromNetwork[indexPath.row].isSelected = true
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark)
-        {
+        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
-            model.restaurantsSaved[indexPath.row].isSelected = false
+            model.restaurantsFromNetwork[indexPath.row].isSelected = false
         }
-        else
-        {
+        else{
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-            model.restaurantsSaved[indexPath.row].isSelected = true
+            model.restaurantsFromNetwork[indexPath.row].isSelected = true
         }
     }
 }
