@@ -111,47 +111,32 @@ extension RestaurantVC : UITableViewDataSource{
             if let e = error {
                 print("HTTP request failed: \(e.localizedDescription)")
             }
-            
-            if let httpResponse = response {
-                print("http response code: \(httpResponse.statusCode)")
-                let HTTP_OK = 200
-                if(httpResponse.statusCode == HTTP_OK ){}else{
-                    print("HTTP Error \(httpResponse.statusCode)")
+            else{
+                    if let httpResponse = response {
+                        print("http response code: \(httpResponse.statusCode)")
+                     
+                        let HTTP_OK = 200
+                        if(httpResponse.statusCode == HTTP_OK ){
+                            
+                            if let imageData = data{
+                                OperationQueue.main.addOperation {
+                                    print("urlArrivedCallback operation: Now on thread: \(Thread.current)")
+                                    cell.imgThumbnail.image = UIImage(data: imageData)
+                                }
+                            }else{
+                                print("Image data not available")
+                            }
+                            
+                        }else{
+                            print("HTTP Error \(httpResponse.statusCode)")
+                        }
+                    }else{
+                        print("Can't parse imageresponse")
+                    }
                 }
-            }else{
-                print("Can't parse imageresponse")
-            }
-            
-            if let imageData = data{
-                OperationQueue.main.addOperation {
-                    print("urlArrivedCallback operation: Now on thread: \(Thread.current)")
-                    
-                    cell.imgThumbnail.image = UIImage(data: imageData)
-                    
-                }
-            }else{
-                print("Image data not available")
-            }
-           
-            
-            
+        
             })
         )
-        
-        //let imgStarArr = [cell.imgStar1, cell.imgStar2, cell.imgStar3, cell.imgStar4, cell.imgStar5]
-      
-//        imgStarArr.forEach({(img) in
-//
-//            guard let imgIndex = imgStarArr.index(of: img) else{
-//                preconditionFailure("Can't load images")
-//            }
-//
-//            if (rating > imgIndex){
-//                img?.image = UIImage(named: "rating")
-//            }else{
-//                img?.image = UIImage(named: "plainStar")
-//            }
-//        })
         return cell
     }
     
