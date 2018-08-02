@@ -10,18 +10,20 @@ import Foundation
 import Alamofire
 
 //Todo train and rest protocol here
+//Todo cache image?
+
 protocol NetworkProtocol {
     static func getInstance() -> NetworkProtocol
     func loadFromNetwork(location: String, term: String, finished: @escaping (_ dataDict: NSDictionary?, _ errorMsg: String?)  -> ())
     func setRestaurantImage(forRestaurantImage restaurantImageURL : String, imageLoaded : @escaping (Data?, HTTPURLResponse?, Error?)->Void)
+     func loadTransitData(finished : @escaping (NSArray?, String?)->Void )
 }
     
-//protocol NetworkImageListener{
-//   func setRestaurantImage(forRestaurantImage restaurantImageURL : String, imageLoaded : @escaping (Data?, HTTPURLResponse?, Error?)->Void)
-//}
+
 class NetworkModel: NetworkProtocol{
     
     private var keyOpt : String?
+    private var transitJSONFileNameOpt : String?
     private static var instance: NetworkProtocol?
     
     var session: URLSession = {
@@ -41,6 +43,7 @@ class NetworkModel: NetworkProtocol{
                 preconditionFailure("Yelp API is not available")
             }
                 keyOpt = dict["YelpAPIKEY"] as? String
+                transitJSONFileNameOpt = dict["NJTransitJSONFile"] as? String
         }
     }
 }
@@ -50,17 +53,52 @@ extension NetworkModel{
         if let inst = NetworkModel.instance {
             return inst
         }
-        
         let inst = NetworkModel()
         NetworkModel.instance = inst
         return inst
     }
 }
-//todo remove term from below func
+
+extension NetworkModel{
+    func loadTransitData(finished : @escaping (NSArray?, String?)->Void ) {
+        
+        guard let transitFileName = transitJSONFileNameOpt else{
+            preconditionFailure("There is no input file for Train Stops")
+        }
+        
+        
+        DispatchQueue.global(qos: .background).async{
+        
+        let jsonResult: Any?
+            
+        if let path = Bundle.main.path(forResource: transitFileName, ofType: "json")
+        {
+             do{
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+            }
+            catch{
+                finished(nil, "InvalidJsonFile")
+                return
+            }
+            
+            guard let stopArray = jsonResult as? NSArray else {
+                finished(nil, "InvalidJsonFile")
+                return
+            }
+            
+            finished(stopArray, nil)
+                
+        }
+        }
+    }
+}
+
+//Restaurant Fetch
 extension NetworkModel{
     func loadFromNetwork(location: String, term: String, finished: @escaping (_ dataDict: NSDictionary?, _ errorMsg: String?)  -> ()) {
         guard let myKey = keyOpt else{
-            return
+            preconditionFailure("This app does not have license to get information from Yelp")
         }
         print("Searching for location \(location)")
         
@@ -97,10 +135,11 @@ extension NetworkModel{
                     }
             }
         }
-        
         print("loading data from server")
-        
     }
+}
+
+extension NetworkModel{
     
     func setRestaurantImage(forRestaurantImage restaurantImageURL : String, imageLoaded : @escaping (Data?, HTTPURLResponse?, Error?)->Void) {
         
@@ -115,12 +154,6 @@ extension NetworkModel{
                         
                         if let imageData = data {
                             imageLoaded(imageData, response, error)
-                            // Finally convert that Data into an image and do what you wish with it.
-//                            DispatchQueue.main.async(execute: {
-//
-//                                self.imgBusiness.image = UIImage(data: imageData)
-//                            })
-                            
                         } else {
                             imageLoaded(nil, response, error)
                         }

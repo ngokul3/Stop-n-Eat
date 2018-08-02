@@ -12,7 +12,9 @@ class RestaurantModel: RestaurantProtocol{
   
     private static var instance: RestaurantProtocol?
     private var searchedRestaurants = [String : RestaurantArray]()
-   
+    private lazy var networkModel = {
+        return AppDel.networkModel
+    }()
     var restaurantsFromNetwork : RestaurantArray
     var restaurantsSaved : RestaurantArray
  
@@ -56,11 +58,8 @@ extension RestaurantModel{
         }
 
         let locationCoordinates = String(describing: trainLocation.0) + "," +  String(describing: trainLocation.1)
-     
-        let network = NetworkModel()
         
-         //Todo - self should be captured weak in Oepration.main.addoperation
-        network.loadFromNetwork(location: locationCoordinates, term: "food", finished: {[weak self](dictionary, error) in
+        networkModel.loadFromNetwork(location: locationCoordinates, term: "food", finished: {[weak self](dictionary, error) in
             print("In return from ajaxRequest: \(Thread.current)")
             
             guard let restaurantResultArray = dictionary?["businesses"] as? [ [String: AnyObject] ] else {

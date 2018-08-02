@@ -148,7 +148,7 @@ extension MapViewVC: MKMapViewDelegate {
             return nil
         }
         pinView.canShowCallout = true
-        pinView.pinTintColor = placePoint.placeType == .train ? UIColor.red : UIColor.blue
+        pinView.pinTintColor = placePoint.placeType == .train ? UIColor.blue : UIColor.red
         return pinView
     }
     

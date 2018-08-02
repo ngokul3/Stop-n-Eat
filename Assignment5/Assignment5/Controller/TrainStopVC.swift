@@ -29,7 +29,8 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
         }
         
         do{
-            try model.loadTransitData(JSONFileFromAssetFolder: "RailStop", completed: {_ in }) //Todo completed required?
+            try model.loadTransitData(completed: {_ in})//todo
+           // try model.loadTransitData(JSONFileFromAssetFolder: "RailStop", completed: {_ in }) //Todo completed required?
         }
         
         catch{}//Todo do something

@@ -17,8 +17,8 @@ var AppDel: AppDelegate {
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    private var restaurantModel = RestaurantModel.getInstance()
     private var netModel = NetworkModel.getInstance()
+    private var restaurantModel = RestaurantModel.getInstance()
     var window: UIWindow?
 
     var restModel: RestaurantProtocol {

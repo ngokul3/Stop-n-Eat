@@ -14,8 +14,8 @@ protocol TrainStopProtocol {
     func getAllTrains()->[TrainStop] //Todo reiew these get func. YOu dont need this
     var filteredStops : StopArray {get set}
     var currentFilter : String {get set}
-    func loadTransitData (JSONFileFromAssetFolder fileName: String, completed : ([TrainStop])->Void) throws
-}
+    func loadTransitData(completed : ([TrainStop])->Void) throws
+ }
 
 protocol RestaurantProtocol{
     static func getInstance()->RestaurantProtocol

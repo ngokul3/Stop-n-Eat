@@ -15,6 +15,9 @@ class TrainStopModel {
     private static var instance: TrainStopProtocol?
     private var searchedStops = [String : StopArray]()
     private var trainStops : StopArray
+    private lazy var networkModel = {
+        return AppDel.networkModel
+    }()
     var filteredStops : StopArray
     var currentFilter : String = ""{
         didSet{
@@ -75,52 +78,81 @@ extension TrainStopModel{
         
     }
     
-    func loadTransitData(JSONFileFromAssetFolder fileName: String, completed : ([TrainStop])->Void) throws {
-    //Todo
-//        DispatchQueue.global(qos: .background).async {
-//            //background code
-//            DispatchQueue.main.async {
-//                //your main thread
-//            }
-//        }
+    func loadTransitData(completed : ([TrainStop])->Void) throws{
         
-        
-        let jsonResult: Any?
-        if let path = Bundle.main.path(forResource: "RailStop", ofType: "json")
-        {
-            do{
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+        networkModel.loadTransitData(finished: ({[weak self] (jsonArray, error)  in
+            
+            if let _ = error{
+                preconditionFailure("Json file not valid")
+            }
+            
+            guard let stopArray = jsonArray else {
+                preconditionFailure("Json file not valid")
+            }
+             OperationQueue.main.addOperation {
+                do{
+                   //  OperationQueue.main.addOperation {
+                        try stopArray.forEach({(arg) in
+                            
+                            guard let stopDict = arg as? NSDictionary else{
+                                preconditionFailure("Json file not valid")
+                            }
+                            
+                            let stopName = stopDict["stop_name"] as? String
+                            let latitude = stopDict["stop_lat"] as? Double
+                            let longitude = stopDict["stop_lon"] as? Double
+                            
+                            try self?.trainStops.append(TrainStop(_stopName: stopName, _latitude: latitude, _longitude: longitude) )
+                        })
+                 //   }
                 }
-            catch{
-                throw TrainStopError.invalidJSONFile()
+                catch{
+                   // throw TrainStopError.notAbleToPrepopulate() //Todo
+                }
             }
             
-            guard let stopArray = jsonResult as? NSArray else {
-                return
-            }
-            
-            do{
-                try stopArray.forEach({(arg) in
-                
-                    guard let stopDict = arg as? NSDictionary else{
-                        return
-                    }
-                    
-                    let stopName = stopDict["stop_name"] as? String
-                    let latitude = stopDict["stop_lat"] as? Double
-                    let longitude = stopDict["stop_lon"] as? Double
-                    
-                    try self.trainStops.append(TrainStop(_stopName: stopName, _latitude: latitude, _longitude: longitude) )
-                })
-            }
-            catch{
-                throw TrainStopError.notAbleToPrepopulate()
-            }
-            
-            print(type(of: stopArray[0]))
-        }
+        }))
     }
+    
+   
+//    func loadTransitData(JSONFileFromAssetFolder fileName: String, completed : ([TrainStop])->Void) throws {
+//
+//        let jsonResult: Any?
+//        if let path = Bundle.main.path(forResource: "RailStop", ofType: "json")
+//        {
+//            do{
+//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+//                }
+//            catch{
+//                throw TrainStopError.invalidJSONFile()
+//            }
+//
+//            guard let stopArray = jsonResult as? NSArray else {
+//                return
+//            }
+//
+//            do{
+//                try stopArray.forEach({(arg) in
+//
+//                    guard let stopDict = arg as? NSDictionary else{
+//                        return
+//                    }
+//
+//                    let stopName = stopDict["stop_name"] as? String
+//                    let latitude = stopDict["stop_lat"] as? Double
+//                    let longitude = stopDict["stop_lon"] as? Double
+//
+//                    try self.trainStops.append(TrainStop(_stopName: stopName, _latitude: latitude, _longitude: longitude) )
+//                })
+//            }
+//            catch{
+//                throw TrainStopError.notAbleToPrepopulate()
+//            }
+//
+//            print(type(of: stopArray[0]))
+//        }
+//    }
 }
 
 extension TrainStopModel{
