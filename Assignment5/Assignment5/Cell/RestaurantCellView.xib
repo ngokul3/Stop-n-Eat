@@ -41,16 +41,17 @@
                         </constraints>
                         <state key="normal" backgroundImage="heart"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ym9-5C-jkx">
-                        <rect key="frame" x="238" y="47" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ym9-5C-jkx">
+                        <rect key="frame" x="280" y="47" width="0.0" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EQD-LA-7A7">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rail" translatesAutoresizingMaskIntoConstraints="NO" id="EQD-LA-7A7">
                         <rect key="frame" x="281" y="44" width="29" height="27"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="29" id="kbF-jI-FE9"/>
+                            <constraint firstAttribute="height" constant="27" id="rfH-kz-UFA"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8i-cB-tcX">
@@ -89,7 +90,7 @@
                 <constraint firstItem="njF-e1-oar" firstAttribute="leading" secondItem="5FJ-bg-znE" secondAttribute="trailing" constant="-62" id="aVG-qZ-1WN"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="34" y="54.5"/>
+            <point key="canvasLocation" x="6708" y="-9"/>
         </tableViewCell>
         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="L6v-Qx-sls">
             <rect key="frame" x="0.0" y="0.0" width="52" height="18"/>
@@ -100,5 +101,6 @@
     <resources>
         <image name="annotation" width="626" height="626"/>
         <image name="heart" width="257" height="196"/>
+        <image name="rail" width="512" height="512"/>
     </resources>
 </document>

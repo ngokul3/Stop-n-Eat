@@ -95,26 +95,29 @@ extension RestaurantVC : UITableViewDataSource{
     
         let restaurant = model.restaurantsFromNetwork[indexPath.row]
         cell.lblRestaurantName.text = restaurant.restaurantName
-        cell.imgRail.image = UIImage(named: restaurant.railImageName)
+        //cell.imgRail.image = UIImage(named: restaurant.railImageName)
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop) + " mi"
         cell.btnSingleMap.tag = indexPath.row
         cell.btnHeart.tag = indexPath.row
         cell.btnHeart.setBackgroundImage(UIImage(named: restaurant.favoriteImageName), for: .normal)
         let rating = restaurant.givenRating
-        let imgStarArr = [cell.imgStar1, cell.imgStar2, cell.imgStar3, cell.imgStar4, cell.imgStar5]
+        let imageName = "\(rating)Stars"
+        cell.imgRatings.image = UIImage(named: imageName)
+        
+        //let imgStarArr = [cell.imgStar1, cell.imgStar2, cell.imgStar3, cell.imgStar4, cell.imgStar5]
       
-        imgStarArr.forEach({(img) in
-            
-            guard let imgIndex = imgStarArr.index(of: img) else{
-                preconditionFailure("Can't load images")
-            }
-            
-            if (rating > imgIndex){
-                img?.image = UIImage(named: "rating")
-            }else{
-                img?.image = UIImage(named: "plainStar")
-            }
-        })
+//        imgStarArr.forEach({(img) in
+//
+//            guard let imgIndex = imgStarArr.index(of: img) else{
+//                preconditionFailure("Can't load images")
+//            }
+//
+//            if (rating > imgIndex){
+//                img?.image = UIImage(named: "rating")
+//            }else{
+//                img?.image = UIImage(named: "plainStar")
+//            }
+//        })
         return cell
     }
     
