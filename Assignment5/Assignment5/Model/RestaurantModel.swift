@@ -75,10 +75,13 @@ extension RestaurantModel{
   
                 restaurantResultArray.forEach { (restaurant) in
                     
-                    guard let name : String = restaurant["name"] as? String else{
+                    guard let url : String = restaurant["image_url"] as? String else{
                         preconditionFailure("Name not found in JSON")
                     }
                     
+                    guard let name : String = restaurant["name"] as? String else{
+                        preconditionFailure("Name not found in JSON")
+                    }
                     guard let id : String = restaurant["id"] as? String else{
                         preconditionFailure("Id not found in JSON")
                     }
@@ -112,7 +115,7 @@ extension RestaurantModel{
                     
                     let completeAddress = addressFirstComponent + addressSecondComponent
                     
-                    let restaurant = Restaurant(_trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating), _displayAddress :  completeAddress)
+                    let restaurant = Restaurant(_url: url, _trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating), _displayAddress :  completeAddress)
                     
                     if(self?.restaurantsSaved.filter({$0.restaurantId == restaurant.restaurantId}).count ?? 0 > 0)
                     {
@@ -211,7 +214,7 @@ extension RestaurantModel{
 extension RestaurantModel{
     func generateEmptyRestaurant() throws-> Restaurant{
         let trainStop = try TrainStop(_stopName: "", _latitude: 0.0, _longitude: 0.0)
-        let restaurant = Restaurant(_trainStop: trainStop, _restaurantName: "", _restaurantId: "", _latitude: 0.0, _longitude: 0.0, _givenRating: 0, _displayAddress: "")
+        let restaurant = Restaurant(_url: "", _trainStop: trainStop, _restaurantName: "", _restaurantId: "", _latitude: 0.0, _longitude: 0.0, _givenRating: 0, _displayAddress: "")
        
         return restaurant
     }
@@ -261,6 +264,7 @@ class Restaurant:  NSObject, NSCoding{
             }
         }
     }
+    var imageURL: String = "" 
     var restaurantId : String = ""
     var latitude : Double = 0.0
     var longitude : Double = 0.0
@@ -284,7 +288,6 @@ class Restaurant:  NSObject, NSCoding{
     var isSelected : Bool = false
     var comments : String = ""
     var dateVisited : Date = Date()
-    var railImageName : String = "rail"
     var favoriteImageName : String = "heart"
     var isFavorite : Bool = false{
         didSet{
@@ -297,8 +300,9 @@ class Restaurant:  NSObject, NSCoding{
     }
     var displayedAddress: String = ""
    
-    init(_trainStop : TrainStop, _restaurantName : String, _restaurantId : String, _latitude : Double, _longitude : Double, _givenRating : Int, _displayAddress : String)
+    init(_url: String, _trainStop : TrainStop, _restaurantName : String, _restaurantId : String, _latitude : Double, _longitude : Double, _givenRating : Int, _displayAddress : String)
     {
+        imageURL = _url
         trainStop = _trainStop
         restaurantName = _restaurantName
         restaurantId = _restaurantId
