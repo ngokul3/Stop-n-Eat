@@ -129,36 +129,8 @@ extension RestaurantVC : UITableViewDataSource{
             cell.imgHeart.tag = indexPath.row
         }
         
-        //Todo put the below in a closure separately. should be in extension of REstaurantCell
         networkModel.setRestaurantImage(forRestaurantImage: restaurant.imageURL, imageLoaded: ({(data,response,error) in
-            
-            if let e = error {
-                print("HTTP request failed: \(e.localizedDescription)")
-            }
-            else{
-                    if let httpResponse = response {
-                        print("http response code: \(httpResponse.statusCode)")
-                     
-                        let HTTP_OK = 200
-                        if(httpResponse.statusCode == HTTP_OK ){
-                            
-                            if let imageData = data{
-                                OperationQueue.main.addOperation {
-                                    print("urlArrivedCallback operation: Now on thread: \(Thread.current)")
-                                    cell.imgThumbnail.image = UIImage(data: imageData)
-                                }
-                            }else{
-                                print("Image data not available")
-                            }
-                            
-                        }else{
-                            print("HTTP Error \(httpResponse.statusCode)")
-                        }
-                    }else{
-                        print("Can't parse imageresponse")
-                    }
-                }
-        
+            cell.imageLoaderClosure(data, response, error)
             })
         )
         return cell
