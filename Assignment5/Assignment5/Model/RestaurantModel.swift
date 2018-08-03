@@ -275,7 +275,7 @@ class Restaurant:  NSObject, NSCoding{
         let distance = self.distanceBetweenTwoCoordinates(lat1: latitude, lon1: longitude, latOpt: trainStop?.latitude, lonOpt: trainStop?.longitude).rounded(toPlaces: 1)
         
         if let stop = self.trainStop{
-            distanceFromStopDesc = String(describing:distance) + " mi from " + String(describing: stop.stopName)
+            distanceFromStopDesc = String(describing:distance) + " mi from " + String(describing: stop.stopName) + " Train Station"
         }
         return distance
     }

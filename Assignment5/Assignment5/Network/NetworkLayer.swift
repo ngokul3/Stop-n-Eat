@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 
-//Todo train and rest protocol here
 //Todo cache image?
 
 protocol NetworkProtocol {

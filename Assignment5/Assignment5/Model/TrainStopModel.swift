@@ -127,10 +127,6 @@ extension TrainStopModel{
         let stop = filteredStops[stopIndex]
         return stop
     }
-    
-    func getAllTrains() -> [TrainStop] {
-         return trainStops
-    }
 }
 
 class TrainStop{

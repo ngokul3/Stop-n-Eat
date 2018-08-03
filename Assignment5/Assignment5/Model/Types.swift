@@ -11,7 +11,6 @@ import Foundation
 protocol TrainStopProtocol {
     static func getInstance() -> TrainStopProtocol
      func getTrainStop(fromFilteredArray stopIndex : Int) throws ->TrainStop
-    func getAllTrains()->[TrainStop] //Todo reiew these get func. YOu dont need this
     var filteredStops : StopArray {get set}
     var currentFilter : String {get set}
     func loadTransitData(completed : @escaping (String?)->Void) throws
