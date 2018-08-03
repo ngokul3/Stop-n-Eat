@@ -27,7 +27,6 @@ class Persistence {
             else{
                 throw RestaurantError.notAbleToDelete(name: restaurant.restaurantName)
             }
-            
         }
         
         //Printing saved data. Auditing purpose

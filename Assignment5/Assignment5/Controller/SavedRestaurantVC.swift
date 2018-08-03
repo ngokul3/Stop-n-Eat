@@ -183,7 +183,12 @@ extension SavedRestaurantVC{
     
     func deleteRestaurant(restaurant: Restaurant){
         do{
-            try Persistence.delete(restaurant)
+            if(restaurant.isFavorite){
+                try Persistence.delete(restaurant)
+            }
+            else{
+                print("Delete from database already complete")
+            }
         }
         catch RestaurantError.notAbleToDelete(let name){
             alertUser = "Not able to delete \(name) from database"

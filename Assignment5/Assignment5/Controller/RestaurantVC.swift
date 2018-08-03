@@ -129,7 +129,7 @@ extension RestaurantVC : UITableViewDataSource{
             cell.imgHeart.tag = indexPath.row
         }
         
-        //Todo put the below in a closure separately
+        //Todo put the below in a closure separately. should be in extension of REstaurantCell
         networkModel.setRestaurantImage(forRestaurantImage: restaurant.imageURL, imageLoaded: ({(data,response,error) in
             
             if let e = error {
