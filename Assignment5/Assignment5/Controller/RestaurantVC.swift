@@ -14,7 +14,7 @@ class RestaurantVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var trainStop : TrainStop?
     var cellArrray = [RestaurantCell]()
-    private var model = AppDel.restModel// RestaurantModel.getInstance() //Todo - should come from Appmodel?
+    private var restaurantModel = AppDel.restModel
     private var networkModel = AppDel.networkModel
     private static var modelObserver: NSObjectProtocol?
     var removeFavoriteNo : ((UIAlertAction)->Void)?
@@ -28,7 +28,7 @@ class RestaurantVC: UIViewController {
             preconditionFailure("Could not find Stop")
         }
         do{
-           try model.loadRestaurantFromNetwork(trainStop: stop)
+           try restaurantModel.loadRestaurantFromNetwork(trainStop: stop)
         }
         catch RestaurantError.notAbleToPopulateRestaurants(){
             alertUser = "Not able to populate restaurants at this time. Could be network related issue"
@@ -73,7 +73,7 @@ extension RestaurantVC{
         }
         
         do{
-            let _ = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+            let _ = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
         }
         catch(RestaurantError.invalidRowSelection()){
             alertUser = "Restaurant selected could not be navigated to the map"
@@ -90,11 +90,11 @@ extension RestaurantVC : UITableViewDataSource{
             preconditionFailure("Incorrect Cell provided")
         }
         
-        guard model.restaurantsFromNetwork[indexPath.row] else{
+        guard restaurantModel.restaurantsFromNetwork[indexPath.row] else{
             preconditionFailure("Restaurant list did not get loaded")
         }
     
-        let restaurant = model.restaurantsFromNetwork[indexPath.row]
+        let restaurant = restaurantModel.restaurantsFromNetwork[indexPath.row]
         cell.lblRestaurantName.text = restaurant.restaurantName
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop) + " mi"
         cell.btnSingleMap.tag = indexPath.row
@@ -141,7 +141,7 @@ extension RestaurantVC : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.restaurantsFromNetwork.count
+        return restaurantModel.restaurantsFromNetwork.count
     }
  }
 
@@ -161,7 +161,7 @@ extension RestaurantVC{
                 preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
             }
             do{
-                let restaurantFromNetwork = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+                let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
                 
                 if(restaurantFromNetwork.isFavorite == true){
                     //Todo
@@ -172,7 +172,7 @@ extension RestaurantVC{
 //                        shouldRemoveFavorite = nil
 //                    }
    
-                    try model.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork)
+                    try restaurantModel.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork)
                     return false
                 }else
                 {
@@ -228,7 +228,7 @@ extension RestaurantVC{
             }
             
             do{
-                let restaurant = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+                let restaurant = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
                 let place = Place()
                 place.trainStop = restaurant.trainStop
                 retaurants.append(restaurant)
@@ -250,7 +250,7 @@ extension RestaurantVC{
             
             do{
                 let place = Place()
-                let restaurantsFetched = try model.getAllRestaurantsFromNetwork()
+                let restaurantsFetched = try restaurantModel.getAllRestaurantsFromNetwork()
                 place.trainStop = restaurantsFetched.first?.trainStop
                 retaurants = restaurantsFetched
                 place.restaurants = retaurants
@@ -284,7 +284,7 @@ extension RestaurantVC{
                 }
                 
                 do{
-                    let restaurantFromNetwork = try model.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+                    let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
                     vc.restaurant = restaurantFromNetwork
                 }
                     
@@ -303,7 +303,7 @@ extension RestaurantVC{
                 vc.saveDetailVC = {[weak self] (restaurant) in
                     do{
                         
-                        try self?.model.addRestaurantToFavorite(restaurantOpt: restaurant)
+                        try self?.restaurantModel.addRestaurantToFavorite(restaurantOpt: restaurant)
                     }
                     catch RestaurantError.invalidRestaurant(){
                         self?.alertUser = "Restaurant is nil"
@@ -360,22 +360,22 @@ extension RestaurantVC: UITableViewDelegate{
         if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
             
-            model.restaurantsFromNetwork[indexPath.row].isSelected = false
+            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = false
         }
         else{
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-            model.restaurantsFromNetwork[indexPath.row].isSelected = true
+            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = true
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
-            model.restaurantsFromNetwork[indexPath.row].isSelected = false
+            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = false
         }
         else{
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-            model.restaurantsFromNetwork[indexPath.row].isSelected = true
+            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = true
         }
     }
 }

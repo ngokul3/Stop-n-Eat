@@ -25,8 +25,9 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController){
         
-        showImageDialog()
-        print("Inside didSeelct")
+         if(tabBarController.selectedIndex == 2){
+            showImageDialog()
+        }
     }
 
 
@@ -70,8 +71,10 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
     @objc func cancelClicked(){
         
         self.dismiss(animated: true, completion: nil)
-        tabBarController!.selectedIndex = 0
-        //self.navigationController?.popViewController(animated: true)
+        guard let tabBarC = tabBarController else{
+            return
+        }
+        tabBarC.selectedIndex = 0
     }
     
     @objc func mailClicked(){
@@ -88,7 +91,7 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
         let mailComposer = MFMailComposeViewController()
         var restaurantInfo = String()
         
-        restaurantInfo = convertToHTMLTable(restaurants: model.restaurantsSaved.filter({$0.isSelected == true}))
+        restaurantInfo = convertToHTMLTable(restaurants: model.restaurantsFromNetwork.filter({$0.isSelected == true}))
         
         mailComposer.setMessageBody(restaurantInfo, isHTML: true)
         mailComposer.setSubject("Check out these locations that we can go")
@@ -111,7 +114,7 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
         
         let msgComposer = MFMessageComposeViewController()
         var restaurantInfo = String()
-        restaurantInfo = convertToMSGBody(restaurants: model.restaurantsSaved.filter({$0.isSelected == true}))
+        restaurantInfo = convertToMSGBody(restaurants: model.restaurantsFromNetwork.filter({$0.isSelected == true}))
         
         msgComposer.body = restaurantInfo
         msgComposer.messageComposeDelegate = self
@@ -125,7 +128,7 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
     @objc func whatsAppClicked()
     {
         var restaurantInfo = String()
-        restaurantInfo = convertToMSGBody(restaurants: model.restaurantsSaved.filter({$0.isSelected == true}))
+        restaurantInfo = convertToMSGBody(restaurants: model.restaurantsFromNetwork.filter({$0.isSelected == true}))
         
         let urlWhats = "whatsapp://send?text=\(restaurantInfo)"
         
@@ -210,6 +213,8 @@ extension NotifyVC{
         }
         
         let html  = htmlHeader + innerHTML + htmlFooter
+        
+        print(html)
         return html
         
     }

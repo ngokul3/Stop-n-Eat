@@ -26,7 +26,7 @@ class TrainStopModel {
                 filterTrainStops(stopName: currentFilter)
             }
             else{
-                filteredStops = trainStops//StopArray()
+                filteredStops = trainStops
             }
            
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListFiltered), object: self))
@@ -56,12 +56,10 @@ extension TrainStopModel : TrainStopProtocol{
     }
 }
 extension TrainStopModel{
-    //Todo should be async call
     
     func filterTrainStops(stopName: String) {
         
-        guard trainStops.count > 0 else
-        {
+        guard trainStops.count > 0 else {
             preconditionFailure("Not able to fetch Train Stops")
         }
         
@@ -75,7 +73,6 @@ extension TrainStopModel{
             
             searchedStops[stopName] = filteredStops
         }
-        
     }
     
     func loadTransitData(completed : @escaping (String?)->Void) throws{
@@ -109,7 +106,7 @@ extension TrainStopModel{
                     self?.currentFilter = "" // For Model to post the event
                  }
                 catch TrainStopError.notAbleToPrepopulate(){
-                     completed("Json file could not be populated into the model")
+                    completed("Json file could not be populated into the model")
                 }
                 catch{
                     completed("Unexpected Error while trying to populate from api call")

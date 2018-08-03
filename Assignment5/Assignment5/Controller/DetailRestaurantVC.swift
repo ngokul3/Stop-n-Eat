@@ -80,6 +80,7 @@ class DetailRestaurantVC: UIViewController {
         }
     }
     
+    //Todo - bring in image next to info button
     override func viewDidLoad() {
         super.viewDidLoad()
     
