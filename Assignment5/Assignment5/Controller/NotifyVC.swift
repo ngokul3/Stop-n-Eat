@@ -166,7 +166,6 @@ extension NotifyVC{
         
         set{
             let alert = UIAlertController(title: "Attention", message: newValue, preferredStyle: .alert)
-            
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel,
                                           handler: ({[weak self]_ in
                                             self?.tabBarController!.selectedIndex = 0
@@ -206,7 +205,7 @@ extension NotifyVC{
         for restaurant in restaurants {
             innerHTML += "<tr>"
             innerHTML += "<td> " + String(itemCount) + ") " + "</td>"
-            innerHTML +=  "<td><a href=" + restaurant.restaurantName + ">" + restaurant.displayedAddress.getTruncatedAddress(firstAddress: "", seperator: " @ ") + "</a>  </td>"
+            innerHTML +=  "<td><a href=" + restaurant.restaurantName + ">" + restaurant.restaurantName + restaurant.displayedAddress.getTruncatedAddress(firstAddress: "", seperator: " @ ") + "</a>  </td>"
             
             innerHTML += "</tr>"
             itemCount = itemCount + 1
