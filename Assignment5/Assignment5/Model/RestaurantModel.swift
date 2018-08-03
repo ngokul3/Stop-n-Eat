@@ -203,9 +203,11 @@ extension RestaurantModel{
             throw RestaurantError.notAbleToDelete(name: restaurant.restaurantName)
         }
         
-        let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantDeleted), object: nil)
-        NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
-   
+        let nsNotification1 = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantCanBeRemovedFromFavorite), object: nil)
+        let nsNotification2 = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantDeleted), object: nil)
+    
+        NotificationCenter.default.post(name: nsNotification1.name, object: nil, userInfo:[Consts.KEY0: restaurant])
+        NotificationCenter.default.post(name: nsNotification2.name, object: nil, userInfo:[Consts.KEY0: restaurant])
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteListChanged), object: self))
     }
 }

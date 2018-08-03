@@ -36,6 +36,7 @@ class RestaurantVC: UIViewController {
         catch{
             alertUser = "Unexpected Error while populating Resaurants. Try again"
         }
+        //to - foreach of observer since they are doing the same operation
      
         RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantLoadedFromNetwork), object: nil, queue: OperationQueue.main) {
             
@@ -53,9 +54,21 @@ class RestaurantVC: UIViewController {
             }
         }
         
-//        removeFavoriteNo = ({[weak self](arg) -> Void in
-//            //self?.shouldRemoveFavorite = false
-//        })
+        RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantCanBeRemovedFromFavorite), object: nil, queue: OperationQueue.main) {
+            
+            [weak self] (notification: Notification) in
+            if let s = self {
+                let info0 = notification.userInfo?[Consts.KEY0]
+                
+                let restaurantOpt = info0 as? Restaurant
+                
+                guard let restaurant = restaurantOpt else{
+                    preconditionFailure("Could not save this favorite restaurant")
+                }
+                s.removeRestaurantFromFavoriteSavedList(restaurant: restaurant)
+            }
+        }
+        
         super.viewDidLoad()
     }
 }
@@ -98,18 +111,11 @@ extension RestaurantVC : UITableViewDataSource{
         cell.lblRestaurantName.text = restaurant.restaurantName
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop) + " mi"
         cell.btnSingleMap.tag = indexPath.row
-       // cell.btnHeart.tag = indexPath.row
-       // cell.btnHeart.setBackgroundImage(UIImage(named: restaurant.favoriteImageName), for: .normal)
-      //  cell.btnHeart.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         let rating = restaurant.givenRating
         let imageName = "\(rating)Stars"
         cell.imgRatings.image = UIImage(named: imageName)
+
         cell.imgHeart.image = UIImage(named: restaurant.favoriteImageName)
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(RestaurantVC.heartTap(gesture: )))
-//        cell.imgHeart.addGestureRecognizer(tap)
-//        cell.imgHeart.isUserInteractionEnabled = true
-//        cell.imgHeart.tag = indexPath.row
-//
         let heartTap : UITapGestureRecognizer?
         
         if(restaurant.isFavorite){
@@ -163,53 +169,60 @@ extension RestaurantVC : UITableViewDataSource{
     }
  }
 
-extension RestaurantVC{
+extension RestaurantVC: UITableViewDelegate{
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        switch identifier{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        case "detailSegueFromHeart":
-            var rowNo : Int?
+        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
             
-            if let button = sender as? UIImageView {
-                rowNo = button.tag
-            }
-            
-            guard let indexRow = rowNo else{
-                preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
-            }
-            do{
-                let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
-                
-                if(restaurantFromNetwork.isFavorite == true){
-                    //Todo
-                    //alertRemoveFavorite = "Do you want to remove \(restaurantFromNetwork.restaurantName) from Favorite"
-//                    if(shouldRemoveFavorite != nil){
-//                        return false
-//                    }else{
-//                        shouldRemoveFavorite = nil
-//                    }
-   
-                    try restaurantModel.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork)
-                    return true
-                }else
-                {
-                    return true
-                }
-            }
-            catch RestaurantError.notAbleToDelete(let name){
-                alertUser = "Not able to delete \(name)"
-                return false
-            }
-            catch{
-                alertUser = "Unexpected Error while preparing to navigate"
-                return false
-            }
-        
-        default:    return true
+            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = false
+        }
+        else{
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = true
         }
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
+            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = false
+        }
+        else{
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = true
+        }
+    }
+}
+
+extension RestaurantVC{
+    
+    func removeFavorite(imageViewOpt: UIImageView?){
+        
+        guard let imageView = imageViewOpt else{
+            alertUser = "Favorite options are not workin at the moment. Please close and reopen the app."
+            return
+        }
+        let indexRow = imageView.tag
+        
+        do{
+            let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+            
+            if(restaurantFromNetwork.isFavorite == true){
+                try restaurantModel.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork)
+            }else{
+                alertUser = "Incorrect restaurant was about to be removed from favorite"
+            }
+        }
+        catch RestaurantError.notAbleToDelete(let name){
+            alertUser = "Not able to remove \(name) from favorite list"
+        }
+        catch{
+            alertUser = "Unexpected Error while preparing to navigate"
+         }
+    }
+ 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         
         guard let identifier = segue.identifier else{
@@ -335,12 +348,40 @@ extension RestaurantVC{
         }
     }
 }
+
 extension RestaurantVC{
     
     func updateUI(){
         self.tableView.reloadData()
     }
     
+    func removeRestaurantFromFavoriteSavedList(restaurant: Restaurant){
+        do{
+            try Persistence.delete(restaurant)
+        }
+        catch RestaurantError.notAbleToDelete(let name){
+            alertUser = "Not able to delete \(name) from database"
+        }
+        catch {
+            alertUser = "Unexpected Error while deletig from database"
+        }
+    }
+}
+
+extension RestaurantVC{
+    
+    @objc func heartTap(gesture : UITapGestureRecognizer){
+        let imageView = gesture.view as? UIImageView
+        performSegue(withIdentifier: "detailSegueFromHeart", sender: imageView)
+    }
+    
+    @objc func favoriteHeartTap(gesture : UITapGestureRecognizer){
+        let imageView = gesture.view as? UIImageView
+        alertRemoveFavorite = imageView
+    }
+}
+
+extension RestaurantVC{
     var alertUser :  String{
         get{
             preconditionFailure("You cannot read from this object")
@@ -354,84 +395,27 @@ extension RestaurantVC{
         }
     }
     
-    var alertRemoveFavorite :  String{
+    var alertRemoveFavorite :  UIImageView?{
         get{
             preconditionFailure("You cannot read from this object")
         }
         
         set{
-            //Todo - on Yes
-            let alert = UIAlertController(title: "Remove Favorite?", message: newValue, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
-            //alert.add
-            //alert.addAction(UIAlertAction()
-           // alert.addAction(UIAlertAction(title: "No ", style: .default, handler: self.removeFavoriteNo))
+            let alert = UIAlertController(title: "Remove Favorite?", message: "Do you want to remove this favorite restaurant", preferredStyle: .alert)
             
-//            DispatchQueue.main.async(execute: {
-//                self.present(alert, animated: true)
-//            })
-        }
-    }
-    
-    @objc func heartTap(gesture : UITapGestureRecognizer){
-        let imageView = gesture.view as? UIImageView
-        performSegue(withIdentifier: "detailSegueFromHeart", sender: imageView)
-    }
-    
-    @objc func favoriteHeartTap(gesture : UITapGestureRecognizer){
-        //todo on yes
-        let alert = UIAlertController(title: "Remove Favorite?", message: "Do you want to remove this favorite restaurant", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {[weak self]_ in
-            let imageView = gesture.view as? UIImageView
-            self?.performSegue(withIdentifier: "detailSegueFromHeart", sender: imageView)
-        }))
-
-        alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
-        self.present(alert, animated: true)
-        //alertRemoveFavorite = "Do you want to remove this restaurant from Favorite"
-       
-    }
-    
-}
-
-extension RestaurantVC: UITableViewDelegate{
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {[weak self]_ in
+                let imageView = newValue
+                self?.removeFavorite(imageViewOpt: imageView)
+            }))
             
-            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = false
-        }
-        else{
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = true
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
-            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = false
-        }
-        else{
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = true
+            alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+            self.present(alert, animated: true)
         }
     }
 }
 
-extension UIAlertAction{
-     func alertForFavoriteRestaurant(title: String, style: UIAlertActionStyle, imageView: UIImageView, viewController : UIViewController){
-        let alertAction = UIAlertAction(title: title, style: style, handler: ({(arg) in
-            viewController.performSegue(withIdentifier: "detailSegueFromHeart", sender: imageView)
-        }))
-        let alertController = UIAlertController(title: "Remove Favorite?", message: "Do you want to remove this favorite restaurant", preferredStyle: .alert)
-        alertController.addAction(alertAction)
-        
-    }
-}
+
+
 
 
 
