@@ -106,6 +106,11 @@ extension SavedRestaurantVC : UITableViewDataSource{
     }
 }
 
+extension SavedRestaurantVC: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+    }
+}
 
 
 extension SavedRestaurantVC{

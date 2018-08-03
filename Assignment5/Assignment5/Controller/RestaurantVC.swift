@@ -74,6 +74,11 @@ class RestaurantVC: UIViewController {
 }
 
 extension RestaurantVC{
+     override func viewWillAppear(_ animated: Bool) {
+        print("View appeared")
+    }
+}
+extension RestaurantVC{
     @IBAction func btnSave(_ sender: Any) {
         var rowNo : Int?
         
@@ -133,6 +138,7 @@ extension RestaurantVC : UITableViewDataSource{
             cell.imageLoaderClosure(data, response, error)
             })
         )
+        
         return cell
     }
     
@@ -166,6 +172,14 @@ extension RestaurantVC: UITableViewDelegate{
             restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = true
         }
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+    }
+    
+//    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+//        return false
+//    }
 }
 
 extension RestaurantVC{
@@ -300,8 +314,6 @@ extension RestaurantVC{
                 catch{
                     alertUser = "Unexpected Error"
                 }
-                
-                
                 vc.restaurantDetailVCType = DetailVCType.Preload
                 vc.saveDetailVC = {[weak self] (restaurant) in
                     do{
