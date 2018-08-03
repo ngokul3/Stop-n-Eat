@@ -15,7 +15,12 @@ import PopupDialog
 class NotifyVC: UIViewController, UITabBarControllerDelegate {
 
     private var model = RestaurantModel.getInstance()
-    
+    private lazy var restaurantsToNotify : ()->[Restaurant] = {
+       let restaurantsFromNetwork = self.model.restaurantsFromNetwork.filter({$0.isSelected == true})
+       let restaurantsFromFavorite = self.model.restaurantsSaved.filter({$0.isSelected == true})
+       let restaurantsToNotify = restaurantsFromNetwork + restaurantsFromFavorite
+       return restaurantsToNotify
+    }
     override func viewDidLoad() {
         tabBarController?.delegate = self
         super.viewDidLoad()
@@ -91,7 +96,7 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
         let mailComposer = MFMailComposeViewController()
         var restaurantInfo = String()
         
-        restaurantInfo = convertToHTMLTable(restaurants: model.restaurantsFromNetwork.filter({$0.isSelected == true}))
+        restaurantInfo = convertToHTMLTable(restaurants: restaurantsToNotify())
         
         mailComposer.setMessageBody(restaurantInfo, isHTML: true)
         mailComposer.setSubject("Check out these locations that we can go")
@@ -114,7 +119,7 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
         
         let msgComposer = MFMessageComposeViewController()
         var restaurantInfo = String()
-        restaurantInfo = convertToMSGBody(restaurants: model.restaurantsFromNetwork.filter({$0.isSelected == true}))
+        restaurantInfo = convertToMSGBody(restaurants: restaurantsToNotify())
         
         msgComposer.body = restaurantInfo
         msgComposer.messageComposeDelegate = self
@@ -128,7 +133,7 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
     @objc func whatsAppClicked()
     {
         var restaurantInfo = String()
-        restaurantInfo = convertToMSGBody(restaurants: model.restaurantsFromNetwork.filter({$0.isSelected == true}))
+        restaurantInfo = convertToMSGBody(restaurants: restaurantsToNotify())
         
         let urlWhats = "whatsapp://send?text=\(restaurantInfo)"
         
@@ -205,7 +210,7 @@ extension NotifyVC{
         for restaurant in restaurants {
             innerHTML += "<tr>"
             innerHTML += "<td> " + String(itemCount) + ") " + "</td>"
-            innerHTML +=  "<td><a href=" + restaurant.restaurantName + ">" + restaurant.restaurantName + restaurant.displayedAddress.getTruncatedAddress(firstAddress: "", seperator: " @ ") + "</a>  </td>"
+            innerHTML +=  "<td><a href=" + restaurant.restaurantURL + ">" + restaurant.restaurantName + restaurant.displayedAddress.getTruncatedAddress(firstAddress: "", seperator: " @ ") + "</a>  </td>"
             
             innerHTML += "</tr>"
             itemCount = itemCount + 1
@@ -232,7 +237,6 @@ extension NotifyVC{
             }
             innerMSGBody += "\n"
             itemCount = itemCount + 1
-            
         }
         
         return innerMSGBody

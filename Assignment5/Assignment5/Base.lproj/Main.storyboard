@@ -25,19 +25,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFZ-VA-63P">
-                                <rect key="frame" x="16" y="235.5" width="55" height="21"/>
+                                <rect key="frame" x="16" y="235" width="55" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XHl-lf-3iQ">
-                                <rect key="frame" x="110" y="165" width="249" height="162"/>
+                                <rect key="frame" x="110" y="165" width="249" height="161"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kdq-3B-IeE">
-                                <rect key="frame" x="16" y="332" width="343" height="216"/>
+                                <rect key="frame" x="16" y="331" width="343" height="135"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="135" id="9h7-Cs-FHi"/>
+                                </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="554316008.64953697">
                                     <!--2018-07-26 16:40:08 +0000-->
                                 </date>
@@ -91,19 +94,35 @@
                                     <action selector="btnRating5Click:" destination="aVw-KE-lTW" eventType="touchUpInside" id="yux-hh-MXB"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PB-gp-A7p">
+                                <rect key="frame" x="16" y="508" width="47" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tJU-jK-1LU">
+                                <rect key="frame" x="110" y="503" width="51" height="31"/>
+                                <connections>
+                                    <action selector="swtNotify_Click:" destination="aVw-KE-lTW" eventType="valueChanged" id="0d0-Rr-qun"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Dqg-ik-f1p" firstAttribute="height" secondItem="pew-h5-JG4" secondAttribute="height" id="0qv-lr-Tnz"/>
                             <constraint firstItem="XHl-lf-3iQ" firstAttribute="top" secondItem="fEB-je-GNb" secondAttribute="bottom" constant="10.5" id="2wf-Ei-MIv"/>
+                            <constraint firstItem="daL-cH-eFj" firstAttribute="bottom" secondItem="8PB-gp-A7p" secondAttribute="bottom" constant="89" id="5Kg-Ja-Z3s"/>
                             <constraint firstItem="zZx-it-EQ2" firstAttribute="leading" secondItem="daL-cH-eFj" secondAttribute="leading" constant="77" id="5t6-EN-mx2"/>
+                            <constraint firstItem="tJU-jK-1LU" firstAttribute="leading" secondItem="XHl-lf-3iQ" secondAttribute="leading" id="6dl-qi-z5h"/>
                             <constraint firstItem="zZx-it-EQ2" firstAttribute="top" secondItem="pew-h5-JG4" secondAttribute="top" id="7CV-If-bWB"/>
                             <constraint firstItem="vyN-e7-JxK" firstAttribute="top" secondItem="pew-h5-JG4" secondAttribute="top" id="7lB-1s-2Yr"/>
                             <constraint firstItem="vyN-e7-JxK" firstAttribute="top" secondItem="Dqg-ik-f1p" secondAttribute="top" id="8D1-O0-omP"/>
                             <constraint firstItem="Dqg-ik-f1p" firstAttribute="top" secondItem="pew-h5-JG4" secondAttribute="top" id="9ns-3Q-MwD"/>
+                            <constraint firstItem="8PB-gp-A7p" firstAttribute="leading" secondItem="daL-cH-eFj" secondAttribute="leading" constant="16" id="AFe-MT-I7U"/>
                             <constraint firstItem="2rF-7O-OhX" firstAttribute="centerY" secondItem="pew-h5-JG4" secondAttribute="centerY" id="C5C-SC-Di2"/>
                             <constraint firstItem="kdq-3B-IeE" firstAttribute="leading" secondItem="evk-pH-rlY" secondAttribute="leading" constant="16" id="CyI-Ob-2A0"/>
                             <constraint firstItem="Dqg-ik-f1p" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="evk-pH-rlY" secondAttribute="leading" constant="20" symbolic="YES" id="D0S-LQ-8gM"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8PB-gp-A7p" secondAttribute="trailing" constant="20" symbolic="YES" id="D5o-QB-Wbp"/>
                             <constraint firstItem="NiC-af-srt" firstAttribute="leading" secondItem="evk-pH-rlY" secondAttribute="leading" constant="110" id="DEa-OA-Xcs"/>
                             <constraint firstItem="zZx-it-EQ2" firstAttribute="height" secondItem="pew-h5-JG4" secondAttribute="height" id="DUo-Ur-0Rj"/>
                             <constraint firstItem="dFZ-VA-63P" firstAttribute="centerY" secondItem="XHl-lf-3iQ" secondAttribute="centerY" id="FgI-CY-CDc"/>
@@ -130,7 +149,7 @@
                             <constraint firstItem="NiC-af-srt" firstAttribute="top" secondItem="daL-cH-eFj" secondAttribute="top" constant="11" id="d8J-65-2Wr"/>
                             <constraint firstItem="XHl-lf-3iQ" firstAttribute="leading" secondItem="dFZ-VA-63P" secondAttribute="trailing" constant="39" id="dMg-Da-GcP"/>
                             <constraint firstItem="2rF-7O-OhX" firstAttribute="width" secondItem="pew-h5-JG4" secondAttribute="width" id="eam-Ma-FWL"/>
-                            <constraint firstItem="daL-cH-eFj" firstAttribute="bottom" secondItem="kdq-3B-IeE" secondAttribute="bottom" constant="70" id="gNS-SX-H9k"/>
+                            <constraint firstItem="tJU-jK-1LU" firstAttribute="centerY" secondItem="8PB-gp-A7p" secondAttribute="centerY" id="hDY-If-4EP"/>
                             <constraint firstItem="pew-h5-JG4" firstAttribute="centerX" secondItem="daL-cH-eFj" secondAttribute="centerX" id="iqX-rC-cXJ"/>
                             <constraint firstItem="RJZ-mX-fyu" firstAttribute="leading" secondItem="daL-cH-eFj" secondAttribute="leading" constant="16" id="nAg-y0-uwW"/>
                             <constraint firstItem="daL-cH-eFj" firstAttribute="bottom" secondItem="Dqg-ik-f1p" secondAttribute="bottom" constant="13" id="o5o-iC-R4o"/>
@@ -138,9 +157,9 @@
                             <constraint firstItem="zZx-it-EQ2" firstAttribute="width" secondItem="pew-h5-JG4" secondAttribute="width" id="pYY-26-rUK"/>
                             <constraint firstItem="vyN-e7-JxK" firstAttribute="leading" secondItem="Dqg-ik-f1p" secondAttribute="trailing" constant="1" id="qey-yy-ygW"/>
                             <constraint firstItem="BOM-Fm-Y2d" firstAttribute="top" secondItem="daL-cH-eFj" secondAttribute="top" constant="10" id="sk6-Tl-sPk"/>
+                            <constraint firstItem="tJU-jK-1LU" firstAttribute="top" secondItem="kdq-3B-IeE" secondAttribute="bottom" constant="37" id="uEU-7r-zr8"/>
                             <constraint firstItem="RJZ-mX-fyu" firstAttribute="top" secondItem="BOM-Fm-Y2d" secondAttribute="bottom" constant="29" id="vOV-jE-jkR"/>
                             <constraint firstItem="daL-cH-eFj" firstAttribute="bottom" secondItem="pew-h5-JG4" secondAttribute="bottom" constant="13" id="w1T-Nd-c4f"/>
-                            <constraint firstItem="pew-h5-JG4" firstAttribute="top" secondItem="kdq-3B-IeE" secondAttribute="bottom" constant="7" id="xHK-bn-jmx"/>
                             <constraint firstItem="2rF-7O-OhX" firstAttribute="height" secondItem="pew-h5-JG4" secondAttribute="height" id="xbF-Kf-HOu"/>
                             <constraint firstItem="fEB-je-GNb" firstAttribute="leading" secondItem="RJZ-mX-fyu" secondAttribute="trailing" constant="39.5" id="xf6-PT-RCI"/>
                             <constraint firstItem="Dqg-ik-f1p" firstAttribute="width" secondItem="pew-h5-JG4" secondAttribute="width" id="yto-uD-JSF"/>
@@ -162,6 +181,7 @@
                         <outlet property="btnRating5" destination="vyN-e7-JxK" id="1en-i1-wAm"/>
                         <outlet property="dateVisited" destination="kdq-3B-IeE" id="3bl-ej-Z1Y"/>
                         <outlet property="lblDistance" destination="NiC-af-srt" id="4CP-BO-hzH"/>
+                        <outlet property="swtNotify" destination="tJU-jK-1LU" id="vh9-FH-kRb"/>
                         <outlet property="txtNotes" destination="XHl-lf-3iQ" id="yNR-nI-zgz"/>
                         <outlet property="txtRestaurantName" destination="fEB-je-GNb" id="c8D-6v-Hqw"/>
                     </connections>

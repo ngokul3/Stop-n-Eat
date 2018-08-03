@@ -73,11 +73,7 @@ class RestaurantVC: UIViewController {
     }
 }
 
-extension RestaurantVC{
-     override func viewWillAppear(_ animated: Bool) {
-        print("View appeared")
-    }
-}
+
 extension RestaurantVC{
     @IBAction func btnSave(_ sender: Any) {
         var rowNo : Int?
@@ -176,10 +172,6 @@ extension RestaurantVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.selectionStyle = UITableViewCellSelectionStyle.none
     }
-    
-//    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-//        return false
-//    }
 }
 
 extension RestaurantVC{

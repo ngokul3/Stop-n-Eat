@@ -19,7 +19,8 @@ class DetailRestaurantVC: UIViewController {
     @IBOutlet weak var txtNotes: UITextView!
     @IBOutlet weak var txtRestaurantName: UITextField!
     @IBOutlet weak var lblDistance: UILabel!
-    
+    @IBOutlet weak var swtNotify: UISwitch!
+   
     private static var modelObserver: NSObjectProtocol?
     private lazy var btnRatings : [UIButton] = [btnRating1, btnRating2, btnRating3, btnRating4, btnRating5]
     
@@ -87,7 +88,8 @@ class DetailRestaurantVC: UIViewController {
         txtNotes.layer.borderColor = UIColor.gray.cgColor
         txtNotes.layer.borderWidth = 0.4
         txtNotes.layer.cornerRadius = 0.8
-        
+        txtNotes.delegate = self
+        txtRestaurantName.delegate = self
         DetailRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantReadyToBeSaved), object: nil, queue: OperationQueue.main) {
             
             [weak self] (notification: Notification) in
@@ -133,6 +135,11 @@ class DetailRestaurantVC: UIViewController {
             setUpButtonImages(rating)
         }
         
+        if(restaurant?.isSelected == true){
+            swtNotify.isOn = true
+        }else{
+            swtNotify.isOn = false
+        }
         //Todo - this has not been implemented yet.
         goBackAction  = ({[weak self](arg) -> Void in
             self?.navigationController?.popViewController(animated: true) // self is captured WEAK
@@ -140,7 +147,21 @@ class DetailRestaurantVC: UIViewController {
     }
 }
 
+extension DetailRestaurantVC: UITextViewDelegate, UITextFieldDelegate{
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+}
 extension DetailRestaurantVC{
+    
     @IBAction func btnSavedClicked(_ sender: UIBarButtonItem) {
         
         guard let name = txtRestaurantName.text
@@ -154,6 +175,16 @@ extension DetailRestaurantVC{
         restaurant?.comments = txtNotes.text
         saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
+    }
+    
+    
+    @IBAction func swtNotify_Click(_ sender: UISwitch) {
+        switch swtNotify.isOn{
+        case true:
+            restaurant?.isSelected = true
+        case false:
+            restaurant?.isSelected = false
+        }
     }
 }
 
