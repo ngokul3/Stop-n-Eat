@@ -29,11 +29,16 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
         }
         
         do{
-            try model.loadTransitData(completed: {_ in})//todo
-           // try model.loadTransitData(JSONFileFromAssetFolder: "RailStop", completed: {_ in }) //Todo completed required?
+            try model.loadTransitData(completed: {[weak self](error) in
+                if let errorFromModel = error{
+                    self?.alertUser = errorFromModel
+                }
+            })
         }
         
-        catch{}//Todo do something
+        catch{
+            alertUser = "Unexpected error while loading Transit Data"
+        }
        
         do {
             let restoredObject = try Persistence.restore()

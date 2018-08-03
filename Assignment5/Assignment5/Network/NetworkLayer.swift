@@ -59,14 +59,13 @@ extension NetworkModel{
     }
 }
 
+//Train Stop Fetch
 extension NetworkModel{
     func loadTransitData(finished : @escaping (NSArray?, String?)->Void ) {
         
         guard let transitFileName = transitJSONFileNameOpt else{
             preconditionFailure("There is no input file for Train Stops")
         }
-        
-        
         DispatchQueue.global(qos: .background).async{
         
         let jsonResult: Any?
