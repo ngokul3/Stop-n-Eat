@@ -17,8 +17,8 @@ class RestaurantVC: UIViewController {
     private var restaurantModel = AppDel.restModel
     private var networkModel = AppDel.networkModel
     private static var modelObserver: NSObjectProtocol?
-    var removeFavoriteNo : ((UIAlertAction)->Void)?
-    
+    var removeFavoriteNo : ((UIAlertAction, String)->Void)?
+    var shouldRemoveFavorite : Bool?
     override func viewDidLoad() {
         
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -98,12 +98,30 @@ extension RestaurantVC : UITableViewDataSource{
         cell.lblRestaurantName.text = restaurant.restaurantName
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop) + " mi"
         cell.btnSingleMap.tag = indexPath.row
-        cell.btnHeart.tag = indexPath.row
-        cell.btnHeart.setBackgroundImage(UIImage(named: restaurant.favoriteImageName), for: .normal)
-        cell.btnHeart.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+       // cell.btnHeart.tag = indexPath.row
+       // cell.btnHeart.setBackgroundImage(UIImage(named: restaurant.favoriteImageName), for: .normal)
+      //  cell.btnHeart.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         let rating = restaurant.givenRating
         let imageName = "\(rating)Stars"
         cell.imgRatings.image = UIImage(named: imageName)
+        cell.imgHeart.image = UIImage(named: restaurant.favoriteImageName)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(RestaurantVC.heartTap(gesture: )))
+//        cell.imgHeart.addGestureRecognizer(tap)
+//        cell.imgHeart.isUserInteractionEnabled = true
+//        cell.imgHeart.tag = indexPath.row
+//
+        let heartTap : UITapGestureRecognizer?
+        
+        if(restaurant.isFavorite){
+            heartTap = UITapGestureRecognizer(target: self, action: #selector(RestaurantVC.favoriteHeartTap(gesture: )))
+        }else{
+            heartTap = UITapGestureRecognizer(target: self, action: #selector(RestaurantVC.heartTap(gesture: )))
+        }
+        if let tap = heartTap{
+            cell.imgHeart.addGestureRecognizer(tap)
+            cell.imgHeart.isUserInteractionEnabled = true
+            cell.imgHeart.tag = indexPath.row
+        }
         
         //Todo put the below in a closure separately
         networkModel.setRestaurantImage(forRestaurantImage: restaurant.imageURL, imageLoaded: ({(data,response,error) in
@@ -150,10 +168,10 @@ extension RestaurantVC{
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier{
         
-        case "detailSegue":
+        case "detailSegueFromHeart":
             var rowNo : Int?
             
-            if let button = sender as? UIButton {
+            if let button = sender as? UIImageView {
                 rowNo = button.tag
             }
             
@@ -173,7 +191,7 @@ extension RestaurantVC{
 //                    }
    
                     try restaurantModel.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork)
-                    return false
+                    return true
                 }else
                 {
                     return true
@@ -268,12 +286,12 @@ extension RestaurantVC{
                 alertUser = "Unexpected Error"
                 }
             
-        case "detailSegue" :
+        case "detailSegueFromHeart" :
             
                 var rowNo : Int?
                 
-                if let button = sender as? UIButton {
-                    rowNo = button.tag
+                if let imageRow = sender as? UIImageView {
+                    rowNo = imageRow.tag
                 }
                 
                 guard let indexRow = rowNo else{
@@ -342,15 +360,39 @@ extension RestaurantVC{
         }
         
         set{
+            //Todo - on Yes
             let alert = UIAlertController(title: "Remove Favorite?", message: newValue, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "No ", style: .default, handler: self.removeFavoriteNo))
+            //alert.add
+            //alert.addAction(UIAlertAction()
+           // alert.addAction(UIAlertAction(title: "No ", style: .default, handler: self.removeFavoriteNo))
             
-            DispatchQueue.main.async(execute: {
-                self.present(alert, animated: true)
-            })
+//            DispatchQueue.main.async(execute: {
+//                self.present(alert, animated: true)
+//            })
         }
     }
+    
+    @objc func heartTap(gesture : UITapGestureRecognizer){
+        let imageView = gesture.view as? UIImageView
+        performSegue(withIdentifier: "detailSegueFromHeart", sender: imageView)
+    }
+    
+    @objc func favoriteHeartTap(gesture : UITapGestureRecognizer){
+        //todo on yes
+        let alert = UIAlertController(title: "Remove Favorite?", message: "Do you want to remove this favorite restaurant", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {[weak self]_ in
+            let imageView = gesture.view as? UIImageView
+            self?.performSegue(withIdentifier: "detailSegueFromHeart", sender: imageView)
+        }))
+
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+        self.present(alert, animated: true)
+        //alertRemoveFavorite = "Do you want to remove this restaurant from Favorite"
+       
+    }
+    
 }
 
 extension RestaurantVC: UITableViewDelegate{
@@ -377,6 +419,17 @@ extension RestaurantVC: UITableViewDelegate{
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
             restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = true
         }
+    }
+}
+
+extension UIAlertAction{
+     func alertForFavoriteRestaurant(title: String, style: UIAlertActionStyle, imageView: UIImageView, viewController : UIViewController){
+        let alertAction = UIAlertAction(title: title, style: style, handler: ({(arg) in
+            viewController.performSegue(withIdentifier: "detailSegueFromHeart", sender: imageView)
+        }))
+        let alertController = UIAlertController(title: "Remove Favorite?", message: "Do you want to remove this favorite restaurant", preferredStyle: .alert)
+        alertController.addAction(alertAction)
+        
     }
 }
 

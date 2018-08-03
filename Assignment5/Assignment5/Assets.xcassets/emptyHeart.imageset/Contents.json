@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "heart.png",
+      "filename" : "emptyHeart.png",
       "scale" : "1x"
     },
     {

@@ -14,14 +14,11 @@ class RestaurantCell: UITableViewCell {
     @IBOutlet weak var btnHeart: UIButton!
     @IBOutlet weak var btnSingleMap: UIButton!
     @IBOutlet weak var imgRail: UIImageView!
-    @IBOutlet weak var imgStar1: UIImageView!
-    @IBOutlet weak var imgStar2: UIImageView!
-    @IBOutlet weak var imgStar3: UIImageView!
-    @IBOutlet weak var imgStar4: UIImageView!
-    @IBOutlet weak var imgStar5: UIImageView!
+
     @IBOutlet weak var lblMiles: UILabel!
     @IBOutlet weak var lblRestaurantName: UILabel!
     @IBOutlet weak var imgRatings: UIImageView!
+    @IBOutlet weak var imgHeart: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

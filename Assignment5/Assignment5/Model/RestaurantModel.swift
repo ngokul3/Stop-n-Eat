@@ -287,14 +287,14 @@ class Restaurant:  NSObject, NSCoding{
     var isSelected : Bool = false
     var comments : String = ""
     var dateVisited : Date = Date()
-    var favoriteImageName : String = "heart"
+    var favoriteImageName : String = "emptyHeart"
    // var restaurantImage
     var isFavorite : Bool = false{
         didSet{
             if(isFavorite){
-                favoriteImageName = "savedHeart"
+                favoriteImageName = "favHeart"
             }else{
-                favoriteImageName = "heart"
+                favoriteImageName = "emptyHeart"
             }
         }
     }
