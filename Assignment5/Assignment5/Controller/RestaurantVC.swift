@@ -15,10 +15,10 @@ class RestaurantVC: UIViewController {
     var trainStop : TrainStop?
     var cellArrray = [RestaurantCell]()
     private var restaurantModel = AppDel.restModel
-    private var networkModel = AppDel.networkModel
     private static var modelObserver: NSObjectProtocol?
     var removeFavoriteNo : ((UIAlertAction, String)->Void)?
     var shouldRemoveFavorite : Bool?
+    
     override func viewDidLoad() {
         
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -36,8 +36,7 @@ class RestaurantVC: UIViewController {
         catch{
             alertUser = "Unexpected Error while populating Resaurants. Try again"
         }
-        //to - foreach of observer since they are doing the same operation
-     
+   
         RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantLoadedFromNetwork), object: nil, queue: OperationQueue.main) {
             
             [weak self] (notification: Notification) in
@@ -73,7 +72,6 @@ class RestaurantVC: UIViewController {
     }
 }
 
-
 extension RestaurantVC{
     @IBAction func btnSave(_ sender: Any) {
         var rowNo : Int?
@@ -97,6 +95,7 @@ extension RestaurantVC{
         }
     }
 }
+
 extension RestaurantVC : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -130,11 +129,10 @@ extension RestaurantVC : UITableViewDataSource{
             cell.imgHeart.tag = indexPath.row
         }
         
-        networkModel.setRestaurantImage(forRestaurantImage: restaurant.imageURL, imageLoaded: ({(data,response,error) in
-            cell.imageLoaderClosure(data, response, error)
-            })
+        restaurantModel.loadRestaurantImage(imageURL: restaurant.imageURL, imageLoaded: ({(data,response,error) in
+                        cell.imageLoaderClosure(data, response, error)
+                    })
         )
-        
         return cell
     }
     

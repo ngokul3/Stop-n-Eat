@@ -338,7 +338,7 @@
             </objects>
             <point key="canvasLocation" x="652" y="782.15892053973016"/>
         </scene>
-        <!--Train StopVC-->
+        <!--Train Stops-->
         <scene sceneID="MOo-vZ-fjG">
             <objects>
                 <viewController id="PJJ-Pb-X40" customClass="TrainStopVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
@@ -346,7 +346,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="xOs-fK-sFz">
+                            <searchBar contentMode="redraw" placeholder="search any NJTransit train stop" translatesAutoresizingMaskIntoConstraints="NO" id="xOs-fK-sFz">
                                 <rect key="frame" x="0.0" y="56" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -397,7 +397,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uWm-DL-yzC"/>
                     </view>
-                    <navigationItem key="navigationItem" id="0xA-at-CSg"/>
+                    <navigationItem key="navigationItem" title="Train Stops" id="0xA-at-CSg"/>
                     <connections>
                         <outlet property="searchBar" destination="xOs-fK-sFz" id="TeP-AR-ojM"/>
                         <outlet property="tableView" destination="Qlq-N7-OU7" id="jmx-cI-mw2"/>

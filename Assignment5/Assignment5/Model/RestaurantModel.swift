@@ -12,17 +12,17 @@ class RestaurantModel: RestaurantProtocol{
   
     private static var instance: RestaurantProtocol?
     private var searchedRestaurants = [String : RestaurantArray]()
+    private var searchedRestaurantImage = [String : (Data,HTTPURLResponse)]()
     private lazy var networkModel = {
         return AppDel.networkModel
     }()
     var restaurantsFromNetwork : RestaurantArray
     var restaurantsSaved : RestaurantArray
- 
     
     private init(){
         restaurantsFromNetwork = RestaurantArray()
         restaurantsSaved = RestaurantArray()
-    }
+     }
 }
 
 extension RestaurantModel{
@@ -39,6 +39,27 @@ extension RestaurantModel{
     
     static func getTotalFavoriteCount()->Int{
         return getInstance().restaurantsSaved.count
+    }
+}
+
+extension RestaurantModel{
+    
+    func loadRestaurantImage(imageURL: String, imageLoaded: @escaping (Data?, HTTPURLResponse?, Error?)->Void){
+        
+        if let (data, response) = searchedRestaurantImage[imageURL]{
+            imageLoaded(data, response, nil)
+        }else{
+            networkModel.setRestaurantImage(forRestaurantImage: imageURL, imageLoaded: {[weak self](dataOpt, responseOpt, errorOpt) in
+                
+                guard let data = dataOpt,
+                    let response = responseOpt else{
+                        print("Image didn't load") // Not crashing the application just because the image icon was not available
+                        return
+                }
+                self?.searchedRestaurantImage[imageURL] = (data, response)
+                imageLoaded(data, response, errorOpt)
+            })
+        }
     }
 }
 
@@ -285,7 +306,7 @@ class Restaurant:  NSObject, NSCoding{
         let distance = self.distanceBetweenTwoCoordinates(lat1: latitude, lon1: longitude, latOpt: trainStop?.latitude, lonOpt: trainStop?.longitude).rounded(toPlaces: 1)
         
         if let stop = self.trainStop{
-            distanceFromStopDesc = String(describing:distance) + " mi from " + String(describing: stop.stopName) + " Train Station"
+            distanceFromStopDesc = String(describing:distance) + " mi from " + String(describing: stop.stopName)
         }
         return distance
     }

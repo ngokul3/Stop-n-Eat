@@ -14,7 +14,6 @@ protocol TrainStopProtocol {
     var filteredStops : StopArray {get set}
     var currentFilter : String {get set}
     func loadTransitData(completed : @escaping (String?)->Void) throws
-    
  }
 
 protocol RestaurantProtocol{
@@ -29,6 +28,7 @@ protocol RestaurantProtocol{
     func deleteRestaurantFromFavorite(restaurant: Restaurant) throws
     func restoreRestaurantsFromFavorite(restaurants : [Restaurant])
     func generateEmptyRestaurant() throws-> Restaurant
+    func loadRestaurantImage(imageURL: String, imageLoaded: @escaping (Data?, HTTPURLResponse?, Error?)->Void)
 }
 
 
@@ -97,3 +97,9 @@ extension String{
     }
     
 }
+
+/**Todo
+ test yelp without network. display useful message
+ cache image
+ dont load image url in mail if it is sempty
+ */
