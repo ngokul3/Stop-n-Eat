@@ -29,6 +29,8 @@ class Persistence {
             }
         }
         
+        restaurant.isFavorite = false
+        
         //Printing saved data. Auditing purpose
         if let data = UserDefaults.standard.data(forKey: "restaurants"),
             let myRestList = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Restaurant] {

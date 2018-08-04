@@ -115,6 +115,13 @@ extension RestaurantVC : UITableViewDataSource{
         let imageName = "\(rating)Stars"
         cell.imgRatings.image = UIImage(named: imageName)
 
+        if(AppDel.restModel.restaurantsSaved.filter({$0.restaurantId == restaurant.restaurantId}).count > 0)
+        {
+            restaurant.isFavorite = true
+        }else{
+            restaurant.isFavorite = false
+        }
+        
         cell.imgHeart.image = UIImage(named: restaurant.favoriteImageName)
         let heartTap : UITapGestureRecognizer?
         

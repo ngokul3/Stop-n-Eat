@@ -112,7 +112,6 @@ extension SavedRestaurantVC: UITableViewDelegate{
     }
 }
 
-
 extension SavedRestaurantVC{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         guard let segueName = segue.identifier else{

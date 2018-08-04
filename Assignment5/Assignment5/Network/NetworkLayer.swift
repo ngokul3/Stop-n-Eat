@@ -9,8 +9,6 @@
 import Foundation
 import Alamofire
 
-//Todo cache image?
-
 protocol NetworkProtocol {
     static func getInstance() -> NetworkProtocol
     func loadFromNetwork(location: String, term: String, finished: @escaping (_ dataDict: NSDictionary?, _ errorMsg: String?)  -> ())

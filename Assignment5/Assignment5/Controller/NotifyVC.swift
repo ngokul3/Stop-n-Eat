@@ -234,7 +234,7 @@ extension NotifyVC{
             innerHTML += "<td> " + String(itemCount) + ") " + "</td>"
             
             if(restaurant.restaurantURL.isEmpty){
-                innerHTML +=  "<td>" + restaurant.restaurantName + restaurant.displayedAddress.getTruncatedAddress(firstAddress: "", seperator: " @ ") + "</a>  </td>"
+                innerHTML +=  "<td>" + restaurant.restaurantName + "</td>"
 
             }else{
             innerHTML +=  "<td><a href=" + restaurant.restaurantURL + ">" + restaurant.restaurantName + restaurant.displayedAddress.getTruncatedAddress(firstAddress: "", seperator: " @ ") + "</a>  </td>"

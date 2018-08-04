@@ -148,11 +148,6 @@ extension RestaurantModel{
                     
                     let restaurant = Restaurant(_url: restaurantURL, _imageUrl: restaurantImageURL, _trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating), _displayAddress :  completeAddress)
                     
-                    if(self?.restaurantsSaved.filter({$0.restaurantId == restaurant.restaurantId}).count ?? 0 > 0)
-                    {
-                        restaurant.isFavorite = true
-                    }
-
                     if(restaurant.distanceFromTrainStop <= 2){ // Loading only those data that are less than 2 miles. Idea is to see restaurants in walking distance
                         
                         print("Adding restaurant \(restaurant.restaurantName)")
@@ -228,7 +223,6 @@ extension RestaurantModel{
     func deleteRestaurantFromFavorite(restaurant: Restaurant) throws{
         
         if(restaurantsSaved.contains{$0.restaurantId == restaurant.restaurantId}){
-            restaurant.isFavorite = false
             restaurantsSaved = restaurantsSaved.filter({($0.restaurantId != restaurant.restaurantId)})
         }
         else{
@@ -261,7 +255,7 @@ class Restaurant:  NSObject, NSCoding{
         aCoder.encode(givenRating, forKey: "givenRating")
         aCoder.encode(myRating, forKey: "myRating")
         aCoder.encode(comments, forKey: "comments")
-        aCoder.encode(comments, forKey: "displayedAddress")
+        aCoder.encode(displayedAddress, forKey: "displayedAddress")
         aCoder.encode(distanceFromStopDesc, forKey: "distanceFromStopDesc")
         aCoder.encode(dateVisited, forKey : "dateVisited")
         aCoder.encode(isFavorite, forKey : "isFavorite")
@@ -329,7 +323,6 @@ class Restaurant:  NSObject, NSCoding{
     var comments : String = ""
     var dateVisited : Date = Date()
     var favoriteImageName : String = "emptyHeart"
-   // var restaurantImage
     var isFavorite : Bool = false{
         didSet{
             if(isFavorite){

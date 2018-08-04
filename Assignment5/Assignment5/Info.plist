@@ -49,7 +49,9 @@
 	<string>Bearer qEjtERYCtGRtYmaELAxisLtdM2TWMsUbLG-wvs0b8KlxIfECiKGRrnY7AKOZwe6Zsz_DehvIAXJtt4jiIrKYjCgyf0Tx4CK_yX0u-6LpOc35By8TiyGlLdElXgqzWXYx</string>
 	<key>NJTransitJSONFile</key>
 	<string>RailStop</string>
-	<key>Item 0</key>
-	<string>whatsapp</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>whatsapp</string>
+	</array>
 </dict>
 </plist>
