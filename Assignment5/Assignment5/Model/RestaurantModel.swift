@@ -293,7 +293,14 @@ class Restaurant:  NSObject, NSCoding{
         switch isSelected{
             
         case true:
-            if(!AppDel.notifyModel.getRestaurantsToNotify().contains(self) && !self.restaurantId.isEmpty){
+//            if(!AppDel.notifyModel.getRestaurantsToNotify().contains(self) && !self.restaurantId.isEmpty){
+//                AppDel.notifyModel.addRestaurantToNotify(restaurantToNotify: self)
+//            }
+//
+            if(!self.restaurantId.isEmpty && !AppDel.notifyModel.getRestaurantsToNotify().contains{arg in
+                    if (arg.restaurantId == self.restaurantId) {return true}else{return false}
+                }
+            ){
                 AppDel.notifyModel.addRestaurantToNotify(restaurantToNotify: self)
             }
             
