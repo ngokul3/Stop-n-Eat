@@ -288,11 +288,32 @@ class Restaurant:  NSObject, NSCoding{
     }
     
     var trainStop : TrainStop?
- //   var notifyModel = AppDel.notifyModel
+    var setRestaurantToNotifyList: Void{
+        
+        switch isSelected{
+            
+        case true:
+            if(!AppDel.notifyModel.getRestaurantsToNotify().contains(self) && !self.restaurantId.isEmpty){
+                AppDel.notifyModel.addRestaurantToNotify(restaurantToNotify: self)
+            }
+            
+        case false:
+            if(AppDel.notifyModel.getRestaurantsToNotify().contains(self)){
+                
+                do{
+                    try AppDel.notifyModel.removeRestauarntFromNotification(restaurant: self)
+                }
+                catch{
+                    preconditionFailure("Not able to remove restaurant from selected list")
+                }
+            }
+        }
+    }
     var restaurantName : String = ""{
         didSet{
             if(restaurantId.isEmpty){
                 restaurantId = String(describing: RestaurantModel.getTotalFavoriteCount())
+                setRestaurantToNotifyList
             }
         }
     }
@@ -320,24 +341,7 @@ class Restaurant:  NSObject, NSCoding{
     var myRating : Int = 0
     var isSelected : Bool = false{
         didSet{
-            switch isSelected{
-                
-            case true:
-                if(!AppDel.notifyModel.getRestaurantsToNotify().contains(self)){
-                    AppDel.notifyModel.addRestaurantToNotify(restaurantToNotify: self)
-                }
-            
-            case false:
-                if(AppDel.notifyModel.getRestaurantsToNotify().contains(self)){
-                    
-                    do{
-                        try AppDel.notifyModel.removeRestauarntFromNotification(restaurant: self)
-                    }
-                    catch{
-                       preconditionFailure("Not able to remove restaurant from selected list")
-                    }
-                }
-            }
+           setRestaurantToNotifyList
         }
     }
     var comments : String = ""

@@ -34,12 +34,14 @@ class NotifyModel: NotifyProtocol{
     
     func removeRestauarntFromNotification(restaurant: Restaurant) throws{
         if(notifyRestaurants.contains{$0.restaurantId == restaurant.restaurantId}){
-            notifyRestaurants = notifyRestaurants.filter({($0.restaurantId != restaurant.restaurantId)})
+             notifyRestaurants = notifyRestaurants.filter({($0.restaurantId != restaurant.restaurantId)})
+             restaurant.isSelected = false
         }
         else{
             throw NotifyError.notAbleToRemoveRestaurant
         }
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantNotificationListChanged), object: self))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteListChanged), object: self))
     }
     
     

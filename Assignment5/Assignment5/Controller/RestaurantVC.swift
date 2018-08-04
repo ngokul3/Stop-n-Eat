@@ -122,6 +122,12 @@ extension RestaurantVC : UITableViewDataSource{
             restaurant.isFavorite = false
         }
         
+        if(restaurant.isSelected){
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryType.none
+        }
+        
         cell.imgHeart.image = UIImage(named: restaurant.favoriteImageName)
         let heartTap : UITapGestureRecognizer?
         

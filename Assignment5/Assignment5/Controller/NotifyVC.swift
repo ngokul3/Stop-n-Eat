@@ -20,25 +20,6 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
   //  private var model = RestaurantModel.getInstance()
     
     private static var modelObserver: NSObjectProtocol?
-
-    //Same restaurant could be selected from Network and Favorite List. So we are removing the duplicates
- //   private lazy var restaurantsToNotify = {[weak self] in
-        
-//                    let restaurantsFromNetwork = self.model.restaurantsFromNetwork.filter({$0.isSelected == true})
-//                    let restaurantsFromFavorite = self.model.restaurantsSaved.filter({$0.isSelected == true})
-//                    let totalList = restaurantsFromNetwork + restaurantsFromFavorite
-//
-//                    var filterRestaurants = [Restaurant]()
-//                    totalList.forEach({
-//                        if(!filterRestaurants.contains($0)){
-//                            filterRestaurants.append($0)
-//                        }
-//                    })
-        
-                   // return self?.notifyModel.getRestaurantsToNotify()
-   //             }()
-    
-  
     private var showDefaultIndexClosure : (()->Void)?
     
     override func viewDidLoad() {
@@ -72,6 +53,7 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
 }
 
 //todo - image lods on custom added favorite - bug??
+//todo delete of record from notify list should set isselected = false
 extension NotifyVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
