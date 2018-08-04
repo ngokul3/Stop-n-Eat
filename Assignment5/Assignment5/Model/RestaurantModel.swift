@@ -155,9 +155,7 @@ extension RestaurantModel{
                     }
                 }
                 
-                 print("Before Caching layer")
-                 self?.searchedRestaurants[trainStop.stopName] = self?.restaurantsFromNetwork
-                print("Caching layer")
+                self?.searchedRestaurants[trainStop.stopName] = self?.restaurantsFromNetwork
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantLoadedFromNetwork), object: self))
             }
             
