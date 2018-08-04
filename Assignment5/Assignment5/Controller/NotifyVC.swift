@@ -15,17 +15,36 @@ import PopupDialog
 class NotifyVC: UIViewController, UITabBarControllerDelegate {
 
     private var model = RestaurantModel.getInstance()
+    
+    //Same restaurant could be selected from Network and Favorite List. So we are removing the duplicates
     private lazy var restaurantsToNotify : ()->[Restaurant] = {
-       let restaurantsFromNetwork = self.model.restaurantsFromNetwork.filter({$0.isSelected == true})
-       let restaurantsFromFavorite = self.model.restaurantsSaved.filter({$0.isSelected == true})
-       let restaurantsToNotify = restaurantsFromNetwork + restaurantsFromFavorite
-       return restaurantsToNotify
-    }
+        
+                    let restaurantsFromNetwork = self.model.restaurantsFromNetwork.filter({$0.isSelected == true})
+                    let restaurantsFromFavorite = self.model.restaurantsSaved.filter({$0.isSelected == true})
+                    let totalList = restaurantsFromNetwork + restaurantsFromFavorite
+
+                    var filterRestaurants = [Restaurant]()
+                    totalList.forEach({
+                        if(!filterRestaurants.contains($0)){
+                            filterRestaurants.append($0)
+                        }
+                    })
+        
+                    return filterRestaurants
+                }
+    private var showDefaultIndexClosure : (()->Void)?
+    
     override func viewDidLoad() {
         tabBarController?.delegate = self
         super.viewDidLoad()
-        
         showImageDialog()
+        
+        showDefaultIndexClosure = {[weak self] in
+            guard let tabBC = self?.tabBarController else{
+                return
+            }
+            tabBC.selectedIndex = 0
+        }
     }
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController){
@@ -34,17 +53,15 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
             showImageDialog()
         }
     }
-
-
 }
+
 extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
     func showImageDialog(animated: Bool = true) {
         
-        // Prepare the popup assets
-        let title = "Let's go!"
+        let title = "Places of Interests"
         let message = "Send your chosen places to your friend(s)"
-        let image = UIImage(named: "GreenInvite.png")
+        let image = UIImage(named: "") //Todo
         
         let popup = PopupDialog(title: title, message: message, image: image)
         
@@ -72,14 +89,25 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
         self.present(popup, animated: animated, completion: nil)
     }
     
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true, completion: self.showDefaultIndexClosure)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith: MFMailComposeResult, error: Error?)
+    {
+        self.dismiss(animated: true, completion: self.showDefaultIndexClosure)
+    }
+}
+
+extension NotifyVC{
     
     @objc func cancelClicked(){
         
         self.dismiss(animated: true, completion: nil)
-        guard let tabBarC = tabBarController else{
+        guard let tabBC = tabBarController else{
             return
         }
-        tabBarC.selectedIndex = 0
+        tabBC.selectedIndex = 0
     }
     
     @objc func mailClicked(){
@@ -99,11 +127,11 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
         restaurantInfo = convertToHTMLTable(restaurants: restaurantsToNotify())
         
         mailComposer.setMessageBody(restaurantInfo, isHTML: true)
-        mailComposer.setSubject("Check out these locations that we can go")
+        mailComposer.setSubject("Hi")
         mailComposer.mailComposeDelegate = self
         
         DispatchQueue.main.async(execute: {
-            self.present(mailComposer, animated: true, completion: nil)
+            self.present(mailComposer, animated: true, completion: self.showDefaultIndexClosure)
         })
     }
     
@@ -125,9 +153,8 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
         msgComposer.messageComposeDelegate = self
         
         DispatchQueue.main.async(execute: {
-            self.present(msgComposer, animated: true, completion: nil)
+            self.present(msgComposer, animated: true, completion: self.showDefaultIndexClosure)
         })
-        
     }
     
     @objc func whatsAppClicked()
@@ -153,15 +180,8 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
             }
         }
     }
-    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith: MFMailComposeResult, error: Error?)
-    {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-}
+   
+ }
 
 extension NotifyVC{
     var alertUser :  String{
@@ -173,7 +193,10 @@ extension NotifyVC{
             let alert = UIAlertController(title: "Attention", message: newValue, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel,
                                           handler: ({[weak self]_ in
-                                            self?.tabBarController!.selectedIndex = 0
+                                            
+                                                if let tabBC = self?.tabBarController{
+                                                tabBC.selectedIndex = 0
+                                                }
                                             })
                                         )
                         )
@@ -238,8 +261,6 @@ extension NotifyVC{
             innerMSGBody += "\n"
             itemCount = itemCount + 1
         }
-        
         return innerMSGBody
     }
-    
 }
