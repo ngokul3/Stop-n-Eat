@@ -44,7 +44,12 @@ extension RestaurantModel{
 
 extension RestaurantModel{
     
-    func loadRestaurantImage(imageURL: String, imageLoaded: @escaping (Data?, HTTPURLResponse?, Error?)->Void){
+    func loadRestaurantImage(imageURLOpt: String?, imageLoaded: @escaping (Data?, HTTPURLResponse?, Error?)->Void){
+        
+        guard let imageURL = imageURLOpt else{
+            print("Image URL was empty")
+            return
+        }
         
         if let (data, response) = searchedRestaurantImage[imageURL]{
             imageLoaded(data, response, nil)
@@ -260,6 +265,7 @@ class Restaurant:  NSObject, NSCoding{
         aCoder.encode(distanceFromStopDesc, forKey: "distanceFromStopDesc")
         aCoder.encode(dateVisited, forKey : "dateVisited")
         aCoder.encode(isFavorite, forKey : "isFavorite")
+        aCoder.encode(imageURL, forKey: "imageURL")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -267,6 +273,7 @@ class Restaurant:  NSObject, NSCoding{
             let restId = aDecoder.decodeObject(forKey: "restaurantId") as? String,
             let restName = aDecoder.decodeObject(forKey: "restaurantName") as? String,
             let restURL = aDecoder.decodeObject(forKey: "restaurantURL") as? String,
+            let restImageURL = aDecoder.decodeObject(forKey: "imageURL") as? String,
             let restComment = aDecoder.decodeObject(forKey:"comments") as? String,
             let restAddress = aDecoder.decodeObject(forKey:"displayedAddress") as? String,
             let restDistanceDesc = aDecoder.decodeObject(forKey:"distanceFromStopDesc") as? String,
@@ -284,6 +291,7 @@ class Restaurant:  NSObject, NSCoding{
         isFavorite = aDecoder.decodeBool(forKey: "isFavorite")
         distanceFromStopDesc = restDistanceDesc
         restaurantURL = restURL
+        imageURL = restImageURL
         super.init()
     }
     

@@ -20,7 +20,8 @@ class DetailRestaurantVC: UIViewController {
     @IBOutlet weak var txtRestaurantName: UITextField!
     @IBOutlet weak var lblDistance: UILabel!
     @IBOutlet weak var swtNotify: UISwitch!
-   
+    @IBOutlet weak var imgRestaurantURL: UIImageView!
+    
     private static var modelObserver: NSObjectProtocol?
     private lazy var btnRatings : [UIButton] = [btnRating1, btnRating2, btnRating3, btnRating4, btnRating5]
     
@@ -53,6 +54,9 @@ class DetailRestaurantVC: UIViewController {
             if(btnIndex <= btnClickedIndex){
                 self?.restaurant?.myRating += 1
                 btn.setBackgroundImage(UIImage(named: fullImageName), for: .normal)
+             //   self?.btnRating4.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+                self?.btnRating4.imageView?.contentMode = UIViewContentMode.scaleAspectFill
+                
              }
             else{
                 btn.setBackgroundImage(UIImage(named: emptyImageName), for: .normal)
@@ -81,8 +85,36 @@ class DetailRestaurantVC: UIViewController {
         }
     }
     
-    //Todo - bring in image next to info button
-    override func viewDidLoad() {
+    lazy var setUpRestaurantImage: ((Data?, HTTPURLResponse?, Error?)-> Void) = {[weak self](data, response, error) in
+        if let e = error {
+            print("HTTP request failed: \(e.localizedDescription)")
+        }
+        else{
+            if let httpResponse = response {
+                print("http response code: \(httpResponse.statusCode)")
+                
+                let HTTP_OK = 200
+                if(httpResponse.statusCode == HTTP_OK ){
+                    
+                    if let imageData = data{
+                        OperationQueue.main.addOperation {
+                            print("urlArrivedCallback operation: Now on thread: \(Thread.current)")
+                            self?.imgRestaurantURL.image = UIImage(data: imageData)
+                        }
+                    }else{
+                        print("Image data not available")
+                    }
+                    
+                }else{
+                    print("HTTP Error \(httpResponse.statusCode)")
+                }
+            }else{
+                print("Can't parse imageresponse")
+            }
+        }
+    }
+    
+     override func viewDidLoad() {
         super.viewDidLoad()
     
         txtNotes.layer.borderColor = UIColor.gray.cgColor
@@ -90,6 +122,11 @@ class DetailRestaurantVC: UIViewController {
         txtNotes.layer.cornerRadius = 0.8
         txtNotes.delegate = self
         txtRestaurantName.delegate = self
+        
+        AppDel.restModel.loadRestaurantImage(imageURLOpt: restaurant?.imageURL, imageLoaded: ({[weak self](data, response, error) in
+           self?.setUpRestaurantImage(data, response, error)
+        }))
+        
         DetailRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantReadyToBeSaved), object: nil, queue: OperationQueue.main) {
             
             [weak self] (notification: Notification) in
@@ -233,6 +270,8 @@ extension DetailRestaurantVC{
         self.updateRating(sender)
     }
 }
+
+
 
 
 

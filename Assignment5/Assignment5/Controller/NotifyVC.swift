@@ -161,7 +161,6 @@ extension NotifyVC{
     {
         var restaurantInfo = String()
         restaurantInfo = convertToMSGBody(restaurants: restaurantsToNotify())
-        
         let urlWhats = "whatsapp://send?text=\(restaurantInfo)"
         
         if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) {
@@ -249,7 +248,6 @@ extension NotifyVC{
         
         print(html)
         return html
-        
     }
     
     func convertToMSGBody(restaurants : [Restaurant])-> String{

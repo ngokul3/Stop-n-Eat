@@ -28,7 +28,7 @@ protocol RestaurantProtocol{
     func deleteRestaurantFromFavorite(restaurant: Restaurant) throws
     func restoreRestaurantsFromFavorite(restaurants : [Restaurant])
     func generateEmptyRestaurant() throws-> Restaurant
-    func loadRestaurantImage(imageURL: String, imageLoaded: @escaping (Data?, HTTPURLResponse?, Error?)->Void)
+    func loadRestaurantImage(imageURLOpt: String?, imageLoaded: @escaping (Data?, HTTPURLResponse?, Error?)->Void)
 }
 
 
@@ -92,7 +92,6 @@ extension String{
         if(addressLine.count > 0){
             shortAddress =  shortAddress + seperator + addressLine[0]
         }
-        
         return shortAddress
     }
     
@@ -102,4 +101,6 @@ extension String{
  test yelp without network. display useful message
  cache image
  dont load image url in mail if it is sempty
+ load project into test directory and check all source code
+ some imag didn't load when checked in . see the error message from git hub
  */

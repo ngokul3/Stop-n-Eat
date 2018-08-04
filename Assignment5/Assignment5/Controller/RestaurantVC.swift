@@ -129,7 +129,7 @@ extension RestaurantVC : UITableViewDataSource{
             cell.imgHeart.tag = indexPath.row
         }
         
-        restaurantModel.loadRestaurantImage(imageURL: restaurant.imageURL, imageLoaded: ({(data,response,error) in
+        restaurantModel.loadRestaurantImage(imageURLOpt: restaurant.imageURL, imageLoaded: ({(data,response,error) in
                         cell.imageLoaderClosure(data, response, error)
                     })
         )
