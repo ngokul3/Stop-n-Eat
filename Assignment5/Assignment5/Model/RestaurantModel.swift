@@ -288,6 +288,7 @@ class Restaurant:  NSObject, NSCoding{
     }
     
     var trainStop : TrainStop?
+ //   var notifyModel = AppDel.notifyModel
     var restaurantName : String = ""{
         didSet{
             if(restaurantId.isEmpty){
@@ -317,7 +318,28 @@ class Restaurant:  NSObject, NSCoding{
         }
     }
     var myRating : Int = 0
-    var isSelected : Bool = false
+    var isSelected : Bool = false{
+        didSet{
+            switch isSelected{
+                
+            case true:
+                if(!AppDel.notifyModel.getRestaurantsToNotify().contains(self)){
+                    AppDel.notifyModel.addRestaurantToNotify(restaurantToNotify: self)
+                }
+            
+            case false:
+                if(AppDel.notifyModel.getRestaurantsToNotify().contains(self)){
+                    
+                    do{
+                        try AppDel.notifyModel.removeRestauarntFromNotification(restaurant: self)
+                    }
+                    catch{
+                       preconditionFailure("Not able to remove restaurant from selected list")
+                    }
+                }
+            }
+        }
+    }
     var comments : String = ""
     var dateVisited : Date = Date()
     var favoriteImageName : String = "emptyHeart"

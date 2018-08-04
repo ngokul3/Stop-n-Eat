@@ -31,6 +31,12 @@ protocol RestaurantProtocol{
     func loadRestaurantImage(imageURLOpt: String?, imageLoaded: @escaping (Data?, HTTPURLResponse?, Error?)->Void)
 }
 
+protocol NotifyProtocol{
+    static func getInstance()->NotifyProtocol
+    func getRestaurantsToNotify()->[Restaurant]
+    func addRestaurantToNotify(restaurantToNotify : Restaurant)
+    func removeRestauarntFromNotification(restaurant: Restaurant) throws
+}
 
 enum TrainStopError: Error{
     case invalidRowSelection()
@@ -52,6 +58,10 @@ enum RestaurantError: Error{
     case notAbleToRestore()
     case notAbleToCreateEmptyRestaurant()
 }
+
+enum NotifyError: Error{
+    case notAbleToRemoveRestaurant
+}
 struct Messages {
     static let StopListFiltered = "Train Stops Filtered"
     static let RestaurantLoadedFromNetwork = "Restaurants From Network Loaded"
@@ -60,6 +70,7 @@ struct Messages {
     static let RestaurantDeleted = "Restaurant Deleted from Saved list"
     static let RestaurantCanBeRemovedFromFavorite = "Restaurant cane be Deleted from Saved list"
     static let ImageArrived = "Image arrived"
+    static let RestaurantNotificationListChanged = "Restaurants to be notified changed"
 }
 
 enum DetailVCType : String

@@ -18,6 +18,7 @@ var AppDel: AppDelegate {
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private var netModel = NetworkModel.getInstance()
+    private var notModel = NotifyModel.getInstance()
     private var restaurantModel = RestaurantModel.getInstance()
     var window: UIWindow?
 
@@ -33,9 +34,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    var notifyModel: NotifyProtocol {
+        get {
+            return notModel
+        }
+    }
+ 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
+         return true
     }
 
 }

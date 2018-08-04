@@ -30,6 +30,8 @@
 		90A31A9121095A86000DB608 /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A9021095A86000DB608 /* RestaurantCell.swift */; };
 		90A31A93210A0AD1000DB608 /* SavedRestaurantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A92210A0AD1000DB608 /* SavedRestaurantVC.swift */; };
 		90A31A95210A0EDC000DB608 /* SavedRestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A31A94210A0EDC000DB608 /* SavedRestaurantCell.swift */; };
+		90EC52462115FEE900D2D63C /* NotifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EC52452115FEE900D2D63C /* NotifyCell.swift */; };
+		90EC52482116073D00D2D63C /* NotifyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EC52472116073D00D2D63C /* NotifyModel.swift */; };
 		B35240353C4004F6D8DD9F18 /* Pods_Assignment5Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5BC1717E2557B9F5746C152 /* Pods_Assignment5Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +87,8 @@
 		90A31A9021095A86000DB608 /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
 		90A31A92210A0AD1000DB608 /* SavedRestaurantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantVC.swift; sourceTree = "<group>"; };
 		90A31A94210A0EDC000DB608 /* SavedRestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantCell.swift; sourceTree = "<group>"; };
+		90EC52452115FEE900D2D63C /* NotifyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyCell.swift; sourceTree = "<group>"; };
+		90EC52472116073D00D2D63C /* NotifyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyModel.swift; sourceTree = "<group>"; };
 		A183E3E3E8589056C36C9F98 /* Pods-Assignment5Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assignment5Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Assignment5Tests/Pods-Assignment5Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B5BC1717E2557B9F5746C152 /* Pods_Assignment5Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Assignment5Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F790217F0D29031A1A06CDEB /* Pods_Assignment5.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Assignment5.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +159,7 @@
 			children = (
 				90A31A94210A0EDC000DB608 /* SavedRestaurantCell.swift */,
 				90A31A9021095A86000DB608 /* RestaurantCell.swift */,
+				90EC52452115FEE900D2D63C /* NotifyCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 				90960B5F210C8672005EC2AA /* TrainStopModel.swift */,
 				90960B61210C8672005EC2AA /* Types.swift */,
 				90998AC0210D3030001E5848 /* MapModel.swift */,
+				90EC52472116073D00D2D63C /* NotifyModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -554,6 +560,7 @@
 				90998AC1210D3031001E5848 /* MapModel.swift in Sources */,
 				90960B63210C8672005EC2AA /* RestaurantModel.swift in Sources */,
 				9064B68B210DDEEA00E35072 /* Persistence.swift in Sources */,
+				90EC52462115FEE900D2D63C /* NotifyCell.swift in Sources */,
 				90A31A93210A0AD1000DB608 /* SavedRestaurantVC.swift in Sources */,
 				90960B64210C8672005EC2AA /* Types.swift in Sources */,
 				90998ABF210D2A7B001E5848 /* MapViewVC.swift in Sources */,
@@ -561,6 +568,7 @@
 				9064B68F210E065200E35072 /* DetailRestaurantVC.swift in Sources */,
 				90A31A632107FE8E000DB608 /* TrainStopVC.swift in Sources */,
 				90960B62210C8672005EC2AA /* TrainStopModel.swift in Sources */,
+				90EC52482116073D00D2D63C /* NotifyModel.swift in Sources */,
 				90108A08210A7940008B9BC7 /* NotifyVC.swift in Sources */,
 				90A31A95210A0EDC000DB608 /* SavedRestaurantCell.swift in Sources */,
 				90A31A612107FE8E000DB608 /* AppDelegate.swift in Sources */,
