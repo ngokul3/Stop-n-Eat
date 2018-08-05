@@ -26,22 +26,51 @@ class NotifyModel: NotifyProtocol{
         return notifyRestaurants
     }
     
+    lazy var isNotifiedRestaurantPresent : (Restaurant, Restaurant)->Bool = {(arg, rest) in
+        
+        if (arg.restaurantId == rest.restaurantId) {
+            return true
+        }else{
+            return false
+        }
+    }
+    func checkIsSelectedConsistency(restaraunts: [Restaurant], restaurantToNotify: Restaurant){
+        
+        let restFromNetwork = restaraunts.first(where: {(isNotifiedRestaurantPresent($0, restaurantToNotify))})
+        
+        guard let restaurant = restFromNetwork else{
+            return
+        }
+        
+        if(restaurant.isSelected != restaurantToNotify.isSelected){
+            restaurant.isSelected = restaurantToNotify.isSelected
+        }
+    }
+    
     func addRestaurantToNotify(restaurantToNotify: Restaurant) {
         notifyRestaurants.append(restaurantToNotify)
        
+        checkIsSelectedConsistency(restaraunts: AppDel.restModel.restaurantsFromNetwork, restaurantToNotify: restaurantToNotify)
+        checkIsSelectedConsistency(restaraunts: AppDel.restModel.restaurantsSaved, restaurantToNotify: restaurantToNotify)
+        
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantNotificationListChanged), object: self))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
     }
     
     func removeRestauarntFromNotification(restaurant: Restaurant) throws{
         if(notifyRestaurants.contains{$0.restaurantId == restaurant.restaurantId}){
              notifyRestaurants = notifyRestaurants.filter({($0.restaurantId != restaurant.restaurantId)})
              restaurant.isSelected = false
+            
+            checkIsSelectedConsistency(restaraunts: AppDel.restModel.restaurantsFromNetwork, restaurantToNotify: restaurant)
+            checkIsSelectedConsistency(restaraunts: AppDel.restModel.restaurantsSaved, restaurantToNotify: restaurant)
+            
         }
         else{
             throw NotifyError.notAbleToRemoveRestaurant
         }
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantNotificationListChanged), object: self))
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteListChanged), object: self))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
     }
     
     

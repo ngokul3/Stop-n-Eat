@@ -66,7 +66,7 @@ struct Messages {
     static let StopListFiltered = "Train Stops Filtered"
     static let RestaurantLoadedFromNetwork = "Restaurants From Network Loaded"
     static let RestaurantReadyToBeSaved = "Restaurant refreshed to Favorite"
-    static let FavoriteListChanged = "Add, Delete or Edit on the Restaurant Model"
+    static let FavoriteOrNotifyChanged = "Favorite Changed or Notify List Changed on the Restaurant Model"
     static let RestaurantDeleted = "Restaurant Deleted from Saved list"
     static let RestaurantCanBeRemovedFromFavorite = "Restaurant cane be Deleted from Saved list"
     static let ImageArrived = "Image arrived"

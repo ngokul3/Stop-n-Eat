@@ -45,7 +45,7 @@ class RestaurantVC: UIViewController {
             }
         }
         
-        RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.FavoriteListChanged), object: nil, queue: OperationQueue.main) {
+        RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.FavoriteOrNotifyChanged), object: nil, queue: OperationQueue.main) {
             
             [weak self] (notification: Notification) in
             if let s = self {

@@ -200,7 +200,7 @@ extension RestaurantModel{
         let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantReadyToBeSaved), object: nil)
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
         
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteListChanged), object: self))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
     }
    
     func restoreRestaurantsFromFavorite(restaurants : [Restaurant]){
@@ -215,7 +215,7 @@ extension RestaurantModel{
         let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantReadyToBeSaved), object: nil)
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
 
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteListChanged), object: self))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
    }
     
     func deleteRestaurantFromFavorite(restaurant: Restaurant) throws{
@@ -232,7 +232,7 @@ extension RestaurantModel{
     
         NotificationCenter.default.post(name: nsNotification1.name, object: nil, userInfo:[Consts.KEY0: restaurant])
         NotificationCenter.default.post(name: nsNotification2.name, object: nil, userInfo:[Consts.KEY0: restaurant])
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteListChanged), object: self))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
     }
 }
 
@@ -288,24 +288,49 @@ class Restaurant:  NSObject, NSCoding{
     }
     
     var trainStop : TrainStop?
+    
+    lazy var isRestaurantSetToNotifyClosure : (Restaurant)->Bool = {[weak self](arg) in
+        
+        if (arg.restaurantId == self?.restaurantId) {
+            return true
+         }else{
+            return false
+        }
+    }
+    
+     lazy var isRestaurantInSameStateAsNotify: ((Restaurant))->Bool = {[weak self](arg) in
+        
+        if(arg.restaurantId == self?.restaurantId){
+            if (arg.isSelected == self?.isSelected) {
+                return true
+            }else{
+                return false
+            }
+        }
+        else{
+            return false
+        }
+    }
     var setRestaurantToNotifyList: Void{
         
+        defer{
+            if(AppDel.restModel.restaurantsFromNetwork.contains{isRestaurantSetToNotifyClosure($0)}){
+                
+            }
+        }
         switch isSelected{
             
         case true:
-//            if(!AppDel.notifyModel.getRestaurantsToNotify().contains(self) && !self.restaurantId.isEmpty){
-//                AppDel.notifyModel.addRestaurantToNotify(restaurantToNotify: self)
-//            }
-//
-            if(!self.restaurantId.isEmpty && !AppDel.notifyModel.getRestaurantsToNotify().contains{arg in
-                    if (arg.restaurantId == self.restaurantId) {return true}else{return false}
-                }
-            ){
+            
+            guard !self.restaurantId.isEmpty else{
+                return // This means user created favorite by clicking "+". Restaurant Id comes from Yelp or it is empty if a new restaurant isn't saved.
+            }
+            if(!AppDel.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotifyClosure($0)}){
                 AppDel.notifyModel.addRestaurantToNotify(restaurantToNotify: self)
             }
-            
+
         case false:
-            if(AppDel.notifyModel.getRestaurantsToNotify().contains(self)){
+            if(AppDel.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotifyClosure($0)}){
                 
                 do{
                     try AppDel.notifyModel.removeRestauarntFromNotification(restaurant: self)
