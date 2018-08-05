@@ -12,6 +12,7 @@ import MessageUI
 import SafariServices
 import PopupDialog
 
+//Todo - cancel should stay on current VC
 class NotifyVC: UIViewController, UITabBarControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -72,6 +73,8 @@ extension NotifyVC: UITableViewDataSource{
                 AppDel.restModel.loadRestaurantImage(imageURLOpt: restaurant.imageURL, imageLoaded: ({(data, response, error) in
                     cell.imageLoaderClosure(data, response, error)
                 }))
+            }else{
+                cell.imgRestaurantNotify.image = nil
             }
         }
         return cell
@@ -164,7 +167,6 @@ extension NotifyVC{
         guard let tabBC = tabBarController else{
             return
         }
-        tabBC.selectedIndex = 0
     }
     
     @objc func mailClicked(){
