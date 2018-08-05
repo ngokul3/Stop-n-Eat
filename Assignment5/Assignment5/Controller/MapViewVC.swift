@@ -17,11 +17,13 @@ class MapViewVC: UIViewController {
         let locationName: String
         let coordinate: CLLocationCoordinate2D
         let placeType : PlaceType
-        init(title: String, locationName: String,  coordinate: CLLocationCoordinate2D, placeType: PlaceType) {
+        let rating: Int?
+        init(title: String, locationName: String,  coordinate: CLLocationCoordinate2D, placeType: PlaceType, rating: Int?) {
             self.title = title
             self.locationName = locationName
             self.coordinate = coordinate
             self.placeType = placeType
+            self.rating = rating
             super.init()
         }
     }
@@ -60,10 +62,10 @@ class MapViewVC: UIViewController {
         let region = MKCoordinateRegion(center: locationCoordinate2D, span: span)
         mapView.setRegion(region, animated: true)
         
-        points.append(PointOfInterest(title: trainStop.stopName, locationName: trainStop.stopName, coordinate: CLLocationCoordinate2D(latitude: trainStop.latitude, longitude: trainStop.longitude), placeType: .train))
+        points.append(PointOfInterest(title: trainStop.stopName, locationName: trainStop.stopName, coordinate: CLLocationCoordinate2D(latitude: trainStop.latitude, longitude: trainStop.longitude), placeType: .train, rating: nil))
 
         restaurants.forEach({(restaurant) in
-            points.append(PointOfInterest(title: restaurant.restaurantName, locationName: restaurant.restaurantName, coordinate: CLLocationCoordinate2D(latitude: restaurant.latitude, longitude: restaurant.longitude), placeType: .restaurant))
+            points.append(PointOfInterest(title: restaurant.restaurantName, locationName: restaurant.restaurantName, coordinate: CLLocationCoordinate2D(latitude: restaurant.latitude, longitude: restaurant.longitude), placeType: .restaurant, rating: restaurant.givenRating))
         })
         
         print(points.count)
@@ -147,6 +149,12 @@ extension MapViewVC: MKMapViewDelegate {
         }
         pinView.canShowCallout = true
         pinView.pinTintColor = placePoint.placeType == .train ? UIColor.blue : UIColor.red
+        
+        if let restRating = placePoint.rating{
+            var pinImageView: UIImageView?
+            pinImageView = placePoint.placeType == .restaurant ? UIImageView(image: UIImage(named: "\(restRating)Stars")) : nil
+            pinView.rightCalloutAccessoryView = pinImageView
+        }
         return pinView
     }
     
