@@ -172,7 +172,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="daL-cH-eFj"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Detail" id="qFv-i1-htj">
+                    <navigationItem key="navigationItem" title="Favorite" id="qFv-i1-htj">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="MzK-II-wYw">
                             <connections>
                                 <action selector="btnSavedClicked:" destination="aVw-KE-lTW" id="Gf9-D5-xTP"/>
@@ -496,6 +496,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="Ov2-ua-eTG" secondAttribute="trailing" constant="2" id="ZVt-JC-1f1"/>
                                                 <constraint firstItem="vvN-3q-osV" firstAttribute="leading" secondItem="jZ8-4d-auD" secondAttribute="trailing" constant="1" id="bEh-rX-5WH"/>
                                                 <constraint firstItem="gys-xa-tjU" firstAttribute="leading" secondItem="IVO-Ct-JaW" secondAttribute="trailing" constant="10" id="dfe-FW-age"/>
+                                                <constraint firstItem="hXQ-Wh-2on" firstAttribute="top" secondItem="KXL-ES-22S" secondAttribute="top" constant="28.5" id="gDi-tK-nQr"/>
                                                 <constraint firstItem="RK6-0c-5Kr" firstAttribute="leading" secondItem="gys-xa-tjU" secondAttribute="trailing" constant="5" id="hn9-nR-Xk5"/>
                                                 <constraint firstItem="hXQ-Wh-2on" firstAttribute="leading" secondItem="IVO-Ct-JaW" secondAttribute="trailing" constant="8" id="im4-t7-Gx2"/>
                                                 <constraint firstAttribute="bottom" secondItem="gys-xa-tjU" secondAttribute="bottom" constant="4.5" id="knx-BC-grO"/>
@@ -611,7 +612,7 @@
             </objects>
             <point key="canvasLocation" x="1032.8" y="-530.28485757121439"/>
         </scene>
-        <!--NotifyVC-->
+        <!--Ready to send these?-->
         <scene sceneID="9kk-xv-g7r">
             <objects>
                 <viewController id="0oi-Wj-mKF" customClass="NotifyVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
@@ -679,7 +680,7 @@
                     <toolbarItems>
                         <barButtonItem title="Item" id="L88-A0-PcC"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="LRS-bA-9mK"/>
+                    <navigationItem key="navigationItem" title="Ready to send these?" id="LRS-bA-9mK"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="z4H-WD-tov" id="g0S-JL-ya2"/>
