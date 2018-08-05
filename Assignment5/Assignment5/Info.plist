@@ -49,6 +49,8 @@
 	<string>Bearer qEjtERYCtGRtYmaELAxisLtdM2TWMsUbLG-wvs0b8KlxIfECiKGRrnY7AKOZwe6Zsz_DehvIAXJtt4jiIrKYjCgyf0Tx4CK_yX0u-6LpOc35By8TiyGlLdElXgqzWXYx</string>
 	<key>NJTransitJSONFile</key>
 	<string>RailStop</string>
+	<key>MilesAround</key>
+	<integer>2</integer>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>whatsapp</string>

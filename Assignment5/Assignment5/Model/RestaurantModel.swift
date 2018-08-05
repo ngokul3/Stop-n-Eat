@@ -13,6 +13,7 @@ class RestaurantModel: RestaurantProtocol{
     private static var instance: RestaurantProtocol?
     private var searchedRestaurants = [String : RestaurantArray]()
     private var searchedRestaurantImage = [String : (Data,HTTPURLResponse)]()
+    private var searchDistanceLimitOpt: Int?
     private lazy var networkModel = {
         return AppDel.networkModel
     }()
@@ -22,6 +23,16 @@ class RestaurantModel: RestaurantProtocol{
     private init(){
         restaurantsFromNetwork = RestaurantArray()
         restaurantsSaved = RestaurantArray()
+        
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            
+            let dictRootOpt = NSDictionary(contentsOfFile: path)
+            
+            guard let dict = dictRootOpt else{
+                preconditionFailure("Yelp API is not available")
+            }
+            searchDistanceLimitOpt = dict["MilesAround"] as? Int
+        }
      }
 }
 
@@ -148,10 +159,13 @@ extension RestaurantModel{
                     
                     let restaurant = Restaurant(_url: restaurantURL, _imageUrl: restaurantImageURL, _trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating), _displayAddress :  completeAddress)
                     
-                    if(restaurant.distanceFromTrainStop <= 2){ // Loading only those data that are less than 2 miles. Idea is to see restaurants in walking distance
-                        
-                        print("Adding restaurant \(restaurant.restaurantName)")
-                        self?.restaurantsFromNetwork.append(restaurant)
+                    
+                    if let searchDistanceLimit = self?.searchDistanceLimitOpt{
+                        if(restaurant.distanceFromTrainStop <= Double(searchDistanceLimit)){ // Loading only those data that are less than configured miles. Idea is to see restaurants in walking distance
+                            
+                            print("Adding restaurant \(restaurant.restaurantName)")
+                            self?.restaurantsFromNetwork.append(restaurant)
+                        }
                     }
                 }
                 
@@ -313,11 +327,6 @@ class Restaurant:  NSObject, NSCoding{
     }
     var setRestaurantToNotifyList: Void{
         
-        defer{
-            if(AppDel.restModel.restaurantsFromNetwork.contains{isRestaurantSetToNotifyClosure($0)}){
-                
-            }
-        }
         switch isSelected{
             
         case true:
@@ -341,6 +350,7 @@ class Restaurant:  NSObject, NSCoding{
             }
         }
     }
+    
     var restaurantName : String = ""{
         didSet{
             if(restaurantId.isEmpty){

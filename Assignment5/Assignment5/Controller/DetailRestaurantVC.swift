@@ -26,7 +26,6 @@ class DetailRestaurantVC: UIViewController {
     private lazy var btnRatings : [UIButton] = [btnRating1, btnRating2, btnRating3, btnRating4, btnRating5]
     
     var restaurant : Restaurant?
-    var goBackAction : ((UIAlertAction) -> Void)?
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
     var emptyRatingImageName: String = "plainStar"
@@ -177,10 +176,6 @@ class DetailRestaurantVC: UIViewController {
         }else{
             swtNotify.isOn = false
         }
-        //Todo - this has not been implemented yet.
-        goBackAction  = ({[weak self](arg) -> Void in
-            self?.navigationController?.popViewController(animated: true) // self is captured WEAK
-        })
     }
 }
 
@@ -246,8 +241,7 @@ extension DetailRestaurantVC{
         set{
             let alert = UIAlertController(title: "Changes not saved", message: newValue, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Stay", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "Disregard", style: .default, handler: goBackAction))
-            
+            alert.addAction(UIAlertAction(title: "Disregard", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
     }

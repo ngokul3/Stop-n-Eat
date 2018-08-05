@@ -17,8 +17,6 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
     private var model = RestaurantModel.getInstance()
     private var notifyModel = NotifyModel.getInstance()
-  //  private var model = RestaurantModel.getInstance()
-    
     private static var modelObserver: NSObjectProtocol?
     private var showDefaultIndexClosure : (()->Void)?
     
@@ -34,7 +32,7 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
             }
         }
         
-       // showImageDialog()
+        showImageDialog()
         
         showDefaultIndexClosure = {[weak self] in
             guard let tabBC = self?.tabBarController else{
@@ -52,8 +50,6 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
     }
 }
 
-//todo - image lods on custom added favorite - bug??
-//todo delete of record from notify list should set isselected = false
 extension NotifyVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -115,10 +111,10 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
     func showImageDialog(animated: Bool = true) {
         
         let title = "Places of Interests"
-        let message = "Send your chosen places to your friend(s)"
+        let message = "Send these to people from your contact list"
         let image = UIImage(named: "") //Todo
         
-        let popup = PopupDialog(title: title, message: message, image: image)
+        let popup =  PopupDialog(title: title, message: message, image: image)
         
         let buttonOne = CancelButton(title: "CANCEL") {
         }
