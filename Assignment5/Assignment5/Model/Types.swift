@@ -107,9 +107,4 @@ extension String{
     }
 }
 
-/**Todo
- test yelp without network. display useful message
- Code signing turn off
- load project into test directory and check all source code
- some imag didn't load when checked in . see the error message from git hub
- */
+

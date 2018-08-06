@@ -159,11 +159,7 @@ extension NotifyVC{
 extension NotifyVC{
     
     @objc func cancelClicked(){
-        
         self.dismiss(animated: true, completion: nil)
-//        guard let tabBC = tabBarController else{
-//            return
-//        }
     }
     
     @objc func mailClicked(){
