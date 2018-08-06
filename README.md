@@ -1,6 +1,14 @@
 # Assignment 5
 
-Information mentioned here is also included in Question1 - 4.txt file
+
+***************************************
+UPDATE as of 08/06 -
+
+The TrainStop search was initially thought to work based on the stop name as well as the zip code. But considering the usability point of view, the search of train stops by zip code  has been discarded.  User can search only based on the stop names.
+
+**************************************
+
+Information mentioned below  is also included in Question1 - 4.txt file
 
 Point 1 -
 
