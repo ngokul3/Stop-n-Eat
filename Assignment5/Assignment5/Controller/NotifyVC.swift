@@ -12,7 +12,6 @@ import MessageUI
 import SafariServices
 import PopupDialog
 
-//Todo - cancel should stay on current VC
 class NotifyVC: UIViewController, UITabBarControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -115,9 +114,7 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
         
         let title = "Places of Interests"
         let message = "Send these to people from your contact list"
-        let image = UIImage(named: "") //Todo
-        
-        let popup =  PopupDialog(title: title, message: message, image: image)
+        let popup =  PopupDialog(title: title, message: message, image: nil)
         
         let buttonOne = CancelButton(title: "CANCEL") {
         }
@@ -164,9 +161,9 @@ extension NotifyVC{
     @objc func cancelClicked(){
         
         self.dismiss(animated: true, completion: nil)
-        guard let tabBC = tabBarController else{
-            return
-        }
+//        guard let tabBC = tabBarController else{
+//            return
+//        }
     }
     
     @objc func mailClicked(){

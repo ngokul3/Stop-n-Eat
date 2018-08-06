@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
 
@@ -51,7 +52,6 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
         }
         
         super.viewDidLoad()
-        
     }
 }
 extension TrainStopVC{
@@ -115,7 +115,6 @@ extension TrainStopVC{
             alertUser = "Unexpected Error"
         }
     }
-
 }
 
 extension TrainStopVC{

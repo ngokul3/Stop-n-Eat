@@ -136,7 +136,7 @@ extension SavedRestaurantVC{
                         self?.alertUser = "Restaurant is nil"
                     }
                     catch{
-                        self?.alertUser = "Something went wrong while adding"
+                        self?.alertUser = "Unexpected error"
                     }
                 }
             }
@@ -145,7 +145,7 @@ extension SavedRestaurantVC{
                 self.alertUser = "Could not add restaurant"
             }
             catch{
-                self.alertUser = "Something went wrong before launching detailed favorite restaurant"
+                self.alertUser = "Unexpected error before launching favorite restaurant"
             }
             
         case "editSegue" :
@@ -170,7 +170,7 @@ extension SavedRestaurantVC{
                     self?.alertUser = "Restaurant \(name) cannot be edited. May be it's not in Favorite list anymore."
                 }
                 catch{
-                    self?.alertUser = "Something went wrong while adding"
+                    self?.alertUser = "Unexpected error"
                 }
             }
             
@@ -198,7 +198,7 @@ extension SavedRestaurantVC{
             alertUser = "Not able to delete \(name) from database"
         }
         catch {
-            alertUser = "Unexpected Error while deletig from database"
+            alertUser = "Unexpected Error"
         }
     }
     

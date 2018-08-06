@@ -44,9 +44,5 @@ class NotifyCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
-
-
 }

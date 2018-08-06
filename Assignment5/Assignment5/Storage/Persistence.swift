@@ -80,7 +80,6 @@ class Persistence {
         }
     }
     
-    
     static func restore() throws -> [Restaurant] {
         var savedRestaurants = [Restaurant]()
      
@@ -91,9 +90,7 @@ class Persistence {
         if let alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] {
             savedRestaurants = alreadySavedRestaurants
         }
-        
         return savedRestaurants
-
     }
 }
 

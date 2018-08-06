@@ -53,9 +53,7 @@ class DetailRestaurantVC: UIViewController {
             if(btnIndex <= btnClickedIndex){
                 self?.restaurant?.myRating += 1
                 btn.setBackgroundImage(UIImage(named: fullImageName), for: .normal)
-             //   self?.btnRating4.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
                 self?.btnRating4.imageView?.contentMode = UIViewContentMode.scaleAspectFill
-                
              }
             else{
                 btn.setBackgroundImage(UIImage(named: emptyImageName), for: .normal)
@@ -208,7 +206,6 @@ extension DetailRestaurantVC{
         saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
     }
-    
     
     @IBAction func swtNotify_Click(_ sender: UISwitch) {
         switch swtNotify.isOn{

@@ -15,7 +15,6 @@ protocol NetworkProtocol {
     func setRestaurantImage(forRestaurantImage restaurantImageURL : String, imageLoaded : @escaping (Data?, HTTPURLResponse?, Error?)->Void)
      func loadTransitData(finished : @escaping (NSArray?, String?)->Void )
 }
-    
 
 class NetworkModel: NetworkProtocol{
     
@@ -67,25 +66,24 @@ extension NetworkModel{
         
         let jsonResult: Any?
             
-        if let path = Bundle.main.path(forResource: transitFileName, ofType: "json")
-        {
-             do{
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-            }
-            catch{
-                finished(nil, "InvalidJsonFile")
-                return
-            }
-            
-            guard let stopArray = jsonResult as? NSArray else {
-                finished(nil, "InvalidJsonFile")
-                return
-            }
-            
-            finished(stopArray, nil)
+            if let path = Bundle.main.path(forResource: transitFileName, ofType: "json")
+            {
+                 do{
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                    jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                }
+                catch{
+                    finished(nil, "InvalidJsonFile")
+                    return
+                }
                 
-        }
+                guard let stopArray = jsonResult as? NSArray else {
+                    finished(nil, "InvalidJsonFile")
+                    return
+                }
+                
+                finished(stopArray, nil)
+            }
         }
     }
 }
@@ -142,6 +140,7 @@ extension NetworkModel{
         if let _ = URL(string: restaurantImageURL)
         {
             let restaurantImageURL = URL(string: restaurantImageURL)!
+            
             let downloadPicTask = session.dataTask(with: restaurantImageURL) { (data, responseOpt, error) in
                 if let e = error {
                     print("Error downloading cat picture: \(e)")
@@ -159,8 +158,6 @@ extension NetworkModel{
                 }
             }
             downloadPicTask.resume()
-            
         }
     }
-    
-}
+ }

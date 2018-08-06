@@ -27,9 +27,5 @@ class SavedRestaurantCell: UITableViewCell {
         txtNotesRestaurant.layer.cornerRadius = 0.8
         
         super.awakeFromNib()
-        
     }
-    
-   
-
 }

@@ -34,6 +34,7 @@ class NotifyModel: NotifyProtocol{
             return false
         }
     }
+    
     func checkIsSelectedConsistency(restaraunts: [Restaurant], restaurantToNotify: Restaurant){
         
         let restFromNetwork = restaraunts.first(where: {(isNotifiedRestaurantPresent($0, restaurantToNotify))})
@@ -72,6 +73,4 @@ class NotifyModel: NotifyProtocol{
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantNotificationListChanged), object: self))
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
     }
-    
-    
 }

@@ -113,7 +113,7 @@ extension RestaurantModel{
                     
                     var restaurantImageURL: String = ""
                     if let imageURL = restaurant["image_url"] as? String{
-                        restaurantImageURL = imageURL
+                        restaurantImageURL = imageURL //Not guarding. Image URL isn't important
                     }
                     
                     guard let name : String = restaurant["name"] as? String else{
@@ -417,9 +417,9 @@ class Restaurant:  NSObject, NSCoding{
 
 //Distance between 2 points - Code snippet from https://www.geodatasource.com/developers/swift
 extension Restaurant{
-    
+
     func distanceBetweenTwoCoordinates(lat1:Double, lon1:Double, latOpt:Double?, lonOpt:Double?) -> Double {
-        
+
         guard let lat2 = latOpt, let lon2 = lonOpt else{
             preconditionFailure("Could not calculate distance")
         }
@@ -430,11 +430,11 @@ extension Restaurant{
         dist = dist * 60 * 1.1515
         return dist
     }
-    
+
     func rad2deg(rad:Double) -> Double {
         return rad * 180.0 / Double.pi
     }
-    
+
     func deg2rad(deg:Double) -> Double {
         return deg * Double.pi / 180
     }

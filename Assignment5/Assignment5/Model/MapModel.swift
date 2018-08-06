@@ -8,12 +8,6 @@
 
 import Foundation
 
-//class MapModel{
-//    var placeArray = PlaceArray()
-//
-//    func
-//}
-
 class Place{
     var trainStop : TrainStop?
     var restaurants : [Restaurant]?
