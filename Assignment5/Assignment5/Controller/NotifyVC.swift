@@ -113,7 +113,7 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
     func showImageDialog(animated: Bool = true) {
         
         let title = "Places of Interests"
-        let message = "Send these to people from your contact list"
+        let message = "Selected restaurants can be sent over these available options"
         let popup =  PopupDialog(title: title, message: message, image: nil)
         
         let buttonOne = CancelButton(title: "CANCEL") {
