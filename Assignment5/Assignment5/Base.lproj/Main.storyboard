@@ -173,6 +173,11 @@
                         <viewLayoutGuide key="safeArea" id="daL-cH-eFj"/>
                     </view>
                     <navigationItem key="navigationItem" title="Favorite" id="qFv-i1-htj">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="Lva-Jn-T9E">
+                            <connections>
+                                <action selector="btnBackClicked:" destination="aVw-KE-lTW" id="oJl-1A-Dt4"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="MzK-II-wYw">
                             <connections>
                                 <action selector="btnSavedClicked:" destination="aVw-KE-lTW" id="Gf9-D5-xTP"/>
@@ -740,6 +745,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dlF-Qv-XRz"/>
-        <segue reference="fOB-Rc-vXx"/>
+        <segue reference="2Xq-XB-UZc"/>
     </inferredMetricsTieBreakers>
 </document>

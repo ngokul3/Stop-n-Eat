@@ -22,41 +22,38 @@ class DetailRestaurantVC: UIViewController {
     @IBOutlet weak var swtNotify: UISwitch!
     @IBOutlet weak var imgRestaurantURL: UIImageView!
     
+   
     private static var modelObserver: NSObjectProtocol?
     private lazy var btnRatings : [UIButton] = [btnRating1, btnRating2, btnRating3, btnRating4, btnRating5]
-    
+    private var myRating: Int = 0
     var restaurant : Restaurant?
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
     var emptyRatingImageName: String = "plainStar"
     var fullRatingImageName: String = "rating"
 
-    lazy var updateRating = {[weak self](button: UIButton) in
+    lazy var updateRating = {(button: UIButton) in
         var imageNameOpt : String?
-        let btnClickedIndexOpt = self?.btnRatings.index(of: button)
+        let btnClickedIndexOpt = self.btnRatings.index(of: button)
         
         guard let btnClickedIndex = btnClickedIndexOpt else{
             return
         }
-        
-        self?.restaurant?.myRating = 0
-        
-        self?.btnRatings.forEach({(btn) in
-            let btnIndexOpt = self?.btnRatings.index(of: btn)
+        self.myRating = 0
+        self.btnRatings.forEach({(btn) in
+            let btnIndexOpt = self.btnRatings.index(of: btn)
             
-            guard let btnIndex = btnIndexOpt,
-                let fullImageName = self?.fullRatingImageName,
-                let emptyImageName = self?.emptyRatingImageName else{
+            guard let btnIndex = btnIndexOpt else{
                 return
             }
             
             if(btnIndex <= btnClickedIndex){
-                self?.restaurant?.myRating += 1
-                btn.setBackgroundImage(UIImage(named: fullImageName), for: .normal)
-                self?.btnRating4.imageView?.contentMode = UIViewContentMode.scaleAspectFill
+                self.myRating += 1
+                btn.setBackgroundImage(UIImage(named: self.fullRatingImageName), for: .normal)
+                self.btnRating4.imageView?.contentMode = UIViewContentMode.scaleAspectFill
              }
             else{
-                btn.setBackgroundImage(UIImage(named: emptyImageName), for: .normal)
+                btn.setBackgroundImage(UIImage(named: self.emptyRatingImageName), for: .normal)
             }
         })
     }
@@ -119,7 +116,7 @@ class DetailRestaurantVC: UIViewController {
         txtNotes.layer.cornerRadius = 0.8
         txtNotes.delegate = self
         txtRestaurantName.delegate = self
-        
+        myRating = restaurant?.myRating ?? 0
         AppDel.restModel.loadRestaurantImage(imageURLOpt: restaurant?.imageURL, imageLoaded: ({[weak self](data, response, error) in
            self?.setUpRestaurantImage(data, response, error)
         }))
@@ -192,6 +189,26 @@ extension DetailRestaurantVC: UITextViewDelegate, UITextFieldDelegate{
 }
 extension DetailRestaurantVC{
     
+    @IBAction func btnBackClicked(_ sender: UIBarButtonItem) {
+        if(restaurant?.restaurantName != txtRestaurantName.text){
+            alertUser = "Restaurant Name was changed"
+            return
+        }
+        if(restaurant?.comments != txtNotes.text){
+            alertUser = "Notes about the restaurant was changed"
+            return
+        }
+        if(restaurant?.dateVisited != dateVisited.date){
+            alertUser = "Notes about the restaurant was changed"
+            return
+        }
+        if(restaurant?.myRating != self.myRating){
+            alertUser = "Restaurant rating was changed"
+            return
+        }
+        navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func btnSavedClicked(_ sender: UIBarButtonItem) {
         
         guard let name = txtRestaurantName.text
@@ -203,6 +220,7 @@ extension DetailRestaurantVC{
         restaurant?.restaurantName = name
         restaurant?.dateVisited = dateVisited.date
         restaurant?.comments = txtNotes.text
+        restaurant?.myRating = self.myRating
         saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
     }
@@ -238,7 +256,9 @@ extension DetailRestaurantVC{
         set{
             let alert = UIAlertController(title: "Changes not saved", message: newValue, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Stay", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "Disregard", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Disregard", style: .default, handler: ({[weak self](arg) -> Void in
+                self?.navigationController?.popViewController(animated: true) // self is captured WEAK
+            })))
             self.present(alert, animated: true)
         }
     }
