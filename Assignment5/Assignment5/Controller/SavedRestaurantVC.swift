@@ -16,7 +16,6 @@ class SavedRestaurantVC: UIViewController {
     
      override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.rowHeight = UITableViewAutomaticDimension
 
         SavedRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantDeleted), object: nil, queue: OperationQueue.main) {
@@ -24,9 +23,7 @@ class SavedRestaurantVC: UIViewController {
             [weak self] (notification: Notification) in
             if let s = self {
                 let info0 = notification.userInfo?[Consts.KEY0]
-                
                 let restaurantOpt = info0 as? Restaurant
-                
                 guard let restaurant = restaurantOpt else{
                     preconditionFailure("Could not save this favorite restaurant")
                 }
@@ -47,7 +44,6 @@ class SavedRestaurantVC: UIViewController {
 extension SavedRestaurantVC : UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "savedRestaurantCell", for: indexPath) as? SavedRestaurantCell else{
             preconditionFailure("Incorrect Cell provided")
         }
@@ -61,7 +57,6 @@ extension SavedRestaurantVC : UITableViewDataSource{
         let imgStarArr = [cell.imgStar1, cell.imgStar2, cell.imgStar3, cell.imgStar4, cell.imgStar5]
         
         imgStarArr.forEach({(img) in
-            
             guard let imgIndex = imgStarArr.index(of: img) else{
                 preconditionFailure("Can't load images")
             }
@@ -84,13 +79,11 @@ extension SavedRestaurantVC : UITableViewDataSource{
                    forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-           
             guard  model.restaurantsSaved[indexPath.row] else{
                 preconditionFailure("Error while getting value from the Menu Model")
             }
             
             let restaurantInContext = model.restaurantsSaved[indexPath.row]
-            
             do{
                 try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext, completed: {[weak self](msgOpt) in
                     if let msg = msgOpt{
@@ -98,11 +91,9 @@ extension SavedRestaurantVC : UITableViewDataSource{
                     }
                 })
             }
-                
             catch RestaurantError.notAbleToDelete(let name){
                 alertUser = "\(name) cannot be deleted"
             }
-                
             catch{
                 alertUser = "Unexpected Error"
             }
@@ -153,7 +144,6 @@ extension SavedRestaurantVC{
             }
             
         case "editSegue" :
-            
             guard let cell = sender as? UITableViewCell
                 ,let indexPath = self.tableView.indexPath(for: cell) else{
                     preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
@@ -177,7 +167,6 @@ extension SavedRestaurantVC{
                     self?.alertUser = "Unexpected error"
                 }
             }
-            
         default : break
         }
     }
@@ -210,7 +199,6 @@ extension SavedRestaurantVC{
         get{
             preconditionFailure("You cannot read from this object")
         }
-        
         set{
             let alert = UIAlertController(title: "Attention", message: newValue, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))

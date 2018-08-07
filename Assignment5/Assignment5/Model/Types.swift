@@ -107,4 +107,8 @@ extension String{
     }
 }
 
-
+/**Todo
+ clean up weak self
+ white spaces
+ 
+ **/

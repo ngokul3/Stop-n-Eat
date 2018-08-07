@@ -36,7 +36,6 @@ class MapViewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         guard let placeOfInterest = place else{
             alertUser = "Error while loading map"
             return
@@ -53,12 +52,9 @@ class MapViewVC: UIViewController {
         }
         
         let stopLocation = CLLocation(latitude: trainStop.latitude, longitude: trainStop.longitude)
-        
         centerMapOnLocation(location: stopLocation)
-        
         let span = MKCoordinateSpanMake(0.07, 0.07)
         let locationCoordinate2D = CLLocationCoordinate2D(latitude:  trainStop.latitude,longitude: trainStop.longitude)
-
         let region = MKCoordinateRegion(center: locationCoordinate2D, span: span)
         mapView.setRegion(region, animated: true)
         
@@ -80,7 +76,6 @@ class MapViewVC: UIViewController {
 
 extension MapViewVC{
     func checkLocationAuthorizationStatus() {
-        
         if CLLocationManager.authorizationStatus() == .authorizedAlways {
             mapView.showsUserLocation = true
         } else {
@@ -101,7 +96,6 @@ extension MapViewVC{
         get{
             preconditionFailure("You cannot read from this object")
         }
-        
         set{
             let alert = UIAlertController(title: "Attention", message: newValue, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -116,7 +110,6 @@ extension MapViewVC: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("Selected view \(view.annotation?.description ?? "None")")
     }
-    
     
     // https://www.raywenderlich.com/166182/mapkit-tutorial-overlay-views
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

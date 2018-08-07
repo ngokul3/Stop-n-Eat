@@ -98,7 +98,6 @@ extension RestaurantVC{
 
 extension RestaurantVC : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as? RestaurantCell else{
             preconditionFailure("Incorrect Cell provided")
         }
@@ -188,13 +187,12 @@ extension RestaurantVC: UITableViewDelegate{
 extension RestaurantVC{
     
     func removeFavorite(imageViewOpt: UIImageView?){
-        
         guard let imageView = imageViewOpt else{
             alertUser = "Favorite options are not workin at the moment. Please close and reopen the app."
             return
         }
-        let indexRow = imageView.tag
         
+        let indexRow = imageView.tag
         do{
             let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
             
@@ -213,13 +211,11 @@ extension RestaurantVC{
     }
  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        
         guard let identifier = segue.identifier else{
             preconditionFailure("No segue identifier")
         }
         
         let segueToVC : UIViewController?
-        
         switch segue.destination{
       
         case is MapViewVC :
@@ -234,11 +230,8 @@ extension RestaurantVC{
         var retaurants = RestaurantArray()
         
         switch identifier{
-       
         case "singleMapSegue" :
-            
             var rowNo : Int?
-            
             if let button = sender as? UIButton {
                 rowNo = button.tag
             }
@@ -267,7 +260,6 @@ extension RestaurantVC{
             }
             
         case "multipleMapSegue" :
-            
             do{
                 let place = Place()
                 let restaurantsFetched = try restaurantModel.getAllRestaurantsFromNetwork()
@@ -289,9 +281,7 @@ extension RestaurantVC{
                 }
             
         case "detailSegueFromHeart" :
-            
                 var rowNo : Int?
-                
                 if let imageRow = sender as? UIImageView {
                     rowNo = imageRow.tag
                 }

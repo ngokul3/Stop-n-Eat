@@ -21,11 +21,10 @@ class DetailRestaurantVC: UIViewController {
     @IBOutlet weak var lblDistance: UILabel!
     @IBOutlet weak var swtNotify: UISwitch!
     @IBOutlet weak var imgRestaurantURL: UIImageView!
-    
-   
     private static var modelObserver: NSObjectProtocol?
     private lazy var btnRatings : [UIButton] = [btnRating1, btnRating2, btnRating3, btnRating4, btnRating5]
     private var myRating: Int = 0
+    private var myNotify: Bool = false
     var restaurant : Restaurant?
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
@@ -41,12 +40,11 @@ class DetailRestaurantVC: UIViewController {
         }
         self.myRating = 0
         self.btnRatings.forEach({(btn) in
-            let btnIndexOpt = self.btnRatings.index(of: btn)
             
+            let btnIndexOpt = self.btnRatings.index(of: btn)
             guard let btnIndex = btnIndexOpt else{
                 return
             }
-            
             if(btnIndex <= btnClickedIndex){
                 self.myRating += 1
                 btn.setBackgroundImage(UIImage(named: self.fullRatingImageName), for: .normal)
@@ -58,23 +56,18 @@ class DetailRestaurantVC: UIViewController {
         })
     }
     
-    lazy var setUpButtonImages:(Int)->Void = {[weak self](rating: Int) in
-        self?.btnRatings.forEach{(btn) in
-            let btnIndex = self?.btnRatings.index(of: btn)
-           
-            guard let index = btnIndex,
-                  let fullImageName = self?.fullRatingImageName,
-                  let emptyImageName = self?.emptyRatingImageName else{
+    lazy var setUpButtonImages:(Int)->Void = {(rating: Int) in
+        self.btnRatings.forEach{(btn) in
+            
+            let btnIndex = self.btnRatings.index(of: btn)
+            guard let index = btnIndex else{
                 return
             }
-            guard let imageName = self?.fullRatingImageName else{
-                return
-            }
-            if(rating > index){
-                btn.setBackgroundImage(UIImage(named: fullImageName), for: .normal)
+             if(rating > index){
+                btn.setBackgroundImage(UIImage(named: self.fullRatingImageName), for: .normal)
             }
             else{
-                btn.setBackgroundImage(UIImage(named: emptyImageName), for: .normal)
+                btn.setBackgroundImage(UIImage(named: self.emptyRatingImageName), for: .normal)
             }
         }
     }
@@ -110,7 +103,6 @@ class DetailRestaurantVC: UIViewController {
     
      override func viewDidLoad() {
         super.viewDidLoad()
-    
         txtNotes.layer.borderColor = UIColor.gray.cgColor
         txtNotes.layer.borderWidth = 0.4
         txtNotes.layer.cornerRadius = 0.8
@@ -132,7 +124,6 @@ class DetailRestaurantVC: UIViewController {
                 guard let restaurant = restaurantOpt else{
                     preconditionFailure("Could not save this favorite restaurant")
                 }
-                
                 s.saveRestaurant(restaurant)
             }
         }
@@ -142,9 +133,7 @@ class DetailRestaurantVC: UIViewController {
         }
         
         switch detailType {
-        
         case .Add :
-            
             if let restaurantInContext = restaurant {
                 setUpButtonImages(restaurantInContext.myRating)
             }else{
@@ -152,12 +141,9 @@ class DetailRestaurantVC: UIViewController {
             }
             
         case .Edit, .Preload :
-            
-            guard let restaurantInContext = restaurant else
-            {
+            guard let restaurantInContext = restaurant else{
                 preconditionFailure("Parent VC did not initialize MenuItem")
             }
-            
             txtRestaurantName.text = restaurantInContext.restaurantName
             dateVisited.date = restaurantInContext.dateVisited
             lblDistance.text = restaurantInContext.distanceFromStopDesc
@@ -165,12 +151,8 @@ class DetailRestaurantVC: UIViewController {
             let rating = restaurantInContext.myRating
             setUpButtonImages(rating)
         }
-        
-        if(restaurant?.isSelected == true){
-            swtNotify.isOn = true
-        }else{
-            swtNotify.isOn = false
-        }
+        self.myNotify = restaurant?.isSelected ?? false
+        swtNotify.isOn = self.myNotify
     }
 }
 
@@ -210,28 +192,22 @@ extension DetailRestaurantVC{
     }
     
     @IBAction func btnSavedClicked(_ sender: UIBarButtonItem) {
-        
         guard let name = txtRestaurantName.text
             , !name.isEmpty else{
             alertUser = "Restaurant Name cannot be empty"
             return
         }
-        
         restaurant?.restaurantName = name
         restaurant?.dateVisited = dateVisited.date
         restaurant?.comments = txtNotes.text
         restaurant?.myRating = self.myRating
+        restaurant?.isSelected = self.myNotify
         saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func swtNotify_Click(_ sender: UISwitch) {
-        switch swtNotify.isOn{
-        case true:
-            restaurant?.isSelected = true
-        case false:
-            restaurant?.isSelected = false
-        }
+        self.myNotify = swtNotify.isOn
     }
 }
 
@@ -252,12 +228,11 @@ extension DetailRestaurantVC{
         get{
             preconditionFailure("You cannot read from this object")
         }
-        
         set{
             let alert = UIAlertController(title: "Changes not saved", message: newValue, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Stay", style: .default, handler: nil))
             alert.addAction(UIAlertAction(title: "Disregard", style: .default, handler: ({[weak self](arg) -> Void in
-                self?.navigationController?.popViewController(animated: true) // self is captured WEAK
+                self?.navigationController?.popViewController(animated: true)
             })))
             self.present(alert, animated: true)
         }

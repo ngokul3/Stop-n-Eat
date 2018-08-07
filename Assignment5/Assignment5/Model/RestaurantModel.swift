@@ -307,19 +307,19 @@ class Restaurant:  NSObject, NSCoding{
     
     var trainStop : TrainStop?
     
-    lazy var isRestaurantSetToNotifyClosure : (Restaurant)->Bool = {[weak self](arg) in
+    lazy var isRestaurantSetToNotify : (Restaurant)->Bool = {(arg) in
         
-        if (arg.restaurantId == self?.restaurantId) {
+        if (arg.restaurantId == self.restaurantId) {
             return true
          }else{
             return false
         }
     }
     
-     lazy var isRestaurantInSameStateAsNotify: ((Restaurant))->Bool = {[weak self](arg) in
+     lazy var isRestaurantInSameStateAsNotify: ((Restaurant))->Bool = {(arg) in
         
-        if(arg.restaurantId == self?.restaurantId){
-            if (arg.isSelected == self?.isSelected) {
+        if(arg.restaurantId == self.restaurantId){
+            if (arg.isSelected == self.isSelected) {
                 return true
             }else{
                 return false
@@ -338,12 +338,12 @@ class Restaurant:  NSObject, NSCoding{
             guard !self.restaurantId.isEmpty else{
                 return // This means user created favorite by clicking "+". Restaurant Id comes from Yelp or it is empty if a new restaurant isn't saved.
             }
-            if(!AppDel.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotifyClosure($0)}){
+            if(!AppDel.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0)}){
                 AppDel.notifyModel.addRestaurantToNotify(restaurantToNotify: self)
             }
 
         case false:
-            if(AppDel.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotifyClosure($0)}){
+            if(AppDel.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0)}){
                 
                 do{
                     try AppDel.notifyModel.removeRestauarntFromNotification(restaurant: self)

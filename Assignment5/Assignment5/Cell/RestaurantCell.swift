@@ -15,7 +15,6 @@ class RestaurantCell: UITableViewCell {
     @IBOutlet weak var btnHeart: UIButton!
     @IBOutlet weak var btnSingleMap: UIButton!
     @IBOutlet weak var imgRail: UIImageView!
-
     @IBOutlet weak var lblMiles: UILabel!
     @IBOutlet weak var lblRestaurantName: UILabel!
     @IBOutlet weak var imgRatings: UIImageView!
