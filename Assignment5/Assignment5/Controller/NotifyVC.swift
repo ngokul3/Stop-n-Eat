@@ -63,18 +63,17 @@ extension NotifyVC: UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "notifyCell", for: indexPath) as? NotifyCell else{
             preconditionFailure("Incorrect Cell provided")
         }
+        guard let restaurant = restaurants[safe: indexPath.row]  else{
+            preconditionFailure("Incorrect row selected")
+        }
+        cell.lblRestaurantDescription.text = restaurant.restaurantName
         
-        if(restaurants[indexPath.row]){
-            let restaurant = restaurants[indexPath.row]
-            cell.lblRestaurantDescription.text = restaurant.restaurantName
-            
-            if(!restaurant.imageURL.isEmpty){
-                AppDel.restModel.loadRestaurantImage(imageURLOpt: restaurant.imageURL, imageLoaded: ({(data, response, error) in
-                    cell.imageLoaderClosure(data, response, error)
-                }))
-            }else{
-                cell.imgRestaurantNotify.image = nil
-            }
+        if(!restaurant.imageURL.isEmpty){
+            AppDel.restModel.loadRestaurantImage(imageURLOpt: restaurant.imageURL, imageLoaded: ({(data, response, error) in
+                cell.imageLoaderClosure(data, response, error)
+            }))
+        }else{
+            cell.imgRestaurantNotify.image = nil
         }
         return cell
     }
@@ -86,13 +85,9 @@ extension NotifyVC: UITableViewDataSource{
         let restaurants = notifyModel.getRestaurantsToNotify()
         
         if editingStyle == .delete {
-            
-            guard  restaurants[indexPath.row] else{
+            guard let restaurantInContext = restaurants[safe: indexPath.row]  else{
                 preconditionFailure("Error while getting value from the Menu Model")
             }
-            
-            let restaurantInContext = restaurants[indexPath.row]
-            
             do{
                 try notifyModel.removeRestauarntFromNotification(restaurant: restaurantInContext)
             }

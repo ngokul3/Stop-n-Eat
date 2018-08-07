@@ -182,11 +182,10 @@ extension RestaurantModel{
     
     func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant{
         
-        guard restaurantsFromNetwork[stopIndex] else{
+        guard let restaurantFromArray = restaurantsFromNetwork[safe: stopIndex]  else{
             throw RestaurantError.invalidRowSelection()
         }
-        
-        let restaurant = restaurantsFromNetwork[stopIndex]
+        let restaurant = restaurantFromArray
         return restaurant
     }
     
@@ -195,8 +194,7 @@ extension RestaurantModel{
         guard restaurantsFromNetwork.count > 0 else{
             throw RestaurantError.zeroCount()
         }
-        
-       return restaurantsFromNetwork
+        return restaurantsFromNetwork
     }
 }
 
@@ -207,13 +205,11 @@ extension RestaurantModel{
         guard let restaurant =  restaurantOpt else{
             throw RestaurantError.invalidRestaurant()
         }
-        
         restaurant.isFavorite = true
         restaurantsSaved.append(restaurant)
         
         let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantReadyToBeSaved), object: nil)
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
-        
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
     }
    
@@ -240,7 +236,6 @@ extension RestaurantModel{
         else{
             throw RestaurantError.notAbleToDelete(name: restaurant.restaurantName)
         }
-        
         let nsNotification1 = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantCanBeRemovedFromFavorite), object: nil)
         let nsNotification2 = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantDeleted), object: nil)
     
@@ -315,26 +310,12 @@ class Restaurant:  NSObject, NSCoding{
             return false
         }
     }
-    
-     lazy var isRestaurantInSameStateAsNotify: ((Restaurant))->Bool = {(arg) in
-        
-        if(arg.restaurantId == self.restaurantId){
-            if (arg.isSelected == self.isSelected) {
-                return true
-            }else{
-                return false
-            }
-        }
-        else{
-            return false
-        }
-    }
+
     var setRestaurantToNotifyList: Void{
         
         switch isSelected{
             
         case true:
-            
             guard !self.restaurantId.isEmpty else{
                 return // This means user created favorite by clicking "+". Restaurant Id comes from Yelp or it is empty if a new restaurant isn't saved.
             }

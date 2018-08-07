@@ -101,12 +101,9 @@ extension RestaurantVC : UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as? RestaurantCell else{
             preconditionFailure("Incorrect Cell provided")
         }
-        
-        guard restaurantModel.restaurantsFromNetwork[indexPath.row] else{
-            preconditionFailure("Restaurant list did not get loaded")
+        guard let restaurant = restaurantModel.restaurantsFromNetwork[safe: indexPath.row]  else{
+             preconditionFailure("Restaurant list did not get loaded")
         }
-    
-        let restaurant = restaurantModel.restaurantsFromNetwork[indexPath.row]
         cell.lblRestaurantName.text = restaurant.restaurantName
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop) + " mi"
         cell.btnSingleMap.tag = indexPath.row

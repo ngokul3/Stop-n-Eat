@@ -79,11 +79,9 @@ extension SavedRestaurantVC : UITableViewDataSource{
                    forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            guard  model.restaurantsSaved[indexPath.row] else{
+            guard let restaurantInContext = model.restaurantsSaved[safe: indexPath.row]  else{
                 preconditionFailure("Error while getting value from the Menu Model")
             }
-            
-            let restaurantInContext = model.restaurantsSaved[indexPath.row]
             do{
                 try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext, completed: {[weak self](msgOpt) in
                     if let msg = msgOpt{
@@ -148,12 +146,9 @@ extension SavedRestaurantVC{
                 ,let indexPath = self.tableView.indexPath(for: cell) else{
                     preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
             }
-            
-            guard  model.restaurantsSaved[indexPath.row] else{
+            guard let restaurantInContext = model.restaurantsSaved[safe: indexPath.row]  else{
                 preconditionFailure("Error while getting value from the Menu Model")
             }
-            
-            let restaurantInContext = model.restaurantsSaved[indexPath.row]
             detailVC.restaurantDetailVCType = DetailVCType.Edit
             detailVC.restaurant = restaurantInContext
             detailVC.saveDetailVC = {[weak self] (restaurant) in

@@ -120,11 +120,9 @@ extension TrainStopModel{
 extension TrainStopModel{
     
     func getTrainStop(fromFilteredArray stopIndex : Int) throws ->TrainStop{
-
-        guard filteredStops[stopIndex] else{
-            throw TrainStopError.invalidRowSelection()
+        guard let stop = filteredStops[safe: stopIndex]  else{
+           throw TrainStopError.invalidRowSelection()
         }
-        let stop = filteredStops[stopIndex]
         return stop
     }
 }

@@ -84,15 +84,22 @@ struct Consts{
     static let KEY0 = "Key0"
 }
 
-extension Collection{
-    subscript(index: Int) -> Bool{
-        guard   index >= 0
-            ,self.count > index else{
-                return false
-        }
-        return true
+extension Collection where Indices.Iterator.Element == Index {
+    subscript (safe index: Index) -> Iterator.Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }
+
+//extension Collection{
+//    subscript(safe index: Int) -> Element?{
+//        get {
+//            if index >= 0 && index < self.count {
+//                return self[index]
+//            }
+//            return nil
+//        }
+//    }
+//}
 
 extension String{
     
@@ -108,8 +115,9 @@ extension String{
 }
 
 /**Todo
- clean up weak self
+
  white spaces
  mention in readme - Notify is session based and not persisted
  mention about Presentation video
+ review unwanted optional settings as params
  **/
