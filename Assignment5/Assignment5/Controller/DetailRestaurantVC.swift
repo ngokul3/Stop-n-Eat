@@ -24,7 +24,6 @@ class DetailRestaurantVC: UIViewController {
     private static var modelObserver: NSObjectProtocol?
     private lazy var btnRatings : [UIButton] = [btnRating1, btnRating2, btnRating3, btnRating4, btnRating5]
     private var myRating: Int = 0
-    private var myNotify: Bool = false
     var restaurant : Restaurant?
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
@@ -151,8 +150,7 @@ class DetailRestaurantVC: UIViewController {
             let rating = restaurantInContext.myRating
             setUpButtonImages(rating)
         }
-        self.myNotify = restaurant?.isSelected ?? false
-        swtNotify.isOn = self.myNotify
+        swtNotify.isOn = restaurant?.isSelected ?? false
     }
 }
 
@@ -188,6 +186,10 @@ extension DetailRestaurantVC{
             alertUser = "Restaurant rating was changed"
             return
         }
+        if(restaurant?.isSelected != self.swtNotify.isOn){
+            alertUser = "Restaurant Notify option was changed"
+            return
+        }
         navigationController?.popViewController(animated: true)
     }
     
@@ -201,13 +203,9 @@ extension DetailRestaurantVC{
         restaurant?.dateVisited = dateVisited.date
         restaurant?.comments = txtNotes.text
         restaurant?.myRating = self.myRating
-        restaurant?.isSelected = self.myNotify
+        restaurant?.isSelected = swtNotify.isOn
         saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func swtNotify_Click(_ sender: UISwitch) {
-        self.myNotify = swtNotify.isOn
     }
 }
 

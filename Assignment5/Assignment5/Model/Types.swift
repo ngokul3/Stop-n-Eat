@@ -110,5 +110,6 @@ extension String{
 /**Todo
  clean up weak self
  white spaces
- 
+ mention in readme - Notify is session based and not persisted
+ mention about Presentation video
  **/

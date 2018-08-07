@@ -100,9 +100,6 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tJU-jK-1LU">
                                 <rect key="frame" x="110" y="485" width="51" height="31"/>
-                                <connections>
-                                    <action selector="swtNotify_Click:" destination="aVw-KE-lTW" eventType="valueChanged" id="0d0-Rr-qun"/>
-                                </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyN-e7-JxK">
                                 <rect key="frame" x="265" y="555" width="50" height="50"/>

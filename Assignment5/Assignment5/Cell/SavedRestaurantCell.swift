@@ -12,13 +12,11 @@ class SavedRestaurantCell: UITableViewCell {
 
     @IBOutlet weak var txtDateSaved: UILabel!
     @IBOutlet weak var txtNotesRestaurant: UITextView!
-    @IBOutlet weak var imgRail: UIImageView!
     @IBOutlet weak var imgStar1: UIImageView!
     @IBOutlet weak var imgStar2: UIImageView!
     @IBOutlet weak var imgStar3: UIImageView!
     @IBOutlet weak var imgStar4: UIImageView!
     @IBOutlet weak var imgStar5: UIImageView!
-    @IBOutlet weak var lblMiles: UILabel!
     @IBOutlet weak var lblRestaurantName: UILabel!
     
     override func awakeFromNib() {
