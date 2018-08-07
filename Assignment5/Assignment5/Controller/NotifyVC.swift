@@ -96,11 +96,9 @@ extension NotifyVC: UITableViewDataSource{
             do{
                 try notifyModel.removeRestauarntFromNotification(restaurant: restaurantInContext)
             }
-                
             catch RestaurantError.notAbleToDelete(let name){
                 alertUser = "\(name) cannot be deleted"
             }
-                
             catch{
                 alertUser = "Unexpected Error"
             }

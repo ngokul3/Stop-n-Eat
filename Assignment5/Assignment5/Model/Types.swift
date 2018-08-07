@@ -25,7 +25,7 @@ protocol RestaurantProtocol{
     func getAllRestaurantsFromNetwork() throws ->RestaurantArray
     func addRestaurantToFavorite(restaurantOpt: Restaurant?) throws
     func editRestaurantInFavorite(restaurant: Restaurant) throws
-    func deleteRestaurantFromFavorite(restaurant: Restaurant) throws
+    func deleteRestaurantFromFavorite(restaurant: Restaurant, completed: ((String?)->Void)?) throws
     func restoreRestaurantsFromFavorite(restaurants : [Restaurant])
     func generateEmptyRestaurant() throws-> Restaurant
     func loadRestaurantImage(imageURLOpt: String?, imageLoaded: @escaping (Data?, HTTPURLResponse?, Error?)->Void)

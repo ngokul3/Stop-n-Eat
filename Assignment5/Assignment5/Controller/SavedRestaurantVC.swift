@@ -92,7 +92,11 @@ extension SavedRestaurantVC : UITableViewDataSource{
             let restaurantInContext = model.restaurantsSaved[indexPath.row]
             
             do{
-                try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext)
+                try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext, completed: {[weak self](msgOpt) in
+                    if let msg = msgOpt{
+                        self?.alertUser = msg
+                    }
+                })
             }
                 
             catch RestaurantError.notAbleToDelete(let name){

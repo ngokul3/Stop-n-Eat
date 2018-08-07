@@ -232,7 +232,7 @@ extension RestaurantModel{
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
    }
     
-    func deleteRestaurantFromFavorite(restaurant: Restaurant) throws{
+    func deleteRestaurantFromFavorite(restaurant: Restaurant, completed: ((String?)->Void)?) throws{
         
         if(restaurantsSaved.contains{$0.restaurantId == restaurant.restaurantId}){
             restaurantsSaved = restaurantsSaved.filter({($0.restaurantId != restaurant.restaurantId)})
@@ -247,6 +247,10 @@ extension RestaurantModel{
         NotificationCenter.default.post(name: nsNotification1.name, object: nil, userInfo:[Consts.KEY0: restaurant])
         NotificationCenter.default.post(name: nsNotification2.name, object: nil, userInfo:[Consts.KEY0: restaurant])
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
+        
+        if(AppDel.notifyModel.getRestaurantsToNotify().contains(restaurant)){
+            completed?("Please note that \(restaurant.restaurantName) is in the Notify List. Please delete from Notify tab if you don't want to Notify.")
+        }
     }
 }
 
@@ -345,7 +349,7 @@ class Restaurant:  NSObject, NSCoding{
                     try AppDel.notifyModel.removeRestauarntFromNotification(restaurant: self)
                 }
                 catch{
-                    preconditionFailure("Not able to remove restaurant from selected list")
+                    preconditionFailure("Not able to remove restaurant from Notify list")
                 }
             }
         }

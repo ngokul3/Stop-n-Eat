@@ -35,7 +35,7 @@ class NotifyModel: NotifyProtocol{
         }
     }
     
-    func checkIsSelectedConsistency(restaraunts: [Restaurant], restaurantToNotify: Restaurant){
+    func checkNotificationConsistency(restaraunts: [Restaurant], restaurantToNotify: Restaurant){
         
         let restFromNetwork = restaraunts.first(where: {(isNotifiedRestaurantPresent($0, restaurantToNotify))})
         
@@ -51,8 +51,8 @@ class NotifyModel: NotifyProtocol{
     func addRestaurantToNotify(restaurantToNotify: Restaurant) {
         notifyRestaurants.append(restaurantToNotify)
        
-        checkIsSelectedConsistency(restaraunts: AppDel.restModel.restaurantsFromNetwork, restaurantToNotify: restaurantToNotify)
-        checkIsSelectedConsistency(restaraunts: AppDel.restModel.restaurantsSaved, restaurantToNotify: restaurantToNotify)
+        checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsFromNetwork, restaurantToNotify: restaurantToNotify)
+        checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsSaved, restaurantToNotify: restaurantToNotify)
         
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantNotificationListChanged), object: self))
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
@@ -63,8 +63,9 @@ class NotifyModel: NotifyProtocol{
              notifyRestaurants = notifyRestaurants.filter({($0.restaurantId != restaurant.restaurantId)})
              restaurant.isSelected = false
             
-            checkIsSelectedConsistency(restaraunts: AppDel.restModel.restaurantsFromNetwork, restaurantToNotify: restaurant)
-            checkIsSelectedConsistency(restaraunts: AppDel.restModel.restaurantsSaved, restaurantToNotify: restaurant)
+            print("\(restaurant.restaurantName) is removed from the Notify list")
+            checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsFromNetwork, restaurantToNotify: restaurant)
+            checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsSaved, restaurantToNotify: restaurant)
             
         }
         else{
