@@ -10,24 +10,6 @@ import UIKit
 import MapKit
 
 class MapViewVC: UIViewController {
-
-    class PointOfInterest : NSObject, MKAnnotation
-    {
-        let title: String?
-        let locationName: String
-        let coordinate: CLLocationCoordinate2D
-        let placeType : PlaceType
-        let rating: Int?
-        init(title: String, locationName: String,  coordinate: CLLocationCoordinate2D, placeType: PlaceType, rating: Int?) {
-            self.title = title
-            self.locationName = locationName
-            self.coordinate = coordinate
-            self.placeType = placeType
-            self.rating = rating
-            super.init()
-        }
-    }
-    
     @IBOutlet weak var mapView: MKMapView!
     var points : [PointOfInterest] = []
     let locationManager = CLLocationManager()
@@ -36,6 +18,7 @@ class MapViewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         guard let placeOfInterest = place else{
             alertUser = "Error while loading map"
             return
@@ -78,7 +61,8 @@ extension MapViewVC{
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedAlways {
             mapView.showsUserLocation = true
-        } else {
+        }
+        else {
             locationManager.requestAlwaysAuthorization()
         }
     }
@@ -99,7 +83,6 @@ extension MapViewVC{
         set{
             let alert = UIAlertController(title: "Attention", message: newValue, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            
             self.present(alert, animated: true)
         }
     }
@@ -157,5 +140,22 @@ extension MapViewVC: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         print("RegionDidChange: \(mapView.region)")
+    }
+}
+
+class PointOfInterest : NSObject, MKAnnotation
+{
+    let title: String?
+    let locationName: String
+    let coordinate: CLLocationCoordinate2D
+    let placeType : PlaceType
+    let rating: Int?
+    init(title: String, locationName: String,  coordinate: CLLocationCoordinate2D, placeType: PlaceType, rating: Int?) {
+        self.title = title
+        self.locationName = locationName
+        self.coordinate = coordinate
+        self.placeType = placeType
+        self.rating = rating
+        super.init()
     }
 }

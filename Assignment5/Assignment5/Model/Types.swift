@@ -10,7 +10,7 @@ import Foundation
 
 protocol TrainStopProtocol {
     static func getInstance() -> TrainStopProtocol
-     func getTrainStop(fromFilteredArray stopIndex : Int) throws ->TrainStop
+    func getTrainStop(fromFilteredArray stopIndex : Int) throws ->TrainStop
     var filteredStops : StopArray {get set}
     var currentFilter : String {get set}
     func loadTransitData(completed : @escaping (String?)->Void) throws
@@ -64,17 +64,15 @@ enum NotifyError: Error{
 }
 struct Messages {
     static let StopListFiltered = "Train Stops Filtered"
-    static let RestaurantLoadedFromNetwork = "Restaurants From Network Loaded"
     static let RestaurantReadyToBeSaved = "Restaurant refreshed to Favorite"
-    static let FavoriteOrNotifyChanged = "Favorite Changed or Notify List Changed on the Restaurant Model"
+    static let RestaurantListChanged = "Favorite Changed or Notify List Changed on the Restaurant Model"
     static let RestaurantDeleted = "Restaurant Deleted from Saved list"
-    static let RestaurantCanBeRemovedFromFavorite = "Restaurant cane be Deleted from Saved list"
+    static let RestaurantCanBeRemovedFromFavorite = "Restaurant can be Deleted from Saved list"
     static let ImageArrived = "Image arrived"
     static let RestaurantNotificationListChanged = "Restaurants to be notified changed"
 }
 
-enum DetailVCType : String
-{
+enum DetailVCType : String{
     case Add
     case Edit
     case Preload
@@ -84,25 +82,14 @@ struct Consts{
     static let KEY0 = "Key0"
 }
 
+//Stackoverflow
 extension Collection where Indices.Iterator.Element == Index {
     subscript (safe index: Index) -> Iterator.Element? {
         return indices.contains(index) ? self[index] : nil
     }
 }
 
-//extension Collection{
-//    subscript(safe index: Int) -> Element?{
-//        get {
-//            if index >= 0 && index < self.count {
-//                return self[index]
-//            }
-//            return nil
-//        }
-//    }
-//}
-
 extension String{
-    
     func getTruncatedAddress(firstAddress : String, seperator : String) -> String
     {
         var shortAddress = firstAddress
@@ -115,9 +102,12 @@ extension String{
 }
 
 /**Todo
-
+code signing
  white spaces
  mention in readme - Notify is session based and not persisted
- mention about Presentation video
- review unwanted optional settings as params
+ upload new presentation
+
+
+ mention about Presentation video in readme
+ 
  **/

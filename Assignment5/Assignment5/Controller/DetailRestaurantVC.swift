@@ -27,7 +27,7 @@ class DetailRestaurantVC: UIViewController {
     var restaurant : Restaurant?
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
-    var emptyRatingImageName: String = "plainStar"
+    var emptyRatingImageName: String = "plainStar" // This image name is not  model specific. So, not having it in Model
     var fullRatingImageName: String = "rating"
 
     lazy var updateRating = {(button: UIButton) in
@@ -37,6 +37,7 @@ class DetailRestaurantVC: UIViewController {
         guard let btnClickedIndex = btnClickedIndexOpt else{
             return
         }
+        
         self.myRating = 0
         self.btnRatings.forEach({(btn) in
             
@@ -44,6 +45,7 @@ class DetailRestaurantVC: UIViewController {
             guard let btnIndex = btnIndexOpt else{
                 return
             }
+            
             if(btnIndex <= btnClickedIndex){
                 self.myRating += 1
                 btn.setBackgroundImage(UIImage(named: self.fullRatingImageName), for: .normal)
@@ -56,7 +58,7 @@ class DetailRestaurantVC: UIViewController {
     }
     
     lazy var setUpButtonImages:(Int)->Void = {(rating: Int) in
-        self.btnRatings.forEach{(btn) in
+        self.btnRatings.forEach{ (btn) in
             
             let btnIndex = self.btnRatings.index(of: btn)
             guard let index = btnIndex else{
@@ -72,6 +74,7 @@ class DetailRestaurantVC: UIViewController {
     }
     
     lazy var setUpRestaurantImage: ((Data?, HTTPURLResponse?, Error?)-> Void) = {[weak self](data, response, error) in
+       
         if let e = error {
             print("HTTP request failed: \(e.localizedDescription)")
         }
@@ -87,14 +90,16 @@ class DetailRestaurantVC: UIViewController {
                             print("urlArrivedCallback operation: Now on thread: \(Thread.current)")
                             self?.imgRestaurantURL.image = UIImage(data: imageData)
                         }
-                    }else{
+                    }
+                    else{
                         print("Image data not available")
                     }
-                    
-                }else{
+                }
+                else{
                     print("HTTP Error \(httpResponse.statusCode)")
                 }
-            }else{
+            }
+            else{
                 print("Can't parse imageresponse")
             }
         }

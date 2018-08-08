@@ -31,7 +31,7 @@ class SavedRestaurantVC: UIViewController {
             }
         }
         
-        SavedRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.FavoriteOrNotifyChanged), object: nil, queue: OperationQueue.main) {
+        SavedRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantListChanged), object: nil, queue: OperationQueue.main) {
             
             [weak self] (notification: Notification) in
             if let s = self {
@@ -107,6 +107,7 @@ extension SavedRestaurantVC: UITableViewDelegate{
 
 extension SavedRestaurantVC{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        
         guard let segueName = segue.identifier else{
             preconditionFailure("No segue identifier")
         }
@@ -133,7 +134,6 @@ extension SavedRestaurantVC{
                     }
                 }
             }
-            
             catch RestaurantError.notAbleToCreateEmptyRestaurant(){
                 self.alertUser = "Could not add restaurant"
             }
@@ -142,16 +142,20 @@ extension SavedRestaurantVC{
             }
             
         case "editSegue" :
-            guard let cell = sender as? UITableViewCell
-                ,let indexPath = self.tableView.indexPath(for: cell) else{
+           
+            guard let cell = sender as? UITableViewCell,
+                  let indexPath = self.tableView.indexPath(for: cell) else{
                     preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
             }
+            
             guard let restaurantInContext = model.restaurantsSaved[safe: indexPath.row]  else{
                 preconditionFailure("Error while getting value from the Menu Model")
             }
+            
             detailVC.restaurantDetailVCType = DetailVCType.Edit
             detailVC.restaurant = restaurantInContext
             detailVC.saveDetailVC = {[weak self] (restaurant) in
+                
                 do{
                     try self?.model.editRestaurantInFavorite(restaurant: restaurantInContext)
                 }

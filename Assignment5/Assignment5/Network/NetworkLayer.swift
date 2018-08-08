@@ -63,9 +63,7 @@ extension NetworkModel{
             preconditionFailure("There is no input file for Train Stops")
         }
         DispatchQueue.global(qos: .background).async{
-        
-        let jsonResult: Any?
-            
+            let jsonResult: Any?
             if let path = Bundle.main.path(forResource: transitFileName, ofType: "json")
             {
                  do{
@@ -76,12 +74,10 @@ extension NetworkModel{
                     finished(nil, "InvalidJsonFile")
                     return
                 }
-                
                 guard let stopArray = jsonResult as? NSArray else {
                     finished(nil, "InvalidJsonFile")
                     return
                 }
-                
                 finished(stopArray, nil)
             }
         }
@@ -91,19 +87,17 @@ extension NetworkModel{
 //Restaurant Fetch
 extension NetworkModel{
     func loadFromNetwork(location: String, term: String, finished: @escaping (_ dataDict: NSDictionary?, _ errorMsg: String?)  -> ()) {
+        
         guard let myKey = keyOpt else{
             preconditionFailure("This app does not have license to get information from Yelp")
         }
-        print("Searching for location \(location)")
-        
         var locationURL : String
         locationURL = "https://api.yelp.com/v3/businesses/search?term=" + term+"&location=" + location
-        
         locationURL = locationURL.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        
         if let url = URL(string: locationURL) {
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = HTTPMethod.get.rawValue
-            
             urlRequest.addValue(myKey, forHTTPHeaderField: "Authorization")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             
@@ -112,12 +106,7 @@ extension NetworkModel{
                     debugPrint(response)
                     
                     if let status = response.response?.statusCode {
-                        switch(status){
-                        case 201:
-                            print("success")
-                        default:
-                            print("Response status: \(status)")
-                        }
+                        print("Response status: \(status)")
                     }
                     
                     if let result = response.result.value {
@@ -140,7 +129,6 @@ extension NetworkModel{
         if let _ = URL(string: restaurantImageURL)
         {
             let restaurantImageURL = URL(string: restaurantImageURL)!
-            
             let downloadPicTask = session.dataTask(with: restaurantImageURL) { (data, responseOpt, error) in
                 if let e = error {
                     print("Error downloading cat picture: \(e)")

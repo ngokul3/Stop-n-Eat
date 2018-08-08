@@ -756,6 +756,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.harvard.csci-s65.Assignment5";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = none;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -777,6 +778,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.harvard.csci-s65.Assignment5";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = none;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -789,6 +791,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RTEDH52U6R;
 				INFOPLIST_FILE = Assignment5Tests/Info.plist;
@@ -811,6 +814,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RTEDH52U6R;
 				INFOPLIST_FILE = Assignment5Tests/Info.plist;
@@ -832,6 +836,7 @@
 			baseConfigurationReference = 1A83198462F52D5998E79A65 /* Pods-Assignment5UITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RTEDH52U6R;
 				INFOPLIST_FILE = Assignment5UITests/Info.plist;
@@ -853,6 +858,7 @@
 			baseConfigurationReference = 4A01B832239251BE826D777A /* Pods-Assignment5UITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RTEDH52U6R;
 				INFOPLIST_FILE = Assignment5UITests/Info.plist;

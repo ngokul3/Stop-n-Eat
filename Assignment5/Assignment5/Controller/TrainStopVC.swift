@@ -11,7 +11,6 @@ import UIKit
 class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
 
     @IBOutlet weak var searchBar: UISearchBar!
-   
     @IBOutlet weak var tableView: UITableView!
     private var model = TrainStopModel.getInstance()
     private var restModel = AppDel.restModel
@@ -34,11 +33,9 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
                 }
             })
         }
-        
         catch{
             alertUser = "Unexpected error while loading Transit Data"
         }
-       
         do {
             let restoredObject = try Persistence.restore()
             restModel.restoreRestaurantsFromFavorite(restaurants: restoredObject)
@@ -49,11 +46,11 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
         catch{
             alertUser = "Unknown Error"
         }
-        
         super.viewDidLoad()
     }
 }
 extension TrainStopVC{
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if(model.currentFilter != searchText){
              model.currentFilter = searchText
@@ -80,7 +77,6 @@ extension TrainStopVC{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
         let cell = tableView.dequeueReusableCell(withIdentifier: "trainCell", for: indexPath)
         cell.textLabel?.text = model.filteredStops[indexPath.row].stopName
         return cell
@@ -92,17 +88,16 @@ extension TrainStopVC{
 }
 
 extension TrainStopVC{
+   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-
         guard let segueVC = segue.destination as? RestaurantVC else{
             preconditionFailure("Wrong destination type: \(segue.destination)")
         }
         
-        guard let cell = sender as? UITableViewCell
-            ,let indexPath = self.tableView.indexPath(for: cell) else{
+        guard let cell = sender as? UITableViewCell,
+              let indexPath = self.tableView.indexPath(for: cell) else{
                 preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
         }
-        
         do{
             let trainStop = try model.getTrainStop(fromFilteredArray: indexPath.row)
             segueVC.trainStop = trainStop
@@ -117,6 +112,7 @@ extension TrainStopVC{
 }
 
 extension TrainStopVC{
+    
     func updateUI(){
         self.tableView.reloadData()
     }
@@ -125,11 +121,9 @@ extension TrainStopVC{
         get{
             preconditionFailure("You cannot read from this object")
         }
-        
         set{
             let alert = UIAlertController(title: "Attention", message: newValue, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            
             self.present(alert, animated: true)
         }
     }

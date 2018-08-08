@@ -70,9 +70,42 @@ extension NotifyVC: UITableViewDataSource{
         
         if(!restaurant.imageURL.isEmpty){
             AppDel.restModel.loadRestaurantImage(imageURLOpt: restaurant.imageURL, imageLoaded: ({(data, response, error) in
-                cell.imageLoaderClosure(data, response, error)
-            }))
-        }else{
+                
+                    OperationQueue.main.addOperation {
+                        if let e = error {
+                            print("HTTP request failed: \(e.localizedDescription)")
+                        }
+                        else{
+                            if let httpResponse = response {
+                                print("http response code: \(httpResponse.statusCode)")
+                                
+                                let HTTP_OK = 200
+                                if(httpResponse.statusCode == HTTP_OK ){
+                                    
+                                    if let imageData = data{
+                                        print("urlArrivedCallback operation: Now on thread: \(Thread.current)")
+                                        cell.imgRestaurantNotify.image = UIImage(data: imageData)
+                                    }
+                                    else{
+                                        cell.imgRestaurantNotify.image = nil
+                                        print("Image data not available")
+                                    }
+                                }
+                                else{
+                                    cell.imgRestaurantNotify.image = nil
+                                    print("HTTP Error \(httpResponse.statusCode)")
+                                }
+                            }
+                            else{
+                                cell.imgRestaurantNotify.image = nil
+                                print("Can't parse imageresponse")
+                            }
+                        }
+                    }
+                })
+            )
+        }
+        else{
             cell.imgRestaurantNotify.image = nil
         }
         return cell
@@ -109,27 +142,23 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
         let message = "Selected restaurants can be sent over these available options"
         let popup =  PopupDialog(title: title, message: message, image: nil)
         
-        let buttonOne = CancelButton(title: "CANCEL") {
+        let buttonOne = CancelButton(title: "Cancel") {
         }
-        
         buttonOne.addTarget(self, action:#selector(self.cancelClicked), for: .touchUpInside)
         
         let buttonTwo = DefaultButton(title: "Send a Mail") {
         }
-        
         buttonTwo.addTarget(self, action:#selector(self.mailClicked), for: .touchUpInside)
         
         let buttonThree = DefaultButton(title: "Send a Message") {
         }
-        
         buttonThree.addTarget(self, action:#selector(self.messageClicked), for: .touchUpInside)
         
         let buttonFour = DefaultButton(title: "WhatsApp") {
         }
-        
         buttonFour.addTarget(self, action:#selector(self.whatsAppClicked), for: .touchUpInside)
+ 
         popup.addButtons([buttonOne, buttonTwo, buttonThree, buttonFour])
-        
         self.present(popup, animated: animated, completion: nil)
     }
     
@@ -144,6 +173,7 @@ extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewCon
 }
 
 extension NotifyVC{
+    
     func updateUI(){
         self.tableView.reloadData()
     }
@@ -156,19 +186,17 @@ extension NotifyVC{
     }
     
     @objc func mailClicked(){
-        
+    
         if !MFMailComposeViewController.canSendMail() {
-            #if targetEnvironment(simulator)
-                alertUser = "Application should be running in an actual device to send mails"
-            #else
-                print("Real device")
-            #endif
-            
+                #if targetEnvironment(simulator)
+                    alertUser = "Application should be running in an actual device to send mails"
+                #else
+                    print("Real device")
+                #endif
             return
         }
         let mailComposer = MFMailComposeViewController()
         var restaurantInfo = String()
-        
         let restaurants = notifyModel.getRestaurantsToNotify()
         restaurantInfo = convertToHTMLTable(restaurants: restaurants)
         
@@ -193,10 +221,8 @@ extension NotifyVC{
         
         let msgComposer = MFMessageComposeViewController()
         var restaurantInfo = String()
-        
         let restaurants = notifyModel.getRestaurantsToNotify()
         restaurantInfo = convertToMSGBody(restaurants: restaurants)
-        
         msgComposer.body = restaurantInfo
         msgComposer.messageComposeDelegate = self
         
@@ -208,29 +234,26 @@ extension NotifyVC{
     @objc func whatsAppClicked()
     {
         var restaurantInfo = String()
-        
         let restaurants = notifyModel.getRestaurantsToNotify()
         restaurantInfo = convertToMSGBody(restaurants: restaurants)
+        let urlWhatsApp = "whatsapp://send?text=\(restaurantInfo)"
         
-        let urlWhats = "whatsapp://send?text=\(restaurantInfo)"
-        
-        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) {
+        if let urlString = urlWhatsApp.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) {
             if let whatsappURL = NSURL(string: urlString) {
                 if UIApplication.shared.canOpenURL(whatsappURL as URL) {
                     UIApplication.shared.open(whatsappURL as URL, options : [:] , completionHandler: nil)
-                } else {
-                    
-                    #if targetEnvironment(simulator)
-                    alertUser = "WhatsApp is not available on this device."
-                    #else
-                    print("Real device")
-                    #endif
-                    return
+                }
+                else {
+                        #if targetEnvironment(simulator)
+                            alertUser = "WhatsApp is not available on this device."
+                        #else
+                            print("Real device")
+                        #endif
+                        return
                 }
             }
         }
     }
-   
  }
 
 extension NotifyVC{
@@ -238,47 +261,31 @@ extension NotifyVC{
         get{
             preconditionFailure("You cannot read from this object")
         }
-        
         set{
             let alert = UIAlertController(title: "Attention", message: newValue, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel,
-                                          handler: ({[weak self]_ in
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: ({[weak self]_ in
                                             
-                                                if let tabBC = self?.tabBarController{
-                                                tabBC.selectedIndex = 0
-                                                }
+                                                    if let tabBC = self?.tabBarController{
+                                                        tabBC.selectedIndex = 0
+                                                    }
                                             })
                                         )
                         )
             DispatchQueue.main.async(execute: {
                 self.present(alert, animated: true)
             })
-            
         }
     }
 }
 
 extension NotifyVC{
+    
     func convertToHTMLTable(restaurants : [Restaurant]) -> String
     {
         var itemCount = 1
         var innerHTML = String()
-        let htmlHeader = """
-                <!DOCTYPE>
-                <HTML>
-                    <head>
-                    </head>
-                    <body>
-                        <table>
-                        
-
-            """
-        let htmlFooter = """
-                       
-                        </table>
-                    </body>
-                </HTML>
-            """
+        let htmlHeader = "<!DOCTYPE><HTML><head></head><body><table>" //Couldn't find a better way to show results nicely formatted with restaurant name displayed like hyperlink
+        let htmlFooter = "</table></body></HTML>"
         
         for restaurant in restaurants {
             innerHTML += "<tr>"
@@ -286,9 +293,9 @@ extension NotifyVC{
             
             if(restaurant.restaurantURL.isEmpty){
                 innerHTML +=  "<td>" + restaurant.restaurantName + "</td>"
-
-            }else{
-            innerHTML +=  "<td><a href=" + restaurant.restaurantURL + ">" + restaurant.restaurantName + restaurant.displayedAddress.getTruncatedAddress(firstAddress: "", seperator: " @ ") + "</a>  </td>"
+            }
+            else{
+                innerHTML +=  "<td><a href=" + restaurant.restaurantURL + ">" + restaurant.restaurantName + restaurant.displayedAddress.getTruncatedAddress(firstAddress: "", seperator: " @ ") + "</a>  </td>"
             }
             
             innerHTML += "</tr>"
@@ -296,18 +303,14 @@ extension NotifyVC{
         }
         
         let html  = htmlHeader + innerHTML + htmlFooter
-        
-        print(html)
         return html
     }
     
     func convertToMSGBody(restaurants : [Restaurant])-> String{
-        
         var itemCount = 1
         var innerMSGBody = String()
         for restaurant in restaurants {
             innerMSGBody += String(itemCount) + ") "
-            
             innerMSGBody +=  restaurant.restaurantName
             if(restaurant.displayedAddress.count > 1){
                 let truncatedAddress = restaurant.displayedAddress.getTruncatedAddress(firstAddress: "", seperator: " @ ")

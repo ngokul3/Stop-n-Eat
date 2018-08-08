@@ -11,16 +11,13 @@ import Foundation
 class Persistence {
 
     static func delete(_ restaurant: Restaurant) throws{
-        
         guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
             return
         }
         
         if let alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] {
-            
             if(alreadySavedRestaurants.contains{$0.restaurantId == restaurant.restaurantId}){
                 let restaurantsSaved = alreadySavedRestaurants.filter({($0.restaurantId != restaurant.restaurantId)})
-                
                 let savedData = NSKeyedArchiver.archivedData(withRootObject: restaurantsSaved)
                 UserDefaults.standard.set(savedData, forKey: "restaurants")
             }
@@ -28,20 +25,10 @@ class Persistence {
                 throw RestaurantError.notAbleToDelete(name: restaurant.restaurantName)
             }
         }
-        
         restaurant.isFavorite = false
-        
-        //Printing saved data. Auditing purpose
-        if let data = UserDefaults.standard.data(forKey: "restaurants"),
-            let myRestList = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Restaurant] {
-            myRestList.forEach({print( "Saved Item - " + $0.restaurantName)})
-        } else {
-            print("There is an issue")
-        }
     }
     
     static func save(_ restaurant: Restaurant) throws {
-       
         var savedRestaurants = [Restaurant]()
         
         if let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") {
@@ -70,23 +57,13 @@ class Persistence {
         
         let savedData = NSKeyedArchiver.archivedData(withRootObject: savedRestaurants)
         UserDefaults.standard.set(savedData, forKey: "restaurants")
-        
-        //Printing saved data. Auditing purpose
-        if let data = UserDefaults.standard.data(forKey: "restaurants"),
-            let myRestList = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Restaurant] {
-            myRestList.forEach({print( "Saved Item - " + $0.restaurantName)})
-        } else {
-            print("There is an issue")
-        }
     }
     
     static func restore() throws -> [Restaurant] {
         var savedRestaurants = [Restaurant]()
-     
         guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
             return savedRestaurants
         }
-        
         if let alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] {
             savedRestaurants = alreadySavedRestaurants
         }

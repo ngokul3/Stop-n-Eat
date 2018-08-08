@@ -21,14 +21,12 @@ class TrainStopModel {
     var filteredStops : StopArray
     var currentFilter : String = ""{
         didSet{
-            
             if(!currentFilter.isEmpty){
                 filterTrainStops(stopName: currentFilter)
             }
             else{
                 filteredStops = trainStops
             }
-           
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListFiltered), object: self))
         }
     }
@@ -58,7 +56,6 @@ extension TrainStopModel : TrainStopProtocol{
 extension TrainStopModel{
     
     func filterTrainStops(stopName: String) {
-        
         guard trainStops.count > 0 else {
             preconditionFailure("Not able to fetch Train Stops")
         }
@@ -76,14 +73,11 @@ extension TrainStopModel{
     }
     
     func loadTransitData(completed : @escaping (String?)->Void) throws{
-        
         networkModel.loadTransitData(finished: ({[weak self] (jsonArray, error) in
-            
             if let _ = error{
                 completed("Json file is valid")
                 return
             }
-            
             guard let stopArray = jsonArray else {
                 completed("Json file could not be parsed into Array")
                 return
@@ -138,12 +132,10 @@ class TrainStop{
         guard let name = _stopName else{
             throw TrainStopError.invalidStopName()
         }
-        
         guard let lat = _latitude,
               let long = _longitude else{
             throw TrainStopError.invalidLocation()
         }
-        
         stopName = name
         latitude = lat
         longitude = long

@@ -25,7 +25,6 @@ class RestaurantModel: RestaurantProtocol{
         restaurantsSaved = RestaurantArray()
         
         if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            
             let dictRootOpt = NSDictionary(contentsOfFile: path)
             
             guard let dict = dictRootOpt else{
@@ -64,12 +63,13 @@ extension RestaurantModel{
         
         if let (data, response) = searchedRestaurantImage[imageURL]{
             imageLoaded(data, response, nil)
-        }else{
+        }
+        else{
             networkModel.setRestaurantImage(forRestaurantImage: imageURL, imageLoaded: {[weak self](dataOpt, responseOpt, errorOpt) in
                 
                 guard let data = dataOpt,
                     let response = responseOpt else{
-                        print("Image didn't load") // Not crashing the application just because the image icon was not available
+                        print("Image didn't load") // Not crashing the application just because the image was not available
                         return
                 }
                 self?.searchedRestaurantImage[imageURL] = (data, response)
@@ -159,7 +159,6 @@ extension RestaurantModel{
                     
                     let restaurant = Restaurant(_url: restaurantURL, _imageUrl: restaurantImageURL, _trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating), _displayAddress :  completeAddress)
                     
-                    
                     if let searchDistanceLimit = self?.searchDistanceLimitOpt{
                         if(restaurant.distanceFromTrainStop <= Double(searchDistanceLimit)){ // Loading only those data that are less than configured miles. Idea is to see restaurants in walking distance
                             
@@ -170,12 +169,9 @@ extension RestaurantModel{
                 }
                 
                 self?.searchedRestaurants[trainStop.stopName] = self?.restaurantsFromNetwork
-                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantLoadedFromNetwork), object: self))
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
             }
-            
         } )
-        
-        print("Number of Records now in restaurant Array is \(restaurantsFromNetwork.count)")
     }
 }
 extension RestaurantModel{
@@ -210,7 +206,7 @@ extension RestaurantModel{
         
         let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantReadyToBeSaved), object: nil)
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
     }
    
     func restoreRestaurantsFromFavorite(restaurants : [Restaurant]){
@@ -225,7 +221,7 @@ extension RestaurantModel{
         let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantReadyToBeSaved), object: nil)
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
 
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
    }
     
     func deleteRestaurantFromFavorite(restaurant: Restaurant, completed: ((String?)->Void)?) throws{
@@ -241,7 +237,7 @@ extension RestaurantModel{
     
         NotificationCenter.default.post(name: nsNotification1.name, object: nil, userInfo:[Consts.KEY0: restaurant])
         NotificationCenter.default.post(name: nsNotification2.name, object: nil, userInfo:[Consts.KEY0: restaurant])
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.FavoriteOrNotifyChanged), object: self))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
         
         if(AppDel.notifyModel.getRestaurantsToNotify().contains(restaurant)){
             completed?("Please note that \(restaurant.restaurantName) is in the Notify List. Please delete from Notify tab if you don't want to Notify.")
@@ -378,7 +374,8 @@ class Restaurant:  NSObject, NSCoding{
         didSet{
             if(isFavorite){
                 favoriteImageName = "favHeart"
-            }else{
+            }
+            else{
                 favoriteImageName = "emptyHeart"
             }
         }
@@ -403,8 +400,7 @@ class Restaurant:  NSObject, NSCoding{
 //Distance between 2 points - Code snippet from https://www.geodatasource.com/developers/swift
 extension Restaurant{
 
-    func distanceBetweenTwoCoordinates(lat1:Double, lon1:Double, latOpt:Double?, lonOpt:Double?) -> Double {
-
+    func distanceBetweenTwoCoordinates(lat1:Double, lon1:Double, latOpt:Double?, lonOpt:Double?) -> Double{
         guard let lat2 = latOpt, let lon2 = lonOpt else{
             preconditionFailure("Could not calculate distance")
         }

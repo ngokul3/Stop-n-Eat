@@ -20,9 +20,8 @@ class RestaurantVC: UIViewController {
     var shouldRemoveFavorite : Bool?
     
     override func viewDidLoad() {
-        
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 80
+        //tableView.estimatedRowHeight = 80
         
         guard let stop = trainStop else{
             preconditionFailure("Could not find Stop")
@@ -36,38 +35,29 @@ class RestaurantVC: UIViewController {
         catch{
             alertUser = "Unexpected Error while populating Resaurants. Try again"
         }
-   
-        RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantLoadedFromNetwork), object: nil, queue: OperationQueue.main) {
-            
-            [weak self] (notification: Notification) in
-            if let s = self {
-                s.updateUI()
-            }
-        }
         
-        RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.FavoriteOrNotifyChanged), object: nil, queue: OperationQueue.main) {
+        RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantListChanged), object: nil, queue: OperationQueue.main) {
+                [weak self] (notification: Notification) in
             
-            [weak self] (notification: Notification) in
-            if let s = self {
-                s.updateUI()
-            }
+                if let s = self {
+                    s.updateUI()
+                }
         }
         
         RestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantCanBeRemovedFromFavorite), object: nil, queue: OperationQueue.main) {
+                [weak self] (notification: Notification) in
             
-            [weak self] (notification: Notification) in
-            if let s = self {
-                let info0 = notification.userInfo?[Consts.KEY0]
-                
-                let restaurantOpt = info0 as? Restaurant
-                
-                guard let restaurant = restaurantOpt else{
-                    preconditionFailure("Could not save this favorite restaurant")
+                if let s = self {
+                    let info0 = notification.userInfo?[Consts.KEY0]
+                    
+                    let restaurantOpt = info0 as? Restaurant
+                    
+                    guard let restaurant = restaurantOpt else{
+                        preconditionFailure("Could not save this favorite restaurant")
+                    }
+                    s.removeRestaurantFromFavoriteSavedList(restaurant: restaurant)
                 }
-                s.removeRestaurantFromFavoriteSavedList(restaurant: restaurant)
-            }
         }
-        
         super.viewDidLoad()
     }
 }
@@ -120,7 +110,8 @@ extension RestaurantVC : UITableViewDataSource{
         
         if(restaurant.isSelected){
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
-        }else{
+        }
+        else{
             cell.accessoryType = UITableViewCellAccessoryType.none
         }
         
@@ -129,9 +120,11 @@ extension RestaurantVC : UITableViewDataSource{
         
         if(restaurant.isFavorite){
             heartTap = UITapGestureRecognizer(target: self, action: #selector(RestaurantVC.favoriteHeartTap(gesture: )))
-        }else{
+        }
+        else{
             heartTap = UITapGestureRecognizer(target: self, action: #selector(RestaurantVC.heartTap(gesture: )))
         }
+        
         if let tap = heartTap{
             cell.imgHeart.addGestureRecognizer(tap)
             cell.imgHeart.isUserInteractionEnabled = true
@@ -139,8 +132,39 @@ extension RestaurantVC : UITableViewDataSource{
         }
         
         restaurantModel.loadRestaurantImage(imageURLOpt: restaurant.imageURL, imageLoaded: ({(data,response,error) in
-                        cell.imageLoaderClosure(data, response, error)
-                    })
+                OperationQueue.main.addOperation {
+                    if let e = error {
+                        print("HTTP request failed: \(e.localizedDescription)")
+                        cell.imgThumbnail.image = nil
+                    }
+                    else{
+                        if let httpResponse = response {
+                            print("http response code: \(httpResponse.statusCode)")
+                            
+                            let HTTP_OK = 200
+                            if(httpResponse.statusCode == HTTP_OK ){
+                                
+                                if let imageData = data{
+                                    print("urlArrivedCallback operation: Now on thread: \(Thread.current)")
+                                    cell.imgThumbnail.image = UIImage(data: imageData)
+                                }
+                                else{
+                                    cell.imgThumbnail.image = nil
+                                    print("Image data not available")
+                                }
+                            }
+                            else{
+                                cell.imgThumbnail.image = nil
+                                print("HTTP Error \(httpResponse.statusCode)")
+                            }
+                        }
+                        else{
+                            cell.imgThumbnail.image = nil
+                            print("Can't parse imageresponse")
+                        }
+                    }
+                }
+            })
         )
         return cell
     }
@@ -227,6 +251,7 @@ extension RestaurantVC{
         var retaurants = RestaurantArray()
         
         switch identifier{
+        
         case "singleMapSegue" :
             var rowNo : Int?
             if let button = sender as? UIButton {
