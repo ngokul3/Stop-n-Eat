@@ -87,6 +87,7 @@ extension SavedRestaurantVC : UITableViewDataSource{
             guard let restaurantInContext = model.restaurantsSaved[safe: indexPath.row]  else{
                 preconditionFailure("Error while getting value from the Menu Model")
             }
+            
             do{
                 try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext, completed: {[weak self](msgOpt) in
                     if let msg = msgOpt{
@@ -105,12 +106,14 @@ extension SavedRestaurantVC : UITableViewDataSource{
 }
 
 extension SavedRestaurantVC: UITableViewDelegate{
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.selectionStyle = UITableViewCellSelectionStyle.none
     }
 }
 
 extension SavedRestaurantVC{
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         
         guard let segueName = segue.identifier else{
@@ -214,6 +217,7 @@ extension SavedRestaurantVC{
 
 //Code referred from http://ios-tutorial.com/working-dates-swift/
 extension Date{
+    
     func returnFormattedDate() -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short

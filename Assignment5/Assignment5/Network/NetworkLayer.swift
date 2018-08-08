@@ -13,7 +13,7 @@ protocol NetworkProtocol {
     static func getInstance() -> NetworkProtocol
     func loadFromNetwork(location: String, term: String, finished: @escaping (_ dataDict: NSDictionary?, _ errorMsg: String?)  -> ())
     func setRestaurantImage(forRestaurantImage restaurantImageURL : String, imageLoaded : @escaping (Data?, HTTPURLResponse?, Error?)->Void)
-     func loadTransitData(finished : @escaping (NSArray?, String?)->Void )
+    func loadTransitData(finished : @escaping (NSArray?, String?)->Void )
 }
 
 class NetworkModel: NetworkProtocol{

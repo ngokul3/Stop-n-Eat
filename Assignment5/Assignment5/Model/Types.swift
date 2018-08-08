@@ -83,7 +83,7 @@ struct Consts{
     static let KEY0 = "Key0"
 }
 
-//Stackoverflow
+//This logic was corrected after code review comments from Assignment 4. Earlier I was returning bool.
 extension Collection where Indices.Iterator.Element == Index {
     
     subscript (safe index: Index) -> Iterator.Element? {
@@ -93,8 +93,7 @@ extension Collection where Indices.Iterator.Element == Index {
 
 extension String{
     
-    func getTruncatedAddress(firstAddress : String, seperator : String) -> String
-    {
+    func getTruncatedAddress(firstAddress : String, seperator : String) -> String{
         var shortAddress = firstAddress
         let addressLine = self.components(separatedBy: ",")
         

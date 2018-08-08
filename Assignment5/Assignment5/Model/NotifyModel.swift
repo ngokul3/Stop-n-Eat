@@ -12,6 +12,7 @@ class NotifyModel: NotifyProtocol{
     
     private static var instance: NotifyProtocol?
     private var notifyRestaurants  = [Restaurant]()
+    
     static func getInstance() -> NotifyProtocol {
         if let inst = NotifyModel.instance {
             return inst
