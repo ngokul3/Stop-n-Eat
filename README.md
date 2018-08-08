@@ -10,8 +10,9 @@ The TrainStop search was initially thought to work based on the stop name as wel
 
 **************************************
 UPDATE as of 08/07 -
-The presentation video is FinalProejct_Presentation.MOV. It is also available as FinalProejct_Presentation.mp4
 
+1) The presentation video is FinalProejct_Presentation.MOV. It is also available as FinalProejct_Presentation.mp4
+2) Added WhatApp to the Notification capability apart from Mail and Msg.
 
 **************************************
 Information mentioned below  is also included in Question1 - 4.txt file
