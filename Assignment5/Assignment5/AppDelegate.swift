@@ -17,14 +17,15 @@ var AppDel: AppDelegate {
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
     private var netModel = NetworkModel.getInstance()
     private var notModel = NotifyModel.getInstance()
-    private var restaurantModel = RestaurantModel.getInstance()
+    private var resModel = RestaurantModel.getInstance()
     var window: UIWindow?
 
     var restModel: RestaurantProtocol {
         get {
-            return restaurantModel
+            return resModel
         }
     }
     
