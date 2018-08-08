@@ -12,6 +12,7 @@ class RestaurantVC: UIViewController {
    
     @IBOutlet weak var btnFavoriteClick: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    
     var trainStop : TrainStop?
     var cellArrray = [RestaurantCell]()
     private var restaurantModel = AppDel.restModel
@@ -21,11 +22,11 @@ class RestaurantVC: UIViewController {
     
     override func viewDidLoad() {
         tableView.rowHeight = UITableViewAutomaticDimension
-        //tableView.estimatedRowHeight = 80
         
         guard let stop = trainStop else{
             preconditionFailure("Could not find Stop")
         }
+        
         do{
            try restaurantModel.loadRestaurantFromNetwork(trainStop: stop)
         }
@@ -63,6 +64,7 @@ class RestaurantVC: UIViewController {
 }
 
 extension RestaurantVC{
+    
     @IBAction func btnSave(_ sender: Any) {
         var rowNo : Int?
         
@@ -87,13 +89,17 @@ extension RestaurantVC{
 }
 
 extension RestaurantVC : UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as? RestaurantCell else{
             preconditionFailure("Incorrect Cell provided")
         }
+        
         guard let restaurant = restaurantModel.restaurantsFromNetwork[safe: indexPath.row]  else{
              preconditionFailure("Restaurant list did not get loaded")
         }
+        
         cell.lblRestaurantName.text = restaurant.restaurantName
         cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop) + " mi"
         cell.btnSingleMap.tag = indexPath.row
@@ -101,10 +107,10 @@ extension RestaurantVC : UITableViewDataSource{
         let imageName = "\(rating)Stars"
         cell.imgRatings.image = UIImage(named: imageName)
 
-        if(AppDel.restModel.restaurantsSaved.filter({$0.restaurantId == restaurant.restaurantId}).count > 0)
-        {
+        if(AppDel.restModel.restaurantsSaved.filter({$0.restaurantId == restaurant.restaurantId}).count > 0){
             restaurant.isFavorite = true
-        }else{
+        }
+        else{
             restaurant.isFavorite = false
         }
         
@@ -190,6 +196,7 @@ extension RestaurantVC: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+       
         if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
             restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = false
@@ -208,18 +215,21 @@ extension RestaurantVC: UITableViewDelegate{
 extension RestaurantVC{
     
     func removeFavorite(imageViewOpt: UIImageView?){
+       
         guard let imageView = imageViewOpt else{
             alertUser = "Favorite options are not workin at the moment. Please close and reopen the app."
             return
         }
         
         let indexRow = imageView.tag
+        
         do{
             let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
             
             if(restaurantFromNetwork.isFavorite == true){
                 try restaurantModel.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork, completed: nil)
-            }else{
+            }
+            else{
                 alertUser = "Incorrect restaurant was about to be removed from favorite"
             }
         }
@@ -232,11 +242,13 @@ extension RestaurantVC{
     }
  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        
         guard let identifier = segue.identifier else{
             preconditionFailure("No segue identifier")
         }
         
         let segueToVC : UIViewController?
+        
         switch segue.destination{
       
         case is MapViewVC :
@@ -254,6 +266,7 @@ extension RestaurantVC{
         
         case "singleMapSegue" :
             var rowNo : Int?
+            
             if let button = sender as? UIButton {
                 rowNo = button.tag
             }
@@ -304,6 +317,7 @@ extension RestaurantVC{
             
         case "detailSegueFromHeart" :
                 var rowNo : Int?
+                
                 if let imageRow = sender as? UIImageView {
                     rowNo = imageRow.tag
                 }
@@ -311,6 +325,7 @@ extension RestaurantVC{
                 guard let indexRow = rowNo else{
                     preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
                 }
+                
                 guard let vc = segueToVC as? DetailRestaurantVC else{
                     preconditionFailure("Could not find segue")
                 }
@@ -329,6 +344,7 @@ extension RestaurantVC{
                 catch{
                     alertUser = "Unexpected Error"
                 }
+                
                 vc.restaurantDetailVCType = DetailVCType.Preload
                 vc.saveDetailVC = {[weak self] (restaurant) in
                     do{
@@ -381,11 +397,11 @@ extension RestaurantVC{
 }
 
 extension RestaurantVC{
+    
     var alertUser :  String{
         get{
             preconditionFailure("You cannot read from this object")
         }
-        
         set{
             let alert = UIAlertController(title: "Attention", message: newValue, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -398,7 +414,6 @@ extension RestaurantVC{
         get{
             preconditionFailure("You cannot read from this object")
         }
-        
         set{
             let alert = UIAlertController(title: "Remove Favorite?", message: "Do you want to remove this favorite restaurant", preferredStyle: .alert)
             

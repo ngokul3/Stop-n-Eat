@@ -11,10 +11,11 @@ import UIKit
 class SavedRestaurantVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
     private var model = RestaurantModel.getInstance()
     private static var modelObserver: NSObjectProtocol?
     
-     override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
 
@@ -44,6 +45,7 @@ class SavedRestaurantVC: UIViewController {
 extension SavedRestaurantVC : UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "savedRestaurantCell", for: indexPath) as? SavedRestaurantCell else{
             preconditionFailure("Incorrect Cell provided")
         }
@@ -57,13 +59,15 @@ extension SavedRestaurantVC : UITableViewDataSource{
         let imgStarArr = [cell.imgStar1, cell.imgStar2, cell.imgStar3, cell.imgStar4, cell.imgStar5]
         
         imgStarArr.forEach({(img) in
+            
             guard let imgIndex = imgStarArr.index(of: img) else{
                 preconditionFailure("Can't load images")
             }
             
             if (rating > imgIndex){
                 img?.image = UIImage(named: "rating")
-            }else{
+            }
+            else{
                 img?.image = UIImage(named: "plainStar")
             }
         })
@@ -79,6 +83,7 @@ extension SavedRestaurantVC : UITableViewDataSource{
                    forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
+            
             guard let restaurantInContext = model.restaurantsSaved[safe: indexPath.row]  else{
                 preconditionFailure("Error while getting value from the Menu Model")
             }
@@ -172,8 +177,8 @@ extension SavedRestaurantVC{
 }
 
 extension SavedRestaurantVC{
-    func updateUI()
-    {
+    
+    func updateUI(){
         tableView.reloadData()
     }
     

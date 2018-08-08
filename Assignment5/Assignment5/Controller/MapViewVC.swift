@@ -11,6 +11,7 @@ import MapKit
 
 class MapViewVC: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
+    
     var points : [PointOfInterest] = []
     let locationManager = CLLocationManager()
     var leg: Int = 0
@@ -58,6 +59,7 @@ class MapViewVC: UIViewController {
 }
 
 extension MapViewVC{
+    
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedAlways {
             mapView.showsUserLocation = true
@@ -76,6 +78,7 @@ extension MapViewVC{
 }
 
 extension MapViewVC{
+    
     var alertUser :  String{
         get{
             preconditionFailure("You cannot read from this object")
@@ -90,12 +93,14 @@ extension MapViewVC{
 
 
 extension MapViewVC: MKMapViewDelegate {
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("Selected view \(view.annotation?.description ?? "None")")
     }
     
     // https://www.raywenderlich.com/166182/mapkit-tutorial-overlay-views
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+       
         if overlay is MKPolyline {
             let lineRenderer = MKPolylineRenderer(overlay: overlay)
             lineRenderer.strokeColor = UIColor(hue: CGFloat(leg) * 0.05, saturation: 0.85, brightness: 0.85, alpha: 0.75)
@@ -103,11 +108,13 @@ extension MapViewVC: MKMapViewDelegate {
             
             return lineRenderer
         }
+        
         return MKOverlayRenderer()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let pinView: MKPinAnnotationView = {
+            
             if let reusedPin = mapView.dequeueReusableAnnotationView(withIdentifier: "annotation") as? MKPinAnnotationView {
                 print("Reusing Pin")
                 return reusedPin
@@ -116,6 +123,7 @@ extension MapViewVC: MKMapViewDelegate {
                 print("Creating new Pin")
                 return MKPinAnnotationView(annotation: annotation, reuseIdentifier: "annotation")
             }
+            
         }()
         
         let placePointOpt = annotation as? PointOfInterest
@@ -123,6 +131,7 @@ extension MapViewVC: MKMapViewDelegate {
         guard let placePoint = placePointOpt else{
             return nil
         }
+        
         pinView.canShowCallout = true
         pinView.pinTintColor = placePoint.placeType == .train ? UIColor.blue : UIColor.red
         
@@ -131,6 +140,7 @@ extension MapViewVC: MKMapViewDelegate {
             pinImageView = placePoint.placeType == .restaurant ? UIImageView(image: UIImage(named: "\(restRating)Stars")) : nil
             pinView.rightCalloutAccessoryView = pinImageView
         }
+        
         return pinView
     }
     
@@ -143,6 +153,9 @@ extension MapViewVC: MKMapViewDelegate {
     }
 }
 
+/*Not including this class in a model file because MKAnnotation requires MapKit namespace.
+Trying to Avoid Mapkit / UIKit references in Model. So having this class in VC itself.
+*/
 class PointOfInterest : NSObject, MKAnnotation
 {
     let title: String?

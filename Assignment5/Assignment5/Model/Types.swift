@@ -1,6 +1,6 @@
 //
 //  Types.swift
-//  TransitBreak
+//  Assignment5
 //
 //  Created by Gokula K Narasimhan on 7/27/18.
 //  Copyright © 2018 Gokula K Narasimhan. All rights reserved.
@@ -62,6 +62,7 @@ enum RestaurantError: Error{
 enum NotifyError: Error{
     case notAbleToRemoveRestaurant
 }
+
 struct Messages {
     static let StopListFiltered = "Train Stops Filtered"
     static let RestaurantReadyToBeSaved = "Restaurant refreshed to Favorite"
@@ -84,19 +85,23 @@ struct Consts{
 
 //Stackoverflow
 extension Collection where Indices.Iterator.Element == Index {
+    
     subscript (safe index: Index) -> Iterator.Element? {
         return indices.contains(index) ? self[index] : nil
     }
 }
 
 extension String{
+    
     func getTruncatedAddress(firstAddress : String, seperator : String) -> String
     {
         var shortAddress = firstAddress
         let addressLine = self.components(separatedBy: ",")
+        
         if(addressLine.count > 0){
             shortAddress =  shortAddress + seperator + addressLine[0]
         }
+        
         return shortAddress
     }
 }

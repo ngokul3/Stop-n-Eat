@@ -12,7 +12,9 @@ class Place{
     var trainStop : TrainStop?
     var restaurants : [Restaurant]?
 }
+
 enum PlaceType{
     case train
     case restaurant
 }
+

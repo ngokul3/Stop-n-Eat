@@ -11,6 +11,7 @@ import Foundation
 class Persistence {
 
     static func delete(_ restaurant: Restaurant) throws{
+        
         guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
             return
         }
@@ -39,8 +40,7 @@ class Persistence {
             }
         }
         
-        if(savedRestaurants.filter({$0.restaurantId == restaurant.restaurantId}).count != 0)
-        {
+        if(savedRestaurants.filter({$0.restaurantId == restaurant.restaurantId}).count != 0){
             savedRestaurants.forEach({(rest) in
                 if(rest.restaurantId == restaurant.restaurantId){
                     rest.restaurantName = restaurant.restaurantName
@@ -61,12 +61,15 @@ class Persistence {
     
     static func restore() throws -> [Restaurant] {
         var savedRestaurants = [Restaurant]()
+        
         guard let alreadySavedData = UserDefaults.standard.data(forKey: "restaurants") else{
             return savedRestaurants
         }
+        
         if let alreadySavedRestaurants = NSKeyedUnarchiver.unarchiveObject(with: alreadySavedData) as? [Restaurant] {
             savedRestaurants = alreadySavedRestaurants
         }
+        
         return savedRestaurants
     }
 }

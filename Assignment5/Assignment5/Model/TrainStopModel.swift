@@ -1,6 +1,6 @@
 //
 //  TrainStopModel.swift
-//  TransitBreak
+//  Assignment5
 //
 //  Created by Gokula K Narasimhan on 7/27/18.
 //  Copyright © 2018 Gokula K Narasimhan. All rights reserved.
@@ -15,10 +15,13 @@ class TrainStopModel {
     private static var instance: TrainStopProtocol?
     private var searchedStops = [String : StopArray]()
     private var trainStops : StopArray
+    
     private lazy var networkModel = {
         return AppDel.networkModel
     }()
+    
     var filteredStops : StopArray
+    
     var currentFilter : String = ""{
         didSet{
             if(!currentFilter.isEmpty){
@@ -30,6 +33,7 @@ class TrainStopModel {
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListFiltered), object: self))
         }
     }
+    
     var storedStopFilter : StopArray?{
         return searchedStops[currentFilter]
     }
@@ -56,6 +60,7 @@ extension TrainStopModel : TrainStopProtocol{
 extension TrainStopModel{
     
     func filterTrainStops(stopName: String) {
+       
         guard trainStops.count > 0 else {
             preconditionFailure("Not able to fetch Train Stops")
         }
@@ -74,10 +79,12 @@ extension TrainStopModel{
     
     func loadTransitData(completed : @escaping (String?)->Void) throws{
         networkModel.loadTransitData(finished: ({[weak self] (jsonArray, error) in
+            
             if let _ = error{
                 completed("Json file is valid")
                 return
             }
+            
             guard let stopArray = jsonArray else {
                 completed("Json file could not be parsed into Array")
                 return
@@ -114,9 +121,11 @@ extension TrainStopModel{
 extension TrainStopModel{
     
     func getTrainStop(fromFilteredArray stopIndex : Int) throws ->TrainStop{
+        
         guard let stop = filteredStops[safe: stopIndex]  else{
            throw TrainStopError.invalidRowSelection()
         }
+        
         return stop
     }
 }
@@ -132,10 +141,12 @@ class TrainStop{
         guard let name = _stopName else{
             throw TrainStopError.invalidStopName()
         }
+        
         guard let lat = _latitude,
               let long = _longitude else{
             throw TrainStopError.invalidLocation()
         }
+        
         stopName = name
         latitude = lat
         longitude = long

@@ -15,6 +15,7 @@ import PopupDialog
 class NotifyVC: UIViewController, UITabBarControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    
     private var model = RestaurantModel.getInstance()
     private var notifyModel = NotifyModel.getInstance()
     private static var modelObserver: NSObjectProtocol?
@@ -51,21 +52,22 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
 }
 
 extension NotifyVC: UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return notifyModel.getRestaurantsToNotify().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let restaurants = notifyModel.getRestaurantsToNotify()
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "notifyCell", for: indexPath) as? NotifyCell else{
             preconditionFailure("Incorrect Cell provided")
         }
+        
         guard let restaurant = restaurants[safe: indexPath.row]  else{
             preconditionFailure("Incorrect row selected")
         }
+        
         cell.lblRestaurantDescription.text = restaurant.restaurantName
         
         if(!restaurant.imageURL.isEmpty){
@@ -111,10 +113,7 @@ extension NotifyVC: UITableViewDataSource{
         return cell
     }
     
-    func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCellEditingStyle,
-                   forRowAt indexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView,commit editingStyle: UITableViewCellEditingStyle,forRowAt indexPath: IndexPath) {
         let restaurants = notifyModel.getRestaurantsToNotify()
         
         if editingStyle == .delete {
@@ -137,7 +136,6 @@ extension NotifyVC: UITableViewDataSource{
 extension NotifyVC: MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
     func showImageDialog(animated: Bool = true) {
-        
         let title = "Places of Interests"
         let message = "Selected restaurants can be sent over these available options"
         let popup =  PopupDialog(title: title, message: message, image: nil)
@@ -195,6 +193,7 @@ extension NotifyVC{
                 #endif
             return
         }
+        
         let mailComposer = MFMailComposeViewController()
         var restaurantInfo = String()
         let restaurants = notifyModel.getRestaurantsToNotify()
@@ -210,6 +209,7 @@ extension NotifyVC{
     }
     
     @objc func messageClicked(){
+        
         if !MFMessageComposeViewController.canSendText(){
             #if targetEnvironment(simulator)
                 alertUser = "Application should be running in an actual device to send messages"
@@ -257,6 +257,7 @@ extension NotifyVC{
  }
 
 extension NotifyVC{
+    
     var alertUser :  String{
         get{
             preconditionFailure("You cannot read from this object")
@@ -271,6 +272,7 @@ extension NotifyVC{
                                             })
                                         )
                         )
+            
             DispatchQueue.main.async(execute: {
                 self.present(alert, animated: true)
             })

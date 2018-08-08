@@ -10,6 +10,7 @@ import UIKit
 typealias ImageLoadType = (Data, HTTPURLResponse, Error)->Void
 
 class RestaurantCell: UITableViewCell {
+    
     @IBOutlet weak var imgThumbnail: UIImageView!
     @IBOutlet weak var btnSingleMap: UIButton!
     @IBOutlet weak var imgRail: UIImageView!

@@ -21,6 +21,7 @@ class DetailRestaurantVC: UIViewController {
     @IBOutlet weak var lblDistance: UILabel!
     @IBOutlet weak var swtNotify: UISwitch!
     @IBOutlet weak var imgRestaurantURL: UIImageView!
+    
     private static var modelObserver: NSObjectProtocol?
     private lazy var btnRatings : [UIButton] = [btnRating1, btnRating2, btnRating3, btnRating4, btnRating5]
     private var myRating: Int = 0
@@ -42,6 +43,7 @@ class DetailRestaurantVC: UIViewController {
         self.btnRatings.forEach({(btn) in
             
             let btnIndexOpt = self.btnRatings.index(of: btn)
+            
             guard let btnIndex = btnIndexOpt else{
                 return
             }
@@ -54,6 +56,7 @@ class DetailRestaurantVC: UIViewController {
             else{
                 btn.setBackgroundImage(UIImage(named: self.emptyRatingImageName), for: .normal)
             }
+            
         })
     }
     
@@ -61,15 +64,18 @@ class DetailRestaurantVC: UIViewController {
         self.btnRatings.forEach{ (btn) in
             
             let btnIndex = self.btnRatings.index(of: btn)
+            
             guard let index = btnIndex else{
                 return
             }
+            
              if(rating > index){
                 btn.setBackgroundImage(UIImage(named: self.fullRatingImageName), for: .normal)
             }
             else{
                 btn.setBackgroundImage(UIImage(named: self.emptyRatingImageName), for: .normal)
             }
+            
         }
     }
     
@@ -160,6 +166,7 @@ class DetailRestaurantVC: UIViewController {
 }
 
 extension DetailRestaurantVC: UITextViewDelegate, UITextFieldDelegate{
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if(text == "\n") {
             textView.resignFirstResponder()
@@ -167,6 +174,7 @@ extension DetailRestaurantVC: UITextViewDelegate, UITextFieldDelegate{
         }
         return true
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         textField.resignFirstResponder()
         return true
@@ -199,11 +207,13 @@ extension DetailRestaurantVC{
     }
     
     @IBAction func btnSavedClicked(_ sender: UIBarButtonItem) {
+        
         guard let name = txtRestaurantName.text
             , !name.isEmpty else{
             alertUser = "Restaurant Name cannot be empty"
             return
         }
+        
         restaurant?.restaurantName = name
         restaurant?.dateVisited = dateVisited.date
         restaurant?.comments = txtNotes.text
@@ -215,6 +225,7 @@ extension DetailRestaurantVC{
 }
 
 extension DetailRestaurantVC{
+    
     func saveRestaurant(_ restaurant: Restaurant){
         do{
             try Persistence.save(restaurant)
@@ -243,6 +254,7 @@ extension DetailRestaurantVC{
 }
 
 extension DetailRestaurantVC{
+    
     @IBAction func btnRating1Click(_ sender: UIButton) {
         self.updateRating(sender)
     }

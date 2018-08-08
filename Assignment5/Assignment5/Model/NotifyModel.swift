@@ -27,6 +27,7 @@ class NotifyModel: NotifyProtocol{
     }
     
     lazy var isNotifiedRestaurantPresent : (Restaurant, Restaurant)->Bool = {(arg, rest) in
+        
         if (arg.restaurantId == rest.restaurantId) {
             return true
         }
@@ -37,18 +38,23 @@ class NotifyModel: NotifyProtocol{
     
     func checkNotificationConsistency(restaraunts: [Restaurant], restaurantToNotify: Restaurant){
         let restFromNetwork = restaraunts.first(where: {(isNotifiedRestaurantPresent($0, restaurantToNotify))})
+        
         guard let restaurant = restFromNetwork else{
             return
         }
+        
         if(restaurant.isSelected != restaurantToNotify.isSelected){
             restaurant.isSelected = restaurantToNotify.isSelected
         }
     }
     
     func addRestaurantToNotify(restaurantToNotify: Restaurant) {
+        
         notifyRestaurants.append(restaurantToNotify)
+        
         checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsFromNetwork, restaurantToNotify: restaurantToNotify)
         checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsSaved, restaurantToNotify: restaurantToNotify)
+        
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantNotificationListChanged), object: self))
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
     }

@@ -12,6 +12,7 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    
     private var model = TrainStopModel.getInstance()
     private var restModel = AppDel.restModel
     private static var modelObserver: NSObjectProtocol?
@@ -49,6 +50,7 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
         super.viewDidLoad()
     }
 }
+
 extension TrainStopVC{
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -90,6 +92,7 @@ extension TrainStopVC{
 extension TrainStopVC{
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        
         guard let segueVC = segue.destination as? RestaurantVC else{
             preconditionFailure("Wrong destination type: \(segue.destination)")
         }

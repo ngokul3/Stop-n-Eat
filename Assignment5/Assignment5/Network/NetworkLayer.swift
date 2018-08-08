@@ -32,20 +32,21 @@ class NetworkModel: NetworkProtocol{
     init()
     {
         if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-           
             let dictRootOpt = NSDictionary(contentsOfFile: path)
-           
+            
             guard let dict = dictRootOpt else{
                 preconditionFailure("Yelp API is not available")
             }
-                keyOpt = dict["YelpAPIKEY"] as? String
-                transitJSONFileNameOpt = dict["NJTransitJSONFile"] as? String
+            
+            keyOpt = dict["YelpAPIKEY"] as? String
+            transitJSONFileNameOpt = dict["NJTransitJSONFile"] as? String
         }
     }
 }
 
 extension NetworkModel{
     static func getInstance() -> NetworkProtocol {
+        
         if let inst = NetworkModel.instance {
             return inst
         }
@@ -62,6 +63,7 @@ extension NetworkModel{
         guard let transitFileName = transitJSONFileNameOpt else{
             preconditionFailure("There is no input file for Train Stops")
         }
+        
         DispatchQueue.global(qos: .background).async{
             let jsonResult: Any?
             if let path = Bundle.main.path(forResource: transitFileName, ofType: "json")
@@ -91,6 +93,7 @@ extension NetworkModel{
         guard let myKey = keyOpt else{
             preconditionFailure("This app does not have license to get information from Yelp")
         }
+        
         var locationURL : String
         locationURL = "https://api.yelp.com/v3/businesses/search?term=" + term+"&location=" + location
         locationURL = locationURL.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!

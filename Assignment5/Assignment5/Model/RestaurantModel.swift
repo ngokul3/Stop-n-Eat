@@ -1,6 +1,6 @@
 //
 //  RestaurantModel.swift
-//  TransitBreak
+//  Assignment5
 //
 //  Created by Gokula K Narasimhan on 7/27/18.
 //  Copyright © 2018 Gokula K Narasimhan. All rights reserved.
@@ -30,6 +30,7 @@ class RestaurantModel: RestaurantProtocol{
             guard let dict = dictRootOpt else{
                 preconditionFailure("Yelp API is not available")
             }
+            
             searchDistanceLimitOpt = dict["MilesAround"] as? Int
         }
      }
@@ -72,6 +73,7 @@ extension RestaurantModel{
                         print("Image didn't load") // Not crashing the application just because the image was not available
                         return
                 }
+                
                 self?.searchedRestaurantImage[imageURL] = (data, response)
                 imageLoaded(data, response, errorOpt)
             })
@@ -181,6 +183,7 @@ extension RestaurantModel{
         guard let restaurantFromArray = restaurantsFromNetwork[safe: stopIndex]  else{
             throw RestaurantError.invalidRowSelection()
         }
+        
         let restaurant = restaurantFromArray
         return restaurant
     }
@@ -190,6 +193,7 @@ extension RestaurantModel{
         guard restaurantsFromNetwork.count > 0 else{
             throw RestaurantError.zeroCount()
         }
+        
         return restaurantsFromNetwork
     }
 }
@@ -201,6 +205,7 @@ extension RestaurantModel{
         guard let restaurant =  restaurantOpt else{
             throw RestaurantError.invalidRestaurant()
         }
+        
         restaurant.isFavorite = true
         restaurantsSaved.append(restaurant)
         
@@ -218,6 +223,7 @@ extension RestaurantModel{
         guard restaurantsSaved.contains(restaurant) else{
             throw RestaurantError.notAbleToEdit(name: restaurant.restaurantName)
         }
+        
         let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantReadyToBeSaved), object: nil)
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
 
@@ -340,12 +346,14 @@ class Restaurant:  NSObject, NSCoding{
             }
         }
     }
+    
     var restaurantURL: String = ""
     var imageURL: String = ""
     var restaurantId : String = ""
     var latitude : Double = 0.0
     var longitude : Double = 0.0
     var distanceFromStopDesc : String = ""
+    
     var distanceFromTrainStop : Double{
         
         let distance = self.distanceBetweenTwoCoordinates(lat1: latitude, lon1: longitude, latOpt: trainStop?.latitude, lonOpt: trainStop?.longitude).rounded(toPlaces: 1)
@@ -361,15 +369,19 @@ class Restaurant:  NSObject, NSCoding{
             myRating = givenRating
         }
     }
+    
     var myRating : Int = 0
+    
     var isSelected : Bool = false{
         didSet{
            setRestaurantToNotifyList
         }
     }
+    
     var comments : String = ""
     var dateVisited : Date = Date()
     var favoriteImageName : String = "emptyHeart"
+    
     var isFavorite : Bool = false{
         didSet{
             if(isFavorite){
@@ -380,6 +392,7 @@ class Restaurant:  NSObject, NSCoding{
             }
         }
     }
+    
     var displayedAddress: String = ""
    
     init(_url: String, _imageUrl: String, _trainStop : TrainStop, _restaurantName : String, _restaurantId : String, _latitude : Double, _longitude : Double, _givenRating : Int, _displayAddress : String)
@@ -401,9 +414,11 @@ class Restaurant:  NSObject, NSCoding{
 extension Restaurant{
 
     func distanceBetweenTwoCoordinates(lat1:Double, lon1:Double, latOpt:Double?, lonOpt:Double?) -> Double{
+        
         guard let lat2 = latOpt, let lon2 = lonOpt else{
             preconditionFailure("Could not calculate distance")
         }
+        
         let theta = lon1 - lon2
         var dist = sin(deg2rad(deg: lat1)) * sin(deg2rad(deg: lat2)) + cos(deg2rad(deg: lat1)) * cos(deg2rad(deg: lat2)) * cos(deg2rad(deg: theta))
         dist = acos(dist)
@@ -420,8 +435,10 @@ extension Restaurant{
         return deg * Double.pi / 180
     }
 }
+
 //Code snippet from StackOverflow
 extension Double {
+    
 func rounded(toPlaces places:Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
