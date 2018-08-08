@@ -100,14 +100,3 @@ extension String{
         return shortAddress
     }
 }
-
-/**Todo
-code signing
- white spaces
- mention in readme - Notify is session based and not persisted
- upload new presentation
-
-
- mention about Presentation video in readme
- 
- **/
