@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.636421"
+            timestampString = "555466238.164548"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.636501"
+            timestampString = "555466238.164661"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "66"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.636555"
+            timestampString = "555466238.164747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.636605"
+            timestampString = "555466238.164817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/TrainStopModel.swift"
-            timestampString = "555431288.636657"
+            timestampString = "555466238.164886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "123"
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.636704"
+            timestampString = "555466238.164952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.636749"
+            timestampString = "555466238.1650209"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/TrainStopModel.swift"
-            timestampString = "555431288.636795"
+            timestampString = "555466238.165091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "69"
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.636839"
+            timestampString = "555466238.165138"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "27"
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.636885"
+            timestampString = "555466238.165193"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "60"
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.636933"
+            timestampString = "555466238.165242"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "50"
@@ -250,7 +250,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.637329"
+            timestampString = "555466238.16571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "92"
@@ -266,7 +266,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Network/NetworkLayer.swift"
-            timestampString = "555431288.637385"
+            timestampString = "555466238.165766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "95"
@@ -282,7 +282,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Network/NetworkLayer.swift"
-            timestampString = "555431288.637437"
+            timestampString = "555466238.165815"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "117"
@@ -298,23 +298,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.637485"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "loadRestaurantFromNetwork(trainStop:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.637755"
+            timestampString = "555466238.165859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
@@ -330,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.638014"
+            timestampString = "555466238.166216"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "loadRestaurantFromNetwork(trainStop:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,11 +330,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.638302"
+            timestampString = "555466238.166557"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "loadRestaurantFromNetwork(trainStop:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Assignment5/Model/RestaurantModel.swift"
+            timestampString = "555466238.166898"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "loadRestaurantFromNetwork(trainStop:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.638562"
+            timestampString = "555466238.167274"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
             landmarkName = "alertUser"
             landmarkType = "24">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.638862"
+            timestampString = "555466238.1676"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "init(coder:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,7 +394,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/MapViewVC.swift"
-            timestampString = "555431288.639124"
+            timestampString = "555466238.1679389"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
@@ -410,7 +410,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.639181"
+            timestampString = "555466238.168008"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.639231"
+            timestampString = "555466238.168063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -442,7 +442,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/MapViewVC.swift"
-            timestampString = "555431288.639474"
+            timestampString = "555466238.168348"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -458,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/MapViewVC.swift"
-            timestampString = "555431288.639526"
+            timestampString = "555466238.1684"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.639575"
+            timestampString = "555466238.168447"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "generateEmptyRestaurant()"
             landmarkType = "7">
          </BreakpointContent>
@@ -490,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.639829"
+            timestampString = "555466238.168779"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "generateEmptyRestaurant()"
             landmarkType = "7">
          </BreakpointContent>
@@ -506,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.640085"
+            timestampString = "555466238.169152"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -522,11 +522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.640383"
+            timestampString = "555466238.169517"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -538,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/SavedRestaurantVC.swift"
-            timestampString = "555431288.6407371"
+            timestampString = "555466238.169892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -554,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.640836"
+            timestampString = "555466238.170206"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "getRestaurantFromNetwork(fromRestaurantArray:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -570,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.641165"
+            timestampString = "555466238.170612"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "addRestaurantToFavorite(restaurantOpt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -586,11 +586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.641444"
+            timestampString = "555466238.17098"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>
@@ -602,11 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/SavedRestaurantVC.swift"
-            timestampString = "555431288.641714"
+            timestampString = "555466238.171324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "SavedRestaurantVC"
             landmarkType = "21">
          </BreakpointContent>
@@ -618,7 +618,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Storage/Persistence.swift"
-            timestampString = "555431288.64177"
+            timestampString = "555466238.1716011"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "14"
@@ -634,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/SavedRestaurantVC.swift"
-            timestampString = "555431288.641824"
+            timestampString = "555466238.171657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>
@@ -650,7 +650,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Storage/Persistence.swift"
-            timestampString = "555431288.641871"
+            timestampString = "555466238.1719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
@@ -666,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.641919"
+            timestampString = "555466238.171953"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "loadRestaurantFromNetwork(trainStop:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -682,11 +682,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.642186"
+            timestampString = "555466238.1723"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "editRestaurantInFavorite(restaurant:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -698,11 +698,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.642442"
+            timestampString = "555466238.172578"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "editRestaurantInFavorite(restaurant:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -714,7 +714,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.6427161"
+            timestampString = "555466238.172871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
@@ -730,11 +730,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.6429991"
+            timestampString = "555466238.173226"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "loadRestaurantFromNetwork(trainStop:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -746,7 +746,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/DetailRestaurantVC.swift"
-            timestampString = "555431288.643293"
+            timestampString = "555466238.173552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "217"
@@ -794,7 +794,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/DetailRestaurantVC.swift"
-            timestampString = "555431288.643649"
+            timestampString = "555466238.173924"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
@@ -810,7 +810,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/DetailRestaurantVC.swift"
-            timestampString = "555431288.64393"
+            timestampString = "555466238.174196"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "50"
@@ -826,7 +826,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/DetailRestaurantVC.swift"
-            timestampString = "555431288.644224"
+            timestampString = "555466238.174448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
@@ -842,7 +842,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Storage/Persistence.swift"
-            timestampString = "555431288.64454"
+            timestampString = "555466238.174695"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
@@ -858,7 +858,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Storage/Persistence.swift"
-            timestampString = "555431288.644603"
+            timestampString = "555466238.1747479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
@@ -874,11 +874,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.644659"
+            timestampString = "555466238.174796"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "init(coder:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -890,7 +890,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Storage/Persistence.swift"
-            timestampString = "555431288.64501"
+            timestampString = "555466238.1751029"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -938,7 +938,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Storage/Persistence.swift"
-            timestampString = "555431288.645068"
+            timestampString = "555466238.175161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
@@ -954,7 +954,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/MapViewVC.swift"
-            timestampString = "555431288.645133"
+            timestampString = "555466238.175218"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "152"
@@ -970,7 +970,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/MapViewVC.swift"
-            timestampString = "555431288.645185"
+            timestampString = "555466238.175267"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "148"
@@ -986,13 +986,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/MapViewVC.swift"
-            timestampString = "555431288.645245"
+            timestampString = "555466238.1753139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "116"
             endingLineNumber = "116"
             landmarkName = "mapView(_:rendererFor:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Assignment5.MapViewVC.mapView(__ObjC.MKMapView, viewFor: __ObjC.MKAnnotation) -&gt; Swift.Optional&lt;__ObjC.MKAnnotationView&gt;"
+                  moduleName = "Assignment5"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Controller/MapViewVC.swift"
+                  timestampString = "555465796.052004"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "25">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; __ObjC.MKPinAnnotationView in Assignment5.MapViewVC.mapView(__ObjC.MKMapView, viewFor: __ObjC.MKAnnotation) -&gt; Swift.Optional&lt;__ObjC.MKAnnotationView&gt;"
+                  moduleName = "Assignment5"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Controller/MapViewVC.swift"
+                  timestampString = "555465796.053992"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1002,7 +1034,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/MapViewVC.swift"
-            timestampString = "555431288.645319"
+            timestampString = "555466238.1753581"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "103"
@@ -1018,7 +1050,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/MapViewVC.swift"
-            timestampString = "555431288.64537"
+            timestampString = "555466238.1754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
@@ -1034,7 +1066,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/MapViewVC.swift"
-            timestampString = "555431288.64542"
+            timestampString = "555466238.1754431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "135"
@@ -1050,7 +1082,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.645481"
+            timestampString = "555466238.175493"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "190"
@@ -1066,27 +1098,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.645559"
+            timestampString = "555466238.175559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
-            landmarkName = "encode(with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.645951"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "loadRestaurantFromNetwork(trainStop:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1098,11 +1114,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.646288"
+            timestampString = "555466238.1759"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "loadRestaurantFromNetwork(trainStop:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1114,7 +1130,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.6465909"
+            timestampString = "555466238.176221"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "23"
@@ -1162,11 +1178,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.6466531"
+            timestampString = "555466238.176299"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "loadRestaurantFromNetwork(trainStop:)"
             landmarkType = "7">
             <Locations>
@@ -1210,7 +1226,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Network/NetworkLayer.swift"
-            timestampString = "555431288.646948"
+            timestampString = "555466238.176584"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "134"
@@ -1226,11 +1242,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.647007"
+            timestampString = "555466238.176651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "loadRestaurantFromNetwork(trainStop:)"
             landmarkType = "7">
             <Locations>
@@ -1274,7 +1290,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.647301"
+            timestampString = "555466238.1769741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
@@ -1290,7 +1306,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.647588"
+            timestampString = "555466238.1773829"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "191"
@@ -1306,7 +1322,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.64765"
+            timestampString = "555466238.177474"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "201"
@@ -1322,7 +1338,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.647701"
+            timestampString = "555466238.17755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "205"
@@ -1370,45 +1386,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.647751"
+            timestampString = "555466238.177624"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "207"
             endingLineNumber = "207"
             landmarkName = "mailClicked()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Assignment5.NotifyVC.mailClicked() -&gt; ()"
-                  moduleName = "Assignment5"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Controller/NotifyVC.swift"
-                  timestampString = "555380472.4058959"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "208"
-                  endingLineNumber = "208"
-                  offsetFromSymbolStart = "792">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in Assignment5.NotifyVC.mailClicked() -&gt; ()"
-                  moduleName = "Assignment5"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Controller/NotifyVC.swift"
-                  timestampString = "555380472.409623"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "209"
-                  endingLineNumber = "209"
-                  offsetFromSymbolStart = "21">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1418,7 +1402,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.6478"
+            timestampString = "555466238.177707"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "327"
@@ -1432,11 +1416,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.647849"
+            timestampString = "555466238.177786"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "405"
-            endingLineNumber = "405"
+            startingLineNumber = "404"
+            endingLineNumber = "404"
             landmarkName = "alertUser"
             landmarkType = "24">
          </BreakpointContent>
@@ -1448,11 +1432,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.648136"
+            timestampString = "555466238.178126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "360"
-            endingLineNumber = "360"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1464,11 +1448,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.648391"
+            timestampString = "555466238.178388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "deleteRestaurantFromFavorite(restaurant:completed:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1480,7 +1464,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.6486779"
+            timestampString = "555466238.17878"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
@@ -1496,11 +1480,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.6489559"
+            timestampString = "555466238.179116"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
             landmarkName = "removeRestaurantFromFavoriteSavedList(restaurant:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1512,7 +1496,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Storage/Persistence.swift"
-            timestampString = "555431288.649214"
+            timestampString = "555466238.179404"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
@@ -1560,7 +1544,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.649271"
+            timestampString = "555466238.1794651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
@@ -1576,7 +1560,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/DetailRestaurantVC.swift"
-            timestampString = "555431288.649519"
+            timestampString = "555466238.179749"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "141"
@@ -1592,7 +1576,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/DetailRestaurantVC.swift"
-            timestampString = "555431288.649817"
+            timestampString = "555466238.180069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "174"
@@ -1608,7 +1592,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.6500911"
+            timestampString = "555466238.180329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
@@ -1624,7 +1608,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.650389"
+            timestampString = "555466238.180662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
@@ -1672,7 +1656,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.650726"
+            timestampString = "555466238.180938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "251"
@@ -1688,7 +1672,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.650797"
+            timestampString = "555466238.180993"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "253"
@@ -1704,7 +1688,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.650848"
+            timestampString = "555466238.181039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "256"
@@ -1720,7 +1704,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.650897"
+            timestampString = "555466238.181083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "327"
@@ -1734,11 +1718,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.6509449"
+            timestampString = "555466238.181127"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "deleteRestaurantFromFavorite(restaurant:completed:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1750,11 +1734,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.651211"
+            timestampString = "555466238.181478"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "deleteRestaurantFromFavorite(restaurant:completed:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1762,15 +1746,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.651469"
+            timestampString = "555466238.181756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "293"
-            endingLineNumber = "293"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
             landmarkName = "init(coder:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1782,11 +1766,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.651726"
+            timestampString = "555466238.182025"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "deleteRestaurantFromFavorite(restaurant:completed:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1798,7 +1782,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.651986"
+            timestampString = "555466238.182332"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
@@ -1814,11 +1798,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.6522501"
+            timestampString = "555466238.182637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "368"
-            endingLineNumber = "368"
+            startingLineNumber = "367"
+            endingLineNumber = "367"
             landmarkName = "RestaurantVC"
             landmarkType = "21">
          </BreakpointContent>
@@ -1830,11 +1814,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.652513"
+            timestampString = "555466238.182911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1846,7 +1830,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.652782"
+            timestampString = "555466238.183158"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "327"
@@ -1860,7 +1844,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.652837"
+            timestampString = "555466238.18321"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "327"
@@ -1874,7 +1858,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.652887"
+            timestampString = "555466238.183254"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
@@ -1890,11 +1874,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/NotifyModel.swift"
-            timestampString = "555431288.6529371"
+            timestampString = "555466238.1833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "removeRestauarntFromNotification(restaurant:)"
             landmarkType = "7">
             <Locations>
@@ -1938,7 +1922,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.652986"
+            timestampString = "555466238.183346"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
@@ -1954,11 +1938,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/NotifyModel.swift"
-            timestampString = "555431288.653033"
+            timestampString = "555466238.183405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "removeRestauarntFromNotification(restaurant:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1970,7 +1954,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.653078"
+            timestampString = "555466238.1834739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
@@ -1986,11 +1970,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/SavedRestaurantVC.swift"
-            timestampString = "555431288.653126"
+            timestampString = "555466238.183543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2002,11 +1986,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/NotifyModel.swift"
-            timestampString = "555431288.653175"
+            timestampString = "555466238.1837929"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "checkNotificationConsistency(restaraunts:restaurantToNotify:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2018,61 +2002,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/NotifyModel.swift"
-            timestampString = "555431288.653219"
+            timestampString = "555466238.183844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "addRestaurantToNotify(restaurantToNotify:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.653264"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
-            landmarkName = "setRestaurantToNotifyList"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Assignment5.Restaurant.setRestaurantToNotifyList.getter : ()"
-                  moduleName = "Assignment5"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Model/RestaurantModel.swift"
-                  timestampString = "555380472.510971"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "328"
-                  endingLineNumber = "328"
-                  offsetFromSymbolStart = "850">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Assignment5.Restaurant) -&gt; Swift.Bool in Assignment5.Restaurant.setRestaurantToNotifyList.getter : ()"
-                  moduleName = "Assignment5"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Model/RestaurantModel.swift"
-                  timestampString = "555380472.515673"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "328"
-                  endingLineNumber = "328"
-                  offsetFromSymbolStart = "18">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2082,11 +2018,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.6535521"
+            timestampString = "555466238.1838911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
+            landmarkName = "setRestaurantToNotifyList"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Assignment5/Model/RestaurantModel.swift"
+            timestampString = "555466238.184202"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "loadRestaurantFromNetwork(trainStop:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2098,7 +2050,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/TrainStopVC.swift"
-            timestampString = "555431288.653825"
+            timestampString = "555466238.184507"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
@@ -2114,11 +2066,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/NotifyModel.swift"
-            timestampString = "555431288.653888"
+            timestampString = "555466238.184563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "addRestaurantToNotify(restaurantToNotify:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2126,17 +2078,79 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Model/RestaurantModel.swift"
-            timestampString = "555431288.6539381"
+            timestampString = "555466238.1846091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "350"
-            endingLineNumber = "350"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
             landmarkName = "Restaurant"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Assignment5.Restaurant.init(_url: Swift.String, _imageUrl: Swift.String, _trainStop: Assignment5.TrainStop, _restaurantName: Swift.String, _restaurantId: Swift.String, _latitude: Swift.Double, _longitude: Swift.Double, _givenRating: Swift.Int, _displayAddress: Swift.String) -&gt; Assignment5.Restaurant"
+                  moduleName = "Assignment5"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Model/RestaurantModel.swift"
+                  timestampString = "555465796.1163369"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "370"
+                  endingLineNumber = "370"
+                  offsetFromSymbolStart = "756">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Assignment5.Restaurant.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;Assignment5.Restaurant&gt;"
+                  moduleName = "Assignment5"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Model/RestaurantModel.swift"
+                  timestampString = "555465796.118482"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "370"
+                  endingLineNumber = "370"
+                  offsetFromSymbolStart = "405">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Assignment5.Restaurant.restaurantURL.getter : Swift.String"
+                  moduleName = "Assignment5"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Model/RestaurantModel.swift"
+                  timestampString = "555465796.120362"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "370"
+                  endingLineNumber = "370"
+                  offsetFromSymbolStart = "54">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Assignment5.Restaurant.restaurantURL.setter : Swift.String"
+                  moduleName = "Assignment5"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Model/RestaurantModel.swift"
+                  timestampString = "555465796.1221679"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "370"
+                  endingLineNumber = "370"
+                  offsetFromSymbolStart = "101">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2146,11 +2160,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.654238"
+            timestampString = "555466238.184934"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "tableView(_:didDeselectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2162,11 +2176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/RestaurantVC.swift"
-            timestampString = "555431288.654521"
+            timestampString = "555466238.185197"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
             landmarkName = "RestaurantVC"
             landmarkType = "21">
          </BreakpointContent>
@@ -2178,7 +2192,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/DetailRestaurantVC.swift"
-            timestampString = "555431288.654776"
+            timestampString = "555466238.1854351"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "181"
@@ -2194,7 +2208,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Network/NetworkLayer.swift"
-            timestampString = "555431288.655074"
+            timestampString = "555466238.18571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "112"
@@ -2210,13 +2224,173 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment5/Controller/NotifyVC.swift"
-            timestampString = "555431288.655133"
+            timestampString = "555466238.185762"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "186"
             endingLineNumber = "186"
             landmarkName = "mailClicked()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Assignment5/Model/RestaurantModel.swift"
+            timestampString = "555466238.186017"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
+            landmarkName = "init(_url:_imageUrl:_trainStop:_restaurantName:_restaurantId:_latitude:_longitude:_givenRating:_displayAddress:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Assignment5.Restaurant.init(_url: Swift.String, _imageUrl: Swift.String, _trainStop: Assignment5.TrainStop, _restaurantName: Swift.String, _restaurantId: Swift.String, _latitude: Swift.Double, _longitude: Swift.Double, _givenRating: Swift.Int, _displayAddress: Swift.String) -&gt; Assignment5.Restaurant"
+                  moduleName = "Assignment5"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Model/RestaurantModel.swift"
+                  timestampString = "555465796.1408941"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "286"
+                  endingLineNumber = "286"
+                  offsetFromSymbolStart = "2287">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Assignment5.Restaurant) -&gt; Swift.Bool in Assignment5.Restaurant.init(_url: Swift.String, _imageUrl: Swift.String, _trainStop: Assignment5.TrainStop, _restaurantName: Swift.String, _restaurantId: Swift.String, _latitude: Swift.Double, _longitude: Swift.Double, _givenRating: Swift.Int, _displayAddress: Swift.String) -&gt; Assignment5.Restaurant"
+                  moduleName = "Assignment5"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Model/RestaurantModel.swift"
+                  timestampString = "555465796.1427521"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "286"
+                  endingLineNumber = "286"
+                  offsetFromSymbolStart = "26">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Assignment5/Model/RestaurantModel.swift"
+            timestampString = "555466238.186325"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
+            landmarkName = "init(_url:_imageUrl:_trainStop:_restaurantName:_restaurantId:_latitude:_longitude:_givenRating:_displayAddress:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Assignment5/Model/RestaurantModel.swift"
+            timestampString = "555466238.186596"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "init(_url:_imageUrl:_trainStop:_restaurantName:_restaurantId:_latitude:_longitude:_givenRating:_displayAddress:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Assignment5/Model/RestaurantModel.swift"
+            timestampString = "555466238.1868449"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "287"
+            endingLineNumber = "287"
+            landmarkName = "init(_url:_imageUrl:_trainStop:_restaurantName:_restaurantId:_latitude:_longitude:_givenRating:_displayAddress:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Assignment5/Model/RestaurantModel.swift"
+            timestampString = "555466238.187138"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "init(_url:_imageUrl:_trainStop:_restaurantName:_restaurantId:_latitude:_longitude:_givenRating:_displayAddress:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Assignment5/Model/RestaurantModel.swift"
+            timestampString = "555466238.187471"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
+            landmarkName = "Restaurant"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Assignment5.Restaurant.__allocating_init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;Assignment5.Restaurant&gt;"
+                  moduleName = "Assignment5"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Model/RestaurantModel.swift"
+                  timestampString = "555465969.9931901"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Assignment5.Restaurant.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;Assignment5.Restaurant&gt;"
+                  moduleName = "Assignment5"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gokulnarasimhan/Harvard/Pilot/assignment-5-ngokul3/Assignment5/Assignment5/Model/RestaurantModel.swift"
+                  timestampString = "555465969.995618"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "322"
+                  endingLineNumber = "322"
+                  offsetFromSymbolStart = "39">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

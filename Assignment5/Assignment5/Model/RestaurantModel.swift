@@ -82,6 +82,7 @@ extension RestaurantModel{
 }
 
 extension RestaurantModel{
+    
     func loadRestaurantFromNetwork(trainStop : TrainStop) throws{
         
         if let restaurantArray = searchedRestaurants[trainStop.stopName] {
@@ -112,8 +113,8 @@ extension RestaurantModel{
                 self?.restaurantsFromNetwork.removeAll()
   
                 restaurantResultArray.forEach { (restaurant) in
-                    
                     var restaurantImageURL: String = ""
+                    
                     if let imageURL = restaurant["image_url"] as? String{
                         restaurantImageURL = imageURL //Not guarding. Image URL isn't important
                     }
@@ -150,13 +151,13 @@ extension RestaurantModel{
                     }
                     
                     var restaurantURL: String = ""
+                    
                     if let restURL = restaurant["url"] as? String{
                         restaurantURL = restURL
                     }
                     
                     let addressFirstComponent = addressArr.count > 0 ? String(describing: addressArr[0] as? String ?? "" ) : ""
                     let addressSecondComponent = addressArr.count > 1 ? String(describing: addressArr[1] as? String ?? "" ) : ""
-                    
                     let completeAddress = addressFirstComponent + addressSecondComponent
                     
                     let restaurant = Restaurant(_url: restaurantURL, _imageUrl: restaurantImageURL, _trainStop : trainStop, _restaurantName: name, _restaurantId: id, _latitude: lat, _longitude: long, _givenRating: Int(rating), _displayAddress :  completeAddress)
@@ -169,13 +170,14 @@ extension RestaurantModel{
                         }
                     }
                 }
-                
                 self?.searchedRestaurants[trainStop.stopName] = self?.restaurantsFromNetwork
+                
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
             }
         } )
     }
 }
+
 extension RestaurantModel{
     
     func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant{
@@ -238,6 +240,7 @@ extension RestaurantModel{
         else{
             throw RestaurantError.notAbleToDelete(name: restaurant.restaurantName)
         }
+        
         let nsNotification1 = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantCanBeRemovedFromFavorite), object: nil)
         let nsNotification2 = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantDeleted), object: nil)
     
@@ -252,6 +255,7 @@ extension RestaurantModel{
 }
 
 extension RestaurantModel{
+    
     func generateEmptyRestaurant() throws-> Restaurant{
         let trainStop = try TrainStop(_stopName: "", _latitude: 0.0, _longitude: 0.0)
         let restaurant = Restaurant(_url: "", _imageUrl: "", _trainStop: trainStop, _restaurantName: "", _restaurantId: "", _latitude: 0.0, _longitude: 0.0, _givenRating: 0, _displayAddress: "")
@@ -261,21 +265,36 @@ extension RestaurantModel{
 }
 
 class Restaurant:  NSObject, NSCoding{
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(restaurantId, forKey: "restaurantId")
-        aCoder.encode(restaurantName, forKey: "restaurantName")
-        aCoder.encode(restaurantURL, forKey: "restaurantURL")
-        aCoder.encode(givenRating, forKey: "givenRating")
-        aCoder.encode(myRating, forKey: "myRating")
-        aCoder.encode(comments, forKey: "comments")
-        aCoder.encode(displayedAddress, forKey: "displayedAddress")
-        aCoder.encode(distanceFromStopDesc, forKey: "distanceFromStopDesc")
-        aCoder.encode(dateVisited, forKey : "dateVisited")
-        aCoder.encode(isFavorite, forKey : "isFavorite")
-        aCoder.encode(imageURL, forKey: "imageURL")
+    
+    init(_url: String, _imageUrl: String, _trainStop : TrainStop, _restaurantName : String, _restaurantId : String, _latitude : Double, _longitude : Double, _givenRating : Int, _displayAddress : String){
+      
+        restaurantURL = _url
+        imageURL = _imageUrl
+        trainStop = _trainStop
+        restaurantName = _restaurantName
+        restaurantId = _restaurantId
+        latitude = _latitude
+        longitude = _longitude
+        givenRating = _givenRating
+        myRating = _givenRating
+        displayedAddress = _displayAddress
+        
+        if(_givenRating >= Consts.MinRating && _givenRating <= Consts.MaxRating){
+            ratingImageName = "\(_givenRating)Stars"
+        }
+        
+        if let _ = AppDel.restModel.restaurantsSaved.filter({$0.restaurantId == _restaurantId}).first {
+            isFavorite = true
+            favoriteImageName = "favHeart"
+        }
+        else{
+            isFavorite = false
+            favoriteImageName = "emptyHeart"
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
+        
         guard
             let restId = aDecoder.decodeObject(forKey: "restaurantId") as? String,
             let restName = aDecoder.decodeObject(forKey: "restaurantName") as? String,
@@ -318,16 +337,18 @@ class Restaurant:  NSObject, NSCoding{
         switch isSelected{
             
         case true:
+            
             guard !self.restaurantId.isEmpty else{
                 return // This means user created favorite by clicking "+". Restaurant Id comes from Yelp or it is empty if a new restaurant isn't saved.
             }
+            
             if(!AppDel.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0)}){
                 AppDel.notifyModel.addRestaurantToNotify(restaurantToNotify: self)
             }
 
         case false:
+            
             if(AppDel.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0)}){
-                
                 do{
                     try AppDel.notifyModel.removeRestauarntFromNotification(restaurant: self)
                 }
@@ -340,6 +361,7 @@ class Restaurant:  NSObject, NSCoding{
     
     var restaurantName : String = ""{
         didSet{
+           
             if(restaurantId.isEmpty){
                 restaurantId = String(describing: RestaurantModel.getTotalFavoriteCount())
                 setRestaurantToNotifyList
@@ -361,7 +383,12 @@ class Restaurant:  NSObject, NSCoding{
         if let stop = self.trainStop{
             distanceFromStopDesc = String(describing:distance) + " mi from " + String(describing: stop.stopName)
         }
+        
         return distance
+    }
+    
+    var distanceFromTrainStopLabelFormat : String{
+        return String(describing: distanceFromTrainStop) + " mi"
     }
     
     var givenRating : Int = 0{
@@ -370,6 +397,7 @@ class Restaurant:  NSObject, NSCoding{
         }
     }
     
+    var ratingImageName: String = ""
     var myRating : Int = 0
     
     var isSelected : Bool = false{
@@ -384,6 +412,7 @@ class Restaurant:  NSObject, NSCoding{
     
     var isFavorite : Bool = false{
         didSet{
+            
             if(isFavorite){
                 favoriteImageName = "favHeart"
             }
@@ -395,18 +424,18 @@ class Restaurant:  NSObject, NSCoding{
     
     var displayedAddress: String = ""
    
-    init(_url: String, _imageUrl: String, _trainStop : TrainStop, _restaurantName : String, _restaurantId : String, _latitude : Double, _longitude : Double, _givenRating : Int, _displayAddress : String)
-    {
-        restaurantURL = _url
-        imageURL = _imageUrl
-        trainStop = _trainStop
-        restaurantName = _restaurantName
-        restaurantId = _restaurantId
-        latitude = _latitude
-        longitude = _longitude
-        givenRating = _givenRating
-        myRating = _givenRating
-        displayedAddress = _displayAddress
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(restaurantId, forKey: "restaurantId")
+        aCoder.encode(restaurantName, forKey: "restaurantName")
+        aCoder.encode(restaurantURL, forKey: "restaurantURL")
+        aCoder.encode(givenRating, forKey: "givenRating")
+        aCoder.encode(myRating, forKey: "myRating")
+        aCoder.encode(comments, forKey: "comments")
+        aCoder.encode(displayedAddress, forKey: "displayedAddress")
+        aCoder.encode(distanceFromStopDesc, forKey: "distanceFromStopDesc")
+        aCoder.encode(dateVisited, forKey : "dateVisited")
+        aCoder.encode(isFavorite, forKey : "isFavorite")
+        aCoder.encode(imageURL, forKey: "imageURL")
     }
 }
 

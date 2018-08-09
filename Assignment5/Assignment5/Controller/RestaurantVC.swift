@@ -101,19 +101,11 @@ extension RestaurantVC : UITableViewDataSource{
         }
         
         cell.lblRestaurantName.text = restaurant.restaurantName
-        cell.lblMiles.text = String(describing: restaurant.distanceFromTrainStop) + " mi"
+        cell.lblMiles.text = restaurant.distanceFromTrainStopLabelFormat
         cell.btnSingleMap.tag = indexPath.row
-        let rating = restaurant.givenRating
-        let imageName = "\(rating)Stars"
-        cell.imgRatings.image = UIImage(named: imageName)
+        let ratingImageName = restaurant.ratingImageName
+        cell.imgRatings.image = UIImage(named: ratingImageName)
 
-        if(AppDel.restModel.restaurantsSaved.filter({$0.restaurantId == restaurant.restaurantId}).count > 0){
-            restaurant.isFavorite = true
-        }
-        else{
-            restaurant.isFavorite = false
-        }
-        
         if(restaurant.isSelected){
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
         }
@@ -224,7 +216,7 @@ extension RestaurantVC{
         let indexRow = imageView.tag
         
         do{
-            let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+            let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow) //todo
             
             if(restaurantFromNetwork.isFavorite == true){
                 try restaurantModel.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork, completed: nil)
@@ -276,7 +268,7 @@ extension RestaurantVC{
             }
             
             do{
-                let restaurant = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+                let restaurant = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow) //todo
                 let place = Place()
                 place.trainStop = restaurant.trainStop
                 retaurants.append(restaurant)
@@ -297,7 +289,7 @@ extension RestaurantVC{
         case "multipleMapSegue" :
             do{
                 let place = Place()
-                let restaurantsFetched = try restaurantModel.getAllRestaurantsFromNetwork()
+                let restaurantsFetched = try restaurantModel.getAllRestaurantsFromNetwork()//todo
                 place.trainStop = restaurantsFetched.first?.trainStop
                 retaurants = restaurantsFetched
                 place.restaurants = retaurants
@@ -331,7 +323,7 @@ extension RestaurantVC{
                 }
                 
                 do{
-                    let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
+                    let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)//todo
                     vc.restaurant = restaurantFromNetwork
                 }
                     
