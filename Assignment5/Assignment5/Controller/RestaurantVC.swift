@@ -20,15 +20,15 @@ class RestaurantVC: UIViewController {
     private var removeFavoriteNo : ((UIAlertAction, String)->Void)?
     private var shouldRemoveFavorite : Bool?
     
-        lazy var isRestaurantSetToNotify : (Restaurant, Restaurant)->Bool = {(restaurantInNotify, restaurantFromNetwork) in
-    
-            if (restaurantInNotify.restaurantId == restaurantFromNetwork.restaurantId) {
-                return true
-             }
-            else{
-                return false
-            }
+    lazy var isRestaurantSetToNotify : (Restaurant, Restaurant)->Bool = {(restaurantInNotify, restaurantFromNetwork) in
+
+        if (restaurantInNotify.restaurantId == restaurantFromNetwork.restaurantId) {
+            return true
+         }
+        else{
+            return false
         }
+    }
     
     override func viewDidLoad() {
         tableView.rowHeight = UITableViewAutomaticDimension

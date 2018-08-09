@@ -33,6 +33,16 @@ class DetailRestaurantVC: UIViewController {
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
 
+    lazy var isRestaurantSetToNotify : (Restaurant, Restaurant)->Bool = {(restaurantInNotify, restaurantSaved) in
+        
+        if (restaurantInNotify.restaurantId == restaurantSaved.restaurantId) {
+            return true
+        }
+        else{
+            return false
+        }
+    }
+    
     lazy var updateRating = {(button: UIButton) in
         var imageNameOpt : String?
         let btnClickedIndexOpt = self.btnRatings.index(of: button)
@@ -152,7 +162,8 @@ class DetailRestaurantVC: UIViewController {
             
             if let restaurantInContext = restaurant {
                 setUpButtonImages(restaurantInContext.myRating)
-            }else{
+            }
+            else{
                 setUpButtonImages(0)
             }
             
@@ -170,7 +181,22 @@ class DetailRestaurantVC: UIViewController {
             setUpButtonImages(rating)
         }
         
-        swtNotify.isOn = restaurant?.isSelected ?? false
+        /*Add does not only mean "+" from SavedRestVC. Add can also be done from RestaurantVC and on click of heart image.
+         So, below guard needs to be done again.
+         I would like to display state of Notify switch for Add from RestaurantVC as well.
+         But if Add comes from SavedRestVC on click of "+", guard will just return. The default will be false anyway
+         */
+        
+        guard let restaurantAddOrEdit = restaurant else{
+            return
+        }
+        
+        if(notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0, restaurantAddOrEdit)}){
+            swtNotify.isOn = true
+        }
+        else{
+            swtNotify.isOn = false
+        }
     }
 }
 
@@ -242,13 +268,13 @@ extension DetailRestaurantVC{
             
             if let restaurantToNotify = restaurant{
             
-                if(notifyModel.getRestaurantsToNotify().contains(restaurantToNotify)){
+                if(notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0, restaurantToNotify)}){
                     do{
                         try notifyModel.removeRestauarntFromNotification(restaurant: restaurantToNotify)
                     }
                     catch{
                         alertUser = "Restaurant could not be removed from notify list"
-                        return 
+                        return
                     }
                 }
             }
