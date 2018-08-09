@@ -15,6 +15,12 @@ UPDATE as of 08/07 -
 2) Added WhatsApp to the Notification capability apart from Mail and Msg.
 
 **************************************
+UPDATE as of 08/09-
+
+1) I have Uber Rides as part of the workspace. To incorporate Uber was in the mind when I started working on this project. Kindly ignore Uber references in the workspace
+
+**************************************
+
 Information mentioned below  is also included in Question1 - 4.txt file
 
 Point 1 -
