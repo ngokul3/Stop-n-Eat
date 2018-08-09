@@ -183,8 +183,9 @@ class DetailRestaurantVC: UIViewController {
         
         /*Add does not only mean "+" from SavedRestVC. Add can also be done from RestaurantVC and on click of heart image.
          So, below guard needs to be done again.
-         I would like to display state of Notify switch for Add from RestaurantVC as well.
-         But if Add comes from SavedRestVC on click of "+", guard will just return. The default will be false anyway
+         I would like to display state of Notify switch for Add from RestaurantVC. If it notify is turned on in RestaurantVC, the state
+         would be preserved here.
+         But if Add comes from SavedRestVC on click of "+", guard will just return. The default of notify will be false anyway
          */
         
         guard let restaurantAddOrEdit = restaurant else{
