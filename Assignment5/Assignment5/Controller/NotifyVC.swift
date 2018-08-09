@@ -118,7 +118,7 @@ extension NotifyVC: UITableViewDataSource{
         
         if editingStyle == .delete {
             guard let restaurantInContext = restaurants[safe: indexPath.row]  else{
-                preconditionFailure("Error while getting value from the Menu Model")
+                preconditionFailure("Restaurant is nil")
             }
             do{
                 try notifyModel.removeRestauarntFromNotification(restaurant: restaurantInContext)

@@ -113,12 +113,14 @@ class DetailRestaurantVC: UIViewController {
     
      override func viewDidLoad() {
         super.viewDidLoad()
+       
         txtNotes.layer.borderColor = UIColor.gray.cgColor
         txtNotes.layer.borderWidth = 0.4
         txtNotes.layer.cornerRadius = 0.8
         txtNotes.delegate = self
         txtRestaurantName.delegate = self
         myRating = restaurant?.myRating ?? 0
+        
         AppDel.restModel.loadRestaurantImage(imageURLOpt: restaurant?.imageURL, imageLoaded: ({[weak self](data, response, error) in
            self?.setUpRestaurantImage(data, response, error)
         }))
@@ -143,7 +145,9 @@ class DetailRestaurantVC: UIViewController {
         }
         
         switch detailType {
+        
         case .Add :
+            
             if let restaurantInContext = restaurant {
                 setUpButtonImages(restaurantInContext.myRating)
             }else{
@@ -151,9 +155,11 @@ class DetailRestaurantVC: UIViewController {
             }
             
         case .Edit, .Preload :
+            
             guard let restaurantInContext = restaurant else{
-                preconditionFailure("Parent VC did not initialize MenuItem")
+                preconditionFailure("Restaurant is nil")
             }
+            
             txtRestaurantName.text = restaurantInContext.restaurantName
             dateVisited.date = restaurantInContext.dateVisited
             lblDistance.text = restaurantInContext.distanceFromStopDesc
@@ -161,6 +167,7 @@ class DetailRestaurantVC: UIViewController {
             let rating = restaurantInContext.myRating
             setUpButtonImages(rating)
         }
+        
         swtNotify.isOn = restaurant?.isSelected ?? false
     }
 }
@@ -208,8 +215,8 @@ extension DetailRestaurantVC{
     
     @IBAction func btnSavedClicked(_ sender: UIBarButtonItem) {
         
-        guard let name = txtRestaurantName.text
-            , !name.isEmpty else{
+        guard let name = txtRestaurantName.text,
+              !name.isEmpty else{
             alertUser = "Restaurant Name cannot be empty"
             return
         }

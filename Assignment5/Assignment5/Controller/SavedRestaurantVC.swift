@@ -138,7 +138,7 @@ extension SavedRestaurantVC{
         case "addSegue" :
             do{
                 detailVC.restaurantDetailVCType = DetailVCType.Add
-                detailVC.restaurant = try model.generateEmptyRestaurant()
+                detailVC.restaurant = try model.generateRestaurantPrototype()
                 detailVC.saveDetailVC = {[weak self] (restaurant) in
                     do{
                         try self?.model.addRestaurantToFavorite(restaurantOpt: restaurant)

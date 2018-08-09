@@ -82,7 +82,7 @@ extension RestaurantVC : UITableViewDataSource{
         }
 
         cell.lblRestaurantName.text = restaurant.restaurantName
-        cell.lblMiles.text = restaurant.distanceFromTrainStopLabelFormat
+        cell.lblMiles.text = restaurant.distanceShownWithImage
         cell.btnSingleMap.tag = indexPath.row
         let ratingImageName = restaurant.ratingImageName
         cell.imgRatings.image = UIImage(named: ratingImageName)

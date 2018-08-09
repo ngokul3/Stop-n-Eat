@@ -14,9 +14,11 @@ class RestaurantModel: RestaurantProtocol{
     private var searchedRestaurants = [String : RestaurantArray]()
     private var searchedRestaurantImage = [String : (Data,HTTPURLResponse)]()
     private var searchDistanceLimitOpt: Int?
+    
     private lazy var networkModel = {
         return AppDel.networkModel
     }()
+    
     private var restaurantsFromNetwork : RestaurantArray
     private var restaurantsSaved : RestaurantArray
     
@@ -186,7 +188,7 @@ extension RestaurantModel{
             throw RestaurantError.invalidRowSelection()
         }
         
-         return restaurantFromArray
+        return restaurantFromArray
     }
     
     func getAllRestaurantsFromNetwork() ->RestaurantArray{
@@ -263,7 +265,7 @@ extension RestaurantModel{
 
 extension RestaurantModel{
     
-    func generateEmptyRestaurant() throws-> Restaurant{
+    func generateRestaurantPrototype() throws-> Restaurant{
         let trainStop = try TrainStop(_stopName: "", _latitude: 0.0, _longitude: 0.0)
         let restaurant = Restaurant(_url: "", _imageUrl: "", _trainStop: trainStop, _restaurantName: "", _restaurantId: "", _latitude: 0.0, _longitude: 0.0, _givenRating: 0, _displayAddress: "")
        
@@ -309,7 +311,7 @@ class Restaurant:  NSObject, NSCoding{
             let restImageURL = aDecoder.decodeObject(forKey: "imageURL") as? String,
             let restComment = aDecoder.decodeObject(forKey:"comments") as? String,
             let restAddress = aDecoder.decodeObject(forKey:"displayedAddress") as? String,
-            let restDistanceDesc = aDecoder.decodeObject(forKey:"distanceFromStopDesc") as? String,
+            //let restDistanceDesc = aDecoder.decodeObject(forKey:"distanceFromStopDesc") as? String,
             let restDate = aDecoder.decodeObject(forKey:"dateVisited") as? Date else {
                 return nil
         }
@@ -318,11 +320,13 @@ class Restaurant:  NSObject, NSCoding{
         restaurantName = restName
         givenRating = aDecoder.decodeInteger(forKey: "givenRating")
         myRating = aDecoder.decodeInteger(forKey: "myRating")
+        latitude = aDecoder.decodeDouble(forKey: "latitude")
+        longitude = aDecoder.decodeDouble(forKey: "longitude")
         comments = restComment
         displayedAddress = restAddress
         dateVisited = restDate
         isFavorite = aDecoder.decodeBool(forKey: "isFavorite")
-        distanceFromStopDesc = restDistanceDesc
+        //distanceFromStopDesc = restDistanceDesc
         restaurantURL = restURL
         imageURL = restImageURL
         super.init()
@@ -334,7 +338,8 @@ class Restaurant:  NSObject, NSCoding{
         
         if (arg.restaurantId == self.restaurantId) {
             return true
-         }else{
+         }
+        else{
             return false
         }
     }
@@ -368,7 +373,6 @@ class Restaurant:  NSObject, NSCoding{
     
     var restaurantName : String = ""{
         didSet{
-           
             if(restaurantId.isEmpty){
                 restaurantId = String(describing: RestaurantModel.getTotalFavoriteCount())
                 setRestaurantToNotifyList
@@ -376,25 +380,27 @@ class Restaurant:  NSObject, NSCoding{
         }
     }
     
-    var restaurantURL: String = ""
-    var imageURL: String = ""
-    var restaurantId : String = ""
-    var latitude : Double = 0.0
-    var longitude : Double = 0.0
-    var distanceFromStopDesc : String = ""
-    
-    var distanceFromTrainStop : Double{
-        
-        let distance = self.distanceBetweenTwoCoordinates(lat1: latitude, lon1: longitude, latOpt: trainStop?.latitude, lonOpt: trainStop?.longitude).rounded(toPlaces: 1)
+    var restaurantURL: String
+    var imageURL: String
+    var restaurantId : String
+    var latitude : Double
+    var longitude : Double
+    var distanceFromStopDesc : String{
         
         if let stop = self.trainStop{
-            distanceFromStopDesc = String(describing:distance) + " mi from " + String(describing: stop.stopName)
+            return String(describing:distanceFromTrainStop) + " mi from " + String(describing: stop.stopName)
         }
-        
+        else{
+            return ""
+        }
+    }
+    
+    var distanceFromTrainStop : Double{
+        let distance = self.distanceBetweenTwoCoordinates(lat1: latitude, lon1: longitude, latOpt: trainStop?.latitude, lonOpt: trainStop?.longitude).rounded(toPlaces: 1)
         return distance
     }
     
-    var distanceFromTrainStopLabelFormat : String{
+    var distanceShownWithImage : String{
         return String(describing: distanceFromTrainStop) + " mi"
     }
     
@@ -419,7 +425,6 @@ class Restaurant:  NSObject, NSCoding{
     
     var isFavorite : Bool = false{
         didSet{
-            
             if(isFavorite){
                 favoriteImageName = "favHeart"
             }
@@ -429,7 +434,7 @@ class Restaurant:  NSObject, NSCoding{
         }
     }
     
-    var displayedAddress: String = ""
+    var displayedAddress: String
    
     func encode(with aCoder: NSCoder) {
         aCoder.encode(restaurantId, forKey: "restaurantId")
@@ -437,9 +442,11 @@ class Restaurant:  NSObject, NSCoding{
         aCoder.encode(restaurantURL, forKey: "restaurantURL")
         aCoder.encode(givenRating, forKey: "givenRating")
         aCoder.encode(myRating, forKey: "myRating")
+        aCoder.encode(latitude, forKey: "latitude")
+        aCoder.encode(longitude, forKey: "longitude")
         aCoder.encode(comments, forKey: "comments")
         aCoder.encode(displayedAddress, forKey: "displayedAddress")
-        aCoder.encode(distanceFromStopDesc, forKey: "distanceFromStopDesc")
+        //aCoder.encode(distanceFromStopDesc, forKey: "distanceFromStopDesc")
         aCoder.encode(dateVisited, forKey : "dateVisited")
         aCoder.encode(isFavorite, forKey : "isFavorite")
         aCoder.encode(imageURL, forKey: "imageURL")
