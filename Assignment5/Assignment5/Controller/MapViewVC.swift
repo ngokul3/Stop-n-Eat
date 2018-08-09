@@ -153,22 +153,4 @@ extension MapViewVC: MKMapViewDelegate {
     }
 }
 
-/*Not including this class in a model file because MKAnnotation requires MapKit namespace.
-Trying to Avoid Mapkit / UIKit references in Model. So having this class in VC itself.
-*/
-class PointOfInterest : NSObject, MKAnnotation
-{
-    let title: String?
-    let locationName: String
-    let coordinate: CLLocationCoordinate2D
-    let placeType : PlaceType
-    let rating: Int?
-    init(title: String, locationName: String,  coordinate: CLLocationCoordinate2D, placeType: PlaceType, rating: Int?) {
-        self.title = title
-        self.locationName = locationName
-        self.coordinate = coordinate
-        self.placeType = placeType
-        self.rating = rating
-        super.init()
-    }
-}
+

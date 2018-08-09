@@ -14,6 +14,7 @@ class NotifyModel: NotifyProtocol{
     private var notifyRestaurants  = [Restaurant]()
     
     static func getInstance() -> NotifyProtocol {
+        
         if let inst = NotifyModel.instance {
             return inst
         }
@@ -36,11 +37,12 @@ class NotifyModel: NotifyProtocol{
             return false
         }
     }
-    
+    //todo
     func checkNotificationConsistency(restaraunts: [Restaurant], restaurantToNotify: Restaurant){
-        let restFromNetwork = restaraunts.first(where: {(isNotifiedRestaurantPresent($0, restaurantToNotify))})
         
-        guard let restaurant = restFromNetwork else{
+        let restaurantOpt = restaraunts.first(where: {(isNotifiedRestaurantPresent($0, restaurantToNotify))})
+        
+        guard let restaurant = restaurantOpt else{
             return
         }
         

@@ -24,12 +24,14 @@ class TrainStopModel {
     
     var currentFilter : String = ""{
         didSet{
+            
             if(!currentFilter.isEmpty){
                 filterTrainStops(stopName: currentFilter)
             }
             else{
                 filteredStops = trainStops
             }
+            
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.StopListFiltered), object: self))
         }
     }
@@ -78,6 +80,7 @@ extension TrainStopModel{
     }
     
     func loadTransitData(completed : @escaping (String?)->Void) throws{
+        
         networkModel.loadTransitData(finished: ({[weak self] (jsonArray, error) in
             
             if let _ = error{
