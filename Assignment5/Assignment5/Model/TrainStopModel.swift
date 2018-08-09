@@ -16,6 +16,7 @@ class TrainStopModel {
     private var searchedStops = [String : StopArray]()
     private var trainStops : StopArray
     
+    //May not be the best way to handle NetworkModel. Open for critics
     private lazy var networkModel = {
         return AppDel.networkModel
     }()

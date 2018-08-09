@@ -193,9 +193,11 @@ class DetailRestaurantVC: UIViewController {
         }
         
         if(notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0, restaurantAddOrEdit)}){
+            restaurantAddOrEdit.isSelected = true
             swtNotify.isOn = true
         }
         else{
+            restaurantAddOrEdit.isSelected = false
             swtNotify.isOn = false
         }
     }

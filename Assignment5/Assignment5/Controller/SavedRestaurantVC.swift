@@ -114,18 +114,6 @@ extension SavedRestaurantVC : UITableViewDataSource{
                 if(self.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0, restaurantInContext)}){
                     alertUser = "Please note that \(restaurantInContext.restaurantName) is in the Notify List. Please delete from Notify tab if you don't want to Notify."
                 }
-                
-//                try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext, completed: {[weak self](msgOpt) in
-//
-//                    if let msg = msgOpt{
-//                        
-//                        if(self?.notifyModel.getRestaurantsToNotify().contains{self?.isRestaurantSetToNotify($0, restaurantInContext)}){
-//                            self?.alertUser = "Please note that \(restaurantInContext.restaurantName) is in the Notify List. Please delete from Notify tab if you don't want to Notify."
-//                        }
-//
-//
-//                    }
-//                })
             }
             catch RestaurantError.notAbleToDelete(let name){
                 alertUser = "\(name) cannot be deleted"

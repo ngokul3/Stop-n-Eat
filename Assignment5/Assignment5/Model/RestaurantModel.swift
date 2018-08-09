@@ -15,6 +15,7 @@ class RestaurantModel: RestaurantProtocol{
     private var searchedRestaurantImage = [String : (Data,HTTPURLResponse)]()
     private var searchDistanceLimitOpt: Int?
     
+   //May not be the best way to handle NetworkModel. Open for critics
     private lazy var networkModel = {
         return AppDel.networkModel
     }()
@@ -171,6 +172,19 @@ extension RestaurantModel{
                             self?.restaurantsFromNetwork.append(restaurant)
                         }
                     }
+                    
+                    if let isRestaurantFavorite = (self?.getAllRestaurantsPersisted().contains{$0.restaurantId == restaurant.restaurantId ? true : false}){
+                        
+                        if(isRestaurantFavorite){
+                            restaurant.isFavorite = true
+                            restaurant.favoriteImageName = "favHeart"
+                        }
+                        else{
+                            restaurant.isFavorite = false
+                            restaurant.favoriteImageName = "emptyHeart"
+                            
+                        }
+                    }
                 }
                 self?.searchedRestaurants[trainStop.stopName] = self?.restaurantsFromNetwork
                 
@@ -237,11 +251,9 @@ extension RestaurantModel{
         
         let nsNotification = NSNotification(name: NSNotification.Name(rawValue: Messages.RestaurantReadyToBeSaved), object: nil)
         NotificationCenter.default.post(name: nsNotification.name, object: nil, userInfo:[Consts.KEY0: restaurant])
-
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
    }
     
-    //func deleteRestaurantFromFavorite(restaurant: Restaurant, completed: ((String?)->Void)?) throws{
     func deleteRestaurantFromFavorite(restaurant: Restaurant) throws{
         
         if(restaurantsSaved.contains{$0.restaurantId == restaurant.restaurantId}){
@@ -257,10 +269,6 @@ extension RestaurantModel{
         NotificationCenter.default.post(name: nsNotification1.name, object: nil, userInfo:[Consts.KEY0: restaurant])
         NotificationCenter.default.post(name: nsNotification2.name, object: nil, userInfo:[Consts.KEY0: restaurant])
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
-        
-//        if(AppDel.notifyModel.getRestaurantsToNotify().contains(restaurant)){
-//            completed?("Please note that \(restaurant.restaurantName) is in the Notify List. Please delete from Notify tab if you don't want to Notify.")
-//        }
     }
 }
 
@@ -291,15 +299,6 @@ class Restaurant:  NSObject, NSCoding{
         
         if(_givenRating >= Consts.MinRating && _givenRating <= Consts.MaxRating){
             ratingImageName = "\(_givenRating)Stars"
-        }
-        
-        if let _ = AppDel.restModel.getAllRestaurantsPersisted().filter({$0.restaurantId == _restaurantId}).first { //todo
-            isFavorite = true
-            favoriteImageName = "favHeart"
-        }
-        else{
-            isFavorite = false
-            favoriteImageName = "emptyHeart"
         }
     }
     
