@@ -301,7 +301,7 @@ class Restaurant:  NSObject, NSCoding{
         myRating = _givenRating
         displayedAddress = _displayAddress
         
-        if(_givenRating >= Consts.MinRating && _givenRating <= Consts.MaxRating){
+        if(_givenRating >= Consts.MinRatingToDisplayImage && _givenRating <= Consts.MaxRatingToDisplayImage){
             ratingImageName = "\(_givenRating)Stars"
         }
     }

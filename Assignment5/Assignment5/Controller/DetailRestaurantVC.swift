@@ -138,19 +138,19 @@ class DetailRestaurantVC: UIViewController {
         }))
         
         DetailRestaurantVC.modelObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue:   Messages.RestaurantReadyToBeSaved), object: nil, queue: OperationQueue.main) {
-            
             [weak self] (notification: Notification) in
-            if let s = self {
-                let info0 = notification.userInfo?[Consts.KEY0]
-                
-                let restaurantOpt = info0 as? Restaurant
-                
-                guard let restaurant = restaurantOpt else{
-                    preconditionFailure("Could not save this favorite restaurant")
+            
+                if let s = self {
+                    let info0 = notification.userInfo?[Consts.KEY0]
+                    
+                    let restaurantOpt = info0 as? Restaurant
+                    
+                    guard let restaurant = restaurantOpt else{
+                        preconditionFailure("Could not save this favorite restaurant")
+                    }
+                    s.saveRestaurant(restaurant)
                 }
-                s.saveRestaurant(restaurant)
             }
-        }
         
         guard let detailType = restaurantDetailVCType else{
             preconditionFailure("Parent VC did not initialize Detail VC Type")

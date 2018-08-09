@@ -81,8 +81,8 @@ enum DetailVCType : String{
 
 struct Consts{
     static let KEY0 = "Key0"
-    static let MinRating = 1
-    static let MaxRating = 5
+    static let MinRatingToDisplayImage = 1
+    static let MaxRatingToDisplayImage = 5
     static let RoundDecimal = 1
     static let SearchTabIndex = 0
     static let NotifyTabIndex = 2
