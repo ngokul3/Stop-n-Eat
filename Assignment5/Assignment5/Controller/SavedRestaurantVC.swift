@@ -13,7 +13,18 @@ class SavedRestaurantVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var model = RestaurantModel.getInstance()
+    private var notifyModel = AppDel.notifyModel
     private static var modelObserver: NSObjectProtocol?
+    
+    lazy var isRestaurantSetToNotify : (Restaurant, Restaurant)->Bool = {(restaurantInNotify, restaurantSaved) in
+        
+        if (restaurantInNotify.restaurantId == restaurantSaved.restaurantId) {
+            return true
+        }
+        else{
+            return false
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,11 +109,23 @@ extension SavedRestaurantVC : UITableViewDataSource{
             do{
                 let restaurantInContext = try model.getRestaurantSaved(fromSavedRestaurantArray: indexPath.row)
                 
-                try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext, completed: {[weak self](msgOpt) in
-                    if let msg = msgOpt{
-                        self?.alertUser = msg
-                    }
-                })
+                try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext)
+                
+                if(self.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0, restaurantInContext)}){
+                    alertUser = "Please note that \(restaurantInContext.restaurantName) is in the Notify List. Please delete from Notify tab if you don't want to Notify."
+                }
+                
+//                try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext, completed: {[weak self](msgOpt) in
+//
+//                    if let msg = msgOpt{
+//                        
+//                        if(self?.notifyModel.getRestaurantsToNotify().contains{self?.isRestaurantSetToNotify($0, restaurantInContext)}){
+//                            self?.alertUser = "Please note that \(restaurantInContext.restaurantName) is in the Notify List. Please delete from Notify tab if you don't want to Notify."
+//                        }
+//
+//
+//                    }
+//                })
             }
             catch RestaurantError.notAbleToDelete(let name){
                 alertUser = "\(name) cannot be deleted"

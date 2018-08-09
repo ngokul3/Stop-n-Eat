@@ -235,7 +235,7 @@ extension RestaurantVC{
             let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
             
             if(restaurantFromNetwork.isFavorite == true){
-                try restaurantModel.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork, completed: nil)
+                try restaurantModel.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork)
             }
             else{
                 alertUser = "Incorrect restaurant was about to be removed from favorite"

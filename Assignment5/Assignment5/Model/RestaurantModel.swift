@@ -241,7 +241,8 @@ extension RestaurantModel{
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
    }
     
-    func deleteRestaurantFromFavorite(restaurant: Restaurant, completed: ((String?)->Void)?) throws{
+    //func deleteRestaurantFromFavorite(restaurant: Restaurant, completed: ((String?)->Void)?) throws{
+    func deleteRestaurantFromFavorite(restaurant: Restaurant) throws{
         
         if(restaurantsSaved.contains{$0.restaurantId == restaurant.restaurantId}){
             restaurantsSaved = restaurantsSaved.filter({($0.restaurantId != restaurant.restaurantId)})
@@ -257,9 +258,9 @@ extension RestaurantModel{
         NotificationCenter.default.post(name: nsNotification2.name, object: nil, userInfo:[Consts.KEY0: restaurant])
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
         
-        if(AppDel.notifyModel.getRestaurantsToNotify().contains(restaurant)){
-            completed?("Please note that \(restaurant.restaurantName) is in the Notify List. Please delete from Notify tab if you don't want to Notify.")
-        }
+//        if(AppDel.notifyModel.getRestaurantsToNotify().contains(restaurant)){
+//            completed?("Please note that \(restaurant.restaurantName) is in the Notify List. Please delete from Notify tab if you don't want to Notify.")
+//        }
     }
 }
 
@@ -300,11 +301,6 @@ class Restaurant:  NSObject, NSCoding{
             isFavorite = false
             favoriteImageName = "emptyHeart"
         }
-        
-        //todo save notify on saved restaurant, then bring up rest from network. isselected is not selected on search.
-        //check something in network. if is already saved rest, that will not be selected
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -339,50 +335,10 @@ class Restaurant:  NSObject, NSCoding{
     
     var trainStop : TrainStop?
     
-//    lazy var isRestaurantSetToNotify : (Restaurant)->Bool = {(arg) in
-//
-//        if (arg.restaurantId == self.restaurantId) {
-//            return true
-//         }
-//        else{
-//            return false
-//        }
-//    }
-
-    //todo - check all appdel used in model
-    
-//    var setRestaurantToNotifyList: Void{
-//
-//        switch isSelected{
-//
-//        case true:
-//
-//            guard !self.restaurantId.isEmpty else{
-//                return // This means user created favorite by clicking "+". Restaurant Id comes from Yelp or it is empty if a new restaurant isn't saved.
-//            }
-//
-//            if(!AppDel.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0)}){
-//                AppDel.notifyModel.addRestaurantToNotify(restaurantToNotify: self)
-//            }
-//
-//        case false:
-//
-//            if(AppDel.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0)}){
-//                do{
-//                    try AppDel.notifyModel.removeRestauarntFromNotification(restaurant: self)
-//                }
-//                catch{
-//                    preconditionFailure("Not able to remove restaurant from Notify list")
-//                }
-//            }
-//        }
-//    }
-    
     var restaurantName : String = ""{
         didSet{
             if(restaurantId.isEmpty){
                 restaurantId = String(describing: RestaurantModel.getTotalFavoriteCount())
-               // setRestaurantToNotifyList
             }
         }
     }
@@ -415,11 +371,7 @@ class Restaurant:  NSObject, NSCoding{
     var ratingImageName: String = ""
     var myRating : Int = 0
     
-    var isSelected : Bool = false{
-        didSet{
-          // setRestaurantToNotifyList
-        }
-    }
+    var isSelected : Bool = false
     
     var comments : String = ""
     var dateVisited : Date = Date()
