@@ -92,8 +92,8 @@ extension RestaurantModel{
         
         let trainLocation = (trainStop.latitude, trainStop.longitude)
     
-        guard trainLocation.0 != 0.0
-            , trainLocation.1 != 0.0 else{
+        guard trainLocation.0 != 0.0,
+              trainLocation.1 != 0.0 else{
             preconditionFailure("Could not find Stop location")
         }
 

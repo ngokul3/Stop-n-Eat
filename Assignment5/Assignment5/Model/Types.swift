@@ -21,6 +21,7 @@ protocol RestaurantProtocol{
     func loadRestaurantFromNetwork(trainStop : TrainStop) throws
     var restaurantsFromNetwork: RestaurantArray {get set}
     var restaurantsSaved: RestaurantArray {get set}
+    
     func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant
     func getAllRestaurantsFromNetwork() throws ->RestaurantArray
     func addRestaurantToFavorite(restaurantOpt: Restaurant?) throws

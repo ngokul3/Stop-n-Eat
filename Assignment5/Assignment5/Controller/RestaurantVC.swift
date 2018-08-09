@@ -10,7 +10,6 @@ import UIKit
 
 class RestaurantVC: UIViewController {
    
-    @IBOutlet weak var btnFavoriteClick: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     var trainStop : TrainStop?
@@ -50,7 +49,6 @@ class RestaurantVC: UIViewController {
             
                 if let s = self {
                     let info0 = notification.userInfo?[Consts.KEY0]
-                    
                     let restaurantOpt = info0 as? Restaurant
                     
                     guard let restaurant = restaurantOpt else{
@@ -60,31 +58,6 @@ class RestaurantVC: UIViewController {
                 }
         }
         super.viewDidLoad()
-    }
-}
-
-extension RestaurantVC{
-    
-    @IBAction func btnSave(_ sender: Any) {
-        var rowNo : Int?
-        
-        if let button = sender as? UIButton {
-            rowNo = button.tag
-        }
-        
-        guard let indexRow = rowNo else{
-            preconditionFailure("Could not find corresponding row: \(sender )")
-        }
-        
-        do{
-            let _ = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
-        }
-        catch(RestaurantError.invalidRowSelection()){
-            alertUser = "Restaurant selected could not be navigated to the map"
-        }
-        catch{
-            alertUser = "Unexpected Error"
-        }
     }
 }
 
@@ -176,26 +149,20 @@ extension RestaurantVC: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
-            
-            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = false
+        do{
+            let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexPath.row)
+        
+            if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
+                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
+                restaurantFromNetwork.isSelected = false
+            }
+            else{
+                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+                restaurantFromNetwork.isSelected = true
+            }
         }
-        else{
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = true
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-       
-        if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
-            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = false
-        }
-        else{
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-            restaurantModel.restaurantsFromNetwork[indexPath.row].isSelected = true
+        catch{
+            alertUser = "Unexpected Error while loading restaurants"
         }
     }
     
