@@ -13,11 +13,22 @@ class RestaurantVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var trainStop : TrainStop?
-    var cellArrray = [RestaurantCell]()
+    private var cellArrray = [RestaurantCell]()
     private var restaurantModel = AppDel.restModel
+    private var notifyModel = AppDel.notifyModel
     private static var modelObserver: NSObjectProtocol?
-    var removeFavoriteNo : ((UIAlertAction, String)->Void)?
-    var shouldRemoveFavorite : Bool?
+    private var removeFavoriteNo : ((UIAlertAction, String)->Void)?
+    private var shouldRemoveFavorite : Bool?
+    
+        lazy var isRestaurantSetToNotify : (Restaurant, Restaurant)->Bool = {(restaurantInNotify, restaurantFromNetwork) in
+    
+            if (restaurantInNotify.restaurantId == restaurantFromNetwork.restaurantId) {
+                return true
+             }
+            else{
+                return false
+            }
+        }
     
     override func viewDidLoad() {
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -87,12 +98,29 @@ extension RestaurantVC : UITableViewDataSource{
         let ratingImageName = restaurant.ratingImageName
         cell.imgRatings.image = UIImage(named: ratingImageName)
 
-        if(restaurant.isSelected){
+        //Will have to check for Id and not restaurant itself because once a restaurant gets saved, the reference changes during the next invoke. When a saved restaurant is selected, I would like to display checkmark on the restaurant from Network.
+        
+        if(notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0, restaurant)}){
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
         }
         else{
             cell.accessoryType = UITableViewCellAccessoryType.none
+
         }
+//        if(restaurant.isSelected){
+//            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+//        //    notifyModel.addRestaurantToNotify(restaurantToNotify: restaurant)
+//        }
+//        else{
+//            cell.accessoryType = UITableViewCellAccessoryType.none
+//
+////            do{
+////                try notifyModel.removeRestauarntFromNotification(restaurant: restaurant)
+////            }
+////            catch{
+////                print("Restaurant is not in the notify list")
+////            }
+//        }
         
         cell.imgHeart.image = UIImage(named: restaurant.favoriteImageName)
         let heartTap : UITapGestureRecognizer?
@@ -165,10 +193,21 @@ extension RestaurantVC: UITableViewDelegate{
             if(tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
                 tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
                 restaurantFromNetwork.isSelected = false
+                
+                if(notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0, restaurantFromNetwork)}){
+                    do{
+                        try notifyModel.removeRestauarntFromNotification(restaurant: restaurantFromNetwork)
+                    }
+                    catch{
+                        alertUser = "Restaurant could not be removed from notify list"
+                        return
+                    }
+                }
             }
             else{
                 tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
                 restaurantFromNetwork.isSelected = true
+                notifyModel.addRestaurantToNotify(restaurantToNotify: restaurantFromNetwork)
             }
         }
         catch{

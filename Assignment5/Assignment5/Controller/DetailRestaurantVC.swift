@@ -25,11 +25,13 @@ class DetailRestaurantVC: UIViewController {
     private static var modelObserver: NSObjectProtocol?
     private lazy var btnRatings : [UIButton] = [btnRating1, btnRating2, btnRating3, btnRating4, btnRating5]
     private var myRating: Int = 0
+    private var notifyModel = AppDel.notifyModel
+    private var emptyRatingImageName: String = "plainStar" // This image name is not  model specific. So, not having it in Model
+    private var fullRatingImageName: String = "rating"
+
     var restaurant : Restaurant?
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
-    var emptyRatingImageName: String = "plainStar" // This image name is not  model specific. So, not having it in Model
-    var fullRatingImageName: String = "rating"
 
     lazy var updateRating = {(button: UIButton) in
         var imageNameOpt : String?
@@ -225,7 +227,33 @@ extension DetailRestaurantVC{
         restaurant?.dateVisited = dateVisited.date
         restaurant?.comments = txtNotes.text
         restaurant?.myRating = self.myRating
-        restaurant?.isSelected = swtNotify.isOn
+        
+        switch swtNotify.isOn {
+        
+        case true:
+            restaurant?.isSelected = true
+            
+            if let restaurantToNotify = restaurant{
+                notifyModel.addRestaurantToNotify(restaurantToNotify: restaurantToNotify)
+            }
+            
+        case false:
+            restaurant?.isSelected = false
+            
+            if let restaurantToNotify = restaurant{
+            
+                if(notifyModel.getRestaurantsToNotify().contains(restaurantToNotify)){
+                    do{
+                        try notifyModel.removeRestauarntFromNotification(restaurant: restaurantToNotify)
+                    }
+                    catch{
+                        alertUser = "Restaurant could not be removed from notify list"
+                        return 
+                    }
+                }
+            }
+        }
+       
         saveDetailVC?(restaurant)
         navigationController?.popViewController(animated: true)
     }

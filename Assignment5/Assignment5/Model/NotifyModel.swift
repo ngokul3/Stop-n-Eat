@@ -28,9 +28,9 @@ class NotifyModel: NotifyProtocol{
         return notifyRestaurants
     }
     
-    lazy var isNotifiedRestaurantPresent : (Restaurant, Restaurant)->Bool = {(arg, rest) in
+    lazy var isNotifiedRestaurantPresent : (Restaurant, Restaurant)->Bool = {(restaurantAleadyInNotify, restaurantToBeNotified) in
         
-        if (arg.restaurantId == rest.restaurantId) {
+        if (restaurantAleadyInNotify.restaurantId == restaurantToBeNotified.restaurantId) {
             return true
         }
         else{
@@ -38,25 +38,29 @@ class NotifyModel: NotifyProtocol{
         }
     }
     //todo
-    func checkNotificationConsistency(restaraunts: [Restaurant], restaurantToNotify: Restaurant){
-        
-        let restaurantOpt = restaraunts.first(where: {(isNotifiedRestaurantPresent($0, restaurantToNotify))})
-        
-        guard let restaurant = restaurantOpt else{
-            return
-        }
-        
-        if(restaurant.isSelected != restaurantToNotify.isSelected){
-            restaurant.isSelected = restaurantToNotify.isSelected
-        }
-    }
+//    func checkNotificationConsistency(restaraunts: [Restaurant], restaurantToNotify: Restaurant){
+//
+//        let restaurantOpt = restaraunts.first(where: {(isNotifiedRestaurantPresent($0, restaurantToNotify))})
+//
+//        guard let restaurant = restaurantOpt else{
+//            return
+//        }
+//
+//        if(restaurant.isSelected != restaurantToNotify.isSelected){
+//            restaurant.isSelected = restaurantToNotify.isSelected
+//        }
+//    }
     
     func addRestaurantToNotify(restaurantToNotify: Restaurant) {
         
-        notifyRestaurants.append(restaurantToNotify)
+        if(!notifyRestaurants.contains{isNotifiedRestaurantPresent($0, restaurantToNotify)}){
+            notifyRestaurants.append(restaurantToNotify)
+        }
+            
+      //  notifyRestaurants.append(restaurantToNotify)
         
-        checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsFromNetwork(), restaurantToNotify: restaurantToNotify)
-        checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsPersisted(), restaurantToNotify: restaurantToNotify)
+       // checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsFromNetwork(), restaurantToNotify: restaurantToNotify)
+       // checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsPersisted(), restaurantToNotify: restaurantToNotify)
         
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantNotificationListChanged), object: self))
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
@@ -67,8 +71,8 @@ class NotifyModel: NotifyProtocol{
         if(notifyRestaurants.contains{$0.restaurantId == restaurant.restaurantId}){
              notifyRestaurants = notifyRestaurants.filter({($0.restaurantId != restaurant.restaurantId)})
              restaurant.isSelected = false
-            checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsFromNetwork(), restaurantToNotify: restaurant)
-            checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsPersisted(), restaurantToNotify: restaurant)
+           // checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsFromNetwork(), restaurantToNotify: restaurant)
+            //checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsPersisted(), restaurantToNotify: restaurant)
         }
         else{
             throw NotifyError.notAbleToRemoveRestaurant
