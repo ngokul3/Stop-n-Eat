@@ -19,11 +19,11 @@ protocol TrainStopProtocol {
 protocol RestaurantProtocol{
     static func getInstance()->RestaurantProtocol
     func loadRestaurantFromNetwork(trainStop : TrainStop) throws
-    var restaurantsFromNetwork: RestaurantArray {get set}
+    //var restaurantsFromNetwork: RestaurantArray {get set}
     var restaurantsSaved: RestaurantArray {get set}
     
     func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant
-    func getAllRestaurantsFromNetwork() throws ->RestaurantArray
+    func getAllRestaurantsFromNetwork() ->RestaurantArray
     func addRestaurantToFavorite(restaurantOpt: Restaurant?) throws
     func editRestaurantInFavorite(restaurant: Restaurant) throws
     func deleteRestaurantFromFavorite(restaurant: Restaurant, completed: ((String?)->Void)?) throws

@@ -69,10 +69,18 @@ extension RestaurantVC : UITableViewDataSource{
             preconditionFailure("Incorrect Cell provided")
         }
         
-        guard let restaurant = restaurantModel.restaurantsFromNetwork[safe: indexPath.row]  else{
-             preconditionFailure("Restaurant list did not get loaded")
+        var restaurantFromNetwork: Restaurant?
+        do{
+            restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexPath.row)
+        }
+        catch{
+            print("Unexpected Error while framing cell")
         }
         
+        guard let restaurant = restaurantFromNetwork  else{
+             preconditionFailure("Restaurant list did not get loaded")
+        }
+
         cell.lblRestaurantName.text = restaurant.restaurantName
         cell.lblMiles.text = restaurant.distanceFromTrainStopLabelFormat
         cell.btnSingleMap.tag = indexPath.row
@@ -141,8 +149,10 @@ extension RestaurantVC : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurantModel.restaurantsFromNetwork.count
-    }
+
+        let restaurantsFromNetwork = restaurantModel.getAllRestaurantsFromNetwork()
+        return restaurantsFromNetwork.count
+     }
  }
 
 extension RestaurantVC: UITableViewDelegate{
@@ -162,7 +172,7 @@ extension RestaurantVC: UITableViewDelegate{
             }
         }
         catch{
-            alertUser = "Unexpected Error while loading restaurants"
+            alertUser = "Unexpected Error while selecting restaurants"
         }
     }
     
@@ -197,7 +207,7 @@ extension RestaurantVC{
         }
         catch{
             alertUser = "Unexpected Error while preparing to navigate"
-         }
+        }
     }
  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
@@ -219,7 +229,7 @@ extension RestaurantVC{
                 preconditionFailure("Wrong destination type: \(segue.destination)")
         }
         
-        var retaurants = RestaurantArray()
+        var restaurants = RestaurantArray()
         
         switch identifier{
         
@@ -235,11 +245,11 @@ extension RestaurantVC{
             }
             
             do{
-                let restaurant = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow) //todo
+                let restaurant = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
                 let place = Place()
                 place.trainStop = restaurant.trainStop
-                retaurants.append(restaurant)
-                place.restaurants = retaurants
+                restaurants.append(restaurant)
+                place.restaurants = restaurants
                 
                 guard let vc = segueToVC as? MapViewVC else{
                     preconditionFailure("Could not find segue")
@@ -255,26 +265,16 @@ extension RestaurantVC{
             }
             
         case "multipleMapSegue" :
-            do{
                 let place = Place()
-                let restaurantsFetched = try restaurantModel.getAllRestaurantsFromNetwork()//todo
+                let restaurantsFetched = restaurantModel.getAllRestaurantsFromNetwork()
                 place.trainStop = restaurantsFetched.first?.trainStop
-                retaurants = restaurantsFetched
-                place.restaurants = retaurants
+                place.restaurants = restaurantsFetched
                 
                 guard let vc = segueToVC as? MapViewVC else{
                     preconditionFailure("Could not find segue")
                 }
                 
                 vc.place = place
-            }
-                
-            catch(RestaurantError.zeroCount()){
-                alertUser = "There are no restaurants to show"
-                }
-            catch{
-                alertUser = "Unexpected Error"
-                }
             
         case "detailSegueFromHeart" :
                 var rowNo : Int?
@@ -292,7 +292,7 @@ extension RestaurantVC{
                 }
                 
                 do{
-                    let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)//todo
+                    let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
                     vc.restaurant = restaurantFromNetwork
                 }
                     

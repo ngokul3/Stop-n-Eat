@@ -190,12 +190,7 @@ extension RestaurantModel{
         return restaurant
     }
     
-    func getAllRestaurantsFromNetwork() throws ->RestaurantArray{
-        
-        guard restaurantsFromNetwork.count > 0 else{
-            throw RestaurantError.zeroCount()
-        }
-        
+    func getAllRestaurantsFromNetwork() ->RestaurantArray{
         return restaurantsFromNetwork
     }
 }

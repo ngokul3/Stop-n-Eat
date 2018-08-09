@@ -53,7 +53,7 @@ class NotifyModel: NotifyProtocol{
         
         notifyRestaurants.append(restaurantToNotify)
         
-        checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsFromNetwork, restaurantToNotify: restaurantToNotify)
+        checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsFromNetwork(), restaurantToNotify: restaurantToNotify)
         checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsSaved, restaurantToNotify: restaurantToNotify)
         
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantNotificationListChanged), object: self))
@@ -65,7 +65,7 @@ class NotifyModel: NotifyProtocol{
         if(notifyRestaurants.contains{$0.restaurantId == restaurant.restaurantId}){
              notifyRestaurants = notifyRestaurants.filter({($0.restaurantId != restaurant.restaurantId)})
              restaurant.isSelected = false
-            checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsFromNetwork, restaurantToNotify: restaurant)
+            checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsFromNetwork(), restaurantToNotify: restaurant)
             checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsSaved, restaurantToNotify: restaurant)
         }
         else{
