@@ -83,6 +83,7 @@ struct Consts{
     static let KEY0 = "Key0"
     static let MinRating = 1
     static let MaxRating = 5
+    static let RoundDecimal = 1
 }
 
 //This logic was corrected after code review comments from Assignment 4. Earlier I was returning bool.

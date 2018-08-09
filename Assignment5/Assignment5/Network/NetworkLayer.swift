@@ -138,15 +138,18 @@ extension NetworkModel{
             let downloadPicTask = session.dataTask(with: restaurantImageURL) { (data, responseOpt, error) in
                 if let e = error {
                     print("Error downloading cat picture: \(e)")
-                } else {
+                }
+                else {
                     if let response = responseOpt as? HTTPURLResponse {
                         
                         if let imageData = data {
                             imageLoaded(imageData, response, error)
-                        } else {
+                        }
+                        else {
                             imageLoaded(nil, response, error)
                         }
-                    }else {
+                    }
+                    else {
                         imageLoaded(nil, nil, error)
                     }
                 }

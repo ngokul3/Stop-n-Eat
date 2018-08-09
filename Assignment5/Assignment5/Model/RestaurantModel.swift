@@ -354,10 +354,12 @@ class Restaurant:  NSObject, NSCoding{
     var distanceFromStopDesc : String = ""
     
     var distanceFromTrainStop : Double{
-        let distance = self.distanceBetweenTwoCoordinates(lat1: latitude, lon1: longitude, latOpt: trainStop?.latitude, lonOpt: trainStop?.longitude).rounded(toPlaces: 1)
+        let distance = self.distanceBetweenTwoCoordinates(lat1: latitude, lon1: longitude, latOpt: trainStop?.latitude, lonOpt: trainStop?.longitude).rounded(toPlaces: Consts.RoundDecimal)
+        
         if let stop = self.trainStop{
             distanceFromStopDesc = String(describing:distance) + " mi from " + String(describing: stop.stopName)
         }
+        
         return distance
     }
     
@@ -373,9 +375,7 @@ class Restaurant:  NSObject, NSCoding{
     
     var ratingImageName: String = ""
     var myRating : Int = 0
-    
     var isSelected : Bool = false
-    
     var comments : String = ""
     var dateVisited : Date = Date()
     var favoriteImageName : String = "emptyHeart"
