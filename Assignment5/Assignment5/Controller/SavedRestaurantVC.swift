@@ -50,7 +50,18 @@ extension SavedRestaurantVC : UITableViewDataSource{
             preconditionFailure("Incorrect Cell provided")
         }
         
-        let restaurant = model.restaurantsSaved[indexPath.row]
+        var restaurantSaved: Restaurant?
+        do{
+            restaurantSaved = try model.getRestaurantSaved(fromSavedRestaurantArray: indexPath.row)
+        }
+        catch{
+            print("Unexpected Error while framing cell")
+        }
+        
+        guard let restaurant = restaurantSaved  else{
+            preconditionFailure("Restaurant list did not get loaded")
+        }
+
         print("Returned name is \(restaurant.restaurantName)")
         cell.lblRestaurantName.text = restaurant.restaurantName
         cell.txtNotesRestaurant.text = restaurant.comments
@@ -75,7 +86,7 @@ extension SavedRestaurantVC : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.restaurantsSaved.count
+        return model.getAllRestaurantsPersisted().count
     }
     
     func tableView(_ tableView: UITableView,
@@ -84,11 +95,9 @@ extension SavedRestaurantVC : UITableViewDataSource{
         
         if editingStyle == .delete {
             
-            guard let restaurantInContext = model.restaurantsSaved[safe: indexPath.row]  else{
-                preconditionFailure("Error while getting value from the Menu Model")
-            }
-            
             do{
+                let restaurantInContext = try model.getRestaurantSaved(fromSavedRestaurantArray: indexPath.row)
+                
                 try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext, completed: {[weak self](msgOpt) in
                     if let msg = msgOpt{
                         self?.alertUser = msg
@@ -156,25 +165,29 @@ extension SavedRestaurantVC{
                     preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
             }
             
-            guard let restaurantInContext = model.restaurantsSaved[safe: indexPath.row]  else{
-                preconditionFailure("Error while getting value from the Menu Model")
+            do{
+                let restaurantInContext = try model.getRestaurantSaved(fromSavedRestaurantArray: indexPath.row)
+                detailVC.restaurantDetailVCType = DetailVCType.Edit
+                detailVC.restaurant = restaurantInContext
+                detailVC.saveDetailVC = {[weak self] (restaurant) in
+                    
+                    do{
+                        try self?.model.editRestaurantInFavorite(restaurant: restaurantInContext)
+                    }
+                    catch RestaurantError.notAbleToEdit(let name){
+                        self?.alertUser = "Restaurant \(name) cannot be edited. May be it's not in Favorite list anymore."
+                    }
+                    catch{
+                        self?.alertUser = "Unexpected error"
+                    }
+                }
+            }
+            catch{
+                alertUser = "Unexpected error while selecting row for editing"
             }
             
-            detailVC.restaurantDetailVCType = DetailVCType.Edit
-            detailVC.restaurant = restaurantInContext
-            detailVC.saveDetailVC = {[weak self] (restaurant) in
-                
-                do{
-                    try self?.model.editRestaurantInFavorite(restaurant: restaurantInContext)
-                }
-                catch RestaurantError.notAbleToEdit(let name){
-                    self?.alertUser = "Restaurant \(name) cannot be edited. May be it's not in Favorite list anymore."
-                }
-                catch{
-                    self?.alertUser = "Unexpected error"
-                }
-            }
         default : break
+            
         }
     }
 }

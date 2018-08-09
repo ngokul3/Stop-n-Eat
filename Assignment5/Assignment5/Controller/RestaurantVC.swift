@@ -193,7 +193,7 @@ extension RestaurantVC{
         let indexRow = imageView.tag
         
         do{
-            let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow) //todo
+            let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexRow)
             
             if(restaurantFromNetwork.isFavorite == true){
                 try restaurantModel.deleteRestaurantFromFavorite(restaurant: restaurantFromNetwork, completed: nil)

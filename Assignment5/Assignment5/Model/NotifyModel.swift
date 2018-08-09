@@ -54,7 +54,7 @@ class NotifyModel: NotifyProtocol{
         notifyRestaurants.append(restaurantToNotify)
         
         checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsFromNetwork(), restaurantToNotify: restaurantToNotify)
-        checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsSaved, restaurantToNotify: restaurantToNotify)
+        checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsPersisted(), restaurantToNotify: restaurantToNotify)
         
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantNotificationListChanged), object: self))
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: Messages.RestaurantListChanged), object: self))
@@ -66,7 +66,7 @@ class NotifyModel: NotifyProtocol{
              notifyRestaurants = notifyRestaurants.filter({($0.restaurantId != restaurant.restaurantId)})
              restaurant.isSelected = false
             checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsFromNetwork(), restaurantToNotify: restaurant)
-            checkNotificationConsistency(restaraunts: AppDel.restModel.restaurantsSaved, restaurantToNotify: restaurant)
+            checkNotificationConsistency(restaraunts: AppDel.restModel.getAllRestaurantsPersisted(), restaurantToNotify: restaurant)
         }
         else{
             throw NotifyError.notAbleToRemoveRestaurant

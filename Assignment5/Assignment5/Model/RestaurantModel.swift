@@ -17,8 +17,8 @@ class RestaurantModel: RestaurantProtocol{
     private lazy var networkModel = {
         return AppDel.networkModel
     }()
-    var restaurantsFromNetwork : RestaurantArray
-    var restaurantsSaved : RestaurantArray
+    private var restaurantsFromNetwork : RestaurantArray
+    private var restaurantsSaved : RestaurantArray
     
     private init(){
         restaurantsFromNetwork = RestaurantArray()
@@ -49,7 +49,7 @@ extension RestaurantModel{
     }
     
     static func getTotalFavoriteCount()->Int{
-        return getInstance().restaurantsSaved.count
+        return getInstance().getAllRestaurantsPersisted().count
     }
 }
 
@@ -180,18 +180,30 @@ extension RestaurantModel{
 
 extension RestaurantModel{
     
-    func getRestaurantFromNetwork(fromRestaurantArray stopIndex : Int) throws ->Restaurant{
+    func getRestaurantFromNetwork(fromRestaurantArray index : Int) throws ->Restaurant{
         
-        guard let restaurantFromArray = restaurantsFromNetwork[safe: stopIndex]  else{
+        guard let restaurantFromArray = restaurantsFromNetwork[safe: index]  else{
             throw RestaurantError.invalidRowSelection()
         }
         
-        let restaurant = restaurantFromArray
-        return restaurant
+         return restaurantFromArray
     }
     
     func getAllRestaurantsFromNetwork() ->RestaurantArray{
         return restaurantsFromNetwork
+    }
+    
+    func getRestaurantSaved(fromSavedRestaurantArray index: Int) throws -> Restaurant{
+        
+        guard let restaurantSaved = restaurantsSaved[safe: index]  else{
+            throw RestaurantError.invalidRowSelection()
+        }
+        
+        return restaurantSaved
+    }
+    
+    func getAllRestaurantsPersisted() -> RestaurantArray{
+        return restaurantsSaved
     }
 }
 
@@ -278,7 +290,7 @@ class Restaurant:  NSObject, NSCoding{
             ratingImageName = "\(_givenRating)Stars"
         }
         
-        if let _ = AppDel.restModel.restaurantsSaved.filter({$0.restaurantId == _restaurantId}).first {
+        if let _ = AppDel.restModel.getAllRestaurantsPersisted().filter({$0.restaurantId == _restaurantId}).first {
             isFavorite = true
             favoriteImageName = "favHeart"
         }
