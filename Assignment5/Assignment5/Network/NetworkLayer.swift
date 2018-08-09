@@ -45,6 +45,7 @@ class NetworkModel: NetworkProtocol{
 }
 
 extension NetworkModel{
+    
     static func getInstance() -> NetworkProtocol {
         
         if let inst = NetworkModel.instance {
@@ -58,6 +59,7 @@ extension NetworkModel{
 
 //Train Stop Fetch
 extension NetworkModel{
+    
     func loadTransitData(finished : @escaping (NSArray?, String?)->Void ) {
         
         guard let transitFileName = transitJSONFileNameOpt else{
@@ -88,6 +90,7 @@ extension NetworkModel{
 
 //Restaurant Fetch
 extension NetworkModel{
+    
     func loadFromNetwork(location: String, term: String, finished: @escaping (_ dataDict: NSDictionary?, _ errorMsg: String?)  -> ()) {
         
         guard let myKey = keyOpt else{

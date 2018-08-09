@@ -311,7 +311,7 @@ class Restaurant:  NSObject, NSCoding{
             let restImageURL = aDecoder.decodeObject(forKey: "imageURL") as? String,
             let restComment = aDecoder.decodeObject(forKey:"comments") as? String,
             let restAddress = aDecoder.decodeObject(forKey:"displayedAddress") as? String,
-            //let restDistanceDesc = aDecoder.decodeObject(forKey:"distanceFromStopDesc") as? String,
+            let restDistanceDesc = aDecoder.decodeObject(forKey:"distanceFromStopDesc") as? String,
             let restDate = aDecoder.decodeObject(forKey:"dateVisited") as? Date else {
                 return nil
         }
@@ -326,7 +326,7 @@ class Restaurant:  NSObject, NSCoding{
         displayedAddress = restAddress
         dateVisited = restDate
         isFavorite = aDecoder.decodeBool(forKey: "isFavorite")
-        //distanceFromStopDesc = restDistanceDesc
+        distanceFromStopDesc = restDistanceDesc
         restaurantURL = restURL
         imageURL = restImageURL
         super.init()
@@ -385,18 +385,13 @@ class Restaurant:  NSObject, NSCoding{
     var restaurantId : String
     var latitude : Double
     var longitude : Double
-    var distanceFromStopDesc : String{
-        
-        if let stop = self.trainStop{
-            return String(describing:distanceFromTrainStop) + " mi from " + String(describing: stop.stopName)
-        }
-        else{
-            return ""
-        }
-    }
+    var distanceFromStopDesc : String = ""
     
     var distanceFromTrainStop : Double{
         let distance = self.distanceBetweenTwoCoordinates(lat1: latitude, lon1: longitude, latOpt: trainStop?.latitude, lonOpt: trainStop?.longitude).rounded(toPlaces: 1)
+        if let stop = self.trainStop{
+            distanceFromStopDesc = String(describing:distance) + " mi from " + String(describing: stop.stopName)
+        }
         return distance
     }
     
@@ -446,7 +441,7 @@ class Restaurant:  NSObject, NSCoding{
         aCoder.encode(longitude, forKey: "longitude")
         aCoder.encode(comments, forKey: "comments")
         aCoder.encode(displayedAddress, forKey: "displayedAddress")
-        //aCoder.encode(distanceFromStopDesc, forKey: "distanceFromStopDesc")
+        aCoder.encode(distanceFromStopDesc, forKey: "distanceFromStopDesc")
         aCoder.encode(dateVisited, forKey : "dateVisited")
         aCoder.encode(isFavorite, forKey : "isFavorite")
         aCoder.encode(imageURL, forKey: "imageURL")
