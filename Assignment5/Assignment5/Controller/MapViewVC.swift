@@ -61,6 +61,7 @@ class MapViewVC: UIViewController {
 extension MapViewVC{
     
     func checkLocationAuthorizationStatus() {
+        
         if CLLocationManager.authorizationStatus() == .authorizedAlways {
             mapView.showsUserLocation = true
         }

@@ -37,6 +37,8 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
         catch{
             alertUser = "Unexpected error while loading Transit Data"
         }
+        
+        //overload of TrainStop may not be best function to restore saved items. But I think it is better than doing it in AppDelegate or TabBarController related event.
         do {
             let restoredObject = try Persistence.restore()
             restModel.restoreRestaurantsFromFavorite(restaurants: restoredObject)
@@ -47,6 +49,7 @@ class TrainStopVC: UIViewController,UITableViewDataSource, UITableViewDelegate, 
         catch{
             alertUser = "Unknown Error"
         }
+        
         super.viewDidLoad()
     }
 }
@@ -101,6 +104,7 @@ extension TrainStopVC{
               let indexPath = self.tableView.indexPath(for: cell) else{
                 preconditionFailure("Segue from unexpected object: \(sender ?? "sender = nil")")
         }
+        
         do{
             let trainStop = try model.getTrainStop(fromFilteredArray: indexPath.row)
             segueVC.trainStop = trainStop

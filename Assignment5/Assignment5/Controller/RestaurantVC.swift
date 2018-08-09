@@ -81,6 +81,7 @@ extension RestaurantVC : UITableViewDataSource{
         }
         
         var restaurantFromNetwork: Restaurant?
+        
         do{
             restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexPath.row)
         }

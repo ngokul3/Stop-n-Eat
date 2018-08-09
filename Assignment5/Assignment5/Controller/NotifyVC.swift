@@ -39,13 +39,13 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
             guard let tabBC = self?.tabBarController else{
                 return
             }
-            tabBC.selectedIndex = 0
+            tabBC.selectedIndex = Consts.SearchTabIndex
         }
     }
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController){
         
-         if(tabBarController.selectedIndex == 2){
+         if(tabBarController.selectedIndex == Consts.NotifyTabIndex){
             showImageDialog()
         }
     }
@@ -117,9 +117,11 @@ extension NotifyVC: UITableViewDataSource{
         let restaurants = notifyModel.getRestaurantsToNotify()
         
         if editingStyle == .delete {
+            
             guard let restaurantInContext = restaurants[safe: indexPath.row]  else{
                 preconditionFailure("Restaurant is nil")
             }
+            
             do{
                 try notifyModel.removeRestauarntFromNotification(restaurant: restaurantInContext)
             }
@@ -267,7 +269,7 @@ extension NotifyVC{
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: ({[weak self]_ in
                                             
                                                     if let tabBC = self?.tabBarController{
-                                                        tabBC.selectedIndex = 0
+                                                        tabBC.selectedIndex = Consts.SearchTabIndex
                                                     }
                                             })
                                         )
