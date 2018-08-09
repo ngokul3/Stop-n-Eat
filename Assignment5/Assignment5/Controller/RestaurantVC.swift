@@ -277,6 +277,7 @@ extension RestaurantVC{
                 guard let vc = segueToVC as? MapViewVC else{
                     preconditionFailure("Could not find segue")
                 }
+                
                 vc.place = place
             }
             catch(RestaurantError.invalidRowSelection()){
@@ -297,6 +298,7 @@ extension RestaurantVC{
                 guard let vc = segueToVC as? MapViewVC else{
                     preconditionFailure("Could not find segue")
                 }
+                
                 vc.place = place
             }
                 
