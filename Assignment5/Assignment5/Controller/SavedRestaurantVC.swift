@@ -12,7 +12,7 @@ class SavedRestaurantVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    private var model = RestaurantModel.getInstance()
+    private var restModel = AppDel.restModel
     private var notifyModel = AppDel.notifyModel
     private static var modelObserver: NSObjectProtocol?
     
@@ -63,7 +63,7 @@ extension SavedRestaurantVC : UITableViewDataSource{
         
         var restaurantSaved: Restaurant?
         do{
-            restaurantSaved = try model.getRestaurantSaved(fromSavedRestaurantArray: indexPath.row)
+            restaurantSaved = try restModel.getRestaurantSaved(fromSavedRestaurantArray: indexPath.row)
         }
         catch{
             print("Unexpected Error while framing cell")
@@ -97,7 +97,7 @@ extension SavedRestaurantVC : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.getAllRestaurantsPersisted().count
+        return restModel.getAllRestaurantsPersisted().count
     }
     
     func tableView(_ tableView: UITableView,
@@ -107,9 +107,9 @@ extension SavedRestaurantVC : UITableViewDataSource{
         if editingStyle == .delete {
             
             do{
-                let restaurantInContext = try model.getRestaurantSaved(fromSavedRestaurantArray: indexPath.row)
+                let restaurantInContext = try restModel.getRestaurantSaved(fromSavedRestaurantArray: indexPath.row)
                 
-                try model.deleteRestaurantFromFavorite(restaurant: restaurantInContext)
+                try restModel.deleteRestaurantFromFavorite(restaurant: restaurantInContext)
                 
                 if(self.notifyModel.getRestaurantsToNotify().contains{isRestaurantSetToNotify($0, restaurantInContext)}){
                     alertUser = "Please note that \(restaurantInContext.restaurantName) is in the Notify List. Please delete from Notify tab if you don't want to Notify."
@@ -149,10 +149,10 @@ extension SavedRestaurantVC{
         case "addSegue" :
             do{
                 detailVC.restaurantDetailVCType = DetailVCType.Add
-                detailVC.restaurant = try model.generateRestaurantPrototype()
+                detailVC.restaurant = try restModel.generateRestaurantPrototype()
                 detailVC.saveDetailVC = {[weak self] (restaurant) in
                     do{
-                        try self?.model.addRestaurantToFavorite(restaurantOpt: restaurant)
+                        try self?.restModel.addRestaurantToFavorite(restaurantOpt: restaurant)
                     }
                     catch RestaurantError.invalidRestaurant(){
                         self?.alertUser = "Restaurant is nil"
@@ -177,13 +177,13 @@ extension SavedRestaurantVC{
             }
             
             do{
-                let restaurantInContext = try model.getRestaurantSaved(fromSavedRestaurantArray: indexPath.row)
+                let restaurantInContext = try restModel.getRestaurantSaved(fromSavedRestaurantArray: indexPath.row)
                 detailVC.restaurantDetailVCType = DetailVCType.Edit
                 detailVC.restaurant = restaurantInContext
                 detailVC.saveDetailVC = {[weak self] (restaurant) in
                     
                     do{
-                        try self?.model.editRestaurantInFavorite(restaurant: restaurantInContext)
+                        try self?.restModel.editRestaurantInFavorite(restaurant: restaurantInContext)
                     }
                     catch RestaurantError.notAbleToEdit(let name){
                         self?.alertUser = "Restaurant \(name) cannot be edited. May be it's not in Favorite list anymore."

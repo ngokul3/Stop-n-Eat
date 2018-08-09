@@ -107,21 +107,6 @@ extension RestaurantVC : UITableViewDataSource{
             cell.accessoryType = UITableViewCellAccessoryType.none
 
         }
-//        if(restaurant.isSelected){
-//            cell.accessoryType = UITableViewCellAccessoryType.checkmark
-//        //    notifyModel.addRestaurantToNotify(restaurantToNotify: restaurant)
-//        }
-//        else{
-//            cell.accessoryType = UITableViewCellAccessoryType.none
-//
-////            do{
-////                try notifyModel.removeRestauarntFromNotification(restaurant: restaurant)
-////            }
-////            catch{
-////                print("Restaurant is not in the notify list")
-////            }
-//        }
-        
         cell.imgHeart.image = UIImage(named: restaurant.favoriteImageName)
         let heartTap : UITapGestureRecognizer?
         
@@ -373,6 +358,7 @@ extension RestaurantVC{
     func removeRestaurantFromFavoriteSavedList(restaurant: Restaurant){
         do{
             try Persistence.delete(restaurant)
+            
         }
         catch RestaurantError.notAbleToDelete(let name){
             alertUser = "Not able to delete \(name) from database"

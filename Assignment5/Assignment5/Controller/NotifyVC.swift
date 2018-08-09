@@ -16,8 +16,8 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
-    private var model = RestaurantModel.getInstance()
-    private var notifyModel = NotifyModel.getInstance()
+    private var restModel = AppDel.restModel
+    private var notifyModel = AppDel.notifyModel
     private static var modelObserver: NSObjectProtocol?
     private var showDefaultIndexClosure : (()->Void)?
     
@@ -71,7 +71,7 @@ extension NotifyVC: UITableViewDataSource{
         cell.lblRestaurantDescription.text = restaurant.restaurantName
         
         if(!restaurant.imageURL.isEmpty){
-            AppDel.restModel.loadRestaurantImage(imageURLOpt: restaurant.imageURL, imageLoaded: ({(data, response, error) in
+            restModel.loadRestaurantImage(imageURLOpt: restaurant.imageURL, imageLoaded: ({(data, response, error) in
                 
                     OperationQueue.main.addOperation {
                         if let e = error {

@@ -258,6 +258,10 @@ extension RestaurantModel{
         
         if(restaurantsSaved.contains{$0.restaurantId == restaurant.restaurantId}){
             restaurantsSaved = restaurantsSaved.filter({($0.restaurantId != restaurant.restaurantId)})
+            
+            if let rest = restaurantsFromNetwork.filter({$0.restaurantId == restaurant.restaurantId}).first {
+                rest.isFavorite = false
+            }
         }
         else{
             throw RestaurantError.notAbleToDelete(name: restaurant.restaurantName)
