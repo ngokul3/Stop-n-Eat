@@ -20,6 +20,7 @@ class NetworkModel: NetworkProtocol{
     
     private var keyOpt : String?
     private var transitJSONFileNameOpt : String?
+    private var searchDistanceLimitOpt: Int?
     private static var instance: NetworkProtocol?
     
     var session: URLSession = {
@@ -40,6 +41,7 @@ class NetworkModel: NetworkProtocol{
             
             keyOpt = dict["YelpAPIKEY"] as? String
             transitJSONFileNameOpt = dict["NJTransitJSONFile"] as? String
+            searchDistanceLimitOpt = dict["MilesAround"] as? Int
         }
     }
 }
@@ -97,8 +99,16 @@ extension NetworkModel{
             preconditionFailure("This app does not have license to get information from Yelp")
         }
         
+        guard let searchByDistanceInMiles = searchDistanceLimitOpt else{
+            preconditionFailure("Could not restrict search by distance")
+        }
+        
+        // Loading only those data that are within certain distance. Idea is to see restaurants in walking distance
+        let conversionFactor = 0.00062137
+        let searchByDistanceInMeters = Int(Double(searchByDistanceInMiles) / conversionFactor)
+        
         var locationURL : String
-        locationURL = "https://api.yelp.com/v3/businesses/search?term=" + term+"&location=" + location
+        locationURL = "https://api.yelp.com/v3/businesses/search?term=" + term+"&location=" + location+"&radius=" + String(describing: searchByDistanceInMeters)
         locationURL = locationURL.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         
         if let url = URL(string: locationURL) {
