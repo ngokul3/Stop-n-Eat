@@ -65,6 +65,7 @@ class RestaurantVC: UIViewController {
                     guard let restaurant = restaurantOpt else{
                         preconditionFailure("Could not save this favorite restaurant")
                     }
+                    
                     s.removeRestaurantFromFavoriteSavedList(restaurant: restaurant)
                 }
         }
@@ -163,7 +164,6 @@ extension RestaurantVC : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         let restaurantsFromNetwork = restaurantModel.getAllRestaurantsFromNetwork()
         return restaurantsFromNetwork.count
      }
@@ -172,7 +172,6 @@ extension RestaurantVC : UITableViewDataSource{
 extension RestaurantVC: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         do{
             let restaurantFromNetwork = try restaurantModel.getRestaurantFromNetwork(fromRestaurantArray: indexPath.row)
         

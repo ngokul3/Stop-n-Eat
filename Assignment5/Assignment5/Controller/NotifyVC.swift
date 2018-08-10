@@ -39,6 +39,7 @@ class NotifyVC: UIViewController, UITabBarControllerDelegate {
             guard let tabBC = self?.tabBarController else{
                 return
             }
+            
             tabBC.selectedIndex = Consts.SearchTabIndex
         }
     }
