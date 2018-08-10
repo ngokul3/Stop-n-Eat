@@ -80,10 +80,12 @@ extension NetworkModel{
                     finished(nil, "InvalidJsonFile")
                     return
                 }
+                
                 guard let stopArray = jsonResult as? NSArray else {
                     finished(nil, "InvalidJsonFile")
                     return
                 }
+                
                 finished(stopArray, nil)
             }
         }
@@ -104,7 +106,7 @@ extension NetworkModel{
         }
         
         // Loading only those data that are within certain distance. Idea is to see restaurants in walking distance
-        let conversionFactor = 0.00062137
+        let conversionFactor = 0.00062137 //mi to m conversion factor
         let searchByDistanceInMeters = Int(Double(searchByDistanceInMiles) / conversionFactor)
         
         var locationURL : String
