@@ -13,7 +13,7 @@
         <!--DetailVC-->
         <scene sceneID="OhN-ID-Fe9">
             <objects>
-                <viewController id="aVw-KE-lTW" userLabel="DetailVC" customClass="DetailRestaurantVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aVw-KE-lTW" userLabel="DetailVC" customClass="DetailRestaurantVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="evk-pH-rlY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,19 +25,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFZ-VA-63P">
-                                <rect key="frame" x="16" y="206" width="55" height="21"/>
+                                <rect key="frame" x="16" y="200" width="55" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XHl-lf-3iQ">
-                                <rect key="frame" x="110" y="159" width="249" height="114"/>
+                                <rect key="frame" x="110" y="159" width="249" height="102"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kdq-3B-IeE">
-                                <rect key="frame" x="16" y="278" width="343" height="216"/>
+                                <rect key="frame" x="16" y="266" width="343" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="554316008.64953697">
                                     <!--2018-07-26 16:40:08 +0000-->
                                 </date>
@@ -90,13 +90,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PB-gp-A7p">
-                                <rect key="frame" x="16" y="524" width="47" height="21"/>
+                                <rect key="frame" x="16" y="510" width="47" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tJU-jK-1LU">
-                                <rect key="frame" x="110" y="519" width="51" height="31"/>
+                                <rect key="frame" x="110" y="505" width="51" height="31"/>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyN-e7-JxK">
                                 <rect key="frame" x="265" y="555" width="50" height="50"/>
@@ -108,6 +108,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Dqg-ik-f1p" firstAttribute="height" secondItem="pew-h5-JG4" secondAttribute="height" id="0qv-lr-Tnz"/>
+                            <constraint firstItem="2rF-7O-OhX" firstAttribute="top" secondItem="tJU-jK-1LU" secondAttribute="bottom" constant="19" id="11E-Ji-b29"/>
                             <constraint firstItem="XHl-lf-3iQ" firstAttribute="top" secondItem="fEB-je-GNb" secondAttribute="bottom" constant="5" id="2wf-Ei-MIv"/>
                             <constraint firstItem="tJU-jK-1LU" firstAttribute="leading" secondItem="XHl-lf-3iQ" secondAttribute="leading" id="6dl-qi-z5h"/>
                             <constraint firstItem="zZx-it-EQ2" firstAttribute="top" secondItem="pew-h5-JG4" secondAttribute="top" id="7CV-If-bWB"/>
@@ -137,7 +138,6 @@
                             <constraint firstItem="vyN-e7-JxK" firstAttribute="centerY" secondItem="Dqg-ik-f1p" secondAttribute="centerY" id="SXK-wN-htM"/>
                             <constraint firstItem="BOM-Fm-Y2d" firstAttribute="centerY" secondItem="NiC-af-srt" secondAttribute="centerY" id="UdT-Xs-Y9d"/>
                             <constraint firstItem="daL-cH-eFj" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NiC-af-srt" secondAttribute="trailing" id="VtJ-I3-3d5"/>
-                            <constraint firstItem="daL-cH-eFj" firstAttribute="bottom" secondItem="pew-h5-JG4" secondAttribute="bottom" constant="13" id="YSm-bX-ef3"/>
                             <constraint firstItem="daL-cH-eFj" firstAttribute="bottom" secondItem="2rF-7O-OhX" secondAttribute="bottom" constant="13" id="aJY-pk-0NA"/>
                             <constraint firstItem="Dqg-ik-f1p" firstAttribute="centerY" secondItem="pew-h5-JG4" secondAttribute="centerY" id="afC-xR-Or3"/>
                             <constraint firstItem="kdq-3B-IeE" firstAttribute="top" secondItem="XHl-lf-3iQ" secondAttribute="bottom" constant="5" id="cFU-rM-2QV"/>
@@ -159,8 +159,7 @@
                             <constraint firstItem="daL-cH-eFj" firstAttribute="bottom" secondItem="pew-h5-JG4" secondAttribute="bottom" constant="13" id="w1T-Nd-c4f"/>
                             <constraint firstItem="2rF-7O-OhX" firstAttribute="height" secondItem="pew-h5-JG4" secondAttribute="height" id="xbF-Kf-HOu"/>
                             <constraint firstItem="fEB-je-GNb" firstAttribute="leading" secondItem="RJZ-mX-fyu" secondAttribute="trailing" constant="39.5" id="xf6-PT-RCI"/>
-                            <constraint firstItem="tJU-jK-1LU" firstAttribute="top" secondItem="kdq-3B-IeE" secondAttribute="bottom" constant="25" id="yVe-OW-WEs"/>
-                            <constraint firstItem="2rF-7O-OhX" firstAttribute="top" secondItem="tJU-jK-1LU" secondAttribute="bottom" constant="5" id="yZe-6Y-CKP"/>
+                            <constraint firstItem="tJU-jK-1LU" firstAttribute="top" secondItem="kdq-3B-IeE" secondAttribute="bottom" constant="23" id="ymr-gq-ZtW"/>
                             <constraint firstItem="Dqg-ik-f1p" firstAttribute="width" secondItem="pew-h5-JG4" secondAttribute="width" id="yto-uD-JSF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="daL-cH-eFj"/>
@@ -198,7 +197,7 @@
         <!--Saved Restaurants-->
         <scene sceneID="ym7-jq-h4Y">
             <objects>
-                <viewController id="KwJ-A0-DQ0" customClass="SavedRestaurantVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KwJ-A0-DQ0" customClass="SavedRestaurantVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bns-9H-NhX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -346,7 +345,7 @@
         <!--Train Stops-->
         <scene sceneID="MOo-vZ-fjG">
             <objects>
-                <viewController id="PJJ-Pb-X40" customClass="TrainStopVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PJJ-Pb-X40" customClass="TrainStopVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="veN-Mf-VBf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -419,7 +418,7 @@
         <!--Restaurants-->
         <scene sceneID="qEh-MF-z3u">
             <objects>
-                <viewController id="1KB-Rn-UMM" customClass="RestaurantVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1KB-Rn-UMM" customClass="RestaurantVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="coE-bu-Zgz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -552,7 +551,7 @@
         <!--Map ViewVC-->
         <scene sceneID="LL3-4B-xis">
             <objects>
-                <viewController id="7qZ-wz-HbW" customClass="MapViewVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7qZ-wz-HbW" customClass="MapViewVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sYh-df-C3p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -622,7 +621,7 @@
         <!--Ready to send these?-->
         <scene sceneID="9kk-xv-g7r">
             <objects>
-                <viewController id="0oi-Wj-mKF" customClass="NotifyVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0oi-Wj-mKF" customClass="NotifyVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MvZ-5w-Yv6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
