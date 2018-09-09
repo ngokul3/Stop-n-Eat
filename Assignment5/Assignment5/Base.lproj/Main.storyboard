@@ -13,7 +13,7 @@
         <!--DetailVC-->
         <scene sceneID="OhN-ID-Fe9">
             <objects>
-                <viewController id="aVw-KE-lTW" userLabel="DetailVC" customClass="DetailRestaurantVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aVw-KE-lTW" userLabel="DetailVC" customClass="DetailRestaurantVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="evk-pH-rlY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,22 +25,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFZ-VA-63P">
-                                <rect key="frame" x="16" y="235" width="55" height="21"/>
+                                <rect key="frame" x="16" y="206" width="55" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XHl-lf-3iQ">
-                                <rect key="frame" x="110" y="164" width="249" height="162"/>
+                                <rect key="frame" x="110" y="159" width="249" height="114"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kdq-3B-IeE">
-                                <rect key="frame" x="16" y="331" width="343" height="135"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="135" id="9h7-Cs-FHi"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="278" width="343" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="554316008.64953697">
                                     <!--2018-07-26 16:40:08 +0000-->
                                 </date>
@@ -93,13 +90,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PB-gp-A7p">
-                                <rect key="frame" x="16" y="490" width="47" height="21"/>
+                                <rect key="frame" x="16" y="524" width="47" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tJU-jK-1LU">
-                                <rect key="frame" x="110" y="485" width="51" height="31"/>
+                                <rect key="frame" x="110" y="519" width="51" height="31"/>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyN-e7-JxK">
                                 <rect key="frame" x="265" y="555" width="50" height="50"/>
@@ -111,7 +108,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Dqg-ik-f1p" firstAttribute="height" secondItem="pew-h5-JG4" secondAttribute="height" id="0qv-lr-Tnz"/>
-                            <constraint firstItem="XHl-lf-3iQ" firstAttribute="top" secondItem="fEB-je-GNb" secondAttribute="bottom" constant="10.5" id="2wf-Ei-MIv"/>
+                            <constraint firstItem="XHl-lf-3iQ" firstAttribute="top" secondItem="fEB-je-GNb" secondAttribute="bottom" constant="5" id="2wf-Ei-MIv"/>
                             <constraint firstItem="tJU-jK-1LU" firstAttribute="leading" secondItem="XHl-lf-3iQ" secondAttribute="leading" id="6dl-qi-z5h"/>
                             <constraint firstItem="zZx-it-EQ2" firstAttribute="top" secondItem="pew-h5-JG4" secondAttribute="top" id="7CV-If-bWB"/>
                             <constraint firstItem="vyN-e7-JxK" firstAttribute="top" secondItem="pew-h5-JG4" secondAttribute="top" id="7lB-1s-2Yr"/>
@@ -152,19 +149,18 @@
                             <constraint firstItem="2rF-7O-OhX" firstAttribute="width" secondItem="pew-h5-JG4" secondAttribute="width" id="eam-Ma-FWL"/>
                             <constraint firstItem="tJU-jK-1LU" firstAttribute="centerY" secondItem="8PB-gp-A7p" secondAttribute="centerY" id="hDY-If-4EP"/>
                             <constraint firstItem="pew-h5-JG4" firstAttribute="centerX" secondItem="daL-cH-eFj" secondAttribute="centerX" id="iqX-rC-cXJ"/>
-                            <constraint firstItem="tJU-jK-1LU" firstAttribute="top" secondItem="kdq-3B-IeE" secondAttribute="bottom" constant="19" id="jkN-rA-9de"/>
                             <constraint firstItem="RJZ-mX-fyu" firstAttribute="leading" secondItem="daL-cH-eFj" secondAttribute="leading" constant="16" id="nAg-y0-uwW"/>
                             <constraint firstItem="daL-cH-eFj" firstAttribute="bottom" secondItem="Dqg-ik-f1p" secondAttribute="bottom" constant="13" id="o5o-iC-R4o"/>
                             <constraint firstItem="daL-cH-eFj" firstAttribute="trailing" secondItem="XHl-lf-3iQ" secondAttribute="trailing" constant="16" id="pPk-Xx-ply"/>
                             <constraint firstItem="zZx-it-EQ2" firstAttribute="width" secondItem="pew-h5-JG4" secondAttribute="width" id="pYY-26-rUK"/>
                             <constraint firstItem="vyN-e7-JxK" firstAttribute="leading" secondItem="Dqg-ik-f1p" secondAttribute="trailing" constant="1" id="qey-yy-ygW"/>
-                            <constraint firstItem="daL-cH-eFj" firstAttribute="bottom" secondItem="8PB-gp-A7p" secondAttribute="bottom" constant="107" id="qlj-Al-98q"/>
                             <constraint firstItem="BOM-Fm-Y2d" firstAttribute="top" secondItem="daL-cH-eFj" secondAttribute="top" constant="10" id="sk6-Tl-sPk"/>
                             <constraint firstItem="Dqg-ik-f1p" firstAttribute="height" secondItem="pew-h5-JG4" secondAttribute="height" id="v02-yD-65E"/>
                             <constraint firstItem="daL-cH-eFj" firstAttribute="bottom" secondItem="pew-h5-JG4" secondAttribute="bottom" constant="13" id="w1T-Nd-c4f"/>
                             <constraint firstItem="2rF-7O-OhX" firstAttribute="height" secondItem="pew-h5-JG4" secondAttribute="height" id="xbF-Kf-HOu"/>
                             <constraint firstItem="fEB-je-GNb" firstAttribute="leading" secondItem="RJZ-mX-fyu" secondAttribute="trailing" constant="39.5" id="xf6-PT-RCI"/>
-                            <constraint firstItem="2rF-7O-OhX" firstAttribute="top" secondItem="tJU-jK-1LU" secondAttribute="bottom" constant="39" id="yZe-6Y-CKP"/>
+                            <constraint firstItem="tJU-jK-1LU" firstAttribute="top" secondItem="kdq-3B-IeE" secondAttribute="bottom" constant="25" id="yVe-OW-WEs"/>
+                            <constraint firstItem="2rF-7O-OhX" firstAttribute="top" secondItem="tJU-jK-1LU" secondAttribute="bottom" constant="5" id="yZe-6Y-CKP"/>
                             <constraint firstItem="Dqg-ik-f1p" firstAttribute="width" secondItem="pew-h5-JG4" secondAttribute="width" id="yto-uD-JSF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="daL-cH-eFj"/>
@@ -202,7 +198,7 @@
         <!--Saved Restaurants-->
         <scene sceneID="ym7-jq-h4Y">
             <objects>
-                <viewController id="KwJ-A0-DQ0" customClass="SavedRestaurantVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KwJ-A0-DQ0" customClass="SavedRestaurantVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bns-9H-NhX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -211,7 +207,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="savedRestaurantCell" rowHeight="90" id="fL0-14-EnU" customClass="SavedRestaurantCell" customModule="Assignment5" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="savedRestaurantCell" rowHeight="90" id="fL0-14-EnU" customClass="SavedRestaurantCell" customModule="Stop_n_Eat">
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fL0-14-EnU" id="jzg-Lf-Hwa">
@@ -350,7 +346,7 @@
         <!--Train Stops-->
         <scene sceneID="MOo-vZ-fjG">
             <objects>
-                <viewController id="PJJ-Pb-X40" customClass="TrainStopVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PJJ-Pb-X40" customClass="TrainStopVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="veN-Mf-VBf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -423,7 +419,7 @@
         <!--Restaurants-->
         <scene sceneID="qEh-MF-z3u">
             <objects>
-                <viewController id="1KB-Rn-UMM" customClass="RestaurantVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1KB-Rn-UMM" customClass="RestaurantVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="coE-bu-Zgz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -432,7 +428,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="restaurantCell" rowHeight="92" id="0Ib-iE-HWi" customClass="RestaurantCell" customModule="Assignment5">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="restaurantCell" rowHeight="92" id="0Ib-iE-HWi" customClass="RestaurantCell" customModule="Stop_n_Eat">
                                         <rect key="frame" x="0.0" y="28" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Ib-iE-HWi" id="KXL-ES-22S">
@@ -556,20 +552,25 @@
         <!--Map ViewVC-->
         <scene sceneID="LL3-4B-xis">
             <objects>
-                <viewController id="7qZ-wz-HbW" customClass="MapViewVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7qZ-wz-HbW" customClass="MapViewVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sYh-df-C3p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sMl-iM-tVx">
-                                <rect key="frame" x="0.0" y="65" width="375" height="602"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sMl-iM-tVx">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
                                     <outlet property="delegate" destination="7qZ-wz-HbW" id="ht3-Cx-hkn"/>
                                 </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="sMl-iM-tVx" firstAttribute="top" secondItem="rYH-rT-ofi" secondAttribute="top" id="Ka7-lr-E6d"/>
+                            <constraint firstAttribute="bottom" secondItem="sMl-iM-tVx" secondAttribute="bottom" id="Ocy-Xy-iuP"/>
+                            <constraint firstItem="sMl-iM-tVx" firstAttribute="trailing" secondItem="rYH-rT-ofi" secondAttribute="trailing" id="f6B-3a-3cB"/>
+                            <constraint firstItem="sMl-iM-tVx" firstAttribute="leading" secondItem="rYH-rT-ofi" secondAttribute="leading" id="vY3-FF-bUg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="rYH-rT-ofi"/>
                     </view>
                     <connections>
@@ -621,7 +622,7 @@
         <!--Ready to send these?-->
         <scene sceneID="9kk-xv-g7r">
             <objects>
-                <viewController id="0oi-Wj-mKF" customClass="NotifyVC" customModule="Assignment5" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0oi-Wj-mKF" customClass="NotifyVC" customModule="Stop_and_Eat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MvZ-5w-Yv6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -630,7 +631,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notifyCell" id="MWV-bp-lio" customClass="NotifyCell" customModule="Assignment5">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notifyCell" id="MWV-bp-lio" customClass="NotifyCell" customModule="Stop_n_Eat">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MWV-bp-lio" id="hin-NG-nEg">
@@ -742,6 +743,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dlF-Qv-XRz"/>
-        <segue reference="2Xq-XB-UZc"/>
+        <segue reference="gbd-2F-tPy"/>
     </inferredMetricsTieBreakers>
 </document>

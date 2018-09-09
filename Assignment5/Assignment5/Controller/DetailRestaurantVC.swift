@@ -10,7 +10,7 @@ import UIKit
 
 class DetailRestaurantVC: UIViewController {
   
-    @IBOutlet weak var btnRating1: UIButton!
+     @IBOutlet weak var btnRating1: UIButton!
     @IBOutlet weak var btnRating2: UIButton!
     @IBOutlet weak var btnRating3: UIButton!
     @IBOutlet weak var btnRating4: UIButton!
@@ -32,7 +32,8 @@ class DetailRestaurantVC: UIViewController {
     var restaurant : Restaurant?
     var restaurantDetailVCType : DetailVCType?
     var saveDetailVC: ((Restaurant?) -> Void)?
-
+    var scrollView: UIScrollView!
+    
     lazy var isRestaurantSetToNotify : (Restaurant, Restaurant)->Bool = {(restaurantInNotify, restaurantSaved) in
         
         if (restaurantInNotify.restaurantId == restaurantSaved.restaurantId) {
@@ -126,6 +127,12 @@ class DetailRestaurantVC: UIViewController {
      override func viewDidLoad() {
         super.viewDidLoad()
        
+        scrollView = UIScrollView(frame: view.bounds)
+         scrollView.contentSize = view.bounds.size
+        scrollView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
+        
+         scrollView.addSubview(view)
+        
         txtNotes.layer.borderColor = UIColor.gray.cgColor
         txtNotes.layer.borderWidth = 0.4
         txtNotes.layer.cornerRadius = 0.8

@@ -71,17 +71,17 @@
 		90998ABC210CBD73001E5848 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		90998ABE210D2A7B001E5848 /* MapViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVC.swift; sourceTree = "<group>"; };
 		90998AC0210D3030001E5848 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
-		90A31A5D2107FE8E000DB608 /* Assignment5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment5.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		90A31A5D2107FE8E000DB608 /* Stop-n-Eat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stop-n-Eat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A31A602107FE8E000DB608 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90A31A622107FE8E000DB608 /* TrainStopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainStopVC.swift; sourceTree = "<group>"; };
 		90A31A652107FE8E000DB608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		90A31A672107FE91000DB608 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90A31A6A2107FE91000DB608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		90A31A6C2107FE91000DB608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		90A31A712107FE91000DB608 /* Assignment5Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment5Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		90A31A712107FE91000DB608 /* Stop-n-EatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Stop-n-EatTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A31A752107FE91000DB608 /* Assignment5Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment5Tests.swift; sourceTree = "<group>"; };
 		90A31A772107FE91000DB608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		90A31A7C2107FE91000DB608 /* Assignment5UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment5UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		90A31A7C2107FE91000DB608 /* Stop-n-EatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Stop-n-EatUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A31A802107FE91000DB608 /* Assignment5UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment5UITests.swift; sourceTree = "<group>"; };
 		90A31A822107FE91000DB608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90A31A8E210953AD000DB608 /* RestaurantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantVC.swift; sourceTree = "<group>"; };
@@ -218,9 +218,9 @@
 		90A31A5E2107FE8E000DB608 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				90A31A5D2107FE8E000DB608 /* Assignment5.app */,
-				90A31A712107FE91000DB608 /* Assignment5Tests.xctest */,
-				90A31A7C2107FE91000DB608 /* Assignment5UITests.xctest */,
+				90A31A5D2107FE8E000DB608 /* Stop-n-Eat.app */,
+				90A31A712107FE91000DB608 /* Stop-n-EatTests.xctest */,
+				90A31A7C2107FE91000DB608 /* Stop-n-EatUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -263,9 +263,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		90A31A5C2107FE8E000DB608 /* Assignment5 */ = {
+		90A31A5C2107FE8E000DB608 /* Stop-n-Eat */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 90A31A852107FE91000DB608 /* Build configuration list for PBXNativeTarget "Assignment5" */;
+			buildConfigurationList = 90A31A852107FE91000DB608 /* Build configuration list for PBXNativeTarget "Stop-n-Eat" */;
 			buildPhases = (
 				0AF396811A65F7EFBD8309AE /* [CP] Check Pods Manifest.lock */,
 				90A31A592107FE8E000DB608 /* Sources */,
@@ -278,14 +278,14 @@
 			);
 			dependencies = (
 			);
-			name = Assignment5;
+			name = "Stop-n-Eat";
 			productName = Assignment5;
-			productReference = 90A31A5D2107FE8E000DB608 /* Assignment5.app */;
+			productReference = 90A31A5D2107FE8E000DB608 /* Stop-n-Eat.app */;
 			productType = "com.apple.product-type.application";
 		};
-		90A31A702107FE91000DB608 /* Assignment5Tests */ = {
+		90A31A702107FE91000DB608 /* Stop-n-EatTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 90A31A882107FE91000DB608 /* Build configuration list for PBXNativeTarget "Assignment5Tests" */;
+			buildConfigurationList = 90A31A882107FE91000DB608 /* Build configuration list for PBXNativeTarget "Stop-n-EatTests" */;
 			buildPhases = (
 				25A05B1EEF8802B41E626F3E /* [CP] Check Pods Manifest.lock */,
 				90A31A6D2107FE91000DB608 /* Sources */,
@@ -299,14 +299,14 @@
 			dependencies = (
 				90A31A732107FE91000DB608 /* PBXTargetDependency */,
 			);
-			name = Assignment5Tests;
+			name = "Stop-n-EatTests";
 			productName = Assignment5Tests;
-			productReference = 90A31A712107FE91000DB608 /* Assignment5Tests.xctest */;
+			productReference = 90A31A712107FE91000DB608 /* Stop-n-EatTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		90A31A7B2107FE91000DB608 /* Assignment5UITests */ = {
+		90A31A7B2107FE91000DB608 /* Stop-n-EatUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 90A31A8B2107FE91000DB608 /* Build configuration list for PBXNativeTarget "Assignment5UITests" */;
+			buildConfigurationList = 90A31A8B2107FE91000DB608 /* Build configuration list for PBXNativeTarget "Stop-n-EatUITests" */;
 			buildPhases = (
 				254CA39F0B864D9FB232BC36 /* [CP] Check Pods Manifest.lock */,
 				90A31A782107FE91000DB608 /* Sources */,
@@ -320,9 +320,9 @@
 			dependencies = (
 				90A31A7E2107FE91000DB608 /* PBXTargetDependency */,
 			);
-			name = Assignment5UITests;
+			name = "Stop-n-EatUITests";
 			productName = Assignment5UITests;
-			productReference = 90A31A7C2107FE91000DB608 /* Assignment5UITests.xctest */;
+			productReference = 90A31A7C2107FE91000DB608 /* Stop-n-EatUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -348,7 +348,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 90A31A582107FE8E000DB608 /* Build configuration list for PBXProject "Assignment5" */;
+			buildConfigurationList = 90A31A582107FE8E000DB608 /* Build configuration list for PBXProject "Stop-n-Eat" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -361,9 +361,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				90A31A5C2107FE8E000DB608 /* Assignment5 */,
-				90A31A702107FE91000DB608 /* Assignment5Tests */,
-				90A31A7B2107FE91000DB608 /* Assignment5UITests */,
+				90A31A5C2107FE8E000DB608 /* Stop-n-Eat */,
+				90A31A702107FE91000DB608 /* Stop-n-EatTests */,
+				90A31A7B2107FE91000DB608 /* Stop-n-EatUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -601,12 +601,12 @@
 /* Begin PBXTargetDependency section */
 		90A31A732107FE91000DB608 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 90A31A5C2107FE8E000DB608 /* Assignment5 */;
+			target = 90A31A5C2107FE8E000DB608 /* Stop-n-Eat */;
 			targetProxy = 90A31A722107FE91000DB608 /* PBXContainerItemProxy */;
 		};
 		90A31A7E2107FE91000DB608 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 90A31A5C2107FE8E000DB608 /* Assignment5 */;
+			target = 90A31A5C2107FE8E000DB608 /* Stop-n-Eat */;
 			targetProxy = 90A31A7D2107FE91000DB608 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -758,7 +758,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.harvard.csci-s65.Assignment5";
+				PRODUCT_BUNDLE_IDENTIFIER = GokulNarasimhan.StopAndEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = none;
@@ -780,7 +780,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.harvard.csci-s65.Assignment5";
+				PRODUCT_BUNDLE_IDENTIFIER = GokulNarasimhan.StopAndEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = none;
@@ -808,7 +808,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Assignment5.app/Assignment5";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stop-n-Eat.app/Stop-n-Eat";
 			};
 			name = Debug;
 		};
@@ -831,7 +831,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Assignment5.app/Assignment5";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stop-n-Eat.app/Stop-n-Eat";
 			};
 			name = Release;
 		};
@@ -882,7 +882,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		90A31A582107FE8E000DB608 /* Build configuration list for PBXProject "Assignment5" */ = {
+		90A31A582107FE8E000DB608 /* Build configuration list for PBXProject "Stop-n-Eat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90A31A832107FE91000DB608 /* Debug */,
@@ -891,7 +891,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		90A31A852107FE91000DB608 /* Build configuration list for PBXNativeTarget "Assignment5" */ = {
+		90A31A852107FE91000DB608 /* Build configuration list for PBXNativeTarget "Stop-n-Eat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90A31A862107FE91000DB608 /* Debug */,
@@ -900,7 +900,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		90A31A882107FE91000DB608 /* Build configuration list for PBXNativeTarget "Assignment5Tests" */ = {
+		90A31A882107FE91000DB608 /* Build configuration list for PBXNativeTarget "Stop-n-EatTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90A31A892107FE91000DB608 /* Debug */,
@@ -909,7 +909,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		90A31A8B2107FE91000DB608 /* Build configuration list for PBXNativeTarget "Assignment5UITests" */ = {
+		90A31A8B2107FE91000DB608 /* Build configuration list for PBXNativeTarget "Stop-n-EatUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90A31A8C2107FE91000DB608 /* Debug */,
