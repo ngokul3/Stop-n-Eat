@@ -13,7 +13,7 @@
         <!--DetailVC-->
         <scene sceneID="OhN-ID-Fe9">
             <objects>
-                <viewController id="aVw-KE-lTW" userLabel="DetailVC" customClass="DetailRestaurantVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aVw-KE-lTW" userLabel="DetailVC" customClass="DetailRestaurantVC" customModule="StopBy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="evk-pH-rlY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -197,7 +197,7 @@
         <!--Saved Restaurants-->
         <scene sceneID="ym7-jq-h4Y">
             <objects>
-                <viewController id="KwJ-A0-DQ0" customClass="SavedRestaurantVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KwJ-A0-DQ0" customClass="SavedRestaurantVC" customModule="StopBy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bns-9H-NhX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -206,7 +206,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="savedRestaurantCell" rowHeight="90" id="fL0-14-EnU" customClass="SavedRestaurantCell" customModule="Stop_n_Eat">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="savedRestaurantCell" rowHeight="90" id="fL0-14-EnU" customClass="SavedRestaurantCell" customModule="StopBy">
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fL0-14-EnU" id="jzg-Lf-Hwa">
@@ -345,7 +345,7 @@
         <!--Train Stops-->
         <scene sceneID="MOo-vZ-fjG">
             <objects>
-                <viewController id="PJJ-Pb-X40" customClass="TrainStopVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PJJ-Pb-X40" customClass="TrainStopVC" customModule="StopBy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="veN-Mf-VBf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -418,7 +418,7 @@
         <!--Restaurants-->
         <scene sceneID="qEh-MF-z3u">
             <objects>
-                <viewController id="1KB-Rn-UMM" customClass="RestaurantVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1KB-Rn-UMM" customClass="RestaurantVC" customModule="StopBy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="coE-bu-Zgz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -427,7 +427,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="restaurantCell" rowHeight="92" id="0Ib-iE-HWi" customClass="RestaurantCell" customModule="Stop_n_Eat">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="restaurantCell" rowHeight="92" id="0Ib-iE-HWi" customClass="RestaurantCell" customModule="StopBy">
                                         <rect key="frame" x="0.0" y="28" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Ib-iE-HWi" id="KXL-ES-22S">
@@ -551,7 +551,7 @@
         <!--Map ViewVC-->
         <scene sceneID="LL3-4B-xis">
             <objects>
-                <viewController id="7qZ-wz-HbW" customClass="MapViewVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7qZ-wz-HbW" customClass="MapViewVC" customModule="StopBy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sYh-df-C3p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -621,7 +621,7 @@
         <!--Ready to send these?-->
         <scene sceneID="9kk-xv-g7r">
             <objects>
-                <viewController id="0oi-Wj-mKF" customClass="NotifyVC" customModule="Stop_n_Eat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0oi-Wj-mKF" customClass="NotifyVC" customModule="StopBy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MvZ-5w-Yv6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -630,7 +630,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notifyCell" id="MWV-bp-lio" customClass="NotifyCell" customModule="Stop_n_Eat">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notifyCell" id="MWV-bp-lio" customClass="NotifyCell" customModule="StopBy">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MWV-bp-lio" id="hin-NG-nEg">
@@ -742,6 +742,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dlF-Qv-XRz"/>
-        <segue reference="gbd-2F-tPy"/>
+        <segue reference="2Xq-XB-UZc"/>
     </inferredMetricsTieBreakers>
 </document>
